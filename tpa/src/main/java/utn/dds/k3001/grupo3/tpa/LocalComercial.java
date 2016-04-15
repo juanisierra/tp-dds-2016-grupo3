@@ -2,10 +2,17 @@ package utn.dds.k3001.grupo3.tpa;
 import java.time.LocalDateTime;
 
 import org.uqbar.geodds.*;
-public class LocalComercial extends POI {
-	//TODO agregar constructor
+public class LocalComercial extends POI 
+{
 	Rubro rubro;
 	Disponibilidad disponibilidad;
+	
+	public LocalComercial(Rubro rubroP, Disponibilidad disponibilidadP, String nombreP, String calleP, String barrioP, int alturaP, Point posicionP)
+	{
+		this.rubro = rubroP;
+		this.disponibilidad = disponibilidadP;
+		this.constructorComun(nombreP, calleP, barrioP, alturaP, posicionP);
+	}
 	@Override
 	public boolean estaCerca(Point otraPosicion)
 	{
@@ -21,6 +28,4 @@ public class LocalComercial extends POI {
 	{
 		return disponibilidad.estaDisponible(fechaBuscada);
 	}
-
-	
 }

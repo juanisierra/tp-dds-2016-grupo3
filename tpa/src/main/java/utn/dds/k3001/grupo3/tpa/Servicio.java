@@ -1,10 +1,16 @@
 package utn.dds.k3001.grupo3.tpa;
 import java.time.*;
-public class Servicio {
-	//TODO agregar constructor
+public class Servicio 
+{
 	private String nombre;
 	private Disponibilidad disponibilidad;
-	public String nombre() 
+
+	public Servicio(String nombreP, Disponibilidad disponibilidadP)
+	{
+		this.nombre = nombreP;
+		this.disponibilidad = disponibilidadP;
+	}
+	String nombre() 
 	{
 		return nombre;
 	}

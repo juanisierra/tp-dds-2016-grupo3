@@ -1,15 +1,21 @@
 package utn.dds.k3001.grupo3.tpa;
 
-public class Rubro {
-	//TODO agregar constructor
+public class Rubro 
+{
 	String nombre;
 	double distanciaDeCercania;
-	public double distancia() {
+	
+	public Rubro(String nombreP, double distanciaDeCercaniaP)
+	{
+		this.nombre = nombreP;
+		this.distanciaDeCercania = distanciaDeCercaniaP;
+	}
+	public double distancia() 
+	{
 		return distanciaDeCercania;
 	}
-	public String nombre() {
-		
+	public String nombre() 
+	{
 		return nombre;
 	}
-
 }

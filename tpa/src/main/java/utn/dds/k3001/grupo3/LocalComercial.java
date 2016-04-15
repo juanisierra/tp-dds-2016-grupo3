@@ -1,11 +1,11 @@
 package utn.dds.k3001.grupo3;
-
+import org.uqbar.geodds.*;
 public class LocalComercial extends POI {
 	Rubro rubro;
 	@Override
-	public boolean estaCerca(double latitud2,double longitud2)
+	public boolean estaCerca(Point otraPosicion)
 	{
-		return (this.distancia(latitud2,longitud2)<= rubro.distancia());
+		return (posicion.distance(otraPosicion)<= rubro.distancia());
 		
 	}
 	public boolean esBuscado(String criterio) 

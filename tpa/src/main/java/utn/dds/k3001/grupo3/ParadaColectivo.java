@@ -1,11 +1,13 @@
 package utn.dds.k3001.grupo3;
 
+import org.uqbar.geodds.*;
+
 public class ParadaColectivo extends POI {
 	Integer linea;
 	@Override
-	public boolean estaCerca(double latitud2,double longitud2)
+	public boolean estaCerca(Point otraPosicion)
 	{
-		return (this.distancia(latitud2, longitud2) <=100);
+		return (posicion.distance(otraPosicion) <=100);
 	}
 	public boolean estaDisponible()
 	{

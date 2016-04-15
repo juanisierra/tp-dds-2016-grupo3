@@ -1,4 +1,4 @@
-package utn.dds.k3001.grupo3;
+package utn.dds.k3001.grupo3.tpa;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,7 +8,8 @@ import java.util.stream.Collectors;
  *
  */
 public class Sistema 
-{	List<POI> POIS;
+{	//TODO agregar metodos para agregar los POIS a la lista
+	List<POI> POIS;
 
 	public List<POI> buscar(String criterio)
 	{

@@ -4,9 +4,9 @@ import org.uqbar.geodds.*;
 
 public class CGP extends PrestadorDeServicios 
 {
-	public CGP(String nombreP, String calleP, String barrioP, int alturaP, Point posicionP)
+	public CGP(String nombre, String calle, String barrio, int altura, Point posicion)
 	{
-		this.constructorComun(nombreP, calleP, barrioP, alturaP, posicionP);
+		super(nombre,calle,barrio,altura,posicion);
 	}
 	public boolean estaCerca(Point otraPosicion) 
 	{

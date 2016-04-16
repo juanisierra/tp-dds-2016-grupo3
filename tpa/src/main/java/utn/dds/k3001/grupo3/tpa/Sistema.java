@@ -1,11 +1,16 @@
 package utn.dds.k3001.grupo3.tpa;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Sistema 
 {
 	List<POI> POIS;
+	public Sistema()
+	{
+		POIS = new LinkedList<POI>();
+	}
 	
 	public void agregarPoi(POI poiNvo)
 	{

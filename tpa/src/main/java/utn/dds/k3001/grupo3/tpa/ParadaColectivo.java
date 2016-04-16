@@ -6,10 +6,9 @@ public class ParadaColectivo extends POI
 {
 	Integer linea;
 	
-	public ParadaColectivo(Integer lineaP, String nombreP, String calleP, String barrioP, int alturaP, Point posicionP)
-	{
-		this.linea = lineaP;
-		this.constructorComun(nombreP, calleP, barrioP, alturaP, posicionP);
+	public ParadaColectivo(String nombre, String calle, String barrio, int altura, Point posicion, Integer linea)
+	{	super(nombre,calle,barrio,altura,posicion);
+		this.linea = linea;
 	}
 	@Override
 	public boolean estaCerca(Point otraPosicion)

@@ -1,29 +1,36 @@
 package utn.dds.k3001.grupo3.tpa;
 
 import org.uqbar.geodds.*;
+
+import java.util.LinkedList;
 import java.util.List;
 import java.time.*;
-public abstract class POI 
+public class POI 
 {
 	public String nombre;
 	public String calle;
 	public String barrio;
 	public int  altura;
 	public Point posicion;
-	protected List<Comuna> listaComunas;
-
-	protected void constructorComun(String nombreP, String calleP, String barrioP, int alturaP, Point posicionP)
+	protected static List<Comuna> listaComunas = new LinkedList<Comuna>();
+	
+	public static void agregarComuna(Comuna comuna)
 	{
-		this.nombre = nombreP;
-		this.calle = calleP;
-		this.barrio = barrioP;
-		this.altura = alturaP;
-		this.posicion = posicionP;
+		listaComunas.add(comuna);
 	}
-	/*public POI(String nombreP, String calleP, String barrioP, int alturaP, Point posicionP)
+
+	public POI(String nombre, String calle, String barrio, int altura, Point posicion)
 	{
-		this.constructorComun(nombreP, calleP, barrioP, alturaP, posicionP);
-	}*/
+		this.nombre = nombre;
+		this.calle = calle;
+		this.barrio = barrio;
+		this.altura = altura;
+		this.posicion = posicion;
+	}
+	public Point getPosicion() //TOOD BORRAR
+	{
+		return posicion;
+	}
 	public boolean estaCerca(Point otraPosicion)
 	{
 		return (posicion.distance(otraPosicion) <=500);

@@ -1,13 +1,19 @@
 package utn.dds.k3001.grupo3.tpa;
 
 import org.uqbar.geodds.Point;
-
+import java.time.*;
 public class Banco extends PrestadorDeServicios 
 {
-	//TODO agregar constructor de servicios especial, con horario bancario
 	
-	public Banco(String nombreP, String calleP, String barrioP, int alturaP, Point posicionP)
+	
+	public Banco(String nombre, String calle, String barrio, int altura, Point posicion)
 	{
-		this.constructorComun(nombreP, calleP, barrioP, alturaP, posicionP);
+		super(nombre,calle,barrio,altura,posicion);
+	}
+	@Override
+	public void agregarServicio(Servicio servicio)
+	{	Servicio servicioBancario = servicio;
+		servicioBancario.setDisponibilidad(Disponibilidad.horarioBancario());
+		serviciosOfrecidos.add(servicio);
 	}
 }

@@ -10,6 +10,10 @@ public class Servicio
 		this.nombre = nombreP;
 		this.disponibilidad = disponibilidadP;
 	}
+	public void setDisponibilidad(Disponibilidad disponibilidad)
+	{
+		this.disponibilidad=disponibilidad;
+	}
 	String nombre() 
 	{
 		return nombre;

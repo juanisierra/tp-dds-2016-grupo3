@@ -7,11 +7,10 @@ public class LocalComercial extends POI
 	Rubro rubro;
 	Disponibilidad disponibilidad;
 	
-	public LocalComercial(Rubro rubroP, Disponibilidad disponibilidadP, String nombreP, String calleP, String barrioP, int alturaP, Point posicionP)
-	{
-		this.rubro = rubroP;
-		this.disponibilidad = disponibilidadP;
-		this.constructorComun(nombreP, calleP, barrioP, alturaP, posicionP);
+	public LocalComercial(String nombre, String calle, String barrio, int altura, Point posicion,Rubro rubro, Disponibilidad disponibilidad)
+	{	super(nombre,calle,barrio,altura,posicion);
+		this.rubro = rubro;
+		this.disponibilidad = disponibilidad;
 	}
 	@Override
 	public boolean estaCerca(Point otraPosicion)

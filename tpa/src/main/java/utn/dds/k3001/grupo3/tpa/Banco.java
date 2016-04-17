@@ -14,6 +14,6 @@ public class Banco extends PrestadorDeServicios
 	public void agregarServicio(Servicio servicio)
 	{	Servicio servicioBancario = servicio;
 		servicioBancario.setDisponibilidad(Disponibilidad.horarioBancario());
-		serviciosOfrecidos.add(servicio);
+		serviciosOfrecidos.add(servicioBancario);
 	}
 }

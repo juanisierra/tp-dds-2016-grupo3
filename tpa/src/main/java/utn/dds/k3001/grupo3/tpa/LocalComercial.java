@@ -15,8 +15,7 @@ public class LocalComercial extends POI
 	@Override
 	public boolean estaCerca(Point otraPosicion)
 	{
-		return (posicion.distance(otraPosicion)<= rubro.distancia());
-		
+		return (posicion.distance(otraPosicion)<= rubro.distancia());		
 	}
 	public boolean esBuscado(String criterio) 
 	{

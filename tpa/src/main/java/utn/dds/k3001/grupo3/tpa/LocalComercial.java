@@ -1,16 +1,19 @@
 package utn.dds.k3001.grupo3.tpa;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.uqbar.geodds.*;
 public class LocalComercial extends POI 
 {
 	Rubro rubro;
-	Disponibilidad disponibilidad;
+	List<Disponibilidad> listaDisponibilidad = new LinkedList<Disponibilidad>();
 	
 	public LocalComercial(String nombre, String calle, String barrio, int altura, Point posicion,Rubro rubro, Disponibilidad disponibilidad)
-	{	super(nombre,calle,barrio,altura,posicion);
+	{	
+		super(nombre,calle,barrio,altura,posicion);
 		this.rubro = rubro;
-		this.disponibilidad = disponibilidad;
+		this.listaDisponibilidad.add(disponibilidad);
 	}
 	@Override
 	public boolean estaCerca(Point otraPosicion)
@@ -21,9 +24,17 @@ public class LocalComercial extends POI
 	{
 		return (rubro.nombre().contains(criterio) || nombre.contains(criterio));
 	}
-	@Override
-	public boolean estaDisponible(LocalDateTime fechaBuscada)
+	public void agregarDisponibilidad(Disponibilidad disponibilidad)
 	{
-		return disponibilidad.estaDisponible(fechaBuscada);
+		this.listaDisponibilidad.add(disponibilidad);
+	}
+	public void limpiarDisponibilidad()
+	{
+		listaDisponibilidad.removeAll(listaDisponibilidad);
+	}
+	@Override
+	public boolean estaDisponible(LocalDateTime fecha)
+	{
+		return listaDisponibilidad.stream().anyMatch(disponibilidad -> disponibilidad.estaDisponible(fecha));
 	}
 }

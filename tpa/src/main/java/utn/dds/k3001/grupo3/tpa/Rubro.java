@@ -2,8 +2,8 @@ package utn.dds.k3001.grupo3.tpa;
 
 public class Rubro 
 {
-	String nombre;
-	double distanciaDeCercania;
+	private String nombre;
+	private double distanciaDeCercania;
 	
 	public Rubro(String nombreP, double distanciaDeCercaniaP)
 	{

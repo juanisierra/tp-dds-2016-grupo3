@@ -4,11 +4,16 @@ import org.uqbar.geodds.*;
 import java.time.*;
 public class ParadaColectivo extends POI 
 {
-	Integer linea;
+	private Integer linea;
 	
 	public ParadaColectivo(String nombre, String calle, String barrio, int altura, Point posicion, Integer linea)
-	{	super(nombre,calle,barrio,altura,posicion);
+	{	
+		super(nombre,calle,barrio,altura,posicion);
 		this.linea = linea;
+	}
+	public Integer linea()//TODO si a nadie le sirve la linea, borrar
+	{
+		return this.linea;
 	}
 	@Override
 	public boolean estaCerca(Point otraPosicion)
@@ -19,7 +24,6 @@ public class ParadaColectivo extends POI
 	{
 		return true;
 	}
-
 	public boolean esBuscado(String criterio)
 	{	
 		return(linea.toString().equals(criterio) || nombre.contains(criterio));

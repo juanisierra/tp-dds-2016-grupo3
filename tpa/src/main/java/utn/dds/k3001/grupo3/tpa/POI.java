@@ -5,20 +5,20 @@ import org.uqbar.geodds.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.time.*;
+
 public class POI 
 {
-	public String nombre;
-	public String calle;
-	public String barrio;
-	public int  altura;
-	public Point posicion;
+	protected String nombre;
+	protected String calle;
+	protected String barrio;
+	protected int  altura;
+	protected Point posicion;
 	protected static List<Comuna> listaComunas = new LinkedList<Comuna>();
 	
 	public static void agregarComuna(Comuna comuna)
 	{
 		listaComunas.add(comuna);
 	}
-
 	public POI(String nombre, String calle, String barrio, int altura, Point posicion)
 	{
 		this.nombre = nombre;
@@ -26,10 +26,6 @@ public class POI
 		this.barrio = barrio;
 		this.altura = altura;
 		this.posicion = posicion;
-	}
-	public Point getPosicion() //TOOD BORRAR
-	{
-		return posicion;
 	}
 	public boolean estaCerca(Point otraPosicion)
 	{
@@ -48,4 +44,3 @@ public class POI
 		return false;
 	}
 }
-

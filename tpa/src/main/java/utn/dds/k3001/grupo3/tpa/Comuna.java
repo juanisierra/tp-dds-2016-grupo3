@@ -7,10 +7,15 @@ import org.uqbar.geodds.Polygon;
 
 public class Comuna extends Polygon
 {
-	public String nombre;
+	private String nombre;
 	
 	public Comuna(String nombreP,List<Point> puntos)
-	{	super(puntos);
+	{
+		super(puntos);
 		this.nombre = nombreP;
+	}
+	public String nombre()//TODO si a nadie le sirve el nombre, borrar
+	{
+		return this.nombre;
 	}
 }

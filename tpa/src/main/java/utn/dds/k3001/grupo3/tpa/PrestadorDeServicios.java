@@ -8,7 +8,8 @@ import org.uqbar.geodds.Point;
 
 public abstract class PrestadorDeServicios extends POI 
 {
-	List<Servicio> serviciosOfrecidos;
+	protected List<Servicio> serviciosOfrecidos;
+	
 	public PrestadorDeServicios(String nombre, String calle, String barrio, int altura, Point posicion)
 	{
 		super(nombre,calle,barrio,altura,posicion);

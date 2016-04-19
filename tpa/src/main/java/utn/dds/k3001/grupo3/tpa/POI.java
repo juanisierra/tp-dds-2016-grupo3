@@ -1,7 +1,6 @@
 package utn.dds.k3001.grupo3.tpa;
 
 import org.uqbar.geodds.*;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.time.*;
@@ -13,6 +12,7 @@ public class POI
 	protected String barrio;
 	protected int  altura;
 	protected Point posicion;
+	protected List<String> listaEtiquetas;
 	protected static List<Comuna> listaComunas = new LinkedList<Comuna>();
 	
 	public static void agregarComuna(Comuna comuna)
@@ -26,6 +26,12 @@ public class POI
 		this.barrio = barrio;
 		this.altura = altura;
 		this.posicion = posicion;
+		this.listaEtiquetas = new LinkedList<String>();
+		this.listaEtiquetas.add(nombre);
+	}
+	public void agregarEtiqueta(String etiqueta)
+	{
+		this.listaEtiquetas.add(etiqueta);
 	}
 	public boolean estaCerca(Point otraPosicion)
 	{
@@ -33,7 +39,7 @@ public class POI
 	}
 	public boolean esBuscado(String criterio)
 	{
-		return nombre.contains(criterio);
+		return listaEtiquetas.contains(criterio);
 	}
 	public boolean estaDisponible(LocalDateTime fechaBuscada,String servicio)
 	{

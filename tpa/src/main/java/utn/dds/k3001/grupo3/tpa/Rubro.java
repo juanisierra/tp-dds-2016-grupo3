@@ -5,10 +5,10 @@ public class Rubro
 	private String nombre;
 	private double distanciaDeCercania;
 	
-	public Rubro(String nombreP, double distanciaDeCercaniaP)
+	public Rubro(String nombre, double distanciaDeCercania)
 	{
-		this.nombre = nombreP;
-		this.distanciaDeCercania = distanciaDeCercaniaP;
+		this.nombre = nombre;
+		this.distanciaDeCercania = distanciaDeCercania;
 	}
 	public double distancia() 
 	{

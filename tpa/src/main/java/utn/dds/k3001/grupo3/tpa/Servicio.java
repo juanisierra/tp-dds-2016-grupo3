@@ -7,12 +7,13 @@ import java.util.List;
 public class Servicio 
 {
 	private String nombre;
-	private List<Disponibilidad> listaDisponibilidad = new LinkedList<Disponibilidad>();
+	private List<Disponibilidad> listaDisponibilidad;
 
-	public Servicio(String nombreP, Disponibilidad disponibilidadP)
+	public Servicio(String nombre, Disponibilidad disponibilidad)
 	{
-		this.nombre = nombreP;
-		this.listaDisponibilidad.add(disponibilidadP);
+		this.listaDisponibilidad = new LinkedList<Disponibilidad>();
+		this.nombre = nombre;
+		this.listaDisponibilidad.add(disponibilidad);
 	}
 	public void agregarDisponibilidad(Disponibilidad disponibilidad)
 	{

@@ -1,7 +1,9 @@
 package utn.dds.k3001.grupo3.tpa;
+
 import java.time.*;	//los constructores para localTime y localDateTime son metodos of(...)
 import java.util.Arrays;
 import java.util.List;
+
 public class Disponibilidad 
 {
 	private List<DayOfWeek> diasDisponible;

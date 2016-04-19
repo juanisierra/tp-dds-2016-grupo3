@@ -2,6 +2,7 @@ package utn.dds.k3001.grupo3.tpa;
 
 import org.uqbar.geodds.*;
 import java.time.*;
+
 public class ParadaColectivo extends POI 
 {
 	private Integer linea;
@@ -10,6 +11,7 @@ public class ParadaColectivo extends POI
 	{	
 		super(nombre,calle,barrio,altura,posicion);
 		this.linea = linea;
+		this.listaEtiquetas.add(linea.toString());
 	}
 	public Integer linea()//TODO si a nadie le sirve la linea, borrar
 	{
@@ -23,9 +25,5 @@ public class ParadaColectivo extends POI
 	public boolean estaDisponible(LocalDateTime fechaBuscada)
 	{
 		return true;
-	}
-	public boolean esBuscado(String criterio)
-	{	
-		return(linea.toString().equals(criterio) || nombre.contains(criterio));
 	}
 }

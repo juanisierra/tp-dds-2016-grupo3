@@ -3,7 +3,6 @@ package utn.dds.k3001.grupo3.tpa;
 import java.time.*;
 import java.util.LinkedList;
 import java.util.List;
-
 import org.uqbar.geodds.Point;
 
 public abstract class PrestadorDeServicios extends POI 
@@ -17,26 +16,9 @@ public abstract class PrestadorDeServicios extends POI
 	}
 	public void agregarServicio(Servicio servicio)
 	{
-		serviciosOfrecidos.add(servicio);
+		this.serviciosOfrecidos.add(servicio);
+		this.listaEtiquetas.add(servicio.nombre());
 	}	
-	private boolean hayServicio(String criterio) 
-	{
-		return serviciosOfrecidos.stream().anyMatch(servicio -> servicio.nombre().contains(criterio));
-	}
-	public boolean esBuscado(String criterio) 
-	{
-		return (this.hayServicio(criterio) || nombre.contains(criterio)); 
-		//Ademas
-		// de
-		// buscar
-		// los
-		// servicios
-		// buscamos
-		// su
-		// nombre,
-		// tambien en el banco buscamos que tenga el servicio, para complementar
-		// la busqueda comun por nombre
-	}
 	private Servicio buscarServicio(String nombre) 
 	{
 		return serviciosOfrecidos.stream().filter(servicio -> servicio.nombre().contains(nombre)).findFirst().get();

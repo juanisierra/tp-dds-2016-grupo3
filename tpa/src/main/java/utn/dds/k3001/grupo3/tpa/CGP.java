@@ -16,7 +16,7 @@ public class CGP extends PrestadorDeServicios
 	}
 	private Comuna estaEnComuna(Point posicion) 
 	{
-		Comuna comunaBuscada = (Comuna) listaComunas.stream().filter(comuna -> comuna.isInside(posicion)).findFirst().get(); // saca el primero y unico de la lista
-		return comunaBuscada;
+		return (Comuna) listaComunas.stream().filter(comuna -> comuna.isInside(posicion)).findFirst().get(); // saca el primero y unico de la lista
+		
 	}
 }

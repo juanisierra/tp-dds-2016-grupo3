@@ -6,12 +6,12 @@ import java.util.stream.Collectors;
 
 public class Sistema 
 {
-	List<POI> POIS;
+	private List<POI> POIS;
+	
 	public Sistema()
 	{
 		POIS = new LinkedList<POI>();
 	}
-	
 	public void agregarPoi(POI poiNvo)
 	{
 		POIS.add(poiNvo);

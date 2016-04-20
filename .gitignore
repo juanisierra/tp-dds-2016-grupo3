@@ -20,3 +20,5 @@ generated-sources
 *.settings
 *.project
 *.svn
+*.classpath
+.classpath

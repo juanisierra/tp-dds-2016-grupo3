@@ -9,14 +9,11 @@ import org.uqbar.geodds.Point;
 
 public class TestsBusquedaPOI 
 {	
-	ParadaColectivo parada114;
-	LocalComercial libreriaYenny;
-	Comuna comuna1;
-	Comuna comuna2;
-	Rubro libreria;
-	Disponibilidad disponibilidadLibrerias, disp1, disp2;
 	Sistema sistema;
-
+	Rubro libreria;
+	Disponibilidad disponibilidadLibrerias;
+	LocalComercial libreriaYenny;
+	ParadaColectivo parada114;
 	CGP cgp1, cgp2;
 	Servicio altaDomicilio, servicio;
 
@@ -38,17 +35,17 @@ public class TestsBusquedaPOI
 
 	
 	@Test
-	public void buscarAltaDomicilio()
+	public void testBuscarAltaDomicilio()
 	{	
 		Assert.assertTrue(sistema.buscar("alta domicilio").contains(cgp1));
 	}
 	@Test
-	public void buscarParada114()
+	public void testBuscarParada114()
 	{
 		Assert.assertTrue(sistema.buscar("114").contains(parada114));
 	}
 	@Test
-	public void buscarLibreria()
+	public void testBuscarLibreria()
 	{
 		Assert.assertTrue(sistema.buscar("libreria").contains(libreriaYenny));
 	}

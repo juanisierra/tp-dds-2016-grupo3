@@ -9,15 +9,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.uqbar.geodds.Point;
-public class TestsDisponibilidad {
-	
 
-	LocalComercial libreriaYenny;
-	Comuna comuna1;
-	Comuna comuna2;
+public class TestsDisponibilidad {
+
 	Rubro libreria;
 	Disponibilidad disponibilidadLibrerias,disponibilidadLunes,disponibilidadMediaSemana;
-
+	LocalComercial libreriaYenny;
 	CGP cgp1;
 	Servicio altaDomicilio, cambioDomicilio;
 
@@ -32,37 +29,37 @@ public class TestsDisponibilidad {
 		cgp1.agregarServicio(altaDomicilio);
 	}
 	@Test
-	public void testLibreriaAbierta()
+	public void testLaLibreriaEstaAbiertaElMiercolesAlMediodia()
 	{	
 		LocalDateTime miercolesMediodia = LocalDateTime.of(LocalDate.of(2016, 4,13),LocalTime.of(13,0));
 		Assert.assertTrue(libreriaYenny.estaDisponible(miercolesMediodia));
 	}
 	@Test
-	public void testLibreriaNoDisponible()
+	public void testLibreriaNoEstaDisponibleElSabadoALaNoche()
 	{	
-		LocalDateTime sabadoMediodia = LocalDateTime.of(LocalDate.of(2016, 4,16),LocalTime.of(13,0));
-		Assert.assertFalse(libreriaYenny.estaDisponible(sabadoMediodia));
+		LocalDateTime sabadoNoche = LocalDateTime.of(LocalDate.of(2016, 4,16),LocalTime.of(23,0));
+		Assert.assertFalse(libreriaYenny.estaDisponible(sabadoNoche));
 	}
 	@Test
-	public void testCgpAbiertoAltaDomicilio()
+	public void testCgpEstaAbiertoConElServicoAltaDomicilio()
 	{	
 		LocalDateTime miercolesMediodia = LocalDateTime.of(LocalDate.of(2016, 4,13),LocalTime.of(13,0));
 		Assert.assertTrue(cgp1.estaDisponible(miercolesMediodia, "alta domicilio"));
 	}
 	@Test
-	public void testCgpAbiertoCualquierCosa()
+	public void testCgpEstaAbiertoConPorLoMenosUnServicio()
 	{
 		LocalDateTime miercolesMediodia = LocalDateTime.of(LocalDate.of(2016, 4,13),LocalTime.of(13,0));
 		Assert.assertTrue(cgp1.estaDisponible(miercolesMediodia));
 	}
 	@Test
-	public void testCgpCerradoSabados()
+	public void testCgpEstaCerradoLosSabados()
 	{	
 		LocalDateTime sabadoMediodia = LocalDateTime.of(LocalDate.of(2016, 4,16),LocalTime.of(13,0));
 		Assert.assertFalse(cgp1.estaDisponible(sabadoMediodia));
 	}
 	@Test
-	public void testVariosHorariosCGP() 
+	public void testConVariosHorariosCGP() 
 	{
 		disponibilidadLunes = new Disponibilidad(LocalTime.of(1, 0), LocalTime.of(3, 0), Arrays.asList(DayOfWeek.MONDAY));
 		disponibilidadMediaSemana = new Disponibilidad(LocalTime.of(4, 0), LocalTime.of(5, 0), Arrays.asList(DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY));

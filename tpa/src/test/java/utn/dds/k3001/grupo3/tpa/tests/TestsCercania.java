@@ -13,15 +13,16 @@ import org.junit.Test;
 import org.uqbar.geodds.Point;
 
 public class TestsCercania {
-	ParadaColectivo parada114;
-	LocalComercial libreriaYenny;
+	Sistema sistema;
 	Comuna comuna1;
 	Comuna comuna2;
 	Rubro libreria;
 	Disponibilidad disponibilidadLibrerias;
-	Sistema sistema;
+	LocalComercial libreriaYenny;
+	ParadaColectivo parada114;
 	CGP cgp1;
 	Servicio altaDomicilio;
+	
 	@Before
 	public void init()
 	{	
@@ -42,6 +43,7 @@ public class TestsCercania {
 	{
 		Assert.assertTrue(parada114.estaCerca(new Point(10.1,10.1)));
 	}
+	
 	@Test
 	public void testEstaCercaLibreria()
 	{

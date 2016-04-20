@@ -19,13 +19,9 @@ public abstract class PrestadorDeServicios extends POI
 		this.serviciosOfrecidos.add(servicio);
 		this.listaEtiquetas.add(servicio.nombre());
 	}	
-	private Servicio buscarServicio(String nombre) 
-	{
-		return serviciosOfrecidos.stream().filter(servicio -> servicio.nombre().contains(nombre)).findFirst().get();
-	}
 	public boolean estaDisponible(LocalDateTime fechaBuscada, String servicio) 
-	{
-		return this.buscarServicio(servicio).estaDisponible(fechaBuscada);
+	{	
+		return serviciosOfrecidos.stream().anyMatch(servicioBuscado -> (servicioBuscado.nombre().contains(servicio) && servicioBuscado.estaDisponible(fechaBuscada)));
 	}
 	public boolean estaDisponible(LocalDateTime fechaBuscada) 
 	{

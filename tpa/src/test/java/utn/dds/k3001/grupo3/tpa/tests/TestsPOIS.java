@@ -24,7 +24,6 @@ public class TestsPOIS
 	Sistema sistema;
 	CGP cgp1;
 	Servicio altaDomicilio;
-	//TODO tests
 	@Before
 	public void init()
 	{	sistema = new Sistema();

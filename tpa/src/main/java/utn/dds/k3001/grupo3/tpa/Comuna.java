@@ -4,14 +4,18 @@ import java.util.List;
 import org.uqbar.geodds.Point;
 import org.uqbar.geodds.Polygon;
 
-public class Comuna extends Polygon
+public class Comuna
 {
 	private String nombre;
+	private Polygon limites;
 	
-	public Comuna(String nombre,List<Point> puntos)
-	{
-		super(puntos);
+	public Comuna(String nombre,List<Point> puntos){
+		this.limites = new Polygon(puntos);
 		this.nombre = nombre;
+	}
+	
+	public boolean estaEnComuna(Point punto){
+		return limites.isInside(punto);
 	}
 
 }

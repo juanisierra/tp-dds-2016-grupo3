@@ -2,21 +2,18 @@ package utn.dds.k3001.grupo3.tpa;
 
 import org.uqbar.geodds.*;
 
-public class CGP extends PrestadorDeServicios 
+public class CGP extends PrestadorDeServicios
 {
-	public CGP(String nombre, String calle, String barrio, int altura, Point posicion)
+	private Comuna comunaPropia;
+	public CGP(String nombre, String calle, String barrio, int altura, Point posicion, Comuna comuna)
 	{
 		super(nombre,calle,barrio,altura,posicion);
+		this.comunaPropia =comuna;
 	}
 	public boolean estaCerca(Point otraPosicion) 
 	{
-		Comuna comunaPropia = this.estaEnComuna(posicion);
-		Comuna comunaBuscada = this.estaEnComuna(otraPosicion);
-		return comunaPropia.equals(comunaBuscada);
-	}
-	private Comuna estaEnComuna(Point posicion) 
-	{
-		return (Comuna) listaComunas.stream().filter(comuna -> comuna.isInside(posicion)).findFirst().get(); // saca el primero y unico de la lista
 		
+		return comunaPropia.estaEnComuna(otraPosicion);
 	}
+	
 }

@@ -10,23 +10,16 @@ public class Disponibilidad
 	private LocalTime horaApertura;
 	private LocalTime horaCierre;
 	
-	public Disponibilidad(LocalTime hApertura, LocalTime hCierre,List<DayOfWeek> diasDisponible)
+	public Disponibilidad(LocalTime horaApertura, LocalTime horaCierre,List<DayOfWeek> diasDisponible)
 	{
-		this.horaApertura = hApertura;
-		this.horaCierre  = hCierre;
+		this.horaApertura = horaApertura;
+		this.horaCierre  = horaCierre;
 		this.diasDisponible = diasDisponible;
 	}
-	public static Disponibilidad horarioBancario() //Builder para Horario Bancario
-	{	
-		LocalTime horaApertura = LocalTime.of(10,0);
-		LocalTime horaCierre = LocalTime.of(15,0);
-		List<DayOfWeek> listaDias = Arrays.asList(DayOfWeek.MONDAY,DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY);
-		return new Disponibilidad(horaApertura, horaCierre,listaDias);
-	}
-	public static Disponibilidad lunesAViernes(LocalTime hApertura, LocalTime hCierre) //Builder para Lunes a viernes
+	public static Disponibilidad lunesAViernes(LocalTime horaApertura, LocalTime horaCierre) //Builder para Lunes a viernes
 	{
 		List<DayOfWeek> listaDias = Arrays.asList(DayOfWeek.MONDAY,DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY);
-		return new Disponibilidad(hApertura, hCierre,listaDias);
+		return new Disponibilidad(horaApertura, horaCierre,listaDias);
 	}
 	public boolean estaDisponible(LocalDateTime fechaBuscada)
 	{

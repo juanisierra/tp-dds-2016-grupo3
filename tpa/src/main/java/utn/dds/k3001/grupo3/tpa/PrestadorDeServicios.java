@@ -17,14 +17,16 @@ public abstract class PrestadorDeServicios extends POI
 	public void agregarServicio(Servicio servicio)
 	{
 		this.serviciosOfrecidos.add(servicio);
-		this.listaEtiquetas.add(servicio.nombre());
 	}	
 	public boolean estaDisponible(LocalDateTime fechaBuscada, String servicio) 
 	{	
 		return serviciosOfrecidos.stream().anyMatch(servicioBuscado -> (servicioBuscado.nombre().contains(servicio) && servicioBuscado.estaDisponible(fechaBuscada)));
 	}
-	public boolean estaDisponible(LocalDateTime fechaBuscada) 
+	public boolean esBuscado(String criterio)
 	{
-		return serviciosOfrecidos.stream().anyMatch(servicio -> servicio.estaDisponible(fechaBuscada));
+		return super.esBuscado(criterio) || this.tieneServicio(criterio);
+	}
+	private boolean tieneServicio(String servicio) {
+		return serviciosOfrecidos.stream().anyMatch(unServicio -> unServicio.nombre().contains(servicio));
 	}
 }

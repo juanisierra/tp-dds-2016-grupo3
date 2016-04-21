@@ -17,14 +17,14 @@ public class TestsDisponibilidad {
 	LocalComercial libreriaYenny;
 	CGP cgp1;
 	Servicio altaDomicilio, cambioDomicilio;
-
+	Comuna comuna1;
 	@Before
 	public void init()
-	{	
+	{	comuna1 = new Comuna("comuna 1",Arrays.asList(new Point(0,0), new Point(0,11), new Point(11,11), new Point (11,0)));
 		libreria = new Rubro("libreria",50);
 		disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));
 		libreriaYenny = new LocalComercial("libreria yenny","Beiro","devoto",100,new Point(10,10),libreria,disponibilidadLibrerias);
-		cgp1 = new CGP("cgp2","beiro","caballito",100,new Point(10.1,10.1));
+		cgp1 = new CGP("cgp2","beiro","caballito",100,new Point(10.1,10.1),comuna1);
 		altaDomicilio = new Servicio("alta domicilio",disponibilidadLibrerias);
 		cgp1.agregarServicio(altaDomicilio);
 	}
@@ -32,13 +32,13 @@ public class TestsDisponibilidad {
 	public void testLaLibreriaEstaAbiertaElMiercolesAlMediodia()
 	{	
 		LocalDateTime miercolesMediodia = LocalDateTime.of(LocalDate.of(2016, 4,13),LocalTime.of(13,0));
-		Assert.assertTrue(libreriaYenny.estaDisponible(miercolesMediodia));
+		Assert.assertTrue(libreriaYenny.estaDisponible(miercolesMediodia,""));
 	}
 	@Test
 	public void testLibreriaNoEstaDisponibleElSabadoALaNoche()
 	{	
 		LocalDateTime sabadoNoche = LocalDateTime.of(LocalDate.of(2016, 4,16),LocalTime.of(23,0));
-		Assert.assertFalse(libreriaYenny.estaDisponible(sabadoNoche));
+		Assert.assertFalse(libreriaYenny.estaDisponible(sabadoNoche,""));
 	}
 	@Test
 	public void testCgpEstaAbiertoConElServicoAltaDomicilio()
@@ -50,13 +50,13 @@ public class TestsDisponibilidad {
 	public void testCgpEstaAbiertoConPorLoMenosUnServicio()
 	{
 		LocalDateTime miercolesMediodia = LocalDateTime.of(LocalDate.of(2016, 4,13),LocalTime.of(13,0));
-		Assert.assertTrue(cgp1.estaDisponible(miercolesMediodia));
+		Assert.assertTrue(cgp1.estaDisponible(miercolesMediodia,""));
 	}
 	@Test
 	public void testCgpEstaCerradoLosSabados()
 	{	
 		LocalDateTime sabadoMediodia = LocalDateTime.of(LocalDate.of(2016, 4,16),LocalTime.of(13,0));
-		Assert.assertFalse(cgp1.estaDisponible(sabadoMediodia));
+		Assert.assertFalse(cgp1.estaDisponible(sabadoMediodia,""));
 	}
 	@Test
 	public void testConVariosHorariosCGP() 
@@ -67,6 +67,6 @@ public class TestsDisponibilidad {
 		cambioDomicilio = new Servicio("cambio domicilio", disponibilidadLunes);
 		cambioDomicilio.agregarDisponibilidad(disponibilidadMediaSemana);
 		cgp1.agregarServicio(cambioDomicilio);
-		Assert.assertFalse(cgp1.estaDisponible(diaComun));
+		Assert.assertFalse(cgp1.estaDisponible(diaComun,""));
 	}
 }

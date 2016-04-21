@@ -11,7 +11,6 @@ public class ParadaColectivo extends POI
 	{	
 		super(nombre,calle,barrio,altura,posicion);
 		this.linea = linea;
-		this.listaEtiquetas.add(linea.toString());
 	}
 
 	@Override
@@ -19,8 +18,11 @@ public class ParadaColectivo extends POI
 	{
 		return (posicion.distance(otraPosicion) <=100);
 	}
-	public boolean estaDisponible(LocalDateTime fechaBuscada)
+	public boolean estaDisponible(LocalDateTime fechaBuscada,String servicio)
 	{
 		return true;
+	}
+	public boolean esBuscado(String criterio) {
+		return super.esBuscado(criterio) || linea.toString().contains(criterio);
 	}
 }

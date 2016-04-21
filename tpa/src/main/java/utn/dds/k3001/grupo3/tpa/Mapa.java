@@ -4,11 +4,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Sistema 
+public class Mapa 
 {
 	private List<POI> POIS;
 	
-	public Sistema()
+	public Mapa()
 	{
 		POIS = new LinkedList<POI>();
 	}

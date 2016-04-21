@@ -1,7 +1,8 @@
 package utn.dds.k3001.grupo3.tpa;
 
+import java.time.LocalTime;
+
 import org.uqbar.geodds.Point;
-import java.time.*;
 
 public class Banco extends PrestadorDeServicios 
 {	
@@ -9,11 +10,9 @@ public class Banco extends PrestadorDeServicios
 	{
 		super(nombre,calle,barrio,altura,posicion);
 	}
-	@Override
 	public void agregarServicio(Servicio servicio)
-	{	
-		Servicio servicioBancario = servicio;
-		servicioBancario.agregarDisponibilidad(Disponibilidad.horarioBancario());
-		serviciosOfrecidos.add(servicioBancario);
+	{	servicio.limpiarDisponibilidad();
+		servicio.agregarDisponibilidad(Disponibilidad.lunesAViernes(LocalTime.of(10,0),LocalTime.of(15,0)));
+		serviciosOfrecidos.add(servicio);
 	}
 }

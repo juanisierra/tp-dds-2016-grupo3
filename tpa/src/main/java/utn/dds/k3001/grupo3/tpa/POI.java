@@ -8,26 +8,15 @@ import java.time.*;
 public class POI 
 {
 	protected String nombre;
-	protected String calle;
-	protected String barrio;
-	protected int  altura;
 	protected Point posicion;
 	protected List<String> listaEtiquetas;
-	protected static List<Comuna> listaComunas = new LinkedList<Comuna>();
-	
-	public static void agregarComuna(Comuna comuna)
-	{
-		listaComunas.add(comuna);
-	}
-	public POI(String nombre, String calle, String barrio, int altura, Point posicion)
-	{
+	protected Direccion direccion;
+
+	public POI(String nombre, String calle, String barrio, int altura, Point posicion) {
+		this.direccion = new Direccion(calle,barrio,altura);
 		this.nombre = nombre;
-		this.calle = calle;
-		this.barrio = barrio;
-		this.altura = altura;
 		this.posicion = posicion;
 		this.listaEtiquetas = new LinkedList<String>();
-		this.listaEtiquetas.add(nombre);
 	}
 	public void agregarEtiqueta(String etiqueta)
 	{
@@ -39,13 +28,9 @@ public class POI
 	}
 	public boolean esBuscado(String criterio)
 	{
-		return listaEtiquetas.contains(criterio);
+		return (nombre.contains(criterio) || listaEtiquetas.contains(criterio));
 	}
 	public boolean estaDisponible(LocalDateTime fechaBuscada,String servicio)
-	{
-		return false;
-	}
-	public boolean estaDisponible(LocalDateTime fechaBuscada)
 	{
 		return false;
 	}

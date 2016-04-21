@@ -16,7 +16,6 @@ public class LocalComercial extends POI
 		this.listaDisponibilidad = new LinkedList<Disponibilidad>();
 		this.rubro = rubro;
 		this.listaDisponibilidad.add(disponibilidad);
-		this.listaEtiquetas.add(rubro.nombre());
 	}
 
 	@Override
@@ -33,8 +32,11 @@ public class LocalComercial extends POI
 		listaDisponibilidad.removeAll(listaDisponibilidad);
 	}
 	@Override
-	public boolean estaDisponible(LocalDateTime fecha)
+	public boolean estaDisponible(LocalDateTime fecha,String servicio)
 	{
 		return listaDisponibilidad.stream().anyMatch(disponibilidad -> disponibilidad.estaDisponible(fecha));
+	}
+	public boolean esBuscado(String criterio) {
+		return super.esBuscado(criterio) || rubro.nombre().contains(criterio);
 	}
 }

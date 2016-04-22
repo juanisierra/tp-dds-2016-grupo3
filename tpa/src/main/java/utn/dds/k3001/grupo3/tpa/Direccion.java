@@ -7,8 +7,8 @@ public class Direccion {
 	private int altura;
 	
 	public Direccion(String calle, String barrio, int altura) {
-	this.calle = calle;
-	this.barrio = barrio;
-	this.altura = altura;
-}
+		this.calle = calle;
+		this.barrio = barrio;
+		this.altura = altura;
+	}
 }

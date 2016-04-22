@@ -12,7 +12,6 @@ public class ParadaColectivo extends POI
 		super(nombre,calle,barrio,altura,posicion);
 		this.linea = linea;
 	}
-
 	@Override
 	public boolean estaCerca(Point otraPosicion)
 	{

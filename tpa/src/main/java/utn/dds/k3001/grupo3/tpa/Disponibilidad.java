@@ -31,6 +31,6 @@ public class Disponibilidad
 	}
 	private boolean abreALaHora(LocalTime hora)
 	{
-		return (hora.compareTo(horaApertura)>0 && hora.compareTo(horaCierre)<0);
+		return (hora.compareTo(horaApertura)>=0 && hora.compareTo(horaCierre)<0);
 	}
 }

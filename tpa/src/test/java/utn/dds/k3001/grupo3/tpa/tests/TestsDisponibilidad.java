@@ -63,10 +63,14 @@ public class TestsDisponibilidad {
 	{
 		disponibilidadLunes = new Disponibilidad(LocalTime.of(1, 0), LocalTime.of(3, 0), Arrays.asList(DayOfWeek.MONDAY));
 		disponibilidadMediaSemana = new Disponibilidad(LocalTime.of(4, 0), LocalTime.of(5, 0), Arrays.asList(DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY));
-		LocalDateTime diaComun = LocalDateTime.of(LocalDate.of(2016, 4,18),LocalTime.of(4,1));		
+		LocalDateTime diaLunes = LocalDateTime.of(LocalDate.of(2016, 4,18),LocalTime.of(4,0));
+		LocalDateTime diaViernes = LocalDateTime.of(LocalDate.of(2016, 4, 22),LocalTime.of(4,0));
+		LocalDateTime diaViernesLimite = LocalDateTime.of(LocalDate.of(2016, 4, 22),LocalTime.of(5,0));
 		cambioDomicilio = new Servicio("cambio domicilio", disponibilidadLunes);
 		cambioDomicilio.agregarDisponibilidad(disponibilidadMediaSemana);
 		cgp1.agregarServicio(cambioDomicilio);
-		Assert.assertFalse(cgp1.estaDisponible(diaComun,""));
+		Assert.assertFalse(cgp1.estaDisponible(diaLunes,""));
+		Assert.assertTrue(cgp1.estaDisponible(diaViernes, ""));
+		Assert.assertFalse(cgp1.estaDisponible(diaViernesLimite,""));
 	}
 }

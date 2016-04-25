@@ -28,8 +28,8 @@ public class Disponibilidad
 	public boolean abreElDia(DayOfWeek dia){
 		return diasDisponible.contains(dia);
 	}
-	
+
 	private boolean abreALaHora(LocalTime hora){
-		return (hora.compareTo(horaApertura)>0 && hora.compareTo(horaCierre)<0);
+		return (hora.compareTo(horaApertura)>=0 && hora.compareTo(horaCierre)<0);
 	}
 }

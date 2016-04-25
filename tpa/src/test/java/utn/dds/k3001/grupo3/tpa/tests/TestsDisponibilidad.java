@@ -15,7 +15,7 @@ public class TestsDisponibilidad {
 	Rubro libreria;
 	Disponibilidad disponibilidadLibrerias,disponibilidadLunes,disponibilidadMediaSemana;
 	LocalComercial libreriaYenny;
-	CGP cgp1;
+	CGP cgp1, cgp2;
 	Servicio altaDomicilio, cambioDomicilio;
 	Comuna comuna1;
 	@Before
@@ -24,9 +24,16 @@ public class TestsDisponibilidad {
 		libreria = new Rubro("libreria",50);
 		disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));
 		libreriaYenny = new LocalComercial("libreria yenny","Beiro","devoto",100,new Point(10,10),libreria,disponibilidadLibrerias);
-		cgp1 = new CGP("cgp2","beiro","caballito",100,new Point(10.1,10.1),comuna1);
+		cgp1 = new CGP("cgp1","beiro","caballito",100,new Point(10.1,10.1),comuna1);
 		altaDomicilio = new Servicio("alta domicilio",disponibilidadLibrerias);
 		cgp1.agregarServicio(altaDomicilio);
+		
+		cgp2= new CGP("cgp2","beiro","rivadavia",4000,new Point(10.1,10.1),comuna1);
+		disponibilidadLunes = new Disponibilidad(LocalTime.of(1, 0), LocalTime.of(3, 0), Arrays.asList(DayOfWeek.MONDAY));
+		disponibilidadMediaSemana = new Disponibilidad(LocalTime.of(4, 0), LocalTime.of(5, 0), Arrays.asList(DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY));
+		cambioDomicilio = new Servicio("cambio domicilio", disponibilidadLunes);
+		cambioDomicilio.agregarDisponibilidad(disponibilidadMediaSemana);
+		cgp2.agregarServicio(cambioDomicilio);
 	}
 	@Test
 	public void testLaLibreriaEstaAbiertaElMiercolesAlMediodia()
@@ -59,14 +66,27 @@ public class TestsDisponibilidad {
 		Assert.assertFalse(cgp1.estaDisponible(sabadoMediodia,""));
 	}
 	@Test
-	public void testConVariosHorariosCGP() 
+	public void testDisponibleAPrimeraHora() 
 	{
-		disponibilidadLunes = new Disponibilidad(LocalTime.of(1, 0), LocalTime.of(3, 0), Arrays.asList(DayOfWeek.MONDAY));
-		disponibilidadMediaSemana = new Disponibilidad(LocalTime.of(4, 0), LocalTime.of(5, 0), Arrays.asList(DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY));
-		LocalDateTime diaComun = LocalDateTime.of(LocalDate.of(2016, 4,18),LocalTime.of(4,1));		
-		cambioDomicilio = new Servicio("cambio domicilio", disponibilidadLunes);
-		cambioDomicilio.agregarDisponibilidad(disponibilidadMediaSemana);
-		cgp1.agregarServicio(cambioDomicilio);
-		Assert.assertFalse(cgp1.estaDisponible(diaComun,""));
+		LocalDateTime diaLunes = LocalDateTime.of(LocalDate.of(2016, 4,18),LocalTime.of(1,0));
+		Assert.assertTrue(cgp2.estaDisponible(diaLunes,""));
+	}
+	@Test
+	public void testNoDisponibleAUltimaHora()
+	{
+		LocalDateTime diaLunes = LocalDateTime.of(LocalDate.of(2016, 4,18),LocalTime.of(3,0));
+		Assert.assertFalse(cgp2.estaDisponible(diaLunes,""));
+	}
+	@Test
+	public void testDisponibilidadUnoCGP()
+	{
+		LocalDateTime diaLunes = LocalDateTime.of(LocalDate.of(2016, 4,18),LocalTime.of(2,0));
+		Assert.assertTrue(cgp2.estaDisponible(diaLunes,""));
+	}
+	@Test
+	public void testDisponibilidadDosCGP()
+	{
+		LocalDateTime diaViernes = LocalDateTime.of(LocalDate.of(2016, 4, 22),LocalTime.of(4,6));
+		Assert.assertTrue(cgp2.estaDisponible(diaViernes, ""));
 	}
 }

@@ -18,20 +18,20 @@ public class POI
 		this.posicion = posicion;
 		this.listaEtiquetas = new LinkedList<String>();
 	}
-	public void agregarEtiqueta(String etiqueta)
-	{
+	
+	public void agregarEtiqueta(String etiqueta){
 		this.listaEtiquetas.add(etiqueta);
 	}
-	public boolean estaCerca(Point otraPosicion)
-	{
-		return (posicion.distance(otraPosicion) <=500);
+	
+	public boolean estaCerca(Point otraPosicion){
+		return (posicion.distance(otraPosicion) <=0.5);
 	}
-	public boolean esBuscado(String criterio)
-	{
+	
+	public boolean esBuscado(String criterio){
 		return (nombre.contains(criterio) || listaEtiquetas.contains(criterio));
 	}
-	public boolean estaDisponible(LocalDateTime fechaBuscada,String servicio)
-	{
+	
+	public boolean estaDisponible(LocalDateTime fechaBuscada,String servicio){
 		return false;
 	}
 }

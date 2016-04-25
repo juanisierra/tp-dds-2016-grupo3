@@ -10,8 +10,7 @@ public class LocalComercial extends POI
 	private Rubro rubro;
 	private List<Disponibilidad> listaDisponibilidad;
 	
-	public LocalComercial(String nombre, String calle, String barrio, int altura, Point posicion,Rubro rubro, Disponibilidad disponibilidad)
-	{	
+	public LocalComercial(String nombre, String calle, String barrio, int altura, Point posicion,Rubro rubro, Disponibilidad disponibilidad){	
 		super(nombre,calle,barrio,altura,posicion);
 		this.listaDisponibilidad = new LinkedList<Disponibilidad>();
 		this.rubro = rubro;
@@ -19,23 +18,23 @@ public class LocalComercial extends POI
 	}
 
 	@Override
-	public boolean estaCerca(Point otraPosicion)
-	{
-		return (posicion.distance(otraPosicion)<= rubro.distancia());		
+	public boolean estaCerca(Point otraPosicion){
+		return (posicion.distance(otraPosicion)<= rubro.distanciaDeCercania());		
 	}
-	public void agregarDisponibilidad(Disponibilidad disponibilidad)
-	{
+	
+	public void agregarDisponibilidad(Disponibilidad disponibilidad){
 		this.listaDisponibilidad.add(disponibilidad);
 	}
-	public void limpiarDisponibilidad()
-	{
+	
+	public void limpiarDisponibilidad(){
 		listaDisponibilidad.removeAll(listaDisponibilidad);
 	}
+	
 	@Override
-	public boolean estaDisponible(LocalDateTime fecha,String servicio)
-	{
+	public boolean estaDisponible(LocalDateTime fecha,String servicio){
 		return listaDisponibilidad.stream().anyMatch(disponibilidad -> disponibilidad.estaDisponible(fecha));
 	}
+	
 	public boolean esBuscado(String criterio) {
 		return super.esBuscado(criterio) || rubro.nombre().contains(criterio);
 	}

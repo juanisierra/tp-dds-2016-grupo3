@@ -8,16 +8,15 @@ public class Mapa
 {
 	private List<POI> POIS;
 	
-	public Mapa()
-	{
+	public Mapa(){
 		POIS = new LinkedList<POI>();
 	}
-	public void agregarPoi(POI poiNvo)
-	{
+	
+	public void agregarPoi(POI poiNvo){
 		POIS.add(poiNvo);
 	}
-	public List<POI> buscar(String criterio)
-	{
+	
+	public List<POI> buscar(String criterio){
 		return POIS.stream().filter(POI -> POI.esBuscado(criterio)).collect(Collectors.toList());
 	}
 }

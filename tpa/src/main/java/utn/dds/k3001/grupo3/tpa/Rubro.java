@@ -5,17 +5,16 @@ public class Rubro
 	private String nombre;
 	private double distanciaDeCercania;
 	
-	public Rubro(String nombre, double distanciaDeCercania)
-	{
+	public Rubro(String nombre, double distanciaDeCercania){
 		this.nombre = nombre;
 		this.distanciaDeCercania = distanciaDeCercania;
 	}
-	public double distancia() 
-	{
+	
+	public double distanciaDeCercania() {
 		return distanciaDeCercania;
 	}
-	public String nombre() 
-	{
+	
+	public String nombre() {
 		return nombre;
 	}
 }

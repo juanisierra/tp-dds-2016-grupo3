@@ -78,13 +78,13 @@ public class TestsDisponibilidad {
 		Assert.assertFalse(cgp2.estaDisponible(diaLunes,""));
 	}
 	@Test
-	public void testDisponibilidadUnoCGP()
+	public void testCGPDisponibleLunes()
 	{
 		LocalDateTime diaLunes = LocalDateTime.of(LocalDate.of(2016, 4,18),LocalTime.of(2,0));
 		Assert.assertTrue(cgp2.estaDisponible(diaLunes,""));
 	}
 	@Test
-	public void testDisponibilidadDosCGP()
+	public void testCGPDisponibleMartes()
 	{
 		LocalDateTime diaViernes = LocalDateTime.of(LocalDate.of(2016, 4, 22),LocalTime.of(4,6));
 		Assert.assertTrue(cgp2.estaDisponible(diaViernes, ""));

@@ -1,4 +1,5 @@
 package utn.dds.k3001.grupo3.tpa.tests;
+
 import utn.dds.k3001.grupo3.tpa.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -11,7 +12,6 @@ import org.junit.Test;
 import org.uqbar.geodds.Point;
 
 public class TestsDisponibilidad {
-
 	Rubro libreria;
 	Disponibilidad disponibilidadLibrerias,disponibilidadLunes,disponibilidadMediaSemana;
 	LocalComercial libreriaYenny;
@@ -88,5 +88,11 @@ public class TestsDisponibilidad {
 	{
 		LocalDateTime diaViernes = LocalDateTime.of(LocalDate.of(2016, 4, 22),LocalTime.of(4,6));
 		Assert.assertTrue(cgp2.estaDisponible(diaViernes, ""));
+	}
+	@Test
+	public void testNoEncuentraServicio()
+	{
+		LocalDateTime diaViernes = LocalDateTime.of(LocalDate.of(2016, 4, 22),LocalTime.of(4,6));
+		Assert.assertFalse(cgp1.estaDisponible(diaViernes, "esteServicioNoExiste"));
 	}
 }

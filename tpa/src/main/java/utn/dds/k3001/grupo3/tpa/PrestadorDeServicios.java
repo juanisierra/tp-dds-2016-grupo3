@@ -16,7 +16,7 @@ public abstract class PrestadorDeServicios extends POI
 	
 	public void agregarServicio(Servicio servicio){
 		this.serviciosOfrecidos.add(servicio);
-	}	
+	}
 	
 	public boolean estaDisponible(LocalDateTime fechaBuscada, String servicio) {	
 		return serviciosOfrecidos.stream().anyMatch(servicioBuscado -> (servicioBuscado.nombre().contains(servicio) && servicioBuscado.estaDisponible(fechaBuscada)));

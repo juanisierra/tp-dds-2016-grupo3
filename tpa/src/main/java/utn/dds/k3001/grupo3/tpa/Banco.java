@@ -1,7 +1,6 @@
 package utn.dds.k3001.grupo3.tpa;
 
 import java.time.LocalTime;
-
 import org.uqbar.geodds.Point;
 
 public class Banco extends PrestadorDeServicios 

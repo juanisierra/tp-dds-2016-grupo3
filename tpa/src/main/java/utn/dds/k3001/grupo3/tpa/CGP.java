@@ -12,8 +12,6 @@ public class CGP extends PrestadorDeServicios
 	}
 	
 	public boolean estaCerca(Point otraPosicion) {
-		
 		return comunaPropia.estaEnComuna(otraPosicion);
 	}
-	
 }

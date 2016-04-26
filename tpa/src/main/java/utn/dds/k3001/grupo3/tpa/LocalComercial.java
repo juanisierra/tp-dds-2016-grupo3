@@ -16,7 +16,7 @@ public class LocalComercial extends POI
 		this.rubro = rubro;
 		this.listaDisponibilidad.add(disponibilidad);
 	}
-
+	
 	@Override
 	public boolean estaCerca(Point otraPosicion){
 		return (posicion.distance(otraPosicion)<= rubro.distanciaDeCercania());		

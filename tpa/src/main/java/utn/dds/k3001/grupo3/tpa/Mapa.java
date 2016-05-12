@@ -6,17 +6,22 @@ import java.util.stream.Collectors;
 
 public class Mapa 
 {
-	private List<POI> POIS;
+	private List<POI> ListaPOIS;
 	
 	public Mapa(){
-		POIS = new LinkedList<POI>();
+		ListaPOIS = new LinkedList<POI>();
 	}
 	
 	public void agregarPoi(POI poiNvo){
-		POIS.add(poiNvo);
+		ListaPOIS.add(poiNvo);
 	}
-	
+	public void eliminarPoi(POI poiAEliminar){
+		ListaPOIS.remove(poiAEliminar);
+	}
+	public List<POI> verTodosLosPois(){
+		return ListaPOIS;
+	}
 	public List<POI> buscar(String criterio){
-		return POIS.stream().filter(POI -> POI.esBuscado(criterio)).collect(Collectors.toList());
+		return ListaPOIS.stream().filter(POI -> POI.esBuscado(criterio)).collect(Collectors.toList());
 	}
 }

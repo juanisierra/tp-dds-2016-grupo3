@@ -7,9 +7,10 @@ import java.util.stream.Collectors;
 public class Mapa 
 {
 	private List<POI> ListaPOIS;
-	
+	private List<OrigenDeDatos> origenesDeDatos;
 	public Mapa(){
 		ListaPOIS = new LinkedList<POI>();
+		origenesDeDatos = new LinkedList<OrigenDeDatos>();
 	}
 	
 	public void agregarPoi(POI poiNvo){
@@ -21,7 +22,13 @@ public class Mapa
 	public List<POI> verTodosLosPois(){
 		return ListaPOIS;
 	}
+	public void agregarOrigenDeDatos(OrigenDeDatos origen){
+		origenesDeDatos.add(origen);
+	}
 	public List<POI> buscar(String criterio){
-		return ListaPOIS.stream().filter(POI -> POI.esBuscado(criterio)).collect(Collectors.toList());
+		LinkedList<POI> listaABuscar = new LinkedList<POI>();
+		listaABuscar.addAll(ListaPOIS);
+		origenesDeDatos.forEach(origen -> listaABuscar.addAll(origen.buscar(criterio)));
+		return (listaABuscar.stream().filter(POI -> POI.esBuscado(criterio)).collect(Collectors.toList()));
 	}
 }

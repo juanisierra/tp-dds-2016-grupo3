@@ -14,7 +14,11 @@ public class Servicio
 		this.nombre = nombre;
 		this.listaDisponibilidad.add(disponibilidad);
 	}
-	
+	public Servicio(String nombre, List<Disponibilidad> disponibilidades){
+		this.listaDisponibilidad = new LinkedList<Disponibilidad>();
+		this.nombre = nombre;
+		this.listaDisponibilidad = disponibilidades;
+	}
 	public void agregarDisponibilidad(Disponibilidad disponibilidad){
 		this.listaDisponibilidad.add(disponibilidad);
 	}
@@ -22,12 +26,18 @@ public class Servicio
 	public void limpiarDisponibilidad(){
 		listaDisponibilidad.removeAll(listaDisponibilidad);
 	}
-	
+	public boolean equals(Servicio otro){
+		return this.nombre.equals(otro.nombre()); //TODO agregar comparacion de listas
+	}
 	String nombre() {
 		return nombre;
 	}
 	
 	public boolean estaDisponible(LocalDateTime fecha){
 		return listaDisponibilidad.stream().anyMatch(disponibilidad -> disponibilidad.estaDisponible(fecha));
+	}
+
+	public List<Disponibilidad> getListaDisponibilidad() {
+		return listaDisponibilidad;
 	}
 }

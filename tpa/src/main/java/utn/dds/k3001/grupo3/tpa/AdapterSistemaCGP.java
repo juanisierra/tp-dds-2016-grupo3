@@ -1,18 +1,17 @@
 package utn.dds.k3001.grupo3.tpa;
 
-
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-
 import org.uqbar.geodds.Point;
-
 import utn.dds.k3001.grupo3.tpa.DTO.*;
 
 public class AdapterSistemaCGP implements OrigenDeDatos{
+	
 	SistemaCGP sistema;
+	
 	public AdapterSistemaCGP(SistemaCGP sistema){
 		this.sistema = sistema;
 	}
@@ -24,9 +23,8 @@ public class AdapterSistemaCGP implements OrigenDeDatos{
 	public List<Disponibilidad> adaptarDisponibilidades(List<RangosServicioDTO> rangoDTO) {
 		LinkedList<Disponibilidad>listaDisponibilidades = new LinkedList<Disponibilidad>();
 		rangoDTO.forEach(rango -> listaDisponibilidades.add(
-				new Disponibilidad(LocalTime.of(rango.getHorarioDesde(),rango.getMinutosDesde()),
-						LocalTime.of(rango.getHorarioHasta(),rango.getMinutosHasta()),Arrays.asList(DayOfWeek.of(rango.getNumeroDia()))))
-						);
+		new Disponibilidad(LocalTime.of(rango.getHorarioDesde(),rango.getMinutosDesde()),
+		LocalTime.of(rango.getHorarioHasta(),rango.getMinutosHasta()),Arrays.asList(DayOfWeek.of(rango.getNumeroDia())))));
 		return listaDisponibilidades;
 	}
 	public CGP adaptarCGP(CentroDTO cgpDTO){//TODO Adaptar demas datos, chequear comunas

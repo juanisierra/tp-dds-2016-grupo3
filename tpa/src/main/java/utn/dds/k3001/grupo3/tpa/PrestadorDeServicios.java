@@ -13,19 +13,15 @@ public abstract class PrestadorDeServicios extends POI
 		super(nombre,calle,barrio,altura,posicion);
 		this.serviciosOfrecidos = new LinkedList<Servicio>();
 	}
-	
 	public void agregarServicio(Servicio servicio){
 		this.serviciosOfrecidos.add(servicio);
 	}
-	
 	public boolean estaDisponible(LocalDateTime fechaBuscada, String servicio) {	
 		return serviciosOfrecidos.stream().anyMatch(servicioBuscado -> (servicioBuscado.nombre().contains(servicio) && servicioBuscado.estaDisponible(fechaBuscada)));
 	}
-	
 	public boolean esBuscado(String criterio){
 		return super.esBuscado(criterio) || this.tieneServicio(criterio);
 	}
-	
 	private boolean tieneServicio(String servicio) {
 		return serviciosOfrecidos.stream().anyMatch(unServicio -> unServicio.nombre().contains(servicio));
 	}

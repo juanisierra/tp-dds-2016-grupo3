@@ -22,7 +22,6 @@ public class Servicio
 	public void agregarDisponibilidad(Disponibilidad disponibilidad){
 		this.listaDisponibilidad.add(disponibilidad);
 	}
-	
 	public void limpiarDisponibilidad(){
 		listaDisponibilidad.removeAll(listaDisponibilidad);
 	}
@@ -32,11 +31,9 @@ public class Servicio
 	String nombre() {
 		return nombre;
 	}
-	
 	public boolean estaDisponible(LocalDateTime fecha){
 		return listaDisponibilidad.stream().anyMatch(disponibilidad -> disponibilidad.estaDisponible(fecha));
 	}
-
 	public List<Disponibilidad> getListaDisponibilidad() {
 		return listaDisponibilidad;
 	}

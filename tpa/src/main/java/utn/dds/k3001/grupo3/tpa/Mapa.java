@@ -8,11 +8,11 @@ public class Mapa
 {
 	private List<POI> ListaPOIS;
 	private List<OrigenDeDatos> origenesDeDatos;
+	
 	public Mapa(){
 		ListaPOIS = new LinkedList<POI>();
 		origenesDeDatos = new LinkedList<OrigenDeDatos>();
 	}
-	
 	public void agregarPoi(POI poiNvo){
 		ListaPOIS.add(poiNvo);
 	}

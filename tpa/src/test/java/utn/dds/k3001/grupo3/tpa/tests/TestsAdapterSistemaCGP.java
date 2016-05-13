@@ -1,16 +1,16 @@
 package utn.dds.k3001.grupo3.tpa.tests;
+
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
-
 import org.junit.*;
 import org.mockito.Mockito;
 import org.uqbar.geodds.Point;
-
 import utn.dds.k3001.grupo3.tpa.*;
 import utn.dds.k3001.grupo3.tpa.DTO.*;
+
 public class TestsAdapterSistemaCGP {
 	AdapterSistemaCGP adapter;
 	ServiciosDTO cambioDomicilio;

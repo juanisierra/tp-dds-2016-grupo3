@@ -13,11 +13,9 @@ public class Comuna
 		this.limites = new Polygon(puntos);
 		this.nombre = nombre;
 	}
-	
 	public Comuna(String nombreComuna) {
 		nombre = nombreComuna;
 	}
-
 	public boolean estaEnComuna(Point punto){
 		return limites.isInside(punto);
 	}

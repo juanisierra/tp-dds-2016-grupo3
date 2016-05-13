@@ -14,7 +14,7 @@ public class TestsABMC {
 	Comuna comuna1;
 	Rubro libreria;
 	Disponibilidad disponibilidadLibrerias;
-	 LocalComercial libreriaYenny;
+	LocalComercial libreriaYenny;
 	@Before
 	public void init(){
 		CABA = new Mapa();

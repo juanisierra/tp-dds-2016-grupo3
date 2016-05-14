@@ -12,15 +12,16 @@ import utn.dds.k3001.grupo3.tpa.*;
 import utn.dds.k3001.grupo3.tpa.DTO.*;
 
 public class TestsAdapterSistemaCGP {
-	AdapterSistemaCGP adapter;
-	ServiciosDTO cambioDomicilio;
-	RangosServicioDTO rangoLunes;
-	CentroDTO cgpCaballito;
-	ArrayList<ServiciosDTO> listaServiciosDTO;
-	ArrayList<RangosServicioDTO> rangosDTO;
-	Servicio miCambioDeDomicilio;
-	SistemaCGP sistemaMock;
 	Mapa CABA;
+	SistemaCGP sistemaMock;
+	AdapterSistemaCGP adapter;
+	RangosServicioDTO rangoLunes;
+	ArrayList<RangosServicioDTO> rangosDTO;
+	ServiciosDTO cambioDomicilio;
+	CentroDTO cgpCaballito;
+	Servicio miCambioDeDomicilio;
+	ArrayList<ServiciosDTO> listaServiciosDTO;
+		
 @Before
 public void init() {
 	CABA = new Mapa();
@@ -46,7 +47,7 @@ public void testAdaptarServicio() {
 	Assert.assertTrue(miCambioDeDomicilio.equals(adapter.adaptarServicios(listaServiciosDTO).get(0)));
 }
 @Test
-public void testElAdaptarCGP() {
+public void testAdaptarCGP() {
 	CGP miCGPCaballito = new CGP("","Rivadavia 123","Caballito",0,new Point(0,0),new Comuna("1",null));
 	Assert.assertTrue(miCGPCaballito.equals(adapter.adaptarCGP(cgpCaballito)));
 }

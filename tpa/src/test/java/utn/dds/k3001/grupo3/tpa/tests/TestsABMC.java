@@ -15,6 +15,7 @@ public class TestsABMC {
 	Rubro libreria;
 	Disponibilidad disponibilidadLibrerias;
 	LocalComercial libreriaYenny;
+	
 	@Before
 	public void init(){
 		CABA = new Mapa();
@@ -24,7 +25,7 @@ public class TestsABMC {
 		libreriaYenny = new LocalComercial("libreria yenny","Beiro","devoto",100,new Point(0.01,0.01),libreria,disponibilidadLibrerias);
 	}
 	@Test
-	public void testAgregaLibreriaYenny () {
+	public void testAgregarLibreriaYenny () {
 		CABA.agregarPoi(libreriaYenny);
 		Assert.assertEquals(1, CABA.verTodosLosPois().size(),0);
 	}

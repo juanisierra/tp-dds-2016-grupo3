@@ -37,4 +37,7 @@ public class Servicio
 	public List<Disponibilidad> getListaDisponibilidad() {
 		return listaDisponibilidad;
 	}
+	public String getNombre() {
+		return nombre;
+	}
 }

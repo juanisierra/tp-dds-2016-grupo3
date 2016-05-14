@@ -34,4 +34,28 @@ public class POI
 	public boolean estaDisponible(LocalDateTime fechaBuscada,String servicio){
 		return false;
 	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Point getPosicion() {
+		return posicion;
+	}
+
+	public void setPosicion(Point posicion) {
+		this.posicion = posicion;
+	}
+
+	public Direccion getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(Direccion direccion) {
+		this.direccion = direccion;
+	}
 }

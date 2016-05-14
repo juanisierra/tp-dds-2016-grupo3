@@ -25,4 +25,7 @@ public abstract class PrestadorDeServicios extends POI
 	private boolean tieneServicio(String servicio) {
 		return serviciosOfrecidos.stream().anyMatch(unServicio -> unServicio.nombre().contains(servicio));
 	}
+	public List<Servicio> getServiciosOfrecidos() {
+		return serviciosOfrecidos;
+	}
 }

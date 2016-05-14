@@ -4,7 +4,6 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import org.junit.*;
 import org.mockito.Mockito;
 import org.uqbar.geodds.Point;

@@ -5,9 +5,11 @@ import java.util.List;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 public class AdapterSistemaBancos implements OrigenDeDatos{
+	
 	private RequestService requestService;
 	private JsonFactory factory;
 	String json;
+	
 	public AdapterSistemaBancos (RequestService requestService){
 		this.requestService = requestService;
 		this.factory = new JsonFactory();
@@ -20,5 +22,4 @@ public class AdapterSistemaBancos implements OrigenDeDatos{
         listaPOI.addAll(factory.JsonAObjeto(json, new TypeReference<List<Banco>>(){})); 
         return listaPOI;
     }
-    
 }

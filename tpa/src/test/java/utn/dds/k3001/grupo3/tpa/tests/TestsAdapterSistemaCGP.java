@@ -39,16 +39,21 @@ public void init() {
 @Test
 public void testAdaptarDisponibilidad(){
 	Disponibilidad disponibilidadLunes =new Disponibilidad(LocalTime.of(8,0),LocalTime.of(16,0),Arrays.asList(DayOfWeek.of(1)));
-	Assert.assertTrue(disponibilidadLunes.equals(adapter.adaptarDisponibilidades(rangosDTO).get(0)));
+	Assert.assertTrue(disponibilidadLunes.getHoraApertura().equals(adapter.adaptarDisponibilidades(rangosDTO).get(0).getHoraApertura()));
+	Assert.assertTrue(disponibilidadLunes.getHoraCierre().equals(adapter.adaptarDisponibilidades(rangosDTO).get(0).getHoraCierre()));
+	Assert.assertTrue(disponibilidadLunes.getDiasDisponible().get(0).equals(adapter.adaptarDisponibilidades(rangosDTO).get(0).getDiasDisponible().get(0)));
 }
 @Test
 public void testAdaptarServicio() {
-	Assert.assertTrue(miCambioDeDomicilio.equals(adapter.adaptarServicios(listaServiciosDTO).get(0)));
+	Assert.assertTrue(miCambioDeDomicilio.getListaDisponibilidad().get(0).getHoraApertura().equals(adapter.adaptarServicios(listaServiciosDTO).get(0).getListaDisponibilidad().get(0).getHoraApertura()));
+	Assert.assertTrue(miCambioDeDomicilio.getListaDisponibilidad().get(0).getHoraCierre().equals(adapter.adaptarServicios(listaServiciosDTO).get(0).getListaDisponibilidad().get(0).getHoraCierre()));
 }
 @Test
 public void testAdaptarCGP() {
-	CGP miCGPCaballito = new CGP("","Rivadavia 123","Caballito",0,new Point(0,0),new Comuna("1",null));
-	Assert.assertTrue(miCGPCaballito.equals(adapter.adaptarCGP(cgpCaballito)));
+	CGP miCGPCaballito = new CGP("CGP 1","Rivadavia 123","Caballito",0,new Point(0,0),new Comuna("1",null));
+	Assert.assertTrue(miCGPCaballito.getNombre().equals(adapter.adaptarCGP(cgpCaballito).getNombre()));
+	Assert.assertTrue(miCGPCaballito.getDireccion().getCalle().equals(adapter.adaptarCGP(cgpCaballito).getDireccion().getCalle()));
+	Assert.assertTrue(miCGPCaballito.getDireccion().getBarrio().equals(adapter.adaptarCGP(cgpCaballito).getDireccion().getBarrio()));
 }
 @Test
 public void testBuscarCGP(){

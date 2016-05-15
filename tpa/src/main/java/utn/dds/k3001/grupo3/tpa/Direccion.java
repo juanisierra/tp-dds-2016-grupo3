@@ -11,7 +11,13 @@ public class Direccion {
 		this.barrio = barrio;
 		this.altura = altura;
 	}
-	public boolean equals(Direccion otra){
-		return this.calle.equals(otra.calle)&&this.barrio.equals(otra.barrio); //TODO Agregar altura
+	public String getCalle() {
+		return calle;
+	}
+	public String getBarrio() {
+		return barrio;
+	}
+	public int getAltura() {
+		return altura;
 	}
 }

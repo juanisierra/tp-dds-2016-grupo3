@@ -25,9 +25,6 @@ public class Servicio
 	public void limpiarDisponibilidad(){
 		listaDisponibilidad.removeAll(listaDisponibilidad);
 	}
-	public boolean equals(Servicio otro){
-		return this.nombre.equals(otro.nombre()); //TODO agregar comparacion de listas
-	}
 	String nombre() {
 		return nombre;
 	}

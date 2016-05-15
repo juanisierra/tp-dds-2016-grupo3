@@ -33,11 +33,6 @@ public class Disponibilidad
 	private boolean abreALaHora(LocalTime hora){
 		return (hora.compareTo(horaApertura)>=0 && hora.compareTo(horaCierre)<0);
 	}
-	public boolean equals(Disponibilidad otraDisponibilidad){
-		return this.horaCierre.equals(otraDisponibilidad.getHoraCierre()) && this.horaApertura.equals(otraDisponibilidad.getHoraApertura()) && this.diasDisponible.equals(otraDisponibilidad.getDiasDisponible());
-	}
-
-
 	public List<DayOfWeek> getDiasDisponible() {
 		return diasDisponible;
 	}

@@ -8,7 +8,6 @@ public class AdapterSistemaBancos implements OrigenDeDatos{
 	
 	private RequestService requestService;
 	private JsonFactory factory;
-	String json;
 	
 	public AdapterSistemaBancos (RequestService requestService){
 		this.requestService = requestService;
@@ -16,7 +15,7 @@ public class AdapterSistemaBancos implements OrigenDeDatos{
 	}
     public List<POI> buscar(String criterio){
     	List<POI> listaPOI = new LinkedList<POI>();
-    	json = requestService.getJsonBancos(criterio,"");           
+    	String json = requestService.getJsonBancos(criterio,"");           
         listaPOI.addAll(factory.JsonAObjeto(json, new TypeReference<List<Banco>>(){})); //Solo asi me deja retornar lista de Bancos pero que admite otros POI
         json = requestService.getJsonBancos("",criterio); 
         listaPOI.addAll(factory.JsonAObjeto(json, new TypeReference<List<Banco>>(){})); 

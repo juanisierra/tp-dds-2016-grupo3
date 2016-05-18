@@ -27,8 +27,8 @@ public class Mapa
 	}
 	public List<POI> buscar(String criterio){
 		LinkedList<POI> listaABuscar = new LinkedList<POI>();
-		listaABuscar.addAll(ListaPOIS);
+		listaABuscar.addAll(ListaPOIS.stream().filter(POI -> POI.esBuscado(criterio)).collect(Collectors.toList()));
 		origenesDeDatos.forEach(origen -> listaABuscar.addAll(origen.buscar(criterio)));
-		return (listaABuscar.stream().filter(POI -> POI.esBuscado(criterio)).collect(Collectors.toList()));
+		return listaABuscar;
 	}
 }

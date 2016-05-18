@@ -15,7 +15,7 @@ public class AdapterSistemaCGP implements OrigenDeDatos{
 	public AdapterSistemaCGP(SistemaCGP sistema){
 		this.sistema = sistema;
 	}
-	public List<Servicio> adaptarServicios(List<ServiciosDTO> servicios){
+	public LinkedList<Servicio> adaptarServicios(List<ServiciosDTO> servicios){
 		LinkedList<Servicio> serviciosLocales = new LinkedList<Servicio>();
 		servicios.forEach(servicio -> serviciosLocales.add(new Servicio(servicio.getNombre(),adaptarDisponibilidades(servicio.getHorarios()))));
 		return serviciosLocales;
@@ -28,7 +28,7 @@ public class AdapterSistemaCGP implements OrigenDeDatos{
 		return listaDisponibilidades;
 	}
 	public CGP adaptarCGP(CentroDTO cgpDTO){//TODO Adaptar demas datos, chequear comunas
-		return new CGP(String.join(" ","CGP",Integer.valueOf(cgpDTO.getNumComuna()).toString()),cgpDTO.getDomicilio(),cgpDTO.getZonas(),0,new Point(0,0),new Comuna(new Integer(cgpDTO.getNumComuna()).toString()));
+		return new CGP(String.join(" ","CGP",Integer.valueOf(cgpDTO.getNumComuna()).toString()),cgpDTO.getDomicilio(),cgpDTO.getZonas(),0,new Point(0,0),new Comuna(new Integer(cgpDTO.getNumComuna()).toString()),this.adaptarServicios(cgpDTO.getListaServicios()));
 	}
 	public List<POI> buscar(String criterio){
 		List<CentroDTO> listaOriginal = sistema.buscarPOIS(criterio);

@@ -4,6 +4,8 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+
 import org.junit.*;
 import org.mockito.Mockito;
 import org.uqbar.geodds.Point;
@@ -30,10 +32,11 @@ public void init() {
 	rangosDTO = new ArrayList<RangosServicioDTO>();
 	rangosDTO.add(rangoLunes);
 	cambioDomicilio = new ServiciosDTO("Cambio Domicilio", rangosDTO);
-	cgpCaballito = new CentroDTO(1,"Caballito","Juan Pablo","Rivadavia 123","4444-4444",listaServiciosDTO);
+	
 	miCambioDeDomicilio = new Servicio("Cambio Domicilio",new Disponibilidad(LocalTime.of(8,0),LocalTime.of(16,0),Arrays.asList(DayOfWeek.of(1))));
 	listaServiciosDTO= new ArrayList<ServiciosDTO>(1);
 	listaServiciosDTO.add(cambioDomicilio);
+	cgpCaballito = new CentroDTO(1,"Caballito","Juan Pablo","Rivadavia 123","4444-4444",listaServiciosDTO);
 	CABA.agregarOrigenDeDatos(adapter);
 }
 @Test
@@ -50,10 +53,14 @@ public void testAdaptarServicio() {
 }
 @Test
 public void testAdaptarCGP() {
-	CGP miCGPCaballito = new CGP("CGP 1","Rivadavia 123","Caballito",0,new Point(0,0),new Comuna("1",null));
+	LinkedList<Servicio> listaServicios = new LinkedList<Servicio>();
+	listaServicios.add(miCambioDeDomicilio);
+	CGP miCGPCaballito = new CGP("CGP 1","Rivadavia 123","Caballito",0,new Point(0,0),new Comuna("1",null),listaServicios);
 	Assert.assertTrue(miCGPCaballito.getNombre().equals(adapter.adaptarCGP(cgpCaballito).getNombre()));
 	Assert.assertTrue(miCGPCaballito.getDireccion().getCalle().equals(adapter.adaptarCGP(cgpCaballito).getDireccion().getCalle()));
 	Assert.assertTrue(miCGPCaballito.getDireccion().getBarrio().equals(adapter.adaptarCGP(cgpCaballito).getDireccion().getBarrio()));
+	Assert.assertTrue(miCGPCaballito.getServiciosOfrecidos().get(0).getListaDisponibilidad().get(0).getHoraApertura().equals(miCambioDeDomicilio.getListaDisponibilidad().get(0).getHoraApertura()));
+	Assert.assertTrue(miCGPCaballito.getServiciosOfrecidos().get(0).getListaDisponibilidad().get(0).getHoraCierre().equals(miCambioDeDomicilio.getListaDisponibilidad().get(0).getHoraCierre()));
 }
 @Test
 public void testBuscarCGP(){

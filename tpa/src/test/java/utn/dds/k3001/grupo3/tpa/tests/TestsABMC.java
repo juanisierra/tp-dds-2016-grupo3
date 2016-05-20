@@ -15,7 +15,7 @@ public class TestsABMC {
 	Rubro libreria;
 	Disponibilidad disponibilidadLibrerias;
 	LocalComercial libreriaYenny;
-	
+	RepositorioInterno repositorio;
 	@Before
 	public void init(){
 		CABA = new Mapa();
@@ -23,22 +23,24 @@ public class TestsABMC {
 		libreria = new Rubro("libreria",50);
 		disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));
 		libreriaYenny = new LocalComercial("libreria yenny","Beiro","devoto",100,new Point(0.01,0.01),libreria,disponibilidadLibrerias);
+		repositorio = new RepositorioInterno();
+		CABA.agregarOrigenDeDatos(repositorio);
 	}
 	@Test
 	public void testAgregarLibreriaYenny () {
-		CABA.agregarPoi(libreriaYenny);
-		Assert.assertEquals(1, CABA.verTodosLosPois().size(),0);
+		repositorio.agregarPoi(libreriaYenny);
+		Assert.assertEquals(1, CABA.buscar("").size(),0);
 	}
 	@Test
 	public void testEliminarLibreriaYenny() {
-		CABA.agregarPoi(libreriaYenny);
-		CABA.eliminarPoi(libreriaYenny);
-		Assert.assertEquals(0, CABA.verTodosLosPois().size(),0);
+		repositorio.agregarPoi(libreriaYenny);
+		repositorio.eliminarPoi(libreriaYenny);
+		Assert.assertEquals(0, CABA.buscar("").size(),0);
 		
 	}
 	@Test
 	public void testListarPOIS(){
-		CABA.agregarPoi(libreriaYenny);
-		Assert.assertTrue(CABA.verTodosLosPois().contains(libreriaYenny));
+		repositorio.agregarPoi(libreriaYenny);
+		Assert.assertTrue(CABA.buscar("").contains(libreriaYenny));
 	}
 }

@@ -18,11 +18,13 @@ public class TestsBusquedaPOI
 	ParadaColectivo parada114;
 	CGP cgp1, cgp2;
 	Servicio altaDomicilio, servicio;
-
+	RepositorioInterno repositorio;
 	@Before
 	public void init()
 	{	
 		CABA = new Mapa();
+		repositorio = new RepositorioInterno();
+		CABA.agregarOrigenDeDatos(repositorio);
 		comuna1 = new Comuna("comuna 1",Arrays.asList(new Point(0,0), new Point(0,11), new Point(11,11), new Point (11,0)));
 		libreria = new Rubro("libreria",50);
 		disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));
@@ -31,9 +33,9 @@ public class TestsBusquedaPOI
 		cgp1 = new CGP("cgp2","beiro","caballito",100,new Point(10.1,10.1),comuna1);
 		altaDomicilio = new Servicio("alta domicilio",disponibilidadLibrerias);
 		cgp1.agregarServicio(altaDomicilio);
-		CABA.agregarPoi(parada114);
-		CABA.agregarPoi(libreriaYenny);
-		CABA.agregarPoi(cgp1);
+		repositorio.agregarPoi(parada114);
+		repositorio.agregarPoi(libreriaYenny);
+		repositorio.agregarPoi(cgp1);
 	}
 
 	

@@ -1,7 +1,7 @@
 package utn.dds.k3001.grupo3.tpa;
 
-import java.awt.List;
-import java.util.LinkedList;
+import java.util.ArrayList;
+
 
 import org.uqbar.geodds.*;
 
@@ -13,7 +13,7 @@ public class CGP extends PrestadorDeServicios
 		super(nombre,calle,barrio,altura,posicion);
 		this.comunaPropia =comuna;
 	}
-	public CGP(String nombre, String calle, String barrio, int altura, Point posicion, Comuna comuna,LinkedList<Servicio> servicios){
+	public CGP(String nombre, String calle, String barrio, int altura, Point posicion, Comuna comuna,ArrayList<Servicio> servicios){
 		super(nombre,calle,barrio,altura,posicion);
 		this.comunaPropia =comuna;
 		this.serviciosOfrecidos = servicios;

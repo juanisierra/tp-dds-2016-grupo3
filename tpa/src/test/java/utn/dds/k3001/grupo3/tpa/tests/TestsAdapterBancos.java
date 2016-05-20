@@ -33,21 +33,18 @@ public class TestsAdapterBancos {
 	public void init(){
 		CABA = new Mapa();
 		requestServiceMock = Mockito.mock(RequestService.class);
-		Mockito.when(requestServiceMock.getJsonBancos("la Plaza","")).thenReturn(listaBancos);
-		Mockito.when(requestServiceMock.getJsonBancos("","la Plaza")).thenReturn(listaBancos);
+		Mockito.when(requestServiceMock.getJsonBancos("","")).thenReturn(listaBancos);
 		adapter = new AdapterSistemaBancos(requestServiceMock);
 		CABA.agregarOrigenDeDatos(adapter);
 	}
 	@Test
 	public void testElAdapterLlamaAlServicio() throws Exception{
 		adapter.buscar("la Plaza");
-		Mockito.verify(requestServiceMock).getJsonBancos("la Plaza","");
-		Mockito.verify(requestServiceMock).getJsonBancos("","la Plaza");
+		Mockito.verify(requestServiceMock).getJsonBancos("","");
 		}
 	@Test
-	public void testElMapaEncuentra4Bancos() throws Exception{
-		Assert.assertEquals(4, CABA.buscar("la Plaza").size());
-		Mockito.verify(requestServiceMock).getJsonBancos("la Plaza","");
-		Mockito.verify(requestServiceMock).getJsonBancos("","la Plaza");
+	public void testElMapaEncuentra2Bancos() throws Exception{
+		Assert.assertEquals(2, CABA.buscar("la Plaza").size());
+		Mockito.verify(requestServiceMock).getJsonBancos("","");
 	}
 }

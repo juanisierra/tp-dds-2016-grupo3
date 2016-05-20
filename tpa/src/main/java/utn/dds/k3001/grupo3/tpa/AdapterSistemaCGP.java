@@ -2,9 +2,12 @@ package utn.dds.k3001.grupo3.tpa;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.uqbar.geodds.Point;
 import utn.dds.k3001.grupo3.tpa.DTO.*;
 
@@ -15,25 +18,17 @@ public class AdapterSistemaCGP implements OrigenDeDatos{
 	public AdapterSistemaCGP(SistemaCGP sistema){
 		this.sistema = sistema;
 	}
-	public LinkedList<Servicio> adaptarServicios(List<ServiciosDTO> servicios){
-		LinkedList<Servicio> serviciosLocales = new LinkedList<Servicio>();
-		servicios.forEach(servicio -> serviciosLocales.add(new Servicio(servicio.getNombre(),adaptarDisponibilidades(servicio.getHorarios()))));
-		return serviciosLocales;
+	public List<Servicio> adaptarServicios(List<ServiciosDTO> servicios){
+		return servicios.stream().map(servicio -> new Servicio(servicio.getNombre(),adaptarDisponibilidades(servicio.getHorarios()))).collect(Collectors.toList());
 	}
 	public List<Disponibilidad> adaptarDisponibilidades(List<RangosServicioDTO> rangoDTO) {
-		LinkedList<Disponibilidad>listaDisponibilidades = new LinkedList<Disponibilidad>();
-		rangoDTO.forEach(rango -> listaDisponibilidades.add(
-		new Disponibilidad(LocalTime.of(rango.getHorarioDesde(),rango.getMinutosDesde()),
-		LocalTime.of(rango.getHorarioHasta(),rango.getMinutosHasta()),Arrays.asList(DayOfWeek.of(rango.getNumeroDia())))));
-		return listaDisponibilidades;
+		return rangoDTO.stream().map(rango -> new Disponibilidad(LocalTime.of(rango.getHorarioDesde(),rango.getMinutosDesde()),
+		LocalTime.of(rango.getHorarioHasta(),rango.getMinutosHasta()),Arrays.asList(DayOfWeek.of(rango.getNumeroDia())))).collect(Collectors.toList());
 	}
 	public CGP adaptarCGP(CentroDTO cgpDTO){//TODO Adaptar demas datos, chequear comunas
-		return new CGP(String.join(" ","CGP",Integer.valueOf(cgpDTO.getNumComuna()).toString()),cgpDTO.getDomicilio(),cgpDTO.getZonas(),0,new Point(0,0),new Comuna(new Integer(cgpDTO.getNumComuna()).toString()),this.adaptarServicios(cgpDTO.getListaServicios()));
+		return new CGP(String.join(" ","CGP",Integer.valueOf(cgpDTO.getNumComuna()).toString()),cgpDTO.getDomicilio(),cgpDTO.getZonas(),0,new Point(0,0),new Comuna(new Integer(cgpDTO.getNumComuna()).toString()),(ArrayList<Servicio>) this.adaptarServicios(cgpDTO.getListaServicios()));
 	}
 	public List<POI> buscar(String criterio){
-		List<CentroDTO> listaOriginal = sistema.buscarPOIS(criterio);
-		List<POI> listaCGP = new LinkedList<POI>();
-		listaOriginal.forEach(cgpDTO -> listaCGP.add(adaptarCGP(cgpDTO)));
-		return listaCGP;		
+		return 	sistema.buscarPOIS("").stream().map(cgpDTO -> adaptarCGP(cgpDTO)).filter(CGP -> CGP.esBuscado(criterio)).collect(Collectors.toList());
 	}
 }

@@ -53,7 +53,7 @@ public void testAdaptarServicio() {
 }
 @Test
 public void testAdaptarCGP() {
-	LinkedList<Servicio> listaServicios = new LinkedList<Servicio>();
+	ArrayList<Servicio> listaServicios = new ArrayList<Servicio>();
 	listaServicios.add(miCambioDeDomicilio);
 	CGP miCGPCaballito = new CGP("CGP 1","Rivadavia 123","Caballito",0,new Point(0,0),new Comuna("1",null),listaServicios);
 	Assert.assertTrue(miCGPCaballito.getNombre().equals(adapter.adaptarCGP(cgpCaballito).getNombre()));
@@ -65,6 +65,6 @@ public void testAdaptarCGP() {
 @Test
 public void testBuscarCGP(){
 	CABA.buscar("hola");
-	Mockito.verify(sistemaMock).buscarPOIS("hola");
+	Mockito.verify(sistemaMock).buscarPOIS("");
 }
 }

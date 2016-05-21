@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.uqbar.geodds.Point;
 import utn.dds.k3001.grupo3.tpa.DTO.*;
 

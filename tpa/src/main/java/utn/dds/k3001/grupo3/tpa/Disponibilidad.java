@@ -16,7 +16,6 @@ public class Disponibilidad
 		this.diasDisponible = diasDisponible;
 	}
 	
-
 	public static Disponibilidad lunesAViernes(LocalTime horaApertura, LocalTime horaCierre){ //Builder para Lunes a viernes
 		List<DayOfWeek> listaDias = Arrays.asList(DayOfWeek.MONDAY,DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY);
 		return new Disponibilidad(horaApertura, horaCierre,listaDias);
@@ -33,15 +32,14 @@ public class Disponibilidad
 	private boolean abreALaHora(LocalTime hora){
 		return (hora.compareTo(horaApertura)>=0 && hora.compareTo(horaCierre)<0);
 	}
+	
 	public List<DayOfWeek> getDiasDisponible() {
 		return diasDisponible;
 	}
 
-
 	public LocalTime getHoraApertura() {
 		return horaApertura;
 	}
-
 
 	public LocalTime getHoraCierre() {
 		return horaCierre;

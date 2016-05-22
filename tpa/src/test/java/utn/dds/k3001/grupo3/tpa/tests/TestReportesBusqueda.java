@@ -1,13 +1,9 @@
 package utn.dds.k3001.grupo3.tpa.tests;
 
 import utn.dds.k3001.grupo3.tpa.*;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -12,6 +12,7 @@ import org.uqbar.geodds.Point;
 public class TestReportesBusqueda
 {
 	Mapa CABA;
+	Terminal terminal;
 	Rubro libreria;
 	Comuna comuna1;
 	Disponibilidad disponibilidadLibrerias;
@@ -24,6 +25,7 @@ public class TestReportesBusqueda
 	public void init()
 	{	
 		CABA = new Mapa();
+		terminal = new Terminal("teminal1", CABA);
 		repositorio = new RepositorioInterno();
 		CABA.agregarOrigenDeDatos(repositorio);
 		comuna1 = new Comuna("comuna 1",Arrays.asList(new Point(0,0), new Point(0,11), new Point(11,11), new Point (11,0)));
@@ -39,9 +41,9 @@ public class TestReportesBusqueda
 	@Test
 	public void testGuardarBusquedas()
 	{	
-		CABA.buscar("gcp1");
-		CABA.buscar("parada114");
-		CABA.buscar("criterio");
-		Assert.assertEquals(3,CABA.busquedasEnFecha(LocalDate.now()).size(),0);
+		terminal.buscar("gcp1");
+		terminal.buscar("parada114");
+		terminal.buscar("criterio");
+		Assert.assertEquals(3,terminal.busquedasEnFecha(LocalDate.now()).size(),0);
 	}	
 }

@@ -7,14 +7,14 @@ public class Busqueda
 {
 	private int cantResultados;
 	private String criterio;
-	private double tiempo;//esta en segundos
+	private double tiempoDemorado;//esta en segundos
 	private LocalDate fecha;
 	
 	public Busqueda(int cantResultados, String criterio, LocalTime hInicio, LocalTime hFin, LocalDate fecha)
 	{
 		this.cantResultados = cantResultados;
 		this.criterio = criterio;
-		this.tiempo = ChronoUnit.SECONDS.between(hInicio, hFin);
+		this.tiempoDemorado = ChronoUnit.SECONDS.between(hInicio, hFin);
 		this.fecha = fecha;
 	}
 	public boolean esEnFecha(LocalDate fecha)
@@ -31,7 +31,7 @@ public class Busqueda
 	}
 	public double getTiempo()
 	{
-		return this.tiempo;
+		return this.tiempoDemorado;
 	}
 	public LocalDate getfecha()
 	{

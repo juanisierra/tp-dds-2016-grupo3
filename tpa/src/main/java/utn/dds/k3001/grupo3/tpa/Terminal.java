@@ -11,19 +11,23 @@ public class Terminal
 	private String nombre;
 	private List<Busqueda> busquedas;
 	private Mapa mapa;
+	private List<ObserverBusqueda> observersBusqueda;
 	
 	public Terminal(String nombre, Mapa mapa)
 	{
 		this.nombre = nombre;
 		this.mapa = mapa;
 		this.busquedas = new LinkedList<Busqueda>();
+		this.observersBusqueda = new LinkedList<ObserverBusqueda>();
 	}
 	public List<POI> buscar(String criterio)
 	{
 		LocalTime inicio = LocalTime.now();
 		LocalDate fecha = LocalDate.now();
 		List<POI> resultado = mapa.buscar(criterio);
-		busquedas.add(new Busqueda(resultado.size(), criterio, inicio, LocalTime.now(), fecha));
+		Busqueda busqueda = new Busqueda(resultado.size(), criterio, inicio, LocalTime.now(), fecha);
+		busquedas.add(busqueda); //TODO poner como un observer mas?
+		observersBusqueda.stream().forEach(observer -> observer.seBusco(busqueda));
 		return resultado;
 	}
 	public List<Busqueda> busquedasEnFecha(LocalDate fecha)
@@ -38,4 +42,5 @@ public class Terminal
 	{
 		return nombre;
 	}
+
 }

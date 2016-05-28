@@ -2,6 +2,7 @@ package utn.dds.k3001.grupo3.tpa;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Mapa 
 {
@@ -23,8 +24,8 @@ public class Mapa
 		repositorioInterno.eliminarPoi(poiAEliminar);
 	}
 	public List<POI> buscar(String criterio){
-		LinkedList<POI> poisBuscados = new LinkedList<POI>();
-		origenesDeDatos.forEach(origen -> poisBuscados.addAll(origen.buscar(criterio)));
-		return poisBuscados;
+		return origenesDeDatos.stream()
+							  .flatMap(origen -> origen.buscar(criterio).stream())
+							  .collect(Collectors.toList());
 	}
 }

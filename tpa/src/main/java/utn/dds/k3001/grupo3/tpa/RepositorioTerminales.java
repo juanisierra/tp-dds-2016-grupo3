@@ -29,6 +29,5 @@ public class RepositorioTerminales
 		return terminales.stream()
 				.flatMap(terminal -> terminal.getBusquedas().stream())
 				.collect(Collectors.groupingBy(busqueda -> busqueda.getFecha(), Collectors.summingInt(busqueda -> busqueda.getCantidadResultados())));
-		
 	}
 }

@@ -14,8 +14,8 @@ public class Mapa
 		origenesDeDatos.add(origen);
 	}
 	public List<POI> buscar(String criterio){
-		LinkedList<POI> listaABuscar = new LinkedList<POI>();
-		origenesDeDatos.forEach(origen -> listaABuscar.addAll(origen.buscar(criterio)));
-		return listaABuscar;
+		LinkedList<POI> poisBuscados = new LinkedList<POI>();
+		origenesDeDatos.forEach(origen -> poisBuscados.addAll(origen.buscar(criterio)));
+		return poisBuscados;
 	}
 }

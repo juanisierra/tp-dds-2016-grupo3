@@ -15,15 +15,6 @@ public class RepositorioTerminales
 	{
 		terminales.add(terminal);
 	}
-	public int cantidadResultadosPorTerminal(String terminal)
-	{
-		return terminales .stream()
-				          .filter(Terminal -> Terminal.getNombre() == terminal)
-						  .findFirst()
-						  .get()
-						  .getBusquedas()
-						  .size();//TODO ver que hacemos si no encuentra la terminal
-	}
 	public int cantidadResultadosTotal()//TODO no me dejaba hacerlo con el forEach, prueben si los deja
 	{
 		int resultado = 0;

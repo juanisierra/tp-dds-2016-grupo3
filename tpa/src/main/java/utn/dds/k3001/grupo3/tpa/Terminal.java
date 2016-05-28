@@ -30,9 +30,9 @@ public class Terminal
 		observersBusqueda.stream().forEach(observer -> observer.seBusco(busqueda));
 		return resultado;
 	}
-	public List<Busqueda> busquedasEnFecha(LocalDate fecha)
+	public int busquedasEnFecha(LocalDate fecha)
 	{
-		return busquedas.stream().filter(Busqueda -> Busqueda.esEnFecha(fecha)).collect(Collectors.toList());
+		return busquedas.stream().filter(Busqueda -> Busqueda.esEnFecha(fecha)).collect(Collectors.toList()).size();
 	}
 	public List<Busqueda> getBusquedas()
 	{

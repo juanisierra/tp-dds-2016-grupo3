@@ -44,6 +44,6 @@ public class TestReportesBusqueda
 		terminal.buscar("gcp1");
 		terminal.buscar("parada114");
 		terminal.buscar("criterio");
-		Assert.assertEquals(3,terminal.busquedasEnFecha(LocalDate.now()).size(),0);
+		Assert.assertEquals(3,terminal.busquedasEnFecha(LocalDate.now()),0);
 	}	
 }

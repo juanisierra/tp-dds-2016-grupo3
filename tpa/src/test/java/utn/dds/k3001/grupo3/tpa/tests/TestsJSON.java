@@ -1,4 +1,5 @@
 package utn.dds.k3001.grupo3.tpa.tests;
+
 import java.util.List;
 
 import org.junit.Assert;
@@ -8,6 +9,7 @@ import org.junit.Test;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import utn.dds.k3001.grupo3.tpa.*;
+
 public class TestsJSON {
 	JsonFactory factory;
 	Banco banco;

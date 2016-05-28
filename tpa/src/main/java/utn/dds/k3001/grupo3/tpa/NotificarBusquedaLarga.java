@@ -1,9 +1,11 @@
 package utn.dds.k3001.grupo3.tpa;
 
 public class NotificarBusquedaLarga implements ObserverBusqueda {
-	int cantidadSegundos;
+	
+	double cantidadSegundos;
 	ServicioMail servicio;
-	public NotificarBusquedaLarga(ServicioMail servicio,int segundos){
+	
+	public NotificarBusquedaLarga(ServicioMail servicio,double segundos){
 		this.cantidadSegundos = segundos;
 		this.servicio = servicio;
 	}

@@ -10,12 +10,13 @@ import org.junit.Test;
 import org.uqbar.geodds.Point;
 
 public class TestsABMC {
+	
 	Mapa CABA;
 	Comuna comuna1;
 	Rubro libreria;
 	Disponibilidad disponibilidadLibrerias;
 	LocalComercial libreriaYenny;
-	RepositorioInterno repositorio;
+
 	@Before
 	public void init(){
 		CABA = new Mapa();
@@ -23,24 +24,22 @@ public class TestsABMC {
 		libreria = new Rubro("libreria",50);
 		disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));
 		libreriaYenny = new LocalComercial("libreria yenny","Beiro","devoto",100,new Point(0.01,0.01),libreria,disponibilidadLibrerias);
-		repositorio = new RepositorioInterno();
-		CABA.agregarOrigenDeDatos(repositorio);
 	}
 	@Test
 	public void testAgregarLibreriaYenny () {
-		repositorio.agregarPoi(libreriaYenny);
+		CABA.agregarPoi(libreriaYenny);
 		Assert.assertEquals(1, CABA.buscar("").size(),0);
 	}
 	@Test
 	public void testEliminarLibreriaYenny() {
-		repositorio.agregarPoi(libreriaYenny);
-		repositorio.eliminarPoi(libreriaYenny);
+		CABA.agregarPoi(libreriaYenny);
+		CABA.eliminarPoi(libreriaYenny);
 		Assert.assertEquals(0, CABA.buscar("").size(),0);
 		
 	}
 	@Test
 	public void testListarPOIS(){
-		repositorio.agregarPoi(libreriaYenny);
+		CABA.agregarPoi(libreriaYenny);
 		Assert.assertTrue(CABA.buscar("").contains(libreriaYenny));
 	}
 }

@@ -33,7 +33,7 @@ public class Busqueda
 	{
 		return this.tiempoDemorado;
 	}
-	public LocalDate getfecha()
+	public LocalDate getFecha()
 	{
 		return this.fecha;
 	}

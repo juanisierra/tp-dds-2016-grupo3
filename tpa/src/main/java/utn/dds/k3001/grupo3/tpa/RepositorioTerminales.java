@@ -1,5 +1,6 @@
 package utn.dds.k3001.grupo3.tpa;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -22,5 +23,12 @@ public class RepositorioTerminales
 	}
 	public Map<Terminal,Integer> busquedasTotalesPorTerminal(){
 		return  terminales.stream().collect(Collectors.toMap( terminal -> terminal, terminal -> terminal.busquedasTotales()));
+	}
+	public Map<LocalDate,Long> busquedasPorFecha()
+	{
+		return terminales.stream()
+				.flatMap(terminal -> terminal.getBusquedas().stream())
+				.collect(Collectors.groupingBy(busqueda -> busqueda.getFecha(), Collectors.counting()));
+		
 	}
 }

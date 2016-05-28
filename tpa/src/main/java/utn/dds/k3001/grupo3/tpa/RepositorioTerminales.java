@@ -2,6 +2,8 @@ package utn.dds.k3001.grupo3.tpa;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class RepositorioTerminales
 {
@@ -15,14 +17,10 @@ public class RepositorioTerminales
 	{
 		terminales.add(terminal);
 	}
-	public int cantidadResultadosTotal()//TODO no me dejaba hacerlo con el forEach, prueben si los deja
-	{
-		int resultado = 0;
-		int cantTerminales = terminales.size();
-		while(cantTerminales > 0)
-		{
-			resultado = resultado + terminales.get(cantTerminales).getBusquedas().size();
-		}
-		return resultado;
+	public Map<Terminal,List<Integer>> busquedasParcialesPorTerminal(){
+		return  terminales.stream().collect(Collectors.toMap( terminal -> terminal, terminal -> terminal.busquedasParciales()));
+	}
+	public Map<Terminal,Integer> busquedasTotalesPorTerminal(){
+		return  terminales.stream().collect(Collectors.toMap( terminal -> terminal, terminal -> terminal.busquedasTotales()));
 	}
 }

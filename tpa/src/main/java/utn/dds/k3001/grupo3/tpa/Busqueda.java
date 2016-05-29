@@ -10,31 +10,30 @@ public class Busqueda
 	private double tiempoDemorado;//esta en segundos
 	private LocalDate fecha;
 	
-	public Busqueda(int cantResultados, String criterio, LocalTime hInicio, LocalTime hFin, LocalDate fecha)
-	{
+	public Busqueda(int cantResultados, String criterio, LocalTime hInicio, LocalTime hFin, LocalDate fecha){
 		this.cantResultados = cantResultados;
 		this.criterio = criterio;
 		this.tiempoDemorado = ChronoUnit.SECONDS.between(hInicio, hFin);
 		this.fecha = fecha;
 	}
-	public boolean esEnFecha(LocalDate fecha)
-	{
+	
+	public boolean esEnFecha(LocalDate fecha){
 		return this.fecha.equals(fecha);
 	}
-	public int getCantidadResultados()
-	{
+	
+	public int getCantidadResultados(){
 		return this.cantResultados;
 	}
-	public String getcriterio()
-	{
+	
+	public String getcriterio(){
 		return this.criterio;
 	}
-	public double getTiempo()
-	{
+	
+	public double getTiempo(){
 		return this.tiempoDemorado;
 	}
-	public LocalDate getFecha()
-	{
+	
+	public LocalDate getFecha(){
 		return this.fecha;
 	}
 }

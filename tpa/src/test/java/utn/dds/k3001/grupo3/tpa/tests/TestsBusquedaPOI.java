@@ -20,8 +20,7 @@ public class TestsBusquedaPOI
 	Servicio altaDomicilio, servicio;
 	
 	@Before
-	public void init()
-	{	
+	public void init(){	
 		CABA = new Mapa();
 		comuna1 = new Comuna("comuna 1",Arrays.asList(new Point(0,0), new Point(0,11), new Point(11,11), new Point (11,0)));
 		libreria = new Rubro("libreria",50);
@@ -35,21 +34,19 @@ public class TestsBusquedaPOI
 		CABA.agregarPoi(libreriaYenny);
 		CABA.agregarPoi(cgp1);
 	}
-
 	
 	@Test
-	public void testBuscarAltaDomicilio()
-	{	
+	public void testBuscarAltaDomicilio(){	
 		Assert.assertTrue(CABA.buscar("alta domicilio").contains(cgp1));
 	}
+	
 	@Test
-	public void testBuscarParada114()
-	{
+	public void testBuscarParada114(){
 		Assert.assertTrue(CABA.buscar("114").contains(parada114));
 	}
+	
 	@Test
-	public void testBuscarLibreria()
-	{
+	public void testBuscarLibreria(){
 		Assert.assertTrue(CABA.buscar("libreria").contains(libreriaYenny));
 	}
 }

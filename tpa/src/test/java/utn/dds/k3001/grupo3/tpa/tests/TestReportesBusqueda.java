@@ -12,7 +12,8 @@ import org.uqbar.geodds.Point;
 public class TestReportesBusqueda
 {
 	Mapa CABA;
-	Terminal terminal;
+	RepositorioTerminales repositorioTerminales;
+	Terminal terminal, terminalMedrano;
 	Rubro libreria;
 	Comuna comuna1;
 	Disponibilidad disponibilidadLibrerias;
@@ -21,10 +22,13 @@ public class TestReportesBusqueda
 	Servicio altaDomicilio, servicio;
 	
 	@Before
-	public void init()
-	{	
+	public void init(){	
 		CABA = new Mapa();
 		terminal = new Terminal("teminal1", CABA);
+		terminalMedrano = new Terminal("TerminalMedrano", CABA);
+		repositorioTerminales = new RepositorioTerminales();
+		repositorioTerminales.agregar(terminal);
+		repositorioTerminales.agregar(terminalMedrano);
 		comuna1 = new Comuna("comuna 1",Arrays.asList(new Point(0,0), new Point(0,11), new Point(11,11), new Point (11,0)));
 		disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));
 		parada114 = new ParadaColectivo("parada 114","Chivilcoy","devoto",1000,new Point(10,10),114);
@@ -36,11 +40,24 @@ public class TestReportesBusqueda
 	}
 	
 	@Test
-	public void testGuardarBusquedas()
-	{	
+	public void testGuardarBusquedas(){	
 		terminal.buscar("gcp1");
 		terminal.buscar("parada114");
 		terminal.buscar("criterio");
 		Assert.assertEquals(3,terminal.busquedasEnFecha(LocalDate.now()),0);
-	}	
+	}
+	
+	@Test
+	public void testResultadosParcialesDeBusqueda1EnTerminal1Son2(){
+		terminal.buscar("a");
+		terminal.buscar("cgp1");
+		Assert.assertEquals(terminal.resultadosParcialesDeBusquedas().get(0).intValue(), 2);
+	}
+	
+	@Test
+	public void testResultadosTotalesDeTerminal1Son3(){
+		terminal.buscar("a");
+		terminal.buscar("cgp");
+		Assert.assertEquals(terminal.resultadosTotalesDeBusquedas(),3);
+	}
 }

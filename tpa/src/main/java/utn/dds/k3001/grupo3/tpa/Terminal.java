@@ -13,15 +13,14 @@ public class Terminal
 	private Mapa mapa;
 	private List<ObserverBusqueda> observersBusqueda;
 	
-	public Terminal(String nombre, Mapa mapa)
-	{
+	public Terminal(String nombre, Mapa mapa){
 		this.nombre = nombre;
 		this.mapa = mapa;
 		this.busquedas = new LinkedList<Busqueda>();
 		this.observersBusqueda = new LinkedList<ObserverBusqueda>();
 	}
-	public List<POI> buscar(String criterio)
-	{
+	
+	public List<POI> buscar(String criterio){
 		LocalTime inicio = LocalTime.now();
 		LocalDate fecha = LocalDate.now();
 		List<POI> resultado = mapa.buscar(criterio);
@@ -30,24 +29,28 @@ public class Terminal
 		observersBusqueda.stream().forEach(observer -> observer.seBusco(busqueda));
 		return resultado;
 	}
-	public int busquedasEnFecha(LocalDate fecha)
-	{
+	
+	public int busquedasEnFecha(LocalDate fecha){	
 		return busquedas.stream().filter(Busqueda -> Busqueda.esEnFecha(fecha)).collect(Collectors.toList()).size();
 	}
-	public int busquedasTotales()
-	{
+	
+	public int busquedasTotales(){
 		return busquedas.size();
 	}
-	public List<Integer> busquedasParciales()
-	{
+	
+	public List<Integer> resultadosParcialesDeBusquedas(){
 		return busquedas.stream().map(busqueda ->busqueda.getCantidadResultados()).collect(Collectors.toList());
 	}
-	public List<Busqueda> getBusquedas()
-	{
+	
+	public int resultadosTotalesDeBusquedas(){
+		return this.resultadosParcialesDeBusquedas().stream().mapToInt(Integer::intValue).sum();
+	}
+	
+	public List<Busqueda> getBusquedas(){
 		return busquedas;
 	}
-	public String getNombre()
-	{
+	
+	public String getNombre(){
 		return nombre;
 	}
 }

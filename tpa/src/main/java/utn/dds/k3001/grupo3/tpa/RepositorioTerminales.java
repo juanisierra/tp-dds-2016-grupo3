@@ -10,22 +10,23 @@ public class RepositorioTerminales
 {
 	private List<Terminal> terminales;
 	
-	public RepositorioTerminales()
-	{
+	public RepositorioTerminales(){
 		this.terminales =  new LinkedList<Terminal>();
 	}
-	public void  agregar(Terminal terminal)
-	{
+	
+	public void  agregar(Terminal terminal){
 		terminales.add(terminal);
 	}
+	
 	public Map<Terminal,List<Integer>> busquedasParcialesPorTerminal(){
-		return  terminales.stream().collect(Collectors.toMap( terminal -> terminal, terminal -> terminal.busquedasParciales()));
+		return  terminales.stream().collect(Collectors.toMap( terminal -> terminal, terminal -> terminal.resultadosParcialesDeBusquedas()));
 	}
+	
 	public Map<Terminal,Integer> busquedasTotalesPorTerminal(){
-		return  terminales.stream().collect(Collectors.toMap( terminal -> terminal, terminal -> terminal.busquedasTotales()));
+		return  terminales.stream().collect(Collectors.toMap( terminal -> terminal, terminal -> terminal.resultadosTotalesDeBusquedas()));
 	}
-	public Map<LocalDate,Integer> busquedasPorFecha()
-	{
+	
+	public Map<LocalDate,Integer> busquedasPorFecha(){
 		return terminales.stream()
 				.flatMap(terminal -> terminal.getBusquedas().stream())
 				.collect(Collectors.groupingBy(busqueda -> busqueda.getFecha(), Collectors.summingInt(busqueda -> busqueda.getCantidadResultados())));

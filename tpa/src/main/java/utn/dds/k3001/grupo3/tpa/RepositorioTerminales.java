@@ -18,17 +18,17 @@ public class RepositorioTerminales
 		terminales.add(terminal);
 	}
 	
-	public Map<Terminal,List<Integer>> busquedasParcialesPorTerminal(){
+	public Map<Terminal,List<Integer>> busquedasParcialesPorTerminal(){//TODO ver si este metodo es necesario o basta con resultadosParcialesDeBusquedas()
 		return  terminales.stream().collect(Collectors.toMap( terminal -> terminal, terminal -> terminal.resultadosParcialesDeBusquedas()));
 	}
 	
-	public Map<Terminal,Integer> busquedasTotalesPorTerminal(){
+	public Map<Terminal,Integer> resultadosTotalesPorTerminal(){
 		return  terminales.stream().collect(Collectors.toMap( terminal -> terminal, terminal -> terminal.resultadosTotalesDeBusquedas()));
 	}
 	
-	public Map<LocalDate,Integer> busquedasPorFecha(){
+	public Map<LocalDate,Long> busquedasPorFecha(){
 		return terminales.stream()
-				.flatMap(terminal -> terminal.getBusquedas().stream())
-				.collect(Collectors.groupingBy(busqueda -> busqueda.getFecha(), Collectors.summingInt(busqueda -> busqueda.getCantidadResultados())));
+				         .flatMap(terminal -> terminal.getBusquedas().stream())
+				         .collect(Collectors.groupingBy(busqueda -> busqueda.getFecha(), Collectors.counting()));
 	}
 }

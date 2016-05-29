@@ -34,10 +34,6 @@ public class Terminal
 		return busquedas.stream().filter(Busqueda -> Busqueda.esEnFecha(fecha)).collect(Collectors.toList()).size();
 	}
 	
-	public int busquedasTotales(){
-		return busquedas.size();
-	}
-	
 	public List<Integer> resultadosParcialesDeBusquedas(){
 		return busquedas.stream().map(busqueda ->busqueda.getCantidadResultados()).collect(Collectors.toList());
 	}

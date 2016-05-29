@@ -1,8 +1,6 @@
 package utn.dds.k3001.grupo3.tpa;
 
 import java.util.ArrayList;
-
-
 import org.uqbar.geodds.*;
 
 public class CGP extends PrestadorDeServicios

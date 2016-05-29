@@ -25,7 +25,7 @@ public class Servicio
 	public void limpiarDisponibilidad(){
 		listaDisponibilidad.removeAll(listaDisponibilidad);
 	}
-	String nombre() {
+	public String nombre() {
 		return nombre;
 	}
 	public boolean estaDisponible(LocalDateTime fecha){

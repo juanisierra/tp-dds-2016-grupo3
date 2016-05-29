@@ -1,6 +1,6 @@
 package utn.dds.k3001.grupo3.tpa;
 
-import java.time.*;	//los constructores para localTime y localDateTime son metodos of(...)
+import java.time.*;
 import java.util.Arrays;
 import java.util.List;
 

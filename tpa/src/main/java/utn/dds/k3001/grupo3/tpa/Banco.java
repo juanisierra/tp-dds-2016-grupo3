@@ -2,14 +2,13 @@ package utn.dds.k3001.grupo3.tpa;
 
 import java.time.LocalTime;
 import java.util.List;
-
 import org.uqbar.geodds.Point;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Banco extends PrestadorDeServicios 
-{	public Banco(String nombre, String calle,  String barrio, int altura, Point posicion){
+{	
+	public Banco(String nombre, String calle,  String barrio, int altura, Point posicion){
 		super(nombre,calle,barrio,altura,posicion);
 	}
 	@JsonCreator

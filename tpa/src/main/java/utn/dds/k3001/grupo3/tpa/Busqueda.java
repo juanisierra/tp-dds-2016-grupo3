@@ -25,10 +25,6 @@ public class Busqueda
 		return this.cantResultados;
 	}
 	
-	public String getcriterio(){
-		return this.criterio;
-	}
-	
 	public double getTiempo(){
 		return this.tiempoDemorado;
 	}

@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 public class TestsAdapterBancos {
-	AdapterSistemaBancos adapter;
+	Mapa CABA;
 	RequestService requestServiceMock;
 	public String listaBancos = "["
 			+"{"
@@ -28,7 +28,8 @@ public class TestsAdapterBancos {
 		      +"\"servicios\": [ \"depósitos\", \"extracciones\", \"transferencias\", \"seguros\", \"\", \"\", \"\", \"\""
 		      +"]"
 		      +"}]";
-	Mapa CABA;
+	AdapterSistemaBancos adapter;
+	
 	@Before
 	public void init(){
 		CABA = new Mapa();

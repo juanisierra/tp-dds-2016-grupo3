@@ -11,16 +11,24 @@ public class Terminal implements ObserverBusqueda
 	private String nombre;
 	private Mapa mapa;
 	private List<Busqueda> busquedas;
-	private List<ObserverBusqueda> observersBusqueda;
+	public List<ObserverBusqueda> observersBusqueda;
 
 	public Terminal(String nombre, Mapa mapa){
 		this.nombre = nombre;
 		this.mapa = mapa;
 		this.busquedas = new LinkedList<Busqueda>();
 		this.observersBusqueda = new LinkedList<ObserverBusqueda>();
-		this.observersBusqueda.add(this);
+		agregarObserverBusqueda(this);
 	}
 
+	public void agregarObserverBusqueda(ObserverBusqueda observerBusqueda){
+		observersBusqueda.add(observerBusqueda);
+	}
+	
+	public void eliminarObserverBusqueda(ObserverBusqueda observerBusqueda){
+		observersBusqueda.remove(observerBusqueda);
+	}
+	
 	public List<POI> buscar(String criterio){
 		LocalTime inicio = LocalTime.now();
 		LocalDate fecha = LocalDate.now();
@@ -29,8 +37,7 @@ public class Terminal implements ObserverBusqueda
 		observersBusqueda.stream().forEach(observer -> observer.seBusco(busqueda));
 		return resultado;
 	}
-	public void seBusco(Busqueda busqueda)
-	{
+	public void seBusco(Busqueda busqueda){
 		busquedas.add(busqueda);
 	}
 
@@ -38,15 +45,19 @@ public class Terminal implements ObserverBusqueda
 		return busquedas.stream().filter(Busqueda -> Busqueda.esEnFecha(fecha)).collect(Collectors.toList()).size();
 	}
 
-	public List<Integer> resultadosParcialesDeBusquedas(){
+	public List<Integer> cantResultadosParcialesDeBusquedas(){
 		return busquedas.stream().map(busqueda ->busqueda.getCantidadResultados()).collect(Collectors.toList());
 	}
 
-	public int resultadosTotalesDeBusquedas(){
-		return this.resultadosParcialesDeBusquedas().stream().mapToInt(Integer::intValue).sum();
+	public int cantResultadosTotalesDeBusquedas(){
+		return this.cantResultadosParcialesDeBusquedas().stream().mapToInt(Integer::intValue).sum();
 	}
 	
 	public List<Busqueda> getBusquedas(){
 		return busquedas;
+	}
+	
+	public int cantObserversBusqueda(){
+		return observersBusqueda.stream().collect(Collectors.toList()).size();
 	}
 }

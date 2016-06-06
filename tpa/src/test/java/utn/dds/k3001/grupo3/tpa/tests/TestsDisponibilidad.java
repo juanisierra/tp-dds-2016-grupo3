@@ -12,12 +12,13 @@ import org.junit.Test;
 import org.uqbar.geodds.Point;
 
 public class TestsDisponibilidad {
+	Comuna comuna1;
 	Rubro libreria;
 	Disponibilidad disponibilidadLibrerias,disponibilidadLunes,disponibilidadMediaSemana;
 	LocalComercial libreriaYenny;
 	CGP cgp1, cgp2;
 	Servicio altaDomicilio, cambioDomicilio;
-	Comuna comuna1;
+	
 	@Before
 	public void init()
 	{	comuna1 = new Comuna("comuna 1",Arrays.asList(new Point(0,0), new Point(0,11), new Point(11,11), new Point (11,0)));

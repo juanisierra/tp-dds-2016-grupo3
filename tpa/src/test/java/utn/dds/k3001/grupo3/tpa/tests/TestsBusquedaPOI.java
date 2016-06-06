@@ -11,13 +11,13 @@ import org.uqbar.geodds.Point;
 public class TestsBusquedaPOI 
 {	
 	Mapa CABA;
-	Rubro libreria;
 	Comuna comuna1;
+	Rubro libreria;
 	Disponibilidad disponibilidadLibrerias;
 	LocalComercial libreriaYenny;
 	ParadaColectivo parada114;
 	CGP cgp1, cgp2;
-	Servicio altaDomicilio, servicio;
+	Servicio altaDomicilio;
 	
 	@Before
 	public void init(){	

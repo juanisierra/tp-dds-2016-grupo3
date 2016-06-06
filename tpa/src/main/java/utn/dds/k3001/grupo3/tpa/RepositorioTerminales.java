@@ -6,24 +6,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class RepositorioTerminales
-{
-	private List<Terminal> terminales;
+public class RepositorioTerminales{
 	
+	private List<Terminal> terminales;
 	public RepositorioTerminales(){
 		this.terminales =  new LinkedList<Terminal>();
 	}
 	
-	public void  agregar(Terminal terminal){
+	public void  agregarTerminal(Terminal terminal){
 		terminales.add(terminal);
 	}
 	
-	public Map<Terminal,List<Integer>> busquedasParcialesPorTerminal(){//TODO ver si este metodo es necesario o basta con resultadosParcialesDeBusquedas()
-		return  terminales.stream().collect(Collectors.toMap( terminal -> terminal, terminal -> terminal.resultadosParcialesDeBusquedas()));
+	public void eliminarTerminal(Terminal terminal){
+		terminales.remove(terminal);
 	}
 	
-	public Map<Terminal,Integer> resultadosTotalesPorTerminal(){
-		return  terminales.stream().collect(Collectors.toMap( terminal -> terminal, terminal -> terminal.resultadosTotalesDeBusquedas()));
+	public Map<Terminal,List<Integer>> busquedasParcialesPorTerminal(){//TODO ver si este metodo es necesario o basta con resultadosParcialesDeBusquedas()
+		return  terminales.stream().collect(Collectors.toMap( terminal -> terminal, terminal -> terminal.cantResultadosParcialesDeBusquedas()));
+	}
+	
+	public Map<Terminal,Integer> cantResultadosTotalesPorTerminal(){
+		return  terminales.stream().collect(Collectors.toMap( terminal -> terminal, terminal -> terminal.cantResultadosTotalesDeBusquedas()));
 	}
 	
 	public Map<LocalDate,Long> busquedasPorFecha(){

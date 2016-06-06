@@ -17,10 +17,10 @@ public class TestsAdapterSistemaCGP {
 	RangosServicioDTO rangoLunes;
 	ArrayList<RangosServicioDTO> rangosDTO;
 	ServiciosDTO cambioDomicilio;
-	CentroDTO cgpCaballito;
 	Servicio miCambioDeDomicilio;
 	ArrayList<ServiciosDTO> listaServiciosDTO;
-		
+	CentroDTO cgpCaballito;
+	
 @Before
 public void init() {
 	CABA = new Mapa();

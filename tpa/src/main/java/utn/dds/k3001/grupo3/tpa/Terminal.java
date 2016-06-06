@@ -11,7 +11,7 @@ public class Terminal implements ObserverBusqueda
 	private String nombre;
 	private Mapa mapa;
 	private List<Busqueda> busquedas;
-	public List<ObserverBusqueda> observersBusqueda;
+	private List<ObserverBusqueda> observersBusqueda;
 
 	public Terminal(String nombre, Mapa mapa){
 		this.nombre = nombre;
@@ -58,6 +58,6 @@ public class Terminal implements ObserverBusqueda
 	}
 	
 	public int cantObserversBusqueda(){
-		return observersBusqueda.stream().collect(Collectors.toList()).size();
+		return observersBusqueda.size();
 	}
 }

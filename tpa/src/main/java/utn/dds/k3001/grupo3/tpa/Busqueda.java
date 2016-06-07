@@ -9,14 +9,17 @@ public class Busqueda
 	private String criterio;
 	private double tiempoDemorado;//esta en segundos
 	private LocalDate fecha;
-	
-	public Busqueda(int cantResultados, String criterio, LocalTime hInicio, LocalTime hFin, LocalDate fecha){
+	private Terminal terminal;
+	public Busqueda(Terminal terminal,int cantResultados, String criterio, LocalTime hInicio, LocalTime hFin, LocalDate fecha){
+		this.terminal = terminal;
 		this.cantResultados = cantResultados;
 		this.criterio = criterio;
 		this.tiempoDemorado = ChronoUnit.SECONDS.between(hInicio, hFin);
 		this.fecha = fecha;
 	}
-	
+	public Terminal getTerminal(){
+	return terminal;
+	}
 	public boolean esEnFecha(LocalDate fecha){
 		return this.fecha.equals(fecha);
 	}

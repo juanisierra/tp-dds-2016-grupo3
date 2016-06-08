@@ -14,24 +14,22 @@ import org.uqbar.geodds.Point;
 public class TestReportesBusqueda
 {
 	Mapa CABA;
-	Terminal terminal, terminalMedrano;
-	RepositorioTerminales repositorioTerminales;
+	Terminal terminal1, terminalMedrano;
+	RepositorioBusquedas repositorioBusquedas;
 	Rubro libreria;
 	Comuna comuna1;
 	Disponibilidad disponibilidadLibrerias;
 	ParadaColectivo parada114;
 	CGP cgp2;
 	Servicio altaDomicilio;
-	ArrayList<ObserverBusqueda> observersBusquedas;
-		
 	@Before
 	public void init(){	
 		CABA = new Mapa();
-		terminal = new Terminal("teminal1", CABA);
+		terminal1 = new Terminal("teminal1", CABA);
 		terminalMedrano = new Terminal("TerminalMedrano", CABA);
-		repositorioTerminales = new RepositorioTerminales();
-		repositorioTerminales.agregarTerminal(terminal);
-		repositorioTerminales.agregarTerminal(terminalMedrano);
+		repositorioBusquedas = new RepositorioBusquedas();
+		terminalMedrano.agregarObserverBusqueda(repositorioBusquedas);
+		terminal1.agregarObserverBusqueda(repositorioBusquedas);
 		comuna1 = new Comuna("comuna 1",Arrays.asList(new Point(0,0), new Point(0,11), new Point(11,11), new Point (11,0)));
 		disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));
 		parada114 = new ParadaColectivo("parada 114","Chivilcoy","devoto",1000,new Point(10,10),114);
@@ -40,64 +38,56 @@ public class TestReportesBusqueda
 		cgp2.agregarServicio(altaDomicilio);
 		CABA.agregarPoi(parada114);
 		CABA.agregarPoi(cgp2);
-		observersBusquedas = new ArrayList<ObserverBusqueda>();
 	}
 	
 	@Test
 	public void testGuardarBusquedas(){	
-		terminal.buscar("gcp1");
-		terminal.buscar("parada114");
-		terminal.buscar("criterio");
-		Assert.assertEquals(3,terminal.busquedasEnFecha(LocalDate.now()),0);
+		terminalMedrano.buscar("gcp1");
+		terminalMedrano.buscar("parada114");
+		terminalMedrano.buscar("criterio");
+		Assert.assertEquals(3,repositorioBusquedas.busquedasPorFecha().get(LocalDate.now()),0);
 	} 
 	
 	@Test
 	public void testCantidadResultadosParcialesDeBusqueda1EnTerminal1Son2(){
-		terminal.buscar("a");
-		terminal.buscar("cgp1");
-		Assert.assertEquals(terminal.cantResultadosParcialesDeBusquedas().get(0).intValue(), 2);
+		terminalMedrano.buscar("a");
+		terminalMedrano.buscar("cgp1");
+		Assert.assertEquals(repositorioBusquedas.cantResultadosTotalesPorTerminal().get(terminalMedrano).intValue(), 2);
 	}
 	
 	@Test
 	public void testCantidadResultadosTotalesDeTerminalSon3(){
-		terminal.buscar("a");//dos resultadods
-		terminal.buscar("cgp");//un resultado
-		Assert.assertEquals(terminal.cantResultadosTotalesDeBusquedas(),3);
+		terminal1.buscar("a");//dos resultadods
+		terminal1.buscar("cgp");//un resultado
+		Assert.assertEquals(repositorioBusquedas.cantResultadosTotalesPorTerminal().get(terminal1).intValue(),3);
 	}
 	
 	@Test
 	public void testSeHizoUnaBusquedaHoyEnReportePorFecha(){
 		Map<LocalDate,Long> reporte;
-		terminal.buscar("busqueda1");
-		reporte = repositorioTerminales.busquedasPorFecha();
+		terminal1.buscar("busqueda1");
+		reporte = repositorioBusquedas.busquedasPorFecha();
 		Assert.assertTrue(reporte.keySet().contains(LocalDate.now()));
 	}
 	
 	@Test
 	public void testCantidadDeBusquedasDeHoy(){
 		Map<LocalDate,Long> reporte;
-		terminal.buscar("busqueda1");
-		terminal.buscar("busqueda2");
-		terminal.buscar("busqueda3");
-		reporte = repositorioTerminales.busquedasPorFecha();
+		terminal1.buscar("busqueda1");
+		terminal1.buscar("busqueda2");
+		terminal1.buscar("busqueda3");
+		reporte = repositorioBusquedas.busquedasPorFecha();
 		Assert.assertEquals(3,reporte.get(LocalDate.now()),0);
 	}
 	
 	@Test
 	public void testCantidadResultadosTotalesPorTerminal(){
 		Map<Terminal,Integer> reporte;
-		terminal.buscar("alta domicilio");
-		terminal.buscar("114");
+		terminal1.buscar("alta domicilio");
+		terminal1.buscar("114");
 		terminalMedrano.buscar("cgp");
-		reporte = repositorioTerminales.cantResultadosTotalesPorTerminal();
-		Assert.assertEquals(2,reporte.get(terminal),0);
+		reporte = repositorioBusquedas.cantResultadosTotalesPorTerminal();
+		Assert.assertEquals(2,reporte.get(terminal1),0);
 		Assert.assertEquals(1,reporte.get(terminalMedrano),0);
-	}
-	
-	@Test
-	public void testHayDosObserversEnTerminal(){
-		terminal.agregarObserverBusqueda(terminalMedrano);
-		Assert.assertEquals(2,terminal.cantObserversBusqueda());
-		
 	}
 }

@@ -7,7 +7,7 @@ public class GuardarBusqueda implements ObserverBusqueda {
 		this.repositorio = repositorio;
 	}
 	@Override
-	public void seBusco(Busqueda busqueda) {
+	public void agregar(Busqueda busqueda) {
 	repositorio.buscar(busqueda);
 		
 	}

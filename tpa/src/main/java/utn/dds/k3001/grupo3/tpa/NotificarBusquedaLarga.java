@@ -10,7 +10,7 @@ public class NotificarBusquedaLarga implements ObserverBusqueda {
 		this.servicio = servicio;
 	}
 	@Override
-	public void seBusco(Busqueda busqueda) {
+	public void agregar(Busqueda busqueda) {
 		if(busqueda.getTiempo()>cantidadSegundos){
 			servicio.notificarAdministrador();
 		}

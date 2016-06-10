@@ -31,7 +31,7 @@ public class Terminal
 		LocalDate fecha = LocalDate.now();
 		List<POI> resultado = mapa.buscar(criterio);
 		Busqueda busqueda = new Busqueda(this,resultado.size(), criterio, inicio, LocalTime.now(), fecha);
-		observersBusqueda.stream().forEach(observer -> observer.seBusco(busqueda));
+		observersBusqueda.stream().forEach(observer -> observer.agregar(busqueda));
 		return resultado;
 	}
 	

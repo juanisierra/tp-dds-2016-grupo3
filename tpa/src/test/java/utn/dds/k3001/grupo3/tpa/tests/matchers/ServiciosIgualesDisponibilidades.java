@@ -16,11 +16,9 @@ public class ServiciosIgualesDisponibilidades extends TypeSafeMatcher<Servicio>{
 		
 		@Override
 		protected boolean matchesSafely(Servicio servicio) {
-			Disponibilidad disponibilidad1 = servicio.getListaDisponibilidad().get(0);
-			Disponibilidad disponibilidad2 = servicioPropio.getListaDisponibilidad().get(0);
-			return 	servicio.getNombre().equals(servicioPropio.getNombre()) &&
-					disponibilidad1.getHoraApertura().equals(disponibilidad2.getHoraApertura()) &&
-					disponibilidad1.getHoraCierre().equals(disponibilidad2.getHoraCierre());
+			 Assert.assertThat(servicio.getListaDisponibilidad().get(0), 
+						new DisponibilidadesIguales(servicioPropio.getListaDisponibilidad().get(0)));
+			return 	servicio.getNombre().equals(servicioPropio.getNombre());		
 		}
 
 	}

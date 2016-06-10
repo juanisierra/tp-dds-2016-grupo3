@@ -17,7 +17,6 @@ public class Terminal
 		this.mapa = mapa;
 		this.observersBusqueda = new LinkedList<ObserverBusqueda>();
 	}
-
 	public void agregarObserverBusqueda(ObserverBusqueda observerBusqueda){
 		observersBusqueda.add(observerBusqueda);
 	}

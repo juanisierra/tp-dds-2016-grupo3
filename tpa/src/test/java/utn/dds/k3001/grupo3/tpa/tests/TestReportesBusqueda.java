@@ -111,10 +111,10 @@ public class TestReportesBusqueda
 					return new LinkedList<POI>();
 				}
 		});
-		notificar = new NotificarBusquedaLarga(servicio,1);
+		notificar = new NotificarBusquedaLarga(servicio,"admin@sistema.com",1);
 		Terminal terminalConMock = new Terminal("teminal2", mapaMock);
 		terminalConMock.agregarObserverBusqueda(notificar);
 		terminalConMock.buscar("");
-		Mockito.verify(servicio).notificarAdministrador();
+		Mockito.verify(servicio).notificarAdministrador("admin@sistema.com","Busqueda Larga","La busqueda llevó demasiado tiempo.");
 	}
 }

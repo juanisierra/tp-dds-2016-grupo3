@@ -1,14 +1,20 @@
 package utn.dds.k3001.grupo3.tpa.tests;
 
 import utn.dds.k3001.grupo3.tpa.*;
+
+import java.util.List;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Map;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.uqbar.geodds.Point;
 
 public class TestReportesBusqueda
@@ -91,5 +97,24 @@ public class TestReportesBusqueda
 		reporte = repositorioBusquedas.cantResultadosTotalesPorTerminal();
 		Assert.assertEquals(2,reporte.get(terminal1),0);
 		Assert.assertEquals(1,reporte.get(terminalMedrano),0);
+	}
+	@Test
+	public void testSeMandaMailConBusquedaDemorada()
+	{	NotificarBusquedaLarga notificar;
+		ServicioMail servicio = Mockito.mock(ServicioMail.class);
+		Mapa mapaMock = Mockito.mock(Mapa.class);
+		Mockito.when(mapaMock.buscar("")).thenAnswer(new Answer<List<POI>>(){
+
+				@Override
+				public List<POI> answer(InvocationOnMock invocation) throws Throwable {
+					Thread.sleep(2000);
+					return new LinkedList<POI>();
+				}
+		});
+		notificar = new NotificarBusquedaLarga(servicio,1);
+		Terminal terminalConMock = new Terminal("teminal2", mapaMock);
+		terminalConMock.agregarObserverBusqueda(notificar);
+		terminalConMock.buscar("");
+		Mockito.verify(servicio).notificarAdministrador();
 	}
 }

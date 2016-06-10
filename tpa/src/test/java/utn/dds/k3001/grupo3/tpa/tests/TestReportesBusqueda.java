@@ -22,14 +22,16 @@ public class TestReportesBusqueda
 	ParadaColectivo parada114;
 	CGP cgp2;
 	Servicio altaDomicilio;
+	GuardarBusqueda guardarBusqueda;
 	@Before
 	public void init(){	
 		CABA = new Mapa();
 		terminal1 = new Terminal("teminal1", CABA);
 		terminalMedrano = new Terminal("TerminalMedrano", CABA);
 		repositorioBusquedas = new RepositorioBusquedas();
-		terminalMedrano.agregarObserverBusqueda(repositorioBusquedas);
-		terminal1.agregarObserverBusqueda(repositorioBusquedas);
+		guardarBusqueda = new GuardarBusqueda(repositorioBusquedas);
+		terminalMedrano.agregarObserverBusqueda(guardarBusqueda);
+		terminal1.agregarObserverBusqueda(guardarBusqueda);
 		comuna1 = new Comuna("comuna 1",Arrays.asList(new Point(0,0), new Point(0,11), new Point(11,11), new Point (11,0)));
 		disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));
 		parada114 = new ParadaColectivo("parada 114","Chivilcoy","devoto",1000,new Point(10,10),114);

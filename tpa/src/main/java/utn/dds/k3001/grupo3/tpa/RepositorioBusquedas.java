@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class RepositorioBusquedas implements ObserverBusqueda{
+public class RepositorioBusquedas{
 private List<Busqueda> listaBusquedas;
 public RepositorioBusquedas()
 {
@@ -24,8 +24,7 @@ public Map<LocalDate,Long> busquedasPorFecha(){
 	return listaBusquedas.stream()
 			.collect(Collectors.groupingBy(busqueda -> busqueda.getFecha(), Collectors.counting()));
 }
-@Override
-public void seBusco(Busqueda busqueda) {
+public void buscar(Busqueda busqueda) {
 	listaBusquedas.add(busqueda);
 }
 }

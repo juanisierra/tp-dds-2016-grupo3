@@ -3,7 +3,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +27,7 @@ public class TestsActualizacionLocales {
 	RepositorioInterno repositorioPOI;
 	LocalComercial panaderia;
 	ActualizarLocales actualizarLocales;
+	SchedulerProcesos scheduler;
 	@Rule
 	public TemporaryFolder carpetaTemporal =new TemporaryFolder();
 	@Before
@@ -36,12 +39,13 @@ public class TestsActualizacionLocales {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		scheduler = new SchedulerProcesos();
 		archivoPrueba.setWritable(true);
 		parser = new ParserArchivoLocales(archivoPrueba.getAbsolutePath());
 		repositorioPOI = new RepositorioInterno();
 		panaderia = new LocalComercial("panaderia","","",0,new Point(0,0),new Rubro("panaderias",10),Disponibilidad.lunesAViernes(LocalTime.of(10, 0), LocalTime.of(15, 0)));
 		repositorioPOI.agregarPoi(panaderia);
-		actualizarLocales = new ActualizarLocales(repositorioPOI,archivoPrueba.getAbsolutePath());
+		actualizarLocales = new ActualizarLocales(repositorioPOI,archivoPrueba.getAbsolutePath(),scheduler);
 	}
 	@Test
 	public void testPanaderiaConComida() throws IOException
@@ -77,5 +81,29 @@ public class TestsActualizacionLocales {
 		writer.close();
 		actualizarLocales.run();
 		Assert.assertEquals(2,repositorioPOI.buscarPorNombre("panaderia").get(0).getEtiquetas().size(),0);
+	}
+	@Test
+	public void testSeEjecutaActualizarLocales() throws FileNotFoundException, InterruptedException
+	{
+		PrintWriter writer = new PrintWriter(archivoPrueba);
+		writer.println("panaderia; comida facturas");
+		writer.println("kiosko; golosinas comida");
+		writer.close();
+		scheduler.agregarTarea(actualizarLocales, LocalDateTime.now());
+		Thread.sleep(10); //Dormimos el hilo para que se llegue a ejecutar el otro
+		Assert.assertEquals(2,repositorioPOI.buscarPorNombre("panaderia").get(0).getEtiquetas().size(),0);
+		Assert.assertEquals(1, scheduler.getHistorial().size(),0);
+	}
+	@Test
+	public void testNoSeLlegaAEjecutarTarea() throws FileNotFoundException, InterruptedException
+	{
+		PrintWriter writer = new PrintWriter(archivoPrueba);
+		writer.println("panaderia; comida facturas");
+		writer.println("kiosko; golosinas comida");
+		writer.close();
+		scheduler.agregarTarea(actualizarLocales, OffsetDateTime.now().plusHours(1).toLocalDateTime());
+		Thread.sleep(10); //Dormimos el hilo para que se llegue a ejecutar el otro
+		Assert.assertEquals(0,repositorioPOI.buscarPorNombre("panaderia").get(0).getEtiquetas().size(),0);
+		Assert.assertEquals(0, scheduler.getHistorial().size(),0);
 	}
 }

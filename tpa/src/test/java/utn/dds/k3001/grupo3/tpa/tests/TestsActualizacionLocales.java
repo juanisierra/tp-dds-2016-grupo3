@@ -1,7 +1,9 @@
 package utn.dds.k3001.grupo3.tpa.tests;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 
@@ -9,12 +11,20 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-
+import org.uqbar.geodds.Point;
 import org.junit.Assert;
+
+import utn.dds.k3001.grupo3.tpa.Disponibilidad;
+import utn.dds.k3001.grupo3.tpa.LocalComercial;
+import utn.dds.k3001.grupo3.tpa.RepositorioInterno;
+import utn.dds.k3001.grupo3.tpa.Rubro;
 import utn.dds.k3001.grupo3.tpa.procesosProgramados.*;
-public class TestsParseo {
+public class TestsActualizacionLocales {
 	ParserArchivoLocales parser;
 	File archivoPrueba;
+	RepositorioInterno repositorioPOI;
+	LocalComercial panaderia;
+	ActualizarLocales actualizarLocales;
 	@Rule
 	public TemporaryFolder carpetaTemporal =new TemporaryFolder();
 	@Before
@@ -28,6 +38,10 @@ public class TestsParseo {
 		}
 		archivoPrueba.setWritable(true);
 		parser = new ParserArchivoLocales(archivoPrueba.getAbsolutePath());
+		repositorioPOI = new RepositorioInterno();
+		panaderia = new LocalComercial("panaderia","","",0,new Point(0,0),new Rubro("panaderias",10),Disponibilidad.lunesAViernes(LocalTime.of(10, 0), LocalTime.of(15, 0)));
+		repositorioPOI.agregarPoi(panaderia);
+		actualizarLocales = new ActualizarLocales(repositorioPOI,archivoPrueba.getAbsolutePath());
 	}
 	@Test
 	public void testPanaderiaConComida() throws IOException
@@ -53,5 +67,15 @@ public class TestsParseo {
 		resultados = parser.obtenerLocalYPalabrasClaves();
 		Assert.assertEquals(2,resultados.get("kiosko").size(),0);
 		Assert.assertEquals(2, resultados.get("panaderia").size(),0);
+	}
+	@Test
+	public void testSeAgregan2PalabrasAlLocal() throws FileNotFoundException
+	{
+		PrintWriter writer = new PrintWriter(archivoPrueba);
+		writer.println("panaderia; comida facturas");
+		writer.println("kiosko; golosinas comida");
+		writer.close();
+		actualizarLocales.run();
+		Assert.assertEquals(2,repositorioPOI.buscarPorNombre("panaderia").get(0).getEtiquetas().size(),0);
 	}
 }

@@ -38,4 +38,5 @@ public class LocalComercial extends POI
 	public boolean esBuscado(String criterio) {
 		return super.esBuscado(criterio) || rubro.nombre().contains(criterio);
 	}
+
 }

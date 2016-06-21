@@ -11,14 +11,18 @@ public class POI
 	protected Point posicion;
 	protected List<String> listaEtiquetas;
 	protected Direccion direccion;
-
+	protected long id;
+	public static long maxID = 0;
 	public POI(String nombre, String calle, String barrio, int altura, Point posicion) {
 		this.direccion = new Direccion(calle,barrio,altura);
 		this.nombre = nombre;
 		this.posicion = posicion;
 		this.listaEtiquetas = new LinkedList<String>();
+		this.id = ++maxID;
 	}
-	
+	public long getID(){
+	return id;
+	}
 	public void agregarEtiqueta(String etiqueta){
 		this.listaEtiquetas.add(etiqueta);
 	}
@@ -57,5 +61,14 @@ public class POI
 
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
+	}
+	public void cambiarEtiquetas(List<String> etiquetasNuevas)
+	{
+		this.listaEtiquetas.clear();
+		this.listaEtiquetas.addAll(etiquetasNuevas);
+	}
+	public List<String> getEtiquetas()
+	{
+	return listaEtiquetas;
 	}
 }

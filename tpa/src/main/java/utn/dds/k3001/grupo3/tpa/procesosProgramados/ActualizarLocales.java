@@ -13,6 +13,10 @@ public class ActualizarLocales implements Runnable {
 @Override
 public void run()
 {
-	//comportamiento al ejecutarse
+	parser.obtenerLocalYPalabrasClaves().forEach((local , palabrasClaves) -> 
+			repositorio.buscar(local)
+			.stream()
+			.filter(POI -> POI.getClass().equals(LocalComercial.class))
+			.forEach(LocalComercial -> LocalComercial.cambiarEtiquetas(palabrasClaves)));
 }
 }

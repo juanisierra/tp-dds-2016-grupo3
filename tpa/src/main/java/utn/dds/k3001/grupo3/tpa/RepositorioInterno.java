@@ -21,4 +21,8 @@ public class RepositorioInterno implements OrigenDeDatos {
 	public List<POI> buscar(String criterio) {
 		return listaPOIS.stream().filter(POI -> POI.esBuscado(criterio)).collect(Collectors.toList());
 	}
+	public List<POI> buscarPorNombre(String nombre)
+	{
+		return listaPOIS.stream().filter(POI -> POI.getNombre().equals(nombre)).collect(Collectors.toList());
+	}
 }

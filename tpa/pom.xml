@@ -13,7 +13,7 @@
         <artifactId>junit</artifactId>
         <version>4.12</version>
       </dependency>
-	
+
 <dependency>
     <groupId>org.uqbar-project</groupId>
     <artifactId>geodds-xtend</artifactId>
@@ -42,6 +42,29 @@
    </dependencies>
   <build>
     <plugins>
+
+      <!-- Para generar el reporte -->
+      <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.7.6.201602180812</version>
+          <executions>
+              <execution>
+                  <id>default-prepare-agent</id>
+                  <goals>
+                      <goal>prepare-agent</goal>
+                  </goals>
+              </execution>
+              <execution>
+                  <id>default-report</id>
+                  <phase>prepare-package</phase>
+                  <goals>
+                      <goal>report</goal>
+                  </goals>
+              </execution>
+          </executions>
+      </plugin>
+
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.1</version>

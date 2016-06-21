@@ -29,7 +29,18 @@ public class TestsParseo {
 		archivoPrueba.setWritable(true);
 		parser = new ParserArchivoLocales(archivoPrueba.getAbsolutePath());
 	}
-
+	@Test
+	public void testPanaderiaConComida() throws IOException
+	{	
+		Map<String,List<String>> resultados;
+		PrintWriter writer = new PrintWriter(archivoPrueba);
+		writer.println("panaderia; comida facturas");
+		writer.close();
+		
+		resultados = parser.obtenerLocalYPalabrasClaves();
+		Assert.assertTrue(resultados.get("panaderia").contains("comida"));
+		Assert.assertTrue(resultados.get("panaderia").contains("facturas"));
+	}
 	@Test
 	public void testSeCopianDosLocalesConPalabras() throws IOException
 	{	

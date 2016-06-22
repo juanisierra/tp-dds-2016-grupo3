@@ -8,24 +8,22 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class SchedulerProcesos {
+public class SchedulerProcesos
+{
 	private ScheduledExecutorService executor;
 	private List<ResultadoProceso> historialProcesos;
-public SchedulerProcesos()
-{
-	executor = Executors.newSingleThreadScheduledExecutor();
-	historialProcesos = new ArrayList<ResultadoProceso>();
-}
-public List<ResultadoProceso> getHistorial()
-{
-	return historialProcesos;
-}
-public void agregarResultado(ResultadoProceso resultado)
-{
-	historialProcesos.add(resultado);
-}
-public void agregarTarea(Runnable tarea,LocalDateTime horaEjecucion)
-{
-	executor.schedule(tarea, ChronoUnit.SECONDS.between(LocalDateTime.now(), horaEjecucion), TimeUnit.SECONDS);
-}
+	
+	public SchedulerProcesos(){
+		executor = Executors.newSingleThreadScheduledExecutor();
+		historialProcesos = new ArrayList<ResultadoProceso>();
+	}
+	public List<ResultadoProceso> getHistorial(){
+		return historialProcesos;
+	}
+	public void agregarResultado(ResultadoProceso resultado){
+		historialProcesos.add(resultado);
+	}
+	public void agregarTarea(Runnable tarea,LocalDateTime horaEjecucion){
+		executor.schedule(tarea, ChronoUnit.SECONDS.between(LocalDateTime.now(), horaEjecucion), TimeUnit.SECONDS);
+	}
 }

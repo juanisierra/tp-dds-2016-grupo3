@@ -16,8 +16,17 @@ public class DarDeBajaPOIS implements Runnable {
 	RepositorioInterno repositorio;
 	SchedulerProcesos scheduler;
 	int poisAfectados;
+	public DarDeBajaPOIS(RepositorioInterno repositorio,SchedulerProcesos scheduler)
+	{
+		this.factory = new JsonFactory();
+		this.servicio = new OldPOISRequestService();
+		this.poisAfectados = 0;
+		this.repositorio = repositorio;
+		this.scheduler = scheduler;
+	}
 	@Override
 	public void run() {
+		this.poisAfectados = 0;
 	List<BajaPOI> poisADarDeBaja = factory.JsonAObjeto(servicio.getJsonPOIS(), new TypeReference<List<BajaPOI>>() {});
 	poisADarDeBaja.forEach(bajaPOI -> {
 			repositorio.eliminarPoiPorNumero(bajaPOI.getId());

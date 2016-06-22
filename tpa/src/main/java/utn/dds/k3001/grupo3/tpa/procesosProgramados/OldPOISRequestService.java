@@ -7,8 +7,8 @@ import com.sun.jersey.api.client.ClientResponse;
 
 public class OldPOISRequestService {
 	private Client cliente;
-	private static final String SISTEMAEXTERNO = "127.0.0.1"; //TODO setear variables
-	private static final String RECURSO = "pois.baja";
+	private static final String SISTEMAEXTERNO = "http://demo3537367.mockable.io/trash"; //TODO setear variables
+	private static final String RECURSO = "pois";
 	
 	public OldPOISRequestService(){
 		this.cliente = Client.create();

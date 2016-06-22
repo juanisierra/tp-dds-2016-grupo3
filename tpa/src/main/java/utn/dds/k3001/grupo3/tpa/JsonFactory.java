@@ -1,6 +1,10 @@
 package utn.dds.k3001.grupo3.tpa;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.util.Map;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,5 +23,15 @@ public class JsonFactory {
 		} catch (IOException exception) {
 			throw new RuntimeException("Error al leer el JSON", exception);
 		}
+		
+	}
+	public Map<Long, LocalDate> JsonAListaPOISBaja(String json)
+	{	
+	try {
+		return this.objectMapper.readValue(json, new TypeReference<Map<Long,LocalDate>>(){});
+	} catch (IOException exception) {
+		throw new RuntimeException("Error al leer el JSON", exception);  //TODO chequear excepcon lanzada y catchearla
+	}
+	
 	}
 }

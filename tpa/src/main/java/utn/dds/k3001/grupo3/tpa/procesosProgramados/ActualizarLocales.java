@@ -26,7 +26,7 @@ public void run()
 			this.POISAfectados++;
 			LocalComercial.cambiarEtiquetas(palabrasClaves);
 			}));
-	scheduler.agregarResultado(new ResultadoProceso(LocalDateTime.now(),POISAfectados,true));
+	scheduler.agregarResultado(new ResultadoProceso(LocalDateTime.now(),POISAfectados,true,"Locales actualizados correctamente"));
 }
 
 }

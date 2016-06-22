@@ -11,11 +11,17 @@ public class Terminal
 	private String nombre;
 	private Mapa mapa;
 	private List<ObserverBusqueda> observersBusqueda;
-
+	private Comuna comuna;
 	public Terminal(String nombre, Mapa mapa){
 		this.nombre = nombre;
 		this.mapa = mapa;
 		this.observersBusqueda = new LinkedList<ObserverBusqueda>();
+	}
+	public Terminal(String nombre, Mapa mapa,Comuna comuna){
+		this.nombre = nombre;
+		this.mapa = mapa;
+		this.observersBusqueda = new LinkedList<ObserverBusqueda>();
+		this.comuna = comuna;
 	}
 	public void agregarObserverBusqueda(ObserverBusqueda observerBusqueda){
 		observersBusqueda.add(observerBusqueda);
@@ -36,5 +42,9 @@ public class Terminal
 	
 	public int cantObserversBusqueda(){
 		return observersBusqueda.size();
+	}
+	public boolean estaEnComuna(String nombre)
+	{
+		return comuna.getNombre().equals(nombre);
 	}
 }

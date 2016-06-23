@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.mockito.Mockito;
 import org.uqbar.geodds.Point;
 import org.junit.Assert;
 
@@ -107,5 +108,14 @@ public class TestsProcesosBatch {
 		Thread.sleep(10); //Dormimos el hilo para que se llegue a ejecutar el otro
 		Assert.assertEquals(0,repositorioPOI.buscarPorNombre("panaderia").get(0).getEtiquetas().size(),0);
 		Assert.assertEquals(0, scheduler.getHistorial().size(),0);
+	}
+	@Test
+	public void testSeReintenta3VecesYSeInforma1() throws FallaProcesoException
+	{	ProcesoBatch procesoBatchMock = Mockito.mock(ProcesoBatch.class);
+		Mockito.doThrow(new FallaProcesoException("No anduvo")).when(procesoBatchMock).ejecutar();
+		Reintentar reintentar = new Reintentar(2,procesoBatchMock,scheduler);
+		reintentar.run();
+		Mockito.verify(procesoBatchMock,Mockito.times(3)).ejecutar();
+		Assert.assertEquals(1,scheduler.getHistorial().size(),0);
 	}
 }

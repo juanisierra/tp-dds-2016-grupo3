@@ -10,6 +10,13 @@ public class EnviarMailFallo implements Runnable {
 	private SchedulerProcesos scheduler;
 	private ServicioMail servicio;
 	private String mailAdministrador;
+	public EnviarMailFallo(String mail,ServicioMail servicio,SchedulerProcesos scheduler,ProcesoBatch proceso)
+	{
+		this.proceso=proceso;
+		this.scheduler = scheduler;
+		this.servicio = servicio;
+		this.mailAdministrador = mail;
+	}
 	@Override
 	public void run() {
 		try

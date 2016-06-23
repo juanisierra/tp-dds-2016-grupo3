@@ -6,6 +6,12 @@ public class Reintentar implements Runnable {
 	private ProcesoBatch proceso;
 	private SchedulerProcesos scheduler;
 	private int numRepeticiones;
+	public Reintentar(int numeroDeVeces,ProcesoBatch proceso,SchedulerProcesos scheduler)
+	{
+		this.numRepeticiones = numeroDeVeces;
+		this.proceso = proceso;
+		this.scheduler = scheduler;
+	}
 	@Override
 	public void run() {
 		try

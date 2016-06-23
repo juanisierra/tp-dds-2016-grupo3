@@ -1,9 +1,11 @@
 package utn.dds.k3001.grupo3.tpa.procesosProgramados;
 
 import java.time.LocalDateTime;
+import java.util.concurrent.Callable;
+
 import utn.dds.k3001.grupo3.tpa.*;
 
-public class ActualizarLocales implements ProcesoBatch 
+public class ActualizarLocales implements Callable<ResultadoProceso> 
 {
 	private ParserArchivoLocales parser;
 	private RepositorioInterno repositorio;
@@ -14,7 +16,7 @@ public class ActualizarLocales implements ProcesoBatch
 		this.repositorio = repositorio;
 	}
 
-	public ResultadoProceso ejecutar(){	
+	public ResultadoProceso call(){	
 		this.POISAfectados = 0;
 		parser.obtenerLocalYPalabrasClaves().forEach((local , palabrasClaves) -> 
 				repositorio.buscar(local)

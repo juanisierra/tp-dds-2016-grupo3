@@ -1,32 +1,23 @@
 package utn.dds.k3001.grupo3.tpa.procesosProgramados;
 
-import java.time.LocalDateTime;
+import java.util.concurrent.Callable;
 
-public class Reintentar implements Runnable {
-	private ProcesoBatch proceso;
-	private SchedulerProcesos scheduler;
+public class Reintentar implements Callable<ResultadoProceso> {
+	private Callable<ResultadoProceso> proceso;
 	private int numRepeticiones;
-	public Reintentar(int numeroDeVeces,ProcesoBatch proceso,SchedulerProcesos scheduler)
+	public Reintentar(int numeroDeVeces,Callable<ResultadoProceso> proceso)
 	{
 		this.numRepeticiones = numeroDeVeces;
 		this.proceso = proceso;
-		this.scheduler = scheduler;
 	}
 	@Override
-	public void run() {
-		try
-		{
-			scheduler.agregarResultado(proceso.ejecutar());
-		} catch (FallaProcesoException e)
-		{
-			if(numRepeticiones>0){
-				numRepeticiones--;
-				this.run();
-			} else {
-				scheduler.agregarResultado(new ResultadoProceso(LocalDateTime.now(),0,false,e.getMessage()));
-			}
-		}
-		
+	public ResultadoProceso call() throws Exception {
+		ResultadoProceso resultado = proceso.call();
+		while(numRepeticiones>0 && !resultado.terminoCorrectamente()){
+		numRepeticiones--;
+		resultado = proceso.call();	
+	}
+	return resultado;
 	}
 
 }

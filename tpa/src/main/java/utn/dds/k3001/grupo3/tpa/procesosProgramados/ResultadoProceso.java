@@ -15,4 +15,12 @@ public class ResultadoProceso
 		this.terminoCorrectamente = terminoCorrectamente;
 		this.comentarios = comentario;
 	}
+	public boolean terminoCorrectamente()
+	{
+		return terminoCorrectamente;
+	}
+	public String getDescripcion()
+	{
+		return comentarios;
+	}
 }

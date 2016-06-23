@@ -1,32 +1,28 @@
 package utn.dds.k3001.grupo3.tpa.procesosProgramados;
 
 import java.time.LocalDateTime;
+import java.util.concurrent.Callable;
 
 import utn.dds.k3001.grupo3.tpa.ServicioMail;
 
-public class EnviarMailFallo implements Runnable {
+public class EnviarMailFallo implements Callable<ResultadoProceso> {
 
-	private ProcesoBatch proceso;
+	private Callable<ResultadoProceso> proceso;
 	private SchedulerProcesos scheduler;
 	private ServicioMail servicio;
 	private String mailAdministrador;
-	public EnviarMailFallo(String mail,ServicioMail servicio,SchedulerProcesos scheduler,ProcesoBatch proceso)
+	public EnviarMailFallo(String mail,ServicioMail servicio,Callable<ResultadoProceso> proceso)
 	{
 		this.proceso=proceso;
-		this.scheduler = scheduler;
 		this.servicio = servicio;
 		this.mailAdministrador = mail;
 	}
 	@Override
-	public void run() {
-		try
-		{
-			scheduler.agregarResultado(proceso.ejecutar());
-		} catch (FallaProcesoException e)
-		{
-			scheduler.agregarResultado(new ResultadoProceso(LocalDateTime.now(),0,false,e.getMessage()));
-			servicio.notificarAdministrador(mailAdministrador, "Fallo en Proceso", e.getMessage());
-		}
-		
+	public ResultadoProceso call() throws Exception{
+		ResultadoProceso resultado = proceso.call();
+		if(!resultado.terminoCorrectamente()){
+		servicio.enviarMail(mailAdministrador, "Fallo un proceso", resultado.getDescripcion());
+	}
+		return resultado;
 	}
 }

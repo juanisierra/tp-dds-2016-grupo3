@@ -2,14 +2,15 @@ package utn.dds.k3001.grupo3.tpa.tests;
 
 import utn.dds.k3001.grupo3.tpa.procesosProgramados.OldPOISRequestService;
 import utn.dds.k3001.grupo3.tpa.JsonFactory;
-import utn.dds.k3001.grupo3.tpa.procesosProgramados.BajaPOI;
 import utn.dds.k3001.grupo3.tpa.procesosProgramados.FallaProcesoException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.*;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 public class TestOldPOISRequest {
@@ -22,9 +23,9 @@ public class TestOldPOISRequest {
 		factory = new JsonFactory();
 	}
 	@Test
-	public void testSePidenBienPOIS() throws FallaProcesoException
+	public void testSePidenBienPOIS() throws FallaProcesoException, JsonProcessingException, IOException
 	{	
-		List<BajaPOI> listaPOI = factory.JsonAObjeto(requestService.getJsonPOIS(), new TypeReference<List<BajaPOI>>() {});
+		List<Long> listaPOI = factory.obtenerPoisAEliminar(requestService.getJsonPOIS());
 		Assert.assertEquals(2,listaPOI.size(),0);
 	}
 

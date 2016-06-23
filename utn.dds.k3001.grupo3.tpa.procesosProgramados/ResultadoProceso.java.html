@@ -5,29 +5,27 @@ import java.time.LocalDateTime;
 public class ResultadoProceso
 {
 	private LocalDateTime momentoFinalizacion;
-	public LocalDateTime getMomentoFinalizacion() {
-<span class="nc" id="L9">		return momentoFinalizacion;</span>
-	}
 	private int cantidadAfectados;
 	private boolean terminoCorrectamente;
 	private String comentarios;
 	
+	public LocalDateTime getMomentoFinalizacion() {
+<span class="nc" id="L13">		return momentoFinalizacion;</span>
+	}
 <span class="fc" id="L15">	public ResultadoProceso(LocalDateTime momentoFinalizacion, int cantidadAfectados, boolean terminoCorrectamente,String comentario) {</span>
 <span class="fc" id="L16">		this.momentoFinalizacion = momentoFinalizacion;</span>
 <span class="fc" id="L17">		this.cantidadAfectados= cantidadAfectados;</span>
 <span class="fc" id="L18">		this.terminoCorrectamente = terminoCorrectamente;</span>
 <span class="fc" id="L19">		this.comentarios = comentario;</span>
 <span class="fc" id="L20">	}</span>
-	public boolean terminoCorrectamente()
-	{
-<span class="fc" id="L23">		return terminoCorrectamente;</span>
+	public boolean terminoCorrectamente() {
+<span class="fc" id="L22">		return terminoCorrectamente;</span>
 	}
-	public String getDescripcion()
-	{
-<span class="nc" id="L27">		return comentarios;</span>
+	public String getDescripcion() {
+<span class="nc" id="L25">		return comentarios;</span>
 	}
 	public int getCantidadAfectados() {
-<span class="nc" id="L30">		return cantidadAfectados;</span>
+<span class="nc" id="L28">		return cantidadAfectados;</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

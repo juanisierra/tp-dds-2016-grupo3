@@ -2,23 +2,23 @@
 
 import java.util.concurrent.Callable;
 
-public class Reintentar implements Callable&lt;ResultadoProceso&gt; {
+public class Reintentar implements Callable&lt;ResultadoProceso&gt; 
+{
 	private Callable&lt;ResultadoProceso&gt; proceso;
 	private int numRepeticiones;
-	public Reintentar(int numeroDeVeces,Callable&lt;ResultadoProceso&gt; proceso)
-<span class="fc" id="L9">	{</span>
-<span class="fc" id="L10">		this.numRepeticiones = numeroDeVeces;</span>
-<span class="fc" id="L11">		this.proceso = proceso;</span>
-<span class="fc" id="L12">	}</span>
+	
+<span class="fc" id="L10">	public Reintentar(int numeroDeVeces,Callable&lt;ResultadoProceso&gt; proceso)	{</span>
+<span class="fc" id="L11">		this.numRepeticiones = numeroDeVeces;</span>
+<span class="fc" id="L12">		this.proceso = proceso;</span>
+<span class="fc" id="L13">	}</span>
 	@Override
 	public ResultadoProceso call() throws Exception {
-<span class="fc" id="L15">		ResultadoProceso resultado = proceso.call();</span>
-<span class="fc bfc" id="L16" title="All 4 branches covered.">		while(numRepeticiones&gt;0 &amp;&amp; !resultado.terminoCorrectamente()){</span>
-<span class="fc" id="L17">		numRepeticiones--;</span>
-<span class="fc" id="L18">		resultado = proceso.call();	</span>
+		ResultadoProceso resultado;
+		do {
+<span class="fc" id="L18">			numRepeticiones--;</span>
+<span class="fc" id="L19">			resultado = proceso.call();	</span>
+<span class="fc bfc" id="L20" title="All 4 branches covered.">		} while (numRepeticiones&gt;=0 &amp;&amp; !resultado.terminoCorrectamente());</span>
+<span class="fc" id="L21">	return resultado;</span>
 	}
-<span class="fc" id="L20">	return resultado;</span>
-	}
-
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -2,7 +2,7 @@ GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_
 tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,ParserArchivoLocales,6,64,0,2,2,12,0,3,0,2
 tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,EnviarMailFallo,30,0,2,0,9,0,3,0,2,0
 tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,OldPOISRequestService,5,35,1,1,1,9,1,3,0,3
-tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,Reintentar,0,34,0,4,0,9,0,4,0,2
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,Reintentar,0,28,0,4,0,8,0,4,0,2
 tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,ActualizarAcciones,51,0,0,0,12,0,5,0,5,0
 tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,SchedulerProcesos,1,49,0,0,1,12,0,5,0,5
 tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,ListaTerminales,9,0,0,0,4,0,2,0,2,0

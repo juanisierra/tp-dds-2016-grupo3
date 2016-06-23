@@ -20,11 +20,10 @@ public class OldPOISRequestService
 	}
 	public String getJsonPOIS () throws FallaProcesoException {
 <span class="fc" id="L22">		ClientResponse respuesta = this.getPOIS();</span>
-<span class="pc bpc" id="L23" title="1 of 2 branches missed.">		if(respuesta.getClientResponseStatus()==ClientResponse.Status.OK)</span>
-		{
-<span class="fc" id="L25">		return respuesta.getEntity(String.class);</span>
+<span class="pc bpc" id="L23" title="1 of 2 branches missed.">		if(respuesta.getClientResponseStatus()==ClientResponse.Status.OK){</span>
+<span class="fc" id="L24">			return respuesta.getEntity(String.class);</span>
 		} else {
-<span class="nc" id="L27">			throw new FallaProcesoException(&quot;No se pudieron obtener los POIS a dar de baja&quot;);</span>
+<span class="nc" id="L26">			throw new FallaProcesoException(&quot;No se pudieron obtener los POIS a dar de baja&quot;);</span>
 		}
 	}
 }

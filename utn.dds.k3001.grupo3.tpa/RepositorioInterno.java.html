@@ -21,5 +21,13 @@ public class RepositorioInterno implements OrigenDeDatos {
 	public List&lt;POI&gt; buscar(String criterio) {
 <span class="fc" id="L22">		return listaPOIS.stream().filter(POI -&gt; POI.esBuscado(criterio)).collect(Collectors.toList());</span>
 	}
+	public List&lt;POI&gt; buscarPorNombre(String nombre)
+	{
+<span class="fc" id="L26">		return listaPOIS.stream().filter(POI -&gt; POI.getNombre().equals(nombre)).collect(Collectors.toList());</span>
+	}
+	public void eliminarPoiPorNumero(long id) {
+<span class="nc" id="L29">		listaPOIS.removeIf(POI -&gt; Long.valueOf(POI.getID()).equals(id));</span>
+		
+<span class="nc" id="L31">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

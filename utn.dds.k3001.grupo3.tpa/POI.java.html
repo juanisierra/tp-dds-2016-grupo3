@@ -11,52 +11,65 @@ public class POI
 	protected Point posicion;
 	protected List&lt;String&gt; listaEtiquetas;
 	protected Direccion direccion;
-
-<span class="fc" id="L15">	public POI(String nombre, String calle, String barrio, int altura, Point posicion) {</span>
-<span class="fc" id="L16">		this.direccion = new Direccion(calle,barrio,altura);</span>
-<span class="fc" id="L17">		this.nombre = nombre;</span>
-<span class="fc" id="L18">		this.posicion = posicion;</span>
-<span class="fc" id="L19">		this.listaEtiquetas = new LinkedList&lt;String&gt;();</span>
-<span class="fc" id="L20">	}</span>
-	
+	protected long id;
+<span class="fc" id="L15">	public static long maxID = 0;</span>
+<span class="fc" id="L16">	public POI(String nombre, String calle, String barrio, int altura, Point posicion) {</span>
+<span class="fc" id="L17">		this.direccion = new Direccion(calle,barrio,altura);</span>
+<span class="fc" id="L18">		this.nombre = nombre;</span>
+<span class="fc" id="L19">		this.posicion = posicion;</span>
+<span class="fc" id="L20">		this.listaEtiquetas = new LinkedList&lt;String&gt;();</span>
+<span class="fc" id="L21">		this.id = ++maxID;</span>
+<span class="fc" id="L22">	}</span>
+	public long getID(){
+<span class="nc" id="L24">	return id;</span>
+	}
 	public void agregarEtiqueta(String etiqueta){
-<span class="nc" id="L23">		this.listaEtiquetas.add(etiqueta);</span>
-<span class="nc" id="L24">	}</span>
+<span class="nc" id="L27">		this.listaEtiquetas.add(etiqueta);</span>
+<span class="nc" id="L28">	}</span>
 	
 	public boolean estaCerca(Point otraPosicion){
-<span class="nc bnc" id="L27" title="All 2 branches missed.">		return (posicion.distance(otraPosicion) &lt;=0.5);</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">		return (posicion.distance(otraPosicion) &lt;=0.5);</span>
 	}
 	
 	public boolean esBuscado(String criterio){
-<span class="pc bpc" id="L31" title="1 of 4 branches missed.">		return (nombre.contains(criterio) || listaEtiquetas.contains(criterio));</span>
+<span class="pc bpc" id="L35" title="1 of 4 branches missed.">		return (nombre.contains(criterio) || listaEtiquetas.contains(criterio));</span>
 	}
 	
 	public boolean estaDisponible(LocalDateTime fechaBuscada,String servicio){
-<span class="nc" id="L35">		return false;</span>
+<span class="nc" id="L39">		return false;</span>
 	}
 
 	public String getNombre() {
-<span class="fc" id="L39">		return nombre;</span>
+<span class="fc" id="L43">		return nombre;</span>
 	}
 
 	public void setNombre(String nombre) {
-<span class="nc" id="L43">		this.nombre = nombre;</span>
-<span class="nc" id="L44">	}</span>
+<span class="nc" id="L47">		this.nombre = nombre;</span>
+<span class="nc" id="L48">	}</span>
 
 	public Point getPosicion() {
-<span class="nc" id="L47">		return posicion;</span>
+<span class="nc" id="L51">		return posicion;</span>
 	}
 
 	public void setPosicion(Point posicion) {
-<span class="nc" id="L51">		this.posicion = posicion;</span>
-<span class="nc" id="L52">	}</span>
+<span class="nc" id="L55">		this.posicion = posicion;</span>
+<span class="nc" id="L56">	}</span>
 
 	public Direccion getDireccion() {
-<span class="fc" id="L55">		return direccion;</span>
+<span class="fc" id="L59">		return direccion;</span>
 	}
 
 	public void setDireccion(Direccion direccion) {
-<span class="nc" id="L59">		this.direccion = direccion;</span>
-<span class="nc" id="L60">	}</span>
+<span class="nc" id="L63">		this.direccion = direccion;</span>
+<span class="nc" id="L64">	}</span>
+	public void cambiarEtiquetas(List&lt;String&gt; etiquetasNuevas)
+	{
+<span class="fc" id="L67">		this.listaEtiquetas.clear();</span>
+<span class="fc" id="L68">		this.listaEtiquetas.addAll(etiquetasNuevas);</span>
+<span class="fc" id="L69">	}</span>
+	public List&lt;String&gt; getEtiquetas()
+	{
+<span class="fc" id="L72">	return listaEtiquetas;</span>
+	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

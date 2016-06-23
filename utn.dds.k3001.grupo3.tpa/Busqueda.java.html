@@ -7,7 +7,7 @@ public class Busqueda
 {
 	private int cantResultados;
 	private String criterio;
-	private double tiempoDemorado;//esta en segundos
+	private double tiempoDemorado;
 	private LocalDate fecha;
 	private Terminal terminal;
 <span class="fc" id="L13">	public Busqueda(Terminal terminal,int cantResultados, String criterio, LocalTime hInicio, LocalTime hFin, LocalDate fecha){</span>
@@ -34,6 +34,9 @@ public class Busqueda
 	
 	public LocalDate getFecha(){
 <span class="fc" id="L36">		return this.fecha;</span>
+	}
+	public String getCriterio() {
+<span class="nc" id="L39">		return criterio;</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

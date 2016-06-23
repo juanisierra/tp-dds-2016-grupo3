@@ -19,7 +19,6 @@ public class DarDeBajaPOIS implements Callable<ResultadoProceso>
 		this.servicio = new OldPOISRequestService();
 		this.repositorio = repositorio;
 	}
-
 	public ResultadoProceso call(){
 		try{
 		this.poisAfectados = 0;

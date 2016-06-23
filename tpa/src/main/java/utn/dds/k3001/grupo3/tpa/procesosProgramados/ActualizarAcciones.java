@@ -3,7 +3,6 @@ package utn.dds.k3001.grupo3.tpa.procesosProgramados;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.Callable;
-
 import utn.dds.k3001.grupo3.tpa.ObserverBusqueda;
 import utn.dds.k3001.grupo3.tpa.OrigenDeTerminales;
 import utn.dds.k3001.grupo3.tpa.Terminal;
@@ -20,7 +19,6 @@ public class ActualizarAcciones implements Callable<ResultadoProceso>
 		this.accionesAEliminar = accionesAEliminar;
 		this.terminales = terminales;
 	}
-
 	public ResultadoProceso call() {
 		this.POISAfectados = 0;
 		List<Terminal> listaTerminalesAModificar = terminales.obtenerTerminales();

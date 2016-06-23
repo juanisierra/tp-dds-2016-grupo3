@@ -20,9 +20,8 @@ public class OldPOISRequestService
 	}
 	public String getJsonPOIS () throws FallaProcesoException {
 		ClientResponse respuesta = this.getPOIS();
-		if(respuesta.getClientResponseStatus()==ClientResponse.Status.OK)
-		{
-		return respuesta.getEntity(String.class);
+		if(respuesta.getClientResponseStatus()==ClientResponse.Status.OK){
+			return respuesta.getEntity(String.class);
 		} else {
 			throw new FallaProcesoException("No se pudieron obtener los POIS a dar de baja");
 		}

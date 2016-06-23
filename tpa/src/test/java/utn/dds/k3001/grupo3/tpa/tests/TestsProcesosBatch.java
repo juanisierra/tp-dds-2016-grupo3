@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -29,7 +30,6 @@ public class TestsProcesosBatch {
 	LocalComercial panaderia;
 	ActualizarLocales actualizarLocales;
 	SchedulerProcesos scheduler;
-	InformarResultado informar;
 	@Rule
 	public TemporaryFolder carpetaTemporal =new TemporaryFolder();
 	@Before
@@ -48,7 +48,6 @@ public class TestsProcesosBatch {
 		panaderia = new LocalComercial("panaderia","","",0,new Point(0,0),new Rubro("panaderias",10),Disponibilidad.lunesAViernes(LocalTime.of(10, 0), LocalTime.of(15, 0)));
 		repositorioPOI.agregarPoi(panaderia);
 		actualizarLocales = new ActualizarLocales(repositorioPOI,archivoPrueba.getAbsolutePath());
-		informar = new InformarResultado(actualizarLocales,scheduler);
 	}
 	@Test
 	public void testPanaderiaConComida() throws IOException
@@ -82,7 +81,7 @@ public class TestsProcesosBatch {
 		writer.println("panaderia; comida facturas");
 		writer.println("kiosko; golosinas comida");
 		writer.close();
-		actualizarLocales.ejecutar();
+		actualizarLocales.call();
 		Assert.assertEquals(2,repositorioPOI.buscarPorNombre("panaderia").get(0).getEtiquetas().size(),0);
 	}
 	@Test
@@ -92,7 +91,7 @@ public class TestsProcesosBatch {
 		writer.println("panaderia; comida facturas");
 		writer.println("kiosko; golosinas comida");
 		writer.close();
-		scheduler.agregarTarea(informar, LocalDateTime.now());
+		scheduler.agregarTarea(actualizarLocales, LocalDateTime.now());
 		Thread.sleep(10); //Dormimos el hilo para que se llegue a ejecutar el otro
 		Assert.assertEquals(2,repositorioPOI.buscarPorNombre("panaderia").get(0).getEtiquetas().size(),0);
 		Assert.assertEquals(1, scheduler.getHistorial().size(),0);
@@ -104,18 +103,35 @@ public class TestsProcesosBatch {
 		writer.println("panaderia; comida facturas");
 		writer.println("kiosko; golosinas comida");
 		writer.close();
-		scheduler.agregarTarea(informar, OffsetDateTime.now().plusHours(1).toLocalDateTime());
+		scheduler.agregarTarea(actualizarLocales, OffsetDateTime.now().plusHours(1).toLocalDateTime());
 		Thread.sleep(10); //Dormimos el hilo para que se llegue a ejecutar el otro
 		Assert.assertEquals(0,repositorioPOI.buscarPorNombre("panaderia").get(0).getEtiquetas().size(),0);
 		Assert.assertEquals(0, scheduler.getHistorial().size(),0);
 	}
 	@Test
-	public void testSeReintenta3VecesYSeInforma1() throws FallaProcesoException
-	{	ProcesoBatch procesoBatchMock = Mockito.mock(ProcesoBatch.class);
-		Mockito.doThrow(new FallaProcesoException("No anduvo")).when(procesoBatchMock).ejecutar();
-		Reintentar reintentar = new Reintentar(2,procesoBatchMock,scheduler);
-		reintentar.run();
-		Mockito.verify(procesoBatchMock,Mockito.times(3)).ejecutar();
-		Assert.assertEquals(1,scheduler.getHistorial().size(),0);
+	public void testSeReintenta3Veces() throws Exception
+	{	Callable<ResultadoProceso> procesoMock = Mockito.mock(ActualizarLocales.class);
+		Mockito.when(procesoMock.call()).thenReturn(new ResultadoProceso(LocalDateTime.now(), 0, false, "fallo"));
+		Reintentar reintentar = new Reintentar(2,procesoMock);
+		reintentar.call();
+		Mockito.verify(procesoMock,Mockito.times(3)).call();
+	}
+	@Test
+	public void testSeHaceUnaSolaVez() throws Exception
+	{	Callable<ResultadoProceso> procesoMock = Mockito.mock(ActualizarLocales.class);
+		Mockito.when(procesoMock.call()).thenReturn(new ResultadoProceso(LocalDateTime.now(), 0, true, "fallo"));
+		Reintentar reintentar = new Reintentar(2,procesoMock);
+		reintentar.call();
+		Mockito.verify(procesoMock,Mockito.times(1)).call();
+	}
+	@Test
+	public void testSeCorre3VecesYSeAnota1() throws Exception
+	{	Callable<ResultadoProceso> procesoMock = Mockito.mock(ActualizarLocales.class);
+		Mockito.when(procesoMock.call()).thenReturn(new ResultadoProceso(LocalDateTime.now(), 0, false, "fallo"));
+		Reintentar reintentar = new Reintentar(2,procesoMock);
+		scheduler.agregarTarea(reintentar, LocalDateTime.now());
+		Thread.sleep(10);
+		Mockito.verify(procesoMock,Mockito.times(3)).call();
+		Assert.assertEquals(scheduler.getHistorial().size(), 1,0);
 	}
 }

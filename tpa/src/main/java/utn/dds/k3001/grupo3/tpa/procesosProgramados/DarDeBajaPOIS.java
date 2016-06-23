@@ -2,11 +2,13 @@ package utn.dds.k3001.grupo3.tpa.procesosProgramados;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.Callable;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import utn.dds.k3001.grupo3.tpa.JsonFactory;
 import utn.dds.k3001.grupo3.tpa.RepositorioInterno;
 
-public class DarDeBajaPOIS implements ProcesoBatch
+public class DarDeBajaPOIS implements Callable<ResultadoProceso>
 {
 	private OldPOISRequestService servicio; 
 	private JsonFactory factory;
@@ -19,7 +21,8 @@ public class DarDeBajaPOIS implements ProcesoBatch
 		this.repositorio = repositorio;
 	}
 
-	public ResultadoProceso ejecutar() throws FallaProcesoException {
+	public ResultadoProceso call(){
+		try{
 		this.poisAfectados = 0;
 		List<BajaPOI> poisADarDeBaja = factory.JsonAObjeto(servicio.getJsonPOIS(), new TypeReference<List<BajaPOI>>() {});
 		poisADarDeBaja.forEach(bajaPOI -> {
@@ -27,6 +30,9 @@ public class DarDeBajaPOIS implements ProcesoBatch
 			poisAfectados++;
 		}
 	);
+		} catch(FallaProcesoException e) {
+			return new ResultadoProceso(LocalDateTime.now(),poisAfectados,false,e.getMessage());
+		}
 	return new ResultadoProceso(LocalDateTime.now(),poisAfectados,true,"POIS dados de baja correctamente.");
 	}
 }

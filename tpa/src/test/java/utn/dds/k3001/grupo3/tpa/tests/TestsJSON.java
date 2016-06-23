@@ -1,5 +1,6 @@
 package utn.dds.k3001.grupo3.tpa.tests;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -8,10 +9,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import utn.dds.k3001.grupo3.tpa.*;
-import utn.dds.k3001.grupo3.tpa.procesosProgramados.BajaPOI;
 
 public class TestsJSON {
 	JsonFactory factory;
@@ -68,9 +69,8 @@ public class TestsJSON {
 		Assert.assertEquals("Banco de la Plaza2", bancos.get(1).getNombre());
 	}
 	@Test
-	public void testParseoPOIIDs(){
-		List<BajaPOI> poiIDs;
-		poiIDs = factory.JsonAObjeto(listaPOIS, new TypeReference<List<BajaPOI>>() {});
+	public void testParseoListaPOI() throws JsonProcessingException, IOException{
+		Assert.assertEquals(123,factory.obtenerPoisAEliminar(listaPOIS).get(0),0);
+		Assert.assertEquals(122,factory.obtenerPoisAEliminar(listaPOIS).get(1),0);
 	}
-	
 }

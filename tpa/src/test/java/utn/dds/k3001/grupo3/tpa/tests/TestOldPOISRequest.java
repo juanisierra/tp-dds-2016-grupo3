@@ -3,15 +3,11 @@ package utn.dds.k3001.grupo3.tpa.tests;
 import utn.dds.k3001.grupo3.tpa.procesosProgramados.OldPOISRequestService;
 import utn.dds.k3001.grupo3.tpa.JsonFactory;
 import utn.dds.k3001.grupo3.tpa.procesosProgramados.FallaProcesoException;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.*;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
+
 
 public class TestOldPOISRequest {
 	OldPOISRequestService requestService;

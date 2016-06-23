@@ -4,11 +4,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Terminal
 {
 	private String nombre;
+	public String getNombre() {
+		return nombre;
+	}
 	private Mapa mapa;
 	private List<ObserverBusqueda> observersBusqueda;
 	private Comuna comuna;

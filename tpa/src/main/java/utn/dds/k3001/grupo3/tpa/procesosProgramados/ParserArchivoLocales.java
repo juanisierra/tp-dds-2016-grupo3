@@ -13,12 +13,12 @@ public class ParserArchivoLocales
 	private File archivo;
 	private Scanner scanner;
 	
-	public ParserArchivoLocales(String filepath){
+	public ParserArchivoLocales(String filepath) throws FallaProcesoException{
 		archivo = new File(filepath);
 		try {
 			scanner = new Scanner(archivo);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			throw new FallaProcesoException("El archivo indicado no es correcto");
 		}
 	}
 	public Map<String,List<String>> obtenerLocalYPalabrasClaves(){	

@@ -6,22 +6,20 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import utn.dds.k3001.grupo3.tpa.JsonFactory;
 import utn.dds.k3001.grupo3.tpa.RepositorioInterno;
 
-public class DarDeBajaPOIS implements Runnable
+public class DarDeBajaPOIS implements ProcesoBatch
 {
 	private OldPOISRequestService servicio; 
 	private JsonFactory factory;
 	private RepositorioInterno repositorio;
-	private SchedulerProcesos scheduler;
 	private int poisAfectados;
 	
-	public DarDeBajaPOIS(RepositorioInterno repositorio, SchedulerProcesos scheduler){
+	public DarDeBajaPOIS(RepositorioInterno repositorio){
 		this.factory = new JsonFactory();
 		this.servicio = new OldPOISRequestService();
 		this.repositorio = repositorio;
-		this.scheduler = scheduler;
 	}
-	@Override
-	public void run() {
+
+	public ResultadoProceso ejecutar() throws FallaProcesoException {
 		this.poisAfectados = 0;
 		List<BajaPOI> poisADarDeBaja = factory.JsonAObjeto(servicio.getJsonPOIS(), new TypeReference<List<BajaPOI>>() {});
 		poisADarDeBaja.forEach(bajaPOI -> {
@@ -29,6 +27,6 @@ public class DarDeBajaPOIS implements Runnable
 			poisAfectados++;
 		}
 	);
-	scheduler.agregarResultado(new ResultadoProceso(LocalDateTime.now(),poisAfectados,true,"POIS dados de baja correctamente."));
+	return new ResultadoProceso(LocalDateTime.now(),poisAfectados,true,"POIS dados de baja correctamente.");
 	}
 }

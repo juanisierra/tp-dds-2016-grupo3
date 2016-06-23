@@ -6,28 +6,26 @@ import utn.dds.k3001.grupo3.tpa.ObserverBusqueda;
 import utn.dds.k3001.grupo3.tpa.OrigenDeTerminales;
 import utn.dds.k3001.grupo3.tpa.Terminal;
 
-public class ActualizarAcciones implements Runnable 
+public class ActualizarAcciones implements ProcesoBatch
 {
 	private List<ObserverBusqueda> accionesAAgregar;
 	private List<ObserverBusqueda> accionesAEliminar;
 	private OrigenDeTerminales terminales;
-	private SchedulerProcesos scheduler;
 	private int POISAfectados;
 	
-	public ActualizarAcciones(OrigenDeTerminales terminales,SchedulerProcesos scheduler,List<ObserverBusqueda> accionesAAgregar,List<ObserverBusqueda> accionesAEliminar){
+	public ActualizarAcciones(OrigenDeTerminales terminales,List<ObserverBusqueda> accionesAAgregar,List<ObserverBusqueda> accionesAEliminar){
 		this.accionesAAgregar = accionesAAgregar;
 		this.accionesAEliminar = accionesAEliminar;
 		this.terminales = terminales;
-		this.scheduler = scheduler;
 	}
-	@Override
-	public void run() {
+
+	public ResultadoProceso ejecutar() {
 		this.POISAfectados = 0;
 		List<Terminal> listaTerminalesAModificar = terminales.obtenerTerminales();
 		listaTerminalesAModificar.forEach(terminal -> {
 			accionesAAgregar.forEach(accion -> terminal.agregarObserverBusqueda(accion));
 			accionesAEliminar.forEach(accion -> terminal.eliminarObserverBusqueda(accion));
 		});
-		scheduler.agregarResultado(new ResultadoProceso(LocalDateTime.now(),POISAfectados,true,"Acciones actualizadas correctamente"));
+	return new ResultadoProceso(LocalDateTime.now(),POISAfectados,true,"Acciones actualizadas correctamente");
 	}
 }

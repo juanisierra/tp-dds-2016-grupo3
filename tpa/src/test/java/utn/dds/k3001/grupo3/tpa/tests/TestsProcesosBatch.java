@@ -21,17 +21,18 @@ import utn.dds.k3001.grupo3.tpa.LocalComercial;
 import utn.dds.k3001.grupo3.tpa.RepositorioInterno;
 import utn.dds.k3001.grupo3.tpa.Rubro;
 import utn.dds.k3001.grupo3.tpa.procesosProgramados.*;
-public class TestsActualizacionLocales {
+public class TestsProcesosBatch {
 	ParserArchivoLocales parser;
 	File archivoPrueba;
 	RepositorioInterno repositorioPOI;
 	LocalComercial panaderia;
 	ActualizarLocales actualizarLocales;
 	SchedulerProcesos scheduler;
+	InformarResultado informar;
 	@Rule
 	public TemporaryFolder carpetaTemporal =new TemporaryFolder();
 	@Before
-	public void init()
+	public void init() throws FallaProcesoException
 	{
 
 		try {
@@ -45,7 +46,8 @@ public class TestsActualizacionLocales {
 		repositorioPOI = new RepositorioInterno();
 		panaderia = new LocalComercial("panaderia","","",0,new Point(0,0),new Rubro("panaderias",10),Disponibilidad.lunesAViernes(LocalTime.of(10, 0), LocalTime.of(15, 0)));
 		repositorioPOI.agregarPoi(panaderia);
-		actualizarLocales = new ActualizarLocales(repositorioPOI,archivoPrueba.getAbsolutePath(),scheduler);
+		actualizarLocales = new ActualizarLocales(repositorioPOI,archivoPrueba.getAbsolutePath());
+		informar = new InformarResultado(actualizarLocales,scheduler);
 	}
 	@Test
 	public void testPanaderiaConComida() throws IOException
@@ -79,7 +81,7 @@ public class TestsActualizacionLocales {
 		writer.println("panaderia; comida facturas");
 		writer.println("kiosko; golosinas comida");
 		writer.close();
-		actualizarLocales.run();
+		actualizarLocales.ejecutar();
 		Assert.assertEquals(2,repositorioPOI.buscarPorNombre("panaderia").get(0).getEtiquetas().size(),0);
 	}
 	@Test
@@ -89,7 +91,7 @@ public class TestsActualizacionLocales {
 		writer.println("panaderia; comida facturas");
 		writer.println("kiosko; golosinas comida");
 		writer.close();
-		scheduler.agregarTarea(actualizarLocales, LocalDateTime.now());
+		scheduler.agregarTarea(informar, LocalDateTime.now());
 		Thread.sleep(10); //Dormimos el hilo para que se llegue a ejecutar el otro
 		Assert.assertEquals(2,repositorioPOI.buscarPorNombre("panaderia").get(0).getEtiquetas().size(),0);
 		Assert.assertEquals(1, scheduler.getHistorial().size(),0);
@@ -101,7 +103,7 @@ public class TestsActualizacionLocales {
 		writer.println("panaderia; comida facturas");
 		writer.println("kiosko; golosinas comida");
 		writer.close();
-		scheduler.agregarTarea(actualizarLocales, OffsetDateTime.now().plusHours(1).toLocalDateTime());
+		scheduler.agregarTarea(informar, OffsetDateTime.now().plusHours(1).toLocalDateTime());
 		Thread.sleep(10); //Dormimos el hilo para que se llegue a ejecutar el otro
 		Assert.assertEquals(0,repositorioPOI.buscarPorNombre("panaderia").get(0).getEtiquetas().size(),0);
 		Assert.assertEquals(0, scheduler.getHistorial().size(),0);

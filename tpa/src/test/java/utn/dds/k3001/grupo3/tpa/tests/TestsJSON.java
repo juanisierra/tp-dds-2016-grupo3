@@ -1,11 +1,11 @@
 package utn.dds.k3001.grupo3.tpa.tests;
 
+import java.io.IOException;
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import utn.dds.k3001.grupo3.tpa.*;
@@ -39,6 +39,14 @@ public class TestsJSON {
 		      +"\"servicios\": [ \"depósitos\", \"extracciones\", \"transferencias\", \"seguros\", \"\", \"\", \"\", \"\""
 		      +"]"
 		      +"}]";
+	public String listaPOIS = 
+			"[{"
+			 +"\"id\": 123,"
+			  + "\"deletedAt\": \"2016-06-22T02:10:58.128Z\""
+			+"}, {"
+			+   "\"id\": 122,"
+			+    "\"deletedAt\": \"2016-06-22T02:12:58.128Z\""
+			+"}]";
 	@Before
 	public void init () {
 		factory = new JsonFactory();
@@ -56,5 +64,9 @@ public class TestsJSON {
 		Assert.assertEquals("Banco de la Plaza1", bancos.get(0).getNombre());
 		Assert.assertEquals("Banco de la Plaza2", bancos.get(1).getNombre());
 	}
-	
+	@Test
+	public void testParseoListaPOI() throws JsonProcessingException, IOException{
+		Assert.assertEquals(123,factory.obtenerPoisAEliminar(listaPOIS).get(0),0);
+		Assert.assertEquals(122,factory.obtenerPoisAEliminar(listaPOIS).get(1),0);
+	}
 }

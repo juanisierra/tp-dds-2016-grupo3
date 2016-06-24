@@ -7,7 +7,7 @@ public class Busqueda
 {
 	private int cantResultados;
 	private String criterio;
-	private double tiempoDemorado;//esta en segundos
+	private double tiempoDemorado;
 	private LocalDate fecha;
 	private Terminal terminal;
 	public Busqueda(Terminal terminal,int cantResultados, String criterio, LocalTime hInicio, LocalTime hFin, LocalDate fecha){
@@ -34,5 +34,8 @@ public class Busqueda
 	
 	public LocalDate getFecha(){
 		return this.fecha;
+	}
+	public String getCriterio() {
+		return criterio;
 	}
 }

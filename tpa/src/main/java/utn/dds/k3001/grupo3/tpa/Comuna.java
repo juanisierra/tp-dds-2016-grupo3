@@ -19,4 +19,8 @@ public class Comuna
 	public boolean estaEnComuna(Point punto){
 		return limites.isInside(punto);
 	}
+	public String getNombre() {
+		
+		return nombre;
+	}
 }

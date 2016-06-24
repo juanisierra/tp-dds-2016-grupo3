@@ -92,7 +92,7 @@ public class TestsProcesosBatch {
 		writer.println("kiosko; golosinas comida");
 		writer.close();
 		scheduler.agregarTarea(actualizarLocales, LocalDateTime.now());
-		Thread.sleep(10); //Dormimos el hilo para que se llegue a ejecutar el otro
+		Thread.sleep(30); //Dormimos el hilo para que se llegue a ejecutar el otro
 		Assert.assertEquals(2,repositorioPOI.buscarPorNombre("panaderia").get(0).getEtiquetas().size(),0);
 		Assert.assertEquals(1, scheduler.getHistorial().size(),0);
 	}

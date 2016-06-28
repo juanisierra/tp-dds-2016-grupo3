@@ -23,9 +23,10 @@ public class ActualizarAcciones implements Callable<ResultadoProceso>
 		this.POISAfectados = 0;
 		List<Terminal> listaTerminalesAModificar = terminales.obtenerTerminales();
 		listaTerminalesAModificar.forEach(terminal -> {
+			POISAfectados++;
 			accionesAAgregar.forEach(accion -> terminal.agregarObserverBusqueda(accion));
 			accionesAEliminar.forEach(accion -> terminal.eliminarObserverBusqueda(accion));
 		});
-	return new ResultadoProceso(LocalDateTime.now(),POISAfectados,true,"Acciones actualizadas correctamente");
+		return new ResultadoProceso(LocalDateTime.now(),POISAfectados,true,"Acciones actualizadas correctamente");
 	}
 }

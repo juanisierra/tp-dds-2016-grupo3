@@ -14,9 +14,9 @@ public class DarDeBajaPOIS implements Callable<ResultadoProceso>
 	private RepositorioInterno repositorio;
 	private int poisAfectados;
 	
-	public DarDeBajaPOIS(RepositorioInterno repositorio){
-		this.factory = new JsonFactory();
-		this.servicio = new OldPOISRequestService();
+	public DarDeBajaPOIS(RepositorioInterno repositorio,JsonFactory factory,OldPOISRequestService servicio){
+		this.factory = factory;
+		this.servicio = servicio;
 		this.repositorio = repositorio;
 	}
 	public ResultadoProceso call(){

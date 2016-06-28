@@ -27,6 +27,8 @@ public class RepositorioInterno implements OrigenDeDatos {
 	}
 	public void eliminarPoiPorNumero(long id) {
 		listaPOIS.removeIf(POI -> Long.valueOf(POI.getID()).equals(id));
-		
+	}	
+	public List<POI> getAllPOIS(){
+		return listaPOIS;
 	}
 }

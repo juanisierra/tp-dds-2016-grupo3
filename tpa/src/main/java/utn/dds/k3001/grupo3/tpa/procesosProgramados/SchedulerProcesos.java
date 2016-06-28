@@ -5,6 +5,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -24,8 +25,8 @@ public class SchedulerProcesos
 		historialProcesos.stream().filter(future -> future.isDone()).forEach(resultado ->{
 			try{
 				lista.add(resultado.get());
-			} catch (Exception e){
-				
+			} catch (InterruptedException | ExecutionException exception){
+				exception.printStackTrace();
 			}
 		});
 		return lista;

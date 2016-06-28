@@ -14,19 +14,20 @@ public class ActualizarAcciones implements Callable&lt;ResultadoProceso&gt;
 	private OrigenDeTerminales terminales;
 	private int POISAfectados;
 	
-<span class="nc" id="L17">	public ActualizarAcciones(OrigenDeTerminales terminales,List&lt;ObserverBusqueda&gt; accionesAAgregar,List&lt;ObserverBusqueda&gt; accionesAEliminar){</span>
-<span class="nc" id="L18">		this.accionesAAgregar = accionesAAgregar;</span>
-<span class="nc" id="L19">		this.accionesAEliminar = accionesAEliminar;</span>
-<span class="nc" id="L20">		this.terminales = terminales;</span>
-<span class="nc" id="L21">	}</span>
+<span class="fc" id="L17">	public ActualizarAcciones(OrigenDeTerminales terminales,List&lt;ObserverBusqueda&gt; accionesAAgregar,List&lt;ObserverBusqueda&gt; accionesAEliminar){</span>
+<span class="fc" id="L18">		this.accionesAAgregar = accionesAAgregar;</span>
+<span class="fc" id="L19">		this.accionesAEliminar = accionesAEliminar;</span>
+<span class="fc" id="L20">		this.terminales = terminales;</span>
+<span class="fc" id="L21">	}</span>
 	public ResultadoProceso call() {
-<span class="nc" id="L23">		this.POISAfectados = 0;</span>
-<span class="nc" id="L24">		List&lt;Terminal&gt; listaTerminalesAModificar = terminales.obtenerTerminales();</span>
-<span class="nc" id="L25">		listaTerminalesAModificar.forEach(terminal -&gt; {</span>
-<span class="nc" id="L26">			accionesAAgregar.forEach(accion -&gt; terminal.agregarObserverBusqueda(accion));</span>
-<span class="nc" id="L27">			accionesAEliminar.forEach(accion -&gt; terminal.eliminarObserverBusqueda(accion));</span>
-<span class="nc" id="L28">		});</span>
-<span class="nc" id="L29">	return new ResultadoProceso(LocalDateTime.now(),POISAfectados,true,&quot;Acciones actualizadas correctamente&quot;);</span>
+<span class="fc" id="L23">		this.POISAfectados = 0;</span>
+<span class="fc" id="L24">		List&lt;Terminal&gt; listaTerminalesAModificar = terminales.obtenerTerminales();</span>
+<span class="fc" id="L25">		listaTerminalesAModificar.forEach(terminal -&gt; {</span>
+<span class="fc" id="L26">			POISAfectados++;</span>
+<span class="fc" id="L27">			accionesAAgregar.forEach(accion -&gt; terminal.agregarObserverBusqueda(accion));</span>
+<span class="fc" id="L28">			accionesAEliminar.forEach(accion -&gt; terminal.eliminarObserverBusqueda(accion));</span>
+<span class="fc" id="L29">		});</span>
+<span class="fc" id="L30">		return new ResultadoProceso(LocalDateTime.now(),POISAfectados,true,&quot;Acciones actualizadas correctamente&quot;);</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

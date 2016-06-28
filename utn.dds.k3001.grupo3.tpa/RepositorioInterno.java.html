@@ -26,8 +26,10 @@ public class RepositorioInterno implements OrigenDeDatos {
 <span class="fc" id="L26">		return listaPOIS.stream().filter(POI -&gt; POI.getNombre().equals(nombre)).collect(Collectors.toList());</span>
 	}
 	public void eliminarPoiPorNumero(long id) {
-<span class="nc" id="L29">		listaPOIS.removeIf(POI -&gt; Long.valueOf(POI.getID()).equals(id));</span>
-		
-<span class="nc" id="L31">	}</span>
+<span class="fc" id="L29">		listaPOIS.removeIf(POI -&gt; Long.valueOf(POI.getID()).equals(id));</span>
+<span class="fc" id="L30">	}	</span>
+	public List&lt;POI&gt; getAllPOIS(){
+<span class="fc" id="L32">		return listaPOIS;</span>
+	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

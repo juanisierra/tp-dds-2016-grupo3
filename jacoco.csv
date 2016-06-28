@@ -1,16 +1,16 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,ParserArchivoLocales,6,64,0,2,2,12,0,3,0,2
-tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,EnviarMailFallo,30,0,2,0,9,0,3,0,2,0
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,EnviarMailFallo,0,30,1,1,0,9,1,2,0,2
 tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,OldPOISRequestService,5,35,1,1,1,9,1,3,0,3
 tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,Reintentar,0,28,0,4,0,8,0,4,0,2
-tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,ActualizarAcciones,51,0,0,0,12,0,5,0,5,0
-tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,SchedulerProcesos,1,49,0,0,1,12,0,5,0,5
-tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,ListaTerminales,9,0,0,0,4,0,2,0,2,0
-tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,DarDeBajaPOIS,63,0,0,0,15,0,3,0,3,0
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,ActualizarAcciones,0,57,0,0,0,13,0,5,0,5
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,SchedulerProcesos,3,49,0,0,2,12,0,5,0,5
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,ListaTerminales,0,9,0,0,0,4,0,2,0,2
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,DarDeBajaPOIS,11,48,0,0,2,13,0,3,0,3
 tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,ActualizarLocales,0,57,0,0,0,14,0,5,0,5
 tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,FallaProcesoException,4,0,0,0,2,0,1,0,1,0
 tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,TerminalesPorComuna,25,0,0,0,5,0,3,0,3,0
-tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,ResultadoProceso,9,18,0,0,3,7,3,2,3,2
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,ResultadoProceso,6,21,0,0,2,8,2,3,2,3
 tpa,utn.dds.k3001.grupo3.tpa,AdapterSistemaBancos.new TypeReference() {...},0,6,0,0,0,1,0,1,0,1
 tpa,utn.dds.k3001.grupo3.tpa,NotificarBusquedaLarga,0,26,1,1,0,8,1,2,0,2
 tpa,utn.dds.k3001.grupo3.tpa,ParadaColectivo,3,35,2,4,1,5,3,4,1,3
@@ -27,11 +27,11 @@ tpa,utn.dds.k3001.grupo3.tpa,Rubro,0,15,0,0,0,6,0,3,0,3
 tpa,utn.dds.k3001.grupo3.tpa,Servicio,7,56,0,0,2,16,1,8,1,8
 tpa,utn.dds.k3001.grupo3.tpa,AdapterSistemaCGP,8,114,0,0,0,8,2,7,2,7
 tpa,utn.dds.k3001.grupo3.tpa,RequestService,37,0,0,0,8,0,3,0,3,0
-tpa,utn.dds.k3001.grupo3.tpa,POI,37,64,3,3,12,15,10,8,8,7
+tpa,utn.dds.k3001.grupo3.tpa,POI,34,67,3,3,11,16,9,9,7,8
 tpa,utn.dds.k3001.grupo3.tpa,AdapterSistemaBancos,0,38,0,0,0,10,0,3,0,3
 tpa,utn.dds.k3001.grupo3.tpa,CGP,0,30,0,0,0,8,0,3,0,3
-tpa,utn.dds.k3001.grupo3.tpa,RepositorioInterno,14,49,0,0,2,9,2,7,2,7
-tpa,utn.dds.k3001.grupo3.tpa,Terminal,36,52,0,0,11,13,5,4,5,4
+tpa,utn.dds.k3001.grupo3.tpa,RepositorioInterno,0,66,0,0,0,12,0,10,0,10
+tpa,utn.dds.k3001.grupo3.tpa,Terminal,26,62,0,0,8,16,3,6,3,6
 tpa,utn.dds.k3001.grupo3.tpa,Busqueda,8,34,0,0,2,11,2,5,2,5
 tpa,utn.dds.k3001.grupo3.tpa,Comuna,3,23,0,0,1,8,1,3,1,3
 tpa,utn.dds.k3001.grupo3.tpa,GuardarBusqueda,0,11,0,0,0,5,0,2,0,2

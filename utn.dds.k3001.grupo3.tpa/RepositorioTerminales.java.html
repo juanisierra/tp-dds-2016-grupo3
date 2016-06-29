@@ -2,21 +2,20 @@
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class RepositorioTerminales implements OrigenDeTerminales{
 	List&lt;Terminal&gt; listaTerminales;
 	public RepositorioTerminales ()
-<span class="nc" id="L10">	{</span>
-<span class="nc" id="L11">		listaTerminales = new ArrayList&lt;Terminal&gt;();</span>
-<span class="nc" id="L12">	} </span>
-	public List&lt;Terminal&gt;filtrarPorComuna(String nombreComuna)
-	{
-<span class="nc" id="L15">		return listaTerminales.stream().filter(Terminal -&gt; Terminal.estaEnComuna(nombreComuna)).collect(Collectors.toList());</span>
-	}
+<span class="nc" id="L9">	{</span>
+<span class="nc" id="L10">		listaTerminales = new ArrayList&lt;Terminal&gt;();</span>
+<span class="nc" id="L11">	} </span>
+	public RepositorioTerminales (List&lt;Terminal&gt; listaTerminales)
+<span class="fc" id="L13">	{</span>
+<span class="fc" id="L14">		this.listaTerminales = listaTerminales;</span>
+<span class="fc" id="L15">	} </span>
 	public List&lt;Terminal&gt; obtenerTerminales()
 	{
-<span class="nc" id="L19">		return listaTerminales;</span>
+<span class="fc" id="L18">		return listaTerminales;</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

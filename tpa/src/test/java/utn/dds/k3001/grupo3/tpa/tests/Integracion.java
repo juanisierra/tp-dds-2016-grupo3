@@ -47,7 +47,7 @@ public class Integracion {
 		panaderia = new LocalComercial("panaderia","","",0,new Point(0,0),new Rubro("panaderias",10),Disponibilidad.lunesAViernes(LocalTime.of(10, 0), LocalTime.of(15, 0)));
 		repositorioPOI.agregarPoi(panaderia);
 		actualizarLocales = new ActualizarLocales(repositorioPOI,archivoPrueba.getAbsolutePath());
-		requestService = new OldPOISRequestService();
+		requestService = new OldPOISRequestService("http://demo3537367.mockable.io/trash","pois");
 		factory = new JsonFactory();
 	}
 	@Test
@@ -64,7 +64,7 @@ public class Integracion {
 		writer.close();
 		scheduler.agregarTarea(actualizarLocales, LocalDateTime.now());
 		Thread.sleep(30); //Dormimos el hilo para que se llegue a ejecutar el otro
-		Assert.assertEquals(2,repositorioPOI.buscarPorNombre("panaderia").get(0).getEtiquetas().size(),0);
+		Assert.assertEquals(2,repositorioPOI.buscarPorNombre("panaderia").getEtiquetas().size(),0);
 		Assert.assertEquals(1, scheduler.getHistorial().size(),0);
 	}
 	@Test
@@ -75,7 +75,7 @@ public class Integracion {
 		writer.close();
 		scheduler.agregarTarea(actualizarLocales, OffsetDateTime.now().plusHours(1).toLocalDateTime());
 		Thread.sleep(30); //Dormimos el hilo para que se llegue a ejecutar el otro
-		Assert.assertEquals(0,repositorioPOI.buscarPorNombre("panaderia").get(0).getEtiquetas().size(),0);
+		Assert.assertEquals(0,repositorioPOI.buscarPorNombre("panaderia").getEtiquetas().size(),0);
 		Assert.assertEquals(0, scheduler.getHistorial().size(),0);
 	}
 	@Test

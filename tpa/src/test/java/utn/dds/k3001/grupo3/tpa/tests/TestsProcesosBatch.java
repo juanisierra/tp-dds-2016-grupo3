@@ -79,7 +79,7 @@ public class TestsProcesosBatch {
 		writer.println("kiosko; golosinas comida");
 		writer.close();
 		actualizarLocales.call();
-		Assert.assertEquals(2,repositorioPOI.buscarPorNombre("panaderia").get(0).getEtiquetas().size(),0);
+		Assert.assertEquals(2,repositorioPOI.buscarPorNombre("panaderia").getEtiquetas().size(),0);
 	}
 	@Test
 	public void testSeReintenta3Veces() throws Exception{

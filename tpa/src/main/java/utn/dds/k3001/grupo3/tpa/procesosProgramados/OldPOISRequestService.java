@@ -7,14 +7,16 @@ import com.sun.jersey.api.client.ClientResponse;
 public class OldPOISRequestService 
 {
 	private Client cliente;
-	private static final String SISTEMAEXTERNO = "http://demo3537367.mockable.io/trash"; 
-	private static final String RECURSO = "pois";
+	private String sistemaExterno; 
+	private String recurso;
 	
-	public OldPOISRequestService(){
+	public OldPOISRequestService(String sistemaExterno,String recurso){
 		this.cliente = Client.create();
+		this.sistemaExterno = sistemaExterno;
+		this.recurso = recurso;
 	}
 	public ClientResponse getPOIS(){ 
-        return this.cliente.resource(SISTEMAEXTERNO).path(RECURSO)
+        return this.cliente.resource(sistemaExterno).path(recurso)
                 .accept(MediaType.APPLICATION_JSON)
                 .get(ClientResponse.class);
 	}

@@ -18,13 +18,12 @@ public class ActualizarLocales implements Callable<ResultadoProceso>
 		this.POISAfectados = 0;
 		try {
 			parser.obtenerLocalYPalabrasClaves().forEach((local , palabrasClaves) -> 
-					repositorio.buscar(local)
-					.stream()
-					.filter(POI -> POI.getClass().equals(LocalComercial.class))
-					.forEach(LocalComercial -> {
+					{POI localEncontrado = repositorio.buscarPorNombre(local);
+					if(localEncontrado!=null){
+					localEncontrado.cambiarEtiquetas(palabrasClaves);
 					this.POISAfectados++;
-					LocalComercial.cambiarEtiquetas(palabrasClaves);
-					}));
+					}
+					});
 		} catch (FallaProcesoException e) {
 		return new ResultadoProceso(LocalDateTime.now(),POISAfectados,false,e.getMessage());
 		}

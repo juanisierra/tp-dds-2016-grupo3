@@ -10,29 +10,33 @@ import java.util.Scanner;
 
 public class ParserArchivoLocales
 {
-	private File archivo;
-	private Scanner scanner;
+	private String filepath;
+	
 	
 <span class="fc" id="L16">	public ParserArchivoLocales(String filepath) throws FallaProcesoException{</span>
-<span class="fc" id="L17">		archivo = new File(filepath);</span>
-		try {
-<span class="fc" id="L19">			scanner = new Scanner(archivo);</span>
-<span class="nc" id="L20">		} catch (FileNotFoundException e) {</span>
-<span class="nc" id="L21">			throw new FallaProcesoException(&quot;El archivo indicado no es correcto&quot;);</span>
-<span class="fc" id="L22">		}</span>
-<span class="fc" id="L23">	}</span>
-	public Map&lt;String,List&lt;String&gt;&gt; obtenerLocalYPalabrasClaves(){	
+<span class="fc" id="L17">		this.filepath = filepath;</span>
+<span class="fc" id="L18">	}</span>
+	public Map&lt;String,List&lt;String&gt;&gt; obtenerLocalYPalabrasClaves() throws FallaProcesoException{	
 		String[] linea;
 		List&lt;String&gt; palabrasClave;
-<span class="fc" id="L27">		Map&lt;String,List&lt;String&gt;&gt; mapa = new HashMap&lt;String,List&lt;String&gt;&gt;();</span>
-<span class="fc bfc" id="L28" title="All 2 branches covered.">		while(scanner.hasNextLine())</span>
+		Scanner scanner;
+		File archivo;
+		try {
+<span class="fc" id="L25">			archivo = new File(filepath);</span>
+<span class="fc" id="L26">			scanner = new Scanner(archivo);</span>
+<span class="nc" id="L27">		} catch (FileNotFoundException e) {</span>
+<span class="nc" id="L28">			throw new FallaProcesoException(&quot;El archivo indicado no es correcto&quot;);</span>
+<span class="fc" id="L29">		}</span>
+<span class="fc" id="L30">		Map&lt;String,List&lt;String&gt;&gt; mapa = new HashMap&lt;String,List&lt;String&gt;&gt;();</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">		while(scanner.hasNextLine())</span>
 		{ 
-<span class="fc" id="L30">			linea = scanner.nextLine().split(&quot;;&quot;,2);</span>
-<span class="fc" id="L31">			palabrasClave =Arrays.asList(linea[1].trim().split(&quot;\\s+&quot;));</span>
-<span class="fc" id="L32">			palabrasClave.removeAll(Arrays.asList(&quot;&quot;,null)); //removemos las claves nulas</span>
-<span class="fc" id="L33">			mapa.putIfAbsent(linea[0],palabrasClave);</span>
+<span class="fc" id="L33">			linea = scanner.nextLine().split(&quot;;&quot;,2);</span>
+<span class="fc" id="L34">			palabrasClave =Arrays.asList(linea[1].trim().split(&quot;\\s+&quot;));</span>
+<span class="fc" id="L35">			palabrasClave.removeAll(Arrays.asList(&quot;&quot;,null)); //removemos las claves nulas</span>
+<span class="fc" id="L36">			mapa.putIfAbsent(linea[0],palabrasClave);</span>
 		}
-<span class="fc" id="L35">		return mapa;</span>
+<span class="fc" id="L38">		scanner.close();</span>
+<span class="fc" id="L39">		return mapa;</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

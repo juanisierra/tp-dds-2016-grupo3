@@ -10,18 +10,18 @@ public class OldPOISRequestService
 	private static final String SISTEMAEXTERNO = &quot;http://demo3537367.mockable.io/trash&quot;; 
 	private static final String RECURSO = &quot;pois&quot;;
 	
-<span class="fc" id="L13">	public OldPOISRequestService(){</span>
-<span class="fc" id="L14">		this.cliente = Client.create();</span>
-<span class="fc" id="L15">	}</span>
+<span class="nc" id="L13">	public OldPOISRequestService(){</span>
+<span class="nc" id="L14">		this.cliente = Client.create();</span>
+<span class="nc" id="L15">	}</span>
 	public ClientResponse getPOIS(){ 
-<span class="fc" id="L17">        return this.cliente.resource(SISTEMAEXTERNO).path(RECURSO)</span>
-<span class="fc" id="L18">                .accept(MediaType.APPLICATION_JSON)</span>
-<span class="fc" id="L19">                .get(ClientResponse.class);</span>
+<span class="nc" id="L17">        return this.cliente.resource(SISTEMAEXTERNO).path(RECURSO)</span>
+<span class="nc" id="L18">                .accept(MediaType.APPLICATION_JSON)</span>
+<span class="nc" id="L19">                .get(ClientResponse.class);</span>
 	}
 	public String getJsonPOIS () throws FallaProcesoException {
-<span class="fc" id="L22">		ClientResponse respuesta = this.getPOIS();</span>
-<span class="pc bpc" id="L23" title="1 of 2 branches missed.">		if(respuesta.getClientResponseStatus()==ClientResponse.Status.OK){</span>
-<span class="fc" id="L24">			return respuesta.getEntity(String.class);</span>
+<span class="nc" id="L22">		ClientResponse respuesta = this.getPOIS();</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">		if(respuesta.getClientResponseStatus()==ClientResponse.Status.OK){</span>
+<span class="nc" id="L24">			return respuesta.getEntity(String.class);</span>
 		} else {
 <span class="nc" id="L26">			throw new FallaProcesoException(&quot;No se pudieron obtener los POIS a dar de baja&quot;);</span>
 		}

@@ -21,18 +21,18 @@ public class SchedulerProcesos
 <span class="fc" id="L21">		historialProcesos = new ArrayList&lt;ScheduledFuture&lt;ResultadoProceso&gt;&gt;();</span>
 <span class="fc" id="L22">	}</span>
 	public List&lt;ResultadoProceso&gt; getHistorial() {
-<span class="fc" id="L24">		List&lt;ResultadoProceso&gt; lista = new ArrayList&lt;ResultadoProceso&gt;();</span>
-<span class="fc" id="L25">		historialProcesos.stream().filter(future -&gt; future.isDone()).forEach(resultado -&gt;{</span>
+<span class="nc" id="L24">		List&lt;ResultadoProceso&gt; lista = new ArrayList&lt;ResultadoProceso&gt;();</span>
+<span class="nc" id="L25">		historialProcesos.stream().filter(future -&gt; future.isDone()).forEach(resultado -&gt;{</span>
 			try{
-<span class="fc" id="L27">				lista.add(resultado.get());</span>
+<span class="nc" id="L27">				lista.add(resultado.get());</span>
 <span class="nc" id="L28">			} catch (InterruptedException | ExecutionException exception){</span>
 <span class="nc" id="L29">				exception.printStackTrace();</span>
-<span class="fc" id="L30">			}</span>
-<span class="fc" id="L31">		});</span>
-<span class="fc" id="L32">		return lista;</span>
+<span class="nc" id="L30">			}</span>
+<span class="nc" id="L31">		});</span>
+<span class="nc" id="L32">		return lista;</span>
 	}
 	public void agregarTarea(Callable&lt;ResultadoProceso&gt; tarea,LocalDateTime horaEjecucion){
-<span class="fc" id="L35">		historialProcesos.add(executor.schedule(tarea, ChronoUnit.SECONDS.between(LocalDateTime.now(), horaEjecucion), TimeUnit.SECONDS));</span>
-<span class="fc" id="L36">	}</span>
+<span class="nc" id="L35">		historialProcesos.add(executor.schedule(tarea, ChronoUnit.SECONDS.between(LocalDateTime.now(), horaEjecucion), TimeUnit.SECONDS));</span>
+<span class="nc" id="L36">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

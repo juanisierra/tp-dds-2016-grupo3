@@ -21,15 +21,20 @@ public class RepositorioInterno implements OrigenDeDatos {
 	public List&lt;POI&gt; buscar(String criterio) {
 <span class="fc" id="L22">		return listaPOIS.stream().filter(POI -&gt; POI.esBuscado(criterio)).collect(Collectors.toList());</span>
 	}
-	public List&lt;POI&gt; buscarPorNombre(String nombre)
-	{
-<span class="fc" id="L26">		return listaPOIS.stream().filter(POI -&gt; POI.getNombre().equals(nombre)).collect(Collectors.toList());</span>
+	public POI buscarPorNombre(String nombre)
+<span class="fc" id="L25">	{	List&lt;POI&gt; lista = listaPOIS.stream().filter(POI -&gt; POI.getNombre().equals(nombre)).collect(Collectors.toList());</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">		if(lista.isEmpty())</span>
+		{
+<span class="fc" id="L28">			return null;</span>
+		} else {
+<span class="fc" id="L30">		return lista.get(0);</span>
+		}
 	}
 	public void eliminarPoiPorNumero(long id) {
-<span class="fc" id="L29">		listaPOIS.removeIf(POI -&gt; Long.valueOf(POI.getID()).equals(id));</span>
-<span class="fc" id="L30">	}	</span>
+<span class="fc" id="L34">		listaPOIS.removeIf(POI -&gt; Long.valueOf(POI.getID()).equals(id));</span>
+<span class="fc" id="L35">	}	</span>
 	public List&lt;POI&gt; getAllPOIS(){
-<span class="fc" id="L32">		return listaPOIS;</span>
+<span class="fc" id="L37">		return listaPOIS;</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

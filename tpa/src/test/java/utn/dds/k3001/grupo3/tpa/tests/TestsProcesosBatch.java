@@ -52,7 +52,7 @@ public class TestsProcesosBatch {
 		actualizarLocales = new ActualizarLocales(repositorioPOI,archivoPrueba.getAbsolutePath());
 	}
 	@Test
-	public void testPanaderiaConComida() throws IOException	{	
+	public void testPanaderiaConComida() throws IOException, FallaProcesoException	{	
 		Map<String,List<String>> resultados;
 		PrintWriter writer = new PrintWriter(archivoPrueba);
 		writer.println("panaderia; comida facturas");
@@ -62,7 +62,7 @@ public class TestsProcesosBatch {
 		Assert.assertTrue(resultados.get("panaderia").contains("facturas"));
 	}
 	@Test
-	public void testSeCopianDosLocalesConPalabras() throws IOException{	
+	public void testSeCopianDosLocalesConPalabras() throws IOException, FallaProcesoException{	
 		Map<String,List<String>> resultados;
 		PrintWriter writer = new PrintWriter(archivoPrueba);
 		writer.println("panaderia; comida facturas");

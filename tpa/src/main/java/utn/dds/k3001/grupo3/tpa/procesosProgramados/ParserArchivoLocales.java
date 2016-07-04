@@ -10,20 +10,23 @@ import java.util.Scanner;
 
 public class ParserArchivoLocales
 {
-	private File archivo;
-	private Scanner scanner;
+	private String filepath;
+	
 	
 	public ParserArchivoLocales(String filepath) throws FallaProcesoException{
-		archivo = new File(filepath);
+		this.filepath = filepath;
+	}
+	public Map<String,List<String>> obtenerLocalYPalabrasClaves() throws FallaProcesoException{	
+		String[] linea;
+		List<String> palabrasClave;
+		Scanner scanner;
+		File archivo;
 		try {
+			archivo = new File(filepath);
 			scanner = new Scanner(archivo);
 		} catch (FileNotFoundException e) {
 			throw new FallaProcesoException("El archivo indicado no es correcto");
 		}
-	}
-	public Map<String,List<String>> obtenerLocalYPalabrasClaves(){	
-		String[] linea;
-		List<String> palabrasClave;
 		Map<String,List<String>> mapa = new HashMap<String,List<String>>();
 		while(scanner.hasNextLine())
 		{ 
@@ -32,6 +35,7 @@ public class ParserArchivoLocales
 			palabrasClave.removeAll(Arrays.asList("",null)); //removemos las claves nulas
 			mapa.putIfAbsent(linea[0],palabrasClave);
 		}
+		scanner.close();
 		return mapa;
 	}
 }

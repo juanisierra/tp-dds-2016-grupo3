@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <Class name="utn.dds.k3001.grupo3.tpa.ParadaColectivo" x="365" y="615">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="utn.dds.k3001.grupo3.tpa.POI"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.PrestadorDeServicios" x="68" y="618">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="utn.dds.k3001.grupo3.tpa.POI"/>
+        <Association
+            destinationClassName="utn.dds.k3001.grupo3.tpa.Servicio"
+            endpointName="serviciosOfrecidos" kind="Simple"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.AdapterSistemaBancos" x="834" y="265">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="utn.dds.k3001.grupo3.tpa.OrigenDeDatos"/>
+        <Association
+            destinationClassName="utn.dds.k3001.grupo3.tpa.JsonFactory"
+            endpointName="factory" kind="Simple"/>
+        <Association
+            destinationClassName="utn.dds.k3001.grupo3.tpa.RequestService"
+            endpointName="requestService" kind="Simple"/>
+        <Communication destinationClassName="utn.dds.k3001.grupo3.tpa.RequestService"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.Comuna" x="969" y="917">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.OrigenDeDatos" x="621" y="224">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.RepositorioBusquedas" x="969" y="368">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="utn.dds.k3001.grupo3.tpa.Busqueda"
+            endpointName="listaBusquedas" kind="Simple"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.Direccion" x="61" y="346">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.ObserverBusqueda" x="1234" y="618">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.Rubro" x="876" y="744">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.RepositorioTerminales"
+        x="1472" y="582">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="utn.dds.k3001.grupo3.tpa.OrigenDeTerminales"/>
+        <Association
+            destinationClassName="utn.dds.k3001.grupo3.tpa.Terminal"
+            endpointName="listaTerminales" kind="Simple"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.OrigenDeTerminales" x="1623" y="495">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.Banco" x="41" y="910">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="utn.dds.k3001.grupo3.tpa.PrestadorDeServicios"/>
+        <Communication destinationClassName="utn.dds.k3001.grupo3.tpa.Servicio"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.RequestService" x="897" y="345">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.Servicio" x="379" y="748">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="utn.dds.k3001.grupo3.tpa.Disponibilidad"
+            endpointName="listaDisponibilidad" kind="Simple"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.LocalComercial" x="679" y="603">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="utn.dds.k3001.grupo3.tpa.POI"/>
+        <Association
+            destinationClassName="utn.dds.k3001.grupo3.tpa.Rubro"
+            endpointName="rubro" kind="Simple"/>
+        <Association
+            destinationClassName="utn.dds.k3001.grupo3.tpa.Disponibilidad"
+            endpointName="listaDisponibilidad" kind="Simple"/>
+        <Communication destinationClassName="utn.dds.k3001.grupo3.tpa.Rubro"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.Busqueda" x="1168" y="214">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="utn.dds.k3001.grupo3.tpa.Terminal"
+            endpointName="terminal" kind="Simple"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.Terminal" x="1436" y="105">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="utn.dds.k3001.grupo3.tpa.ObserverBusqueda"
+            endpointName="observersBusqueda" kind="Simple"/>
+        <Association
+            destinationClassName="utn.dds.k3001.grupo3.tpa.Mapa"
+            endpointName="mapa" kind="Simple"/>
+        <Association
+            destinationClassName="utn.dds.k3001.grupo3.tpa.Comuna"
+            endpointName="comuna" kind="Simple"/>
+        <Communication destinationClassName="utn.dds.k3001.grupo3.tpa.Mapa"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.NotificarBusquedaLarga"
+        x="1186" y="766">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="utn.dds.k3001.grupo3.tpa.ObserverBusqueda"/>
+        <Association
+            destinationClassName="utn.dds.k3001.grupo3.tpa.ServicioMail"
+            endpointName="servicio" kind="Simple"/>
+        <Communication destinationClassName="utn.dds.k3001.grupo3.tpa.ServicioMail"/>
+        <Communication destinationClassName="utn.dds.k3001.grupo3.tpa.Busqueda"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.Disponibilidad" x="635" y="735">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.ServicioMail" x="1123" y="874">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.GuardarBusqueda" x="991" y="522">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="utn.dds.k3001.grupo3.tpa.ObserverBusqueda"/>
+        <Association
+            destinationClassName="utn.dds.k3001.grupo3.tpa.RepositorioBusquedas"
+            endpointName="repositorio" kind="Simple"/>
+        <Communication destinationClassName="utn.dds.k3001.grupo3.tpa.RepositorioBusquedas"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.AdapterSistemaCGP" x="508" y="381">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="utn.dds.k3001.grupo3.tpa.OrigenDeDatos"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.JsonFactory" x="902" y="151">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.Mapa" x="308" y="39">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="utn.dds.k3001.grupo3.tpa.RepositorioInterno"
+            endpointName="repositorioInterno" kind="Simple"/>
+        <Association
+            destinationClassName="utn.dds.k3001.grupo3.tpa.OrigenDeDatos"
+            endpointName="origenesDeDatos" kind="Simple"/>
+        <Communication destinationClassName="utn.dds.k3001.grupo3.tpa.RepositorioInterno"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.CGP" x="418" y="905">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="utn.dds.k3001.grupo3.tpa.PrestadorDeServicios"/>
+        <Association
+            destinationClassName="utn.dds.k3001.grupo3.tpa.Comuna"
+            endpointName="comunaPropia" kind="Simple"/>
+        <Communication destinationClassName="utn.dds.k3001.grupo3.tpa.Comuna"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.RepositorioInterno" x="263" y="205">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="utn.dds.k3001.grupo3.tpa.OrigenDeDatos"/>
+        <Association destinationClassName="utn.dds.k3001.grupo3.tpa.POI"
+            endpointName="listaPOIS" kind="Simple"/>
+    </Class>
+    <Class name="utn.dds.k3001.grupo3.tpa.POI" x="191" y="366">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="utn.dds.k3001.grupo3.tpa.Direccion"
+            endpointName="direccion" kind="Simple"/>
+    </Class>
+</ClassDiagram>

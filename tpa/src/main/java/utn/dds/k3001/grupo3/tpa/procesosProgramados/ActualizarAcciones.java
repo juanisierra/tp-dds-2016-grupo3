@@ -3,9 +3,10 @@ package utn.dds.k3001.grupo3.tpa.procesosProgramados;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.Callable;
-import utn.dds.k3001.grupo3.tpa.ObserverBusqueda;
-import utn.dds.k3001.grupo3.tpa.OrigenDeTerminales;
-import utn.dds.k3001.grupo3.tpa.Terminal;
+
+import utn.dds.k3001.grupo3.tpa.busquedas.ObserverBusqueda;
+import utn.dds.k3001.grupo3.tpa.busquedas.OrigenDeTerminales;
+import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 
 public class ActualizarAcciones implements Callable<ResultadoProceso>
 {

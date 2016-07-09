@@ -1,4 +1,4 @@
-package utn.dds.k3001.grupo3.tpa;
+package utn.dds.k3001.grupo3.tpa.origenesDePOIS;
 
 import javax.ws.rs.core.MediaType;
 import com.sun.jersey.api.client.Client;

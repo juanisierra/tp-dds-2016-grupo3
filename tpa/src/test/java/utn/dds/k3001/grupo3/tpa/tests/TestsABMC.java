@@ -1,5 +1,9 @@
 package utn.dds.k3001.grupo3.tpa.tests;
-import utn.dds.k3001.grupo3.tpa.*;
+import utn.dds.k3001.grupo3.tpa.busquedas.*;
+import utn.dds.k3001.grupo3.tpa.pois.Comuna;
+import utn.dds.k3001.grupo3.tpa.pois.Disponibilidad;
+import utn.dds.k3001.grupo3.tpa.pois.LocalComercial;
+import utn.dds.k3001.grupo3.tpa.pois.Rubro;
 
 import java.time.LocalTime;
 import java.util.Arrays;

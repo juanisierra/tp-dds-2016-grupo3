@@ -1,9 +1,12 @@
-package utn.dds.k3001.grupo3.tpa;
+package utn.dds.k3001.grupo3.tpa.busquedas;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
+
+import utn.dds.k3001.grupo3.tpa.pois.Comuna;
+import utn.dds.k3001.grupo3.tpa.pois.POI;
 
 public class Terminal
 {

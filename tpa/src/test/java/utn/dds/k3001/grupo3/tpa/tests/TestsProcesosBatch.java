@@ -22,7 +22,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.junit.Assert;
 
-import utn.dds.k3001.grupo3.tpa.*;
+import utn.dds.k3001.grupo3.tpa.busquedas.*;
+import utn.dds.k3001.grupo3.tpa.origenesDePOIS.JsonFactory;
+import utn.dds.k3001.grupo3.tpa.origenesDePOIS.RepositorioInterno;
+import utn.dds.k3001.grupo3.tpa.pois.Disponibilidad;
+import utn.dds.k3001.grupo3.tpa.pois.LocalComercial;
+import utn.dds.k3001.grupo3.tpa.pois.Rubro;
 import utn.dds.k3001.grupo3.tpa.procesosProgramados.*;
 public class TestsProcesosBatch {
 	ParserArchivoLocales parser;

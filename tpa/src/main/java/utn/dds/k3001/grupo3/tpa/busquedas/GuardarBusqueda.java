@@ -1,4 +1,4 @@
-package utn.dds.k3001.grupo3.tpa;
+package utn.dds.k3001.grupo3.tpa.busquedas;
 
 public class GuardarBusqueda implements ObserverBusqueda {
 	RepositorioBusquedas repositorio;

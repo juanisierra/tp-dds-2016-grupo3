@@ -3,7 +3,7 @@ package utn.dds.k3001.grupo3.tpa.tests.matchers;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 
-import utn.dds.k3001.grupo3.tpa.Disponibilidad;
+import utn.dds.k3001.grupo3.tpa.pois.Disponibilidad;
 
 public class DisponibilidadesIguales extends TypeSafeMatcher<Disponibilidad>{
 	private Disponibilidad disponibilidadPropia;

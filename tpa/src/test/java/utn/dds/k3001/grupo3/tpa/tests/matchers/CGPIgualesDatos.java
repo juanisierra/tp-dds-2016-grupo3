@@ -2,7 +2,8 @@ package utn.dds.k3001.grupo3.tpa.tests.matchers;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
-import utn.dds.k3001.grupo3.tpa.CGP;
+
+import utn.dds.k3001.grupo3.tpa.pois.CGP;
 
 public class CGPIgualesDatos extends TypeSafeMatcher<CGP>{
 	private CGP cgpPropio;

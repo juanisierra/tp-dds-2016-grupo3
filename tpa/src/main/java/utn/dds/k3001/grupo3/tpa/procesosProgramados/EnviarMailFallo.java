@@ -1,7 +1,8 @@
 package utn.dds.k3001.grupo3.tpa.procesosProgramados;
 
 import java.util.concurrent.Callable;
-import utn.dds.k3001.grupo3.tpa.ServicioMail;
+
+import utn.dds.k3001.grupo3.tpa.busquedas.ServicioMail;
 
 public class EnviarMailFallo implements Callable<ResultadoProceso> 
 {

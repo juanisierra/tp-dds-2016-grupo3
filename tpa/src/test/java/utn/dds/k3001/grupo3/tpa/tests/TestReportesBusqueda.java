@@ -1,6 +1,13 @@
 package utn.dds.k3001.grupo3.tpa.tests;
 
-import utn.dds.k3001.grupo3.tpa.*;
+import utn.dds.k3001.grupo3.tpa.busquedas.*;
+import utn.dds.k3001.grupo3.tpa.pois.CGP;
+import utn.dds.k3001.grupo3.tpa.pois.Comuna;
+import utn.dds.k3001.grupo3.tpa.pois.Disponibilidad;
+import utn.dds.k3001.grupo3.tpa.pois.POI;
+import utn.dds.k3001.grupo3.tpa.pois.ParadaColectivo;
+import utn.dds.k3001.grupo3.tpa.pois.Rubro;
+import utn.dds.k3001.grupo3.tpa.pois.Servicio;
 
 import java.util.List;
 import java.time.LocalDate;

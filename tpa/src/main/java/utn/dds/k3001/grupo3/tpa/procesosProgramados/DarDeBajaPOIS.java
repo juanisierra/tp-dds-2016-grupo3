@@ -4,8 +4,9 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.Callable;
-import utn.dds.k3001.grupo3.tpa.JsonFactory;
-import utn.dds.k3001.grupo3.tpa.RepositorioInterno;
+
+import utn.dds.k3001.grupo3.tpa.origenesDePOIS.JsonFactory;
+import utn.dds.k3001.grupo3.tpa.origenesDePOIS.RepositorioInterno;
 
 public class DarDeBajaPOIS implements Callable<ResultadoProceso>
 {

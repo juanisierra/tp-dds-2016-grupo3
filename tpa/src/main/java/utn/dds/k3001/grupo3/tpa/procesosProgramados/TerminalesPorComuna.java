@@ -2,8 +2,9 @@ package utn.dds.k3001.grupo3.tpa.procesosProgramados;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import utn.dds.k3001.grupo3.tpa.OrigenDeTerminales;
-import utn.dds.k3001.grupo3.tpa.Terminal;
+
+import utn.dds.k3001.grupo3.tpa.busquedas.OrigenDeTerminales;
+import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 
 public class TerminalesPorComuna implements OrigenDeTerminales
 {

@@ -1,8 +1,11 @@
-package utn.dds.k3001.grupo3.tpa;
+package utn.dds.k3001.grupo3.tpa.origenesDePOIS;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import com.fasterxml.jackson.core.type.TypeReference;
+
+import utn.dds.k3001.grupo3.tpa.pois.Banco;
+import utn.dds.k3001.grupo3.tpa.pois.POI;
 
 public class AdapterSistemaBancos implements OrigenDeDatos{
 	

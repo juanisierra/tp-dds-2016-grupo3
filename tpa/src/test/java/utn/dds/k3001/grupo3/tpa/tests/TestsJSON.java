@@ -8,7 +8,9 @@ import org.junit.Test;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 
-import utn.dds.k3001.grupo3.tpa.*;
+import utn.dds.k3001.grupo3.tpa.busquedas.*;
+import utn.dds.k3001.grupo3.tpa.origenesDePOIS.JsonFactory;
+import utn.dds.k3001.grupo3.tpa.pois.Banco;
 
 public class TestsJSON {
 	JsonFactory factory;

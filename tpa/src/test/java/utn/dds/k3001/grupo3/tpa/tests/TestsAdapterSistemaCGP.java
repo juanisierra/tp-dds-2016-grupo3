@@ -7,8 +7,14 @@ import java.util.Arrays;
 import org.junit.*;
 import org.mockito.Mockito;
 import org.uqbar.geodds.Point;
-import utn.dds.k3001.grupo3.tpa.*;
+
 import utn.dds.k3001.grupo3.tpa.DTO.*;
+import utn.dds.k3001.grupo3.tpa.busquedas.*;
+import utn.dds.k3001.grupo3.tpa.origenesDePOIS.AdapterSistemaCGP;
+import utn.dds.k3001.grupo3.tpa.pois.CGP;
+import utn.dds.k3001.grupo3.tpa.pois.Comuna;
+import utn.dds.k3001.grupo3.tpa.pois.Disponibilidad;
+import utn.dds.k3001.grupo3.tpa.pois.Servicio;
 import utn.dds.k3001.grupo3.tpa.tests.matchers.*;
 public class TestsAdapterSistemaCGP {
 	Mapa CABA;

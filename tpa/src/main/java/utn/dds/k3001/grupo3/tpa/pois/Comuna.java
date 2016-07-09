@@ -1,4 +1,4 @@
-package utn.dds.k3001.grupo3.tpa;
+package utn.dds.k3001.grupo3.tpa.pois;
 
 import java.util.List;
 import org.uqbar.geodds.Point;

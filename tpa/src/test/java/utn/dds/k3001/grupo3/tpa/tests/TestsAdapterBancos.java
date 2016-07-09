@@ -1,6 +1,8 @@
 package utn.dds.k3001.grupo3.tpa.tests;
 
-import utn.dds.k3001.grupo3.tpa.*;
+import utn.dds.k3001.grupo3.tpa.busquedas.*;
+import utn.dds.k3001.grupo3.tpa.origenesDePOIS.AdapterSistemaBancos;
+import utn.dds.k3001.grupo3.tpa.origenesDePOIS.RequestService;
 
 import org.junit.Assert;
 import org.junit.Before;

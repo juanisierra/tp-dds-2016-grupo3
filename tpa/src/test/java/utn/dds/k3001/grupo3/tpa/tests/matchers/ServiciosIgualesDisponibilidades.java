@@ -2,8 +2,6 @@ package utn.dds.k3001.grupo3.tpa.tests.matchers;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Assert;
-
-import utn.dds.k3001.grupo3.tpa.busquedas.*;
 import utn.dds.k3001.grupo3.tpa.pois.Servicio;
 	
 public class ServiciosIgualesDisponibilidades extends TypeSafeMatcher<Servicio>{

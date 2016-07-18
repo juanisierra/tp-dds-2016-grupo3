@@ -2,8 +2,6 @@ package utn.dds.k3001.grupo3.tpa.procesosProgramados;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.Callable;
-
-import utn.dds.k3001.grupo3.tpa.busquedas.*;
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.RepositorioInterno;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 

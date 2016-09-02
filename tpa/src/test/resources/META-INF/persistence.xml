@@ -7,6 +7,9 @@
   
     <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	 <class>utn.dds.k3001.grupo3.tpa.busquedas.Busqueda</class>
+    	 <class>utn.dds.k3001.grupo3.tpa.busquedas.Terminal</class>
+    	 <class>utn.dds.k3001.grupo3.tpa.pois.Comuna</class>
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        
         

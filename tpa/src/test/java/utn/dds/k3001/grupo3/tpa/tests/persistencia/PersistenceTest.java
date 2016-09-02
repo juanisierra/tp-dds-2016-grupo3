@@ -15,21 +15,22 @@ import utn.dds.k3001.grupo3.tpa.pois.Comuna;
 public class PersistenceTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 
 	@Test
-	public void guardarYTraerComuna() {
+	public void guardarYTraerBusqueda() {
 		Comuna comuna1 = new Comuna();
 		comuna1.setNombre("Centro");
 		Terminal terminal = new Terminal();
 		terminal.setNombre("Terminal Centro");
 		terminal.setComuna(comuna1);
-		//Busqueda busqueda = new Busqueda(terminal,2,"a",LocalTime.now(),LocalTime.now(),LocalDate.now());		
+		Busqueda busqueda = new Busqueda(terminal,2,"a",LocalTime.now(),LocalTime.now(),LocalDate.now());		
 		withTransaction(() -> {
 			entityManager().persist(comuna1);
 			entityManager().persist(terminal);
-			//entityManager().persist(busqueda);//TODO arreglar busqueda, tira error al persistirla
+			entityManager().persist(busqueda);
 			});
-		Assert.assertTrue(entityManager().find(Comuna.class, 1)==comuna1);
+		Assert.assertTrue(entityManager().find(Busqueda.class, 1)==busqueda);
+		Assert.assertTrue(entityManager().find(Busqueda.class, 1).getTerminal()==terminal);
+		Assert.assertTrue(entityManager().find(Busqueda.class, 1).getTerminal().getComuna()==comuna1);
 	}
-
 	@Test
 	public void contextUpWithTransaction() throws Exception {
 		withTransaction(() -> {});

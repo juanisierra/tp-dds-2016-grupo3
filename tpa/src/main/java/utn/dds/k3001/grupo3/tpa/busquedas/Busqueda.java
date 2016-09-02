@@ -8,12 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 	@Entity 
 public class Busqueda
 {	@Id @GeneratedValue
-	private double id;
+	private int id;
 	private int cantResultados;
 	private String criterio;
 	private double tiempoDemorado;
@@ -54,11 +55,11 @@ public class Busqueda
 		return criterio;
 	}
 
-	public double getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(double id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

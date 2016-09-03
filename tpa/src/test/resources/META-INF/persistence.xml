@@ -15,6 +15,11 @@
     	 <class>utn.dds.k3001.grupo3.tpa.pois.Disponibilidad</class>
     	 <class>utn.dds.k3001.grupo3.tpa.pois.Rubro</class>
     	 <class>utn.dds.k3001.grupo3.tpa.pois.LocalComercial</class>
+    	 <class>utn.dds.k3001.grupo3.tpa.pois.ParadaColectivo</class>
+    	 <class>utn.dds.k3001.grupo3.tpa.pois.Banco</class>
+    	 <class>utn.dds.k3001.grupo3.tpa.pois.Servicio</class>
+    	 <class>utn.dds.k3001.grupo3.tpa.pois.PrestadorDeServicios</class>
+    	 <class>utn.dds.k3001.grupo3.tpa.pois.CGP</class>
     	 <class>utn.dds.k3001.grupo3.tpa.geo.Point</class>
     	 <class>utn.dds.k3001.grupo3.tpa.geo.Polygon</class>
         <properties> 

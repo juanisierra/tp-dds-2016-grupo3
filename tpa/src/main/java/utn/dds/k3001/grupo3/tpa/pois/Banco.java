@@ -2,12 +2,17 @@ package utn.dds.k3001.grupo3.tpa.pois;
 
 import java.time.LocalTime;
 import java.util.List;
+
+import javax.persistence.Entity;
+
 import utn.dds.k3001.grupo3.tpa.geo.*;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+@Entity
 public class Banco extends PrestadorDeServicios 
-{	
+{	public Banco(){
+	super();
+}
 	public Banco(String nombre, String calle,  String barrio, int altura, Point posicion){
 		super(nombre,calle,barrio,altura,posicion);
 	}

@@ -10,14 +10,15 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 
 import java.time.*;
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 public class POI 
 {	@Id @GeneratedValue
 	protected int id;

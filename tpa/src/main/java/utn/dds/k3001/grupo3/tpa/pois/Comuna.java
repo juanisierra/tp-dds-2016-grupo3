@@ -2,12 +2,11 @@ package utn.dds.k3001.grupo3.tpa.pois;
 
 import java.util.List;
 
-import javax.persistence.Embedded;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 

@@ -8,13 +8,15 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
-import utn.dds.k3001.grupo3.tpa.*;
 import utn.dds.k3001.grupo3.tpa.busquedas.Busqueda;
 import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 import utn.dds.k3001.grupo3.tpa.geo.Point;
 import utn.dds.k3001.grupo3.tpa.geo.Polygon;
 import utn.dds.k3001.grupo3.tpa.pois.Comuna;
+import utn.dds.k3001.grupo3.tpa.pois.Disponibilidad;
+import utn.dds.k3001.grupo3.tpa.pois.LocalComercial;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
+import utn.dds.k3001.grupo3.tpa.pois.Rubro;
 
 public class PersistenceTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 
@@ -44,6 +46,24 @@ public class PersistenceTest extends AbstractPersistenceTest implements WithGlob
 		withTransaction(() -> {
 			
 			entityManager().persist(poi1);
+			});
+	}
+	@Test
+	public void guardarYTraerDisponibilidad() {
+		Disponibilidad disp = Disponibilidad.lunesAViernes(LocalTime.of(2, 0), LocalTime.of(5, 0));
+		withTransaction(() -> {
+			
+			entityManager().persist(disp);
+			});
+	}
+	@Test
+	public void guardarYTraerLocalComercial() {
+		Disponibilidad disp = Disponibilidad.lunesAViernes(LocalTime.of(2, 0), LocalTime.of(5, 0));
+		Rubro rubro = new Rubro("a",2);
+		LocalComercial local = new LocalComercial("Pepe","calle1","Centro",12,new Point(2,2),rubro,disp);
+		withTransaction(() -> {
+			
+			entityManager().persist(local);
 			});
 	}
 	@Test

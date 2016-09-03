@@ -12,6 +12,9 @@
     	 <class>utn.dds.k3001.grupo3.tpa.pois.POI</class>
     	 <class>utn.dds.k3001.grupo3.tpa.pois.Direccion</class>
     	 <class>utn.dds.k3001.grupo3.tpa.pois.Comuna</class>
+    	 <class>utn.dds.k3001.grupo3.tpa.pois.Disponibilidad</class>
+    	 <class>utn.dds.k3001.grupo3.tpa.pois.Rubro</class>
+    	 <class>utn.dds.k3001.grupo3.tpa.pois.LocalComercial</class>
     	 <class>utn.dds.k3001.grupo3.tpa.geo.Point</class>
     	 <class>utn.dds.k3001.grupo3.tpa.geo.Polygon</class>
         <properties> 

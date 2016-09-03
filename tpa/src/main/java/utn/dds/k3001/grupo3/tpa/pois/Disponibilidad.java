@@ -4,12 +4,23 @@ import java.time.*;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.Convert;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
+@Entity
 public class Disponibilidad 
-{
+{	@Id @GeneratedValue
+	private int id;
+	@ElementCollection
 	private List<DayOfWeek> diasDisponible;
 	private LocalTime horaApertura;
 	private LocalTime horaCierre;
-	
+	public Disponibilidad(){}
 	public Disponibilidad(LocalTime horaApertura, LocalTime horaCierre,List<DayOfWeek> diasDisponible){
 		this.horaApertura = horaApertura;
 		this.horaCierre  = horaCierre;
@@ -43,5 +54,25 @@ public class Disponibilidad
 
 	public LocalTime getHoraCierre() {
 		return horaCierre;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setDiasDisponible(List<DayOfWeek> diasDisponible) {
+		this.diasDisponible = diasDisponible;
+	}
+
+	public void setHoraApertura(LocalTime horaApertura) {
+		this.horaApertura = horaApertura;
+	}
+
+	public void setHoraCierre(LocalTime horaCierre) {
+		this.horaCierre = horaCierre;
 	}
 }

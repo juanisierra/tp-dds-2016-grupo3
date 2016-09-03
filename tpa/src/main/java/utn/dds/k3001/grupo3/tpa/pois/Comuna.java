@@ -5,16 +5,20 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
-import org.uqbar.geodds.Point;
-import org.uqbar.geodds.Polygon;
+import org.hibernate.annotations.Cascade;
+
+import utn.dds.k3001.grupo3.tpa.geo.*;
+
 	@Entity
 public class Comuna
 {	@Id @GeneratedValue
 	private int id;
 	private String nombre;
-	@Transient //TODO Ver como persistir poligonos
+	@OneToOne
+	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	private Polygon limites;
 	
 	public Comuna(String nombre,List<Point> puntos){

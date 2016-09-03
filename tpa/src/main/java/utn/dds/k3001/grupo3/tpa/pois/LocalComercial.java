@@ -3,7 +3,8 @@ package utn.dds.k3001.grupo3.tpa.pois;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
-import org.uqbar.geodds.*;
+
+import utn.dds.k3001.grupo3.tpa.geo.*;
 
 public class LocalComercial extends POI 
 {

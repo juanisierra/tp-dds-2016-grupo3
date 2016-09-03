@@ -15,7 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.mockito.Mockito;
-import org.uqbar.geodds.Point;
+import utn.dds.k3001.grupo3.tpa.geo.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.JsonFactory;
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.RepositorioInterno;

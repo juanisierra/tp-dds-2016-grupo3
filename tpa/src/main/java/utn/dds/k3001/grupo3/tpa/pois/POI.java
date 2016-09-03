@@ -1,6 +1,7 @@
 package utn.dds.k3001.grupo3.tpa.pois;
 
-import org.uqbar.geodds.*;
+
+import utn.dds.k3001.grupo3.tpa.geo.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.time.*;

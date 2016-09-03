@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.uqbar.geodds.Point;
 
+import utn.dds.k3001.grupo3.tpa.geo.*;
 import utn.dds.k3001.grupo3.tpa.DTO.*;
 import utn.dds.k3001.grupo3.tpa.pois.CGP;
 import utn.dds.k3001.grupo3.tpa.pois.Comuna;

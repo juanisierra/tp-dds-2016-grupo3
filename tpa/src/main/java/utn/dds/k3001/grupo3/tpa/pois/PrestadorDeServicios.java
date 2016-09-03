@@ -3,8 +3,7 @@ package utn.dds.k3001.grupo3.tpa.pois;
 import java.time.*;
 import java.util.LinkedList;
 import java.util.List;
-import org.uqbar.geodds.Point;
-
+import utn.dds.k3001.grupo3.tpa.geo.*;
 public abstract class PrestadorDeServicios extends POI 
 {
 	protected List<Servicio> serviciosOfrecidos;

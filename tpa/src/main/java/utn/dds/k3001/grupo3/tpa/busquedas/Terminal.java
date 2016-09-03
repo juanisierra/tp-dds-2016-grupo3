@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cascade;
+
 import utn.dds.k3001.grupo3.tpa.pois.Comuna;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 @Entity
@@ -25,6 +27,7 @@ public class Terminal
 	@Transient //TODO Agregar Observers
 	private List<ObserverBusqueda> observersBusqueda;
 	@ManyToOne
+	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	private Comuna comuna;
 	public Terminal(String nombre, Mapa mapa){
 		this.nombre = nombre;

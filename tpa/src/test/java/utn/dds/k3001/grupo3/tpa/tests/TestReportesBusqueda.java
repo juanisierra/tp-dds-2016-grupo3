@@ -21,7 +21,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.uqbar.geodds.Point;
+import utn.dds.k3001.grupo3.tpa.geo.*;
 
 public class TestReportesBusqueda
 {

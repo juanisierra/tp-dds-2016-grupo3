@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cascade;
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 	@Entity 
 public class Busqueda
@@ -21,6 +22,7 @@ public class Busqueda
 	@Convert(converter = LocalDateConverter.class)
 	private LocalDate fecha;
 	@ManyToOne
+	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	private Terminal terminal;
 	
 	

@@ -11,8 +11,7 @@ import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.uqbar.geodds.Point;
-
+import utn.dds.k3001.grupo3.tpa.geo.*;
 public class TestsABMC {
 	
 	Mapa CABA;

@@ -2,7 +2,7 @@ package utn.dds.k3001.grupo3.tpa.pois;
 
 import java.time.LocalTime;
 import java.util.List;
-import org.uqbar.geodds.Point;
+import utn.dds.k3001.grupo3.tpa.geo.*;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import org.junit.*;
 import org.mockito.Mockito;
-import org.uqbar.geodds.Point;
-
+import utn.dds.k3001.grupo3.tpa.geo.*;
 import utn.dds.k3001.grupo3.tpa.DTO.*;
 import utn.dds.k3001.grupo3.tpa.busquedas.*;
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.AdapterSistemaCGP;

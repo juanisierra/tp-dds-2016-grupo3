@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,6 +23,7 @@ import org.uqbar.geodds.NumberUtils;
  */
 @SuppressWarnings("all")
 @Entity
+
 public class Polygon {
 	@Id @GeneratedValue
 	private int id;

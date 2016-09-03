@@ -14,6 +14,7 @@ import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 import utn.dds.k3001.grupo3.tpa.geo.Point;
 import utn.dds.k3001.grupo3.tpa.geo.Polygon;
 import utn.dds.k3001.grupo3.tpa.pois.Comuna;
+import utn.dds.k3001.grupo3.tpa.pois.POI;
 
 public class PersistenceTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 
@@ -34,6 +35,16 @@ public class PersistenceTest extends AbstractPersistenceTest implements WithGlob
 		Assert.assertTrue(entityManager().find(Busqueda.class, 1)==busqueda);
 		Assert.assertTrue(entityManager().find(Busqueda.class, 1).getTerminal()==terminal);
 		Assert.assertTrue(entityManager().find(Busqueda.class, 1).getTerminal().getComuna()==comuna1);
+	}
+	@Test
+	public void guardarYTraerPOI() {
+		POI poi1 = new POI("Verduleria","Nazca","Centro",200,new Point(2,2));
+		poi1.agregarEtiqueta("A");
+		poi1.agregarEtiqueta("B");
+		withTransaction(() -> {
+			
+			entityManager().persist(poi1);
+			});
 	}
 	@Test
 	public void contextUpWithTransaction() throws Exception {

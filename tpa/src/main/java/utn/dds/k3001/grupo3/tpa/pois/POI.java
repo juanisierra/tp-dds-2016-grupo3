@@ -4,22 +4,40 @@ package utn.dds.k3001.grupo3.tpa.pois;
 import utn.dds.k3001.grupo3.tpa.geo.*;
 import java.util.LinkedList;
 import java.util.List;
-import java.time.*;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Cascade;
+
+import java.time.*;
+@Entity
 public class POI 
-{
+{	@Id @GeneratedValue
+	protected int id;
 	protected String nombre;
+	@OneToOne
+	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	protected Point posicion;
+	@ElementCollection
 	protected List<String> listaEtiquetas;
+	@Embedded
 	protected Direccion direccion;
-	protected long id;
-	public static long maxID = 0;
+
 	public POI(String nombre, String calle, String barrio, int altura, Point posicion) {
 		this.direccion = new Direccion(calle,barrio,altura);
 		this.nombre = nombre;
 		this.posicion = posicion;
 		this.listaEtiquetas = new LinkedList<String>();
-		this.id = ++maxID;
+
+	}
+	public POI(){
 	}
 	public long getID(){
 	return id;
@@ -71,5 +89,17 @@ public class POI
 	public List<String> getEtiquetas()
 	{
 	return listaEtiquetas;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public List<String> getListaEtiquetas() {
+		return listaEtiquetas;
+	}
+	public void setListaEtiquetas(List<String> listaEtiquetas) {
+		this.listaEtiquetas = listaEtiquetas;
 	}
 }

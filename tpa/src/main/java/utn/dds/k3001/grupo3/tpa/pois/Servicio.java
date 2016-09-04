@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -18,6 +19,7 @@ public class Servicio
 	private String nombre;
 	@OneToMany
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
+	@JoinColumn(name ="servicio_id")
 	private List<Disponibilidad> listaDisponibilidad;
 	public Servicio(){}
 	public Servicio(String nombre, Disponibilidad disponibilidad){

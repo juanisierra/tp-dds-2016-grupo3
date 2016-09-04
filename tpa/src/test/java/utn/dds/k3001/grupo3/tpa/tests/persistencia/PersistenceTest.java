@@ -1,6 +1,7 @@
 package utn.dds.k3001.grupo3.tpa.tests.persistencia;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
 
@@ -21,6 +22,7 @@ import utn.dds.k3001.grupo3.tpa.pois.POI;
 import utn.dds.k3001.grupo3.tpa.pois.ParadaColectivo;
 import utn.dds.k3001.grupo3.tpa.pois.Rubro;
 import utn.dds.k3001.grupo3.tpa.pois.Servicio;
+import utn.dds.k3001.grupo3.tpa.procesosProgramados.ResultadoProceso;
 
 public class PersistenceTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 
@@ -99,6 +101,14 @@ public class PersistenceTest extends AbstractPersistenceTest implements WithGlob
 				withTransaction(() -> {
 			
 			entityManager().persist(cgpDevoto);
+			});
+	}
+	@Test
+	public void guardarYTraerResultadoProceso() {
+		ResultadoProceso resultado = new ResultadoProceso(LocalDateTime.now(),20,true,"a");
+				withTransaction(() -> {
+			
+			entityManager().persist(resultado);
 			});
 	}
 	@Test

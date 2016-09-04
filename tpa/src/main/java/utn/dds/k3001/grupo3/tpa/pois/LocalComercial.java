@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -18,6 +19,7 @@ public class LocalComercial extends POI
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	private Rubro rubro;
 	@OneToMany
+	@JoinColumn(name = "disponibilidad_id")
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	private List<Disponibilidad> listaDisponibilidad;
 	public LocalComercial(){}

@@ -29,7 +29,8 @@ public class TestsBusquedaPOI
 	
 	@Before
 	public void init(){	
-		CABA = new Mapa();
+		CABA = Mapa.getInstance();
+		CABA.resetMapa();
 		comuna1 = new Comuna("comuna 1",Arrays.asList(new Point(0,0), new Point(0,11), new Point(11,11), new Point (11,0)));
 		libreria = new Rubro("libreria",50);
 		disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));

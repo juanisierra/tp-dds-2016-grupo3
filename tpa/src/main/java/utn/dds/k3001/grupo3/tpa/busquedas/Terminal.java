@@ -22,7 +22,7 @@ public class Terminal
 {	@Id @GeneratedValue
 	private int id;
 	private String nombre;
-	@Transient //TODO Agregar mapa
+	@Transient 
 	private Mapa mapa;
 	@Transient //TODO Agregar Observers
 	private List<ObserverBusqueda> observersBusqueda;
@@ -34,7 +34,9 @@ public class Terminal
 		this.mapa = mapa;
 		this.observersBusqueda = new LinkedList<ObserverBusqueda>();
 	}
-	public Terminal(){}
+	public Terminal(){	//Builder para hibernate
+		this.mapa = Mapa.getInstance();
+	}
 	public String getNombre() {
 		return nombre;
 	}

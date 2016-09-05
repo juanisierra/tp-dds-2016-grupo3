@@ -37,7 +37,8 @@ public class TestReportesBusqueda
 	GuardarBusqueda guardarBusqueda;
 	@Before
 	public void init(){	
-		CABA = new Mapa();
+		CABA = Mapa.getInstance();
+		CABA.resetMapa();
 		terminal1 = new Terminal("teminal1", CABA);
 		terminalMedrano = new Terminal("TerminalMedrano", CABA);
 		repositorioBusquedas = new RepositorioBusquedas();

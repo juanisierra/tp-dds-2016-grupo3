@@ -34,20 +34,23 @@ public class TestsAdapterBancos {
 	
 	@Before
 	public void init(){
-		CABA = new Mapa();
+		CABA = Mapa.getInstance();
+		CABA.resetMapa();
 		requestServiceMock = Mockito.mock(RequestService.class);
 		Mockito.when(requestServiceMock.getJsonBancos("","")).thenReturn(listaBancos);
 		adapter = new AdapterSistemaBancos(requestServiceMock);
+		
+	}
+	@Test
+	public void testElMapaEncuentra2Bancos() throws Exception{
 		CABA.agregarOrigenDeDatos(adapter);
+		Assert.assertEquals(2, CABA.buscar("la Plaza").size());
+		Mockito.verify(requestServiceMock).getJsonBancos("","");
 	}
 	@Test
 	public void testElAdapterLlamaAlServicio() throws Exception{
 		adapter.buscar("la Plaza");
 		Mockito.verify(requestServiceMock).getJsonBancos("","");
 		}
-	@Test
-	public void testElMapaEncuentra2Bancos() throws Exception{
-		Assert.assertEquals(2, CABA.buscar("la Plaza").size());
-		Mockito.verify(requestServiceMock).getJsonBancos("","");
-	}
+	
 }

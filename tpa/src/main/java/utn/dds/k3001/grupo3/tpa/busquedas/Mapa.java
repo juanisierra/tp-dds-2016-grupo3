@@ -12,11 +12,20 @@ public class Mapa
 {
 	private List<OrigenDeDatos> origenesDeDatos;
 	private RepositorioInterno repositorioInterno;
+	private final static Mapa INSTANCE = new Mapa();
 	
-	public Mapa(){
+	private Mapa(){
 		this.origenesDeDatos = new LinkedList<OrigenDeDatos>();
 		this.repositorioInterno = new RepositorioInterno();
 		this.origenesDeDatos.add(repositorioInterno);
+	}
+	public  void resetMapa() {
+		this.origenesDeDatos = new LinkedList<OrigenDeDatos>();
+		this.repositorioInterno = new RepositorioInterno();
+		this.origenesDeDatos.add(repositorioInterno);
+	}
+	public static Mapa getInstance() {
+		return INSTANCE;
 	}
 	public void agregarOrigenDeDatos(OrigenDeDatos origen){
 		origenesDeDatos.add(origen);

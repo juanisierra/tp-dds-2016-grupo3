@@ -28,7 +28,8 @@ public class TestsAdapterSistemaCGP {
 	
 @Before
 public void init() {
-	CABA = new Mapa();
+	CABA = Mapa.getInstance();
+	CABA.resetMapa();
 	sistemaMock = Mockito.mock(SistemaCGP.class);
 	adapter = new AdapterSistemaCGP(sistemaMock);
 	rangoLunes = new RangosServicioDTO(1,8,0,16,0);

@@ -19,7 +19,7 @@ public class LocalComercial extends POI
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	private Rubro rubro;
 	@OneToMany
-	@JoinColumn(name = "disponibilidad_id")
+	@JoinColumn(name = "local_id")
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	private List<Disponibilidad> listaDisponibilidad;
 	public LocalComercial(){}

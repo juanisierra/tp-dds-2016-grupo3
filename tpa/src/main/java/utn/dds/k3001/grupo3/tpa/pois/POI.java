@@ -18,7 +18,7 @@ import org.hibernate.annotations.Cascade;
 
 import java.time.*;
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class POI 
 {	@Id @GeneratedValue
 	protected int id;

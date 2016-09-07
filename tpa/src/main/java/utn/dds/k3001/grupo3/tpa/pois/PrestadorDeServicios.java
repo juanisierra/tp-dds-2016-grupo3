@@ -14,7 +14,7 @@ import org.hibernate.annotations.Cascade;
 
 import utn.dds.k3001.grupo3.tpa.geo.*;
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE) //TODO Agregar single-table o ver como
+ //TODO Agregar single-table o ver como
 public abstract class PrestadorDeServicios extends POI 
 {	@ManyToMany //TODO Revisar relacion
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})

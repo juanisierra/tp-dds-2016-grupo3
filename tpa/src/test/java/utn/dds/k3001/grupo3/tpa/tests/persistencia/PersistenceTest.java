@@ -9,6 +9,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
+
+import utn.dds.k3001.grupo3.tpa.busquedas.AccionesBusqueda;
 import utn.dds.k3001.grupo3.tpa.busquedas.Busqueda;
 import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 import utn.dds.k3001.grupo3.tpa.geo.Point;
@@ -33,6 +35,8 @@ public class PersistenceTest extends AbstractPersistenceTest implements WithGlob
 		Polygon poligono = new Polygon(Arrays.asList(new Point(2,2),new Point(1,1)));
 		comuna1.setLimites(poligono);
 		Terminal terminal = new Terminal();
+		terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
+		terminal.agregarObserverBusqueda(AccionesBusqueda.NOTIFICARBUSQUEDALARGA);
 		terminal.setNombre("Terminal Centro");
 		terminal.setComuna(comuna1);
 		Busqueda busqueda = new Busqueda(terminal,2,"a",LocalTime.now(),LocalTime.now(),LocalDate.now());		
@@ -101,14 +105,6 @@ public class PersistenceTest extends AbstractPersistenceTest implements WithGlob
 				withTransaction(() -> {
 			
 			entityManager().persist(cgpDevoto);
-			});
-	}
-	@Test
-	public void guardarYTraerResultadoProceso() {
-		ResultadoProceso resultado = new ResultadoProceso(LocalDateTime.now(),20,true,"a");
-				withTransaction(() -> {
-			
-			entityManager().persist(resultado);
 			});
 	}
 	@Test

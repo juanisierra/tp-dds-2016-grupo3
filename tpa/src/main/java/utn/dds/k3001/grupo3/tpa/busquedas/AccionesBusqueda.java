@@ -11,7 +11,7 @@ public enum AccionesBusqueda implements ObserverBusqueda {
 			
 		}
 	},
-	NOTIFICARBUQUEDALARGA {
+	NOTIFICARBUSQUEDALARGA {
 		
 			@Override
 			public void agregar(Busqueda busqueda) {

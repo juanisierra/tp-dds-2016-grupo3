@@ -22,7 +22,6 @@
     	 <class>utn.dds.k3001.grupo3.tpa.pois.CGP</class>
     	 <class>utn.dds.k3001.grupo3.tpa.geo.Point</class>
     	 <class>utn.dds.k3001.grupo3.tpa.geo.Polygon</class>
-    	 <class>utn.dds.k3001.grupo3.tpa.procesosProgramados.ResultadoProceso</class>
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        
         

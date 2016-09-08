@@ -39,4 +39,5 @@ public class Mapa
 							  .flatMap(origen -> origen.buscar(criterio).stream())
 							  .collect(Collectors.toList());
 	}
+	
 }

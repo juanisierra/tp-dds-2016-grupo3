@@ -4,6 +4,7 @@ package utn.dds.k3001.grupo3.tpa.tests.persistencia;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -39,8 +40,9 @@ public class PersistTest extends AbstractPersistenceTest implements WithGlobalEn
 		});
 	
 	List<Terminal> lista = repo.obtenerTerminalesPersistidas();
-	Assert.assertEquals(terminal1.getNombre(),lista.get(0).getNombre());
-	Assert.assertEquals(terminal1.getObserversBusqueda(),lista.get(0).getObserversBusqueda());
+	Terminal terminalBuscado = lista.stream().filter(elem -> elem.getId()==terminal1.getId()).collect(Collectors.toList()).get(0);
+	Assert.assertEquals(terminal1.getNombre(),terminalBuscado.getNombre());
+	Assert.assertEquals(terminal1.getObserversBusqueda(),terminalBuscado.getObserversBusqueda());
 	withTransaction(() -> {
 		
 		entityManager().createQuery("DELETE FROM Busqueda").executeUpdate();
@@ -48,8 +50,7 @@ public class PersistTest extends AbstractPersistenceTest implements WithGlobalEn
 	}
 	@Test
 	public void testPersistirBusquedas(){
-		Terminal terminal1 = new Terminal("teminal1", Mapa.getInstance());
-	Busqueda busqueda1 = new Busqueda(terminal1,2,"a",LocalTime.now(),LocalTime.now(),LocalDate.now());
+	Busqueda busqueda1 = new Busqueda(null,2,"a",LocalTime.now(),LocalTime.now(),LocalDate.now());
 	Busqueda busqueda2 = new Busqueda();
 	RepositorioBusquedas.getInstance().buscar(busqueda1);
 	RepositorioBusquedas.getInstance().buscar(busqueda2);
@@ -62,8 +63,6 @@ public class PersistTest extends AbstractPersistenceTest implements WithGlobalEn
 	List<Busqueda> lista = RepositorioBusquedas.getInstance().obtenerBusquedasPersistidas();
 	Assert.assertEquals(busqueda1.getCriterio(),lista.get(0).getCriterio());
 	withTransaction(() -> {
-	entityManager().createQuery("DELETE FROM Busqueda").executeUpdate();
-	entityManager().createQuery("DELETE FROM Terminal").executeUpdate();
 	
 	});
 	}

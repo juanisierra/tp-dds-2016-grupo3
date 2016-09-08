@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
+
 import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
+import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
 public class RepositorioInterno implements OrigenDeDatos {
@@ -44,5 +49,15 @@ public class RepositorioInterno implements OrigenDeDatos {
 	}	
 	public List<POI> getAllPOIS(){
 		return listaPOIS;
+	}
+	@SuppressWarnings("unchecked")
+	public List<POI> obtenerPOISPersistidos(){
+		EntityManager em = PerThreadEntityManagers.getEntityManager();
+		return (List<POI>) em.createQuery("FROM POI").getResultList();
+		
+	}
+	public void persistirPOIS(){
+		EntityManager em = PerThreadEntityManagers.getEntityManager();
+		listaPOIS.forEach(terminal -> em.persist(terminal));
 	}
 }

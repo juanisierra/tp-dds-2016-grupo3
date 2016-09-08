@@ -8,6 +8,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -28,6 +29,7 @@ public class Polygon {
 	@Id @GeneratedValue
 	private int id;
 	@OneToMany
+	@JoinColumn(name = "poligono_id")
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
   private List<Point> surface;
   /**

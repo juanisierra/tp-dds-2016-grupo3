@@ -41,7 +41,8 @@ public class TestReportesBusqueda
 		CABA.resetMapa();
 		terminal1 = new Terminal("teminal1", CABA);
 		terminalMedrano = new Terminal("TerminalMedrano", CABA);
-		repositorioBusquedas = new RepositorioBusquedas();
+		repositorioBusquedas = RepositorioBusquedas.getInstance();
+		repositorioBusquedas.resetRepositorio();
 		guardarBusqueda = new GuardarBusqueda(repositorioBusquedas);
 		terminalMedrano.agregarObserverBusqueda(guardarBusqueda);
 		terminal1.agregarObserverBusqueda(guardarBusqueda);

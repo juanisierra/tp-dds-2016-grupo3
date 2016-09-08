@@ -4,13 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
 public class RepositorioInterno implements OrigenDeDatos {
 	
 	private ArrayList<POI> listaPOIS;
-	
-	public RepositorioInterno(){
+	private final static RepositorioInterno INSTANCE = new RepositorioInterno();
+	private RepositorioInterno(){
+		listaPOIS = new ArrayList<POI>();
+	}
+	public static RepositorioInterno getInstance() {
+		return INSTANCE;
+	}
+	public void resetRepositorio(){
 		listaPOIS = new ArrayList<POI>();
 	}
 	public void agregarPoi(POI poiNvo){

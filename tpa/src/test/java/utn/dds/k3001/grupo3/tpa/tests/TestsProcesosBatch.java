@@ -51,10 +51,12 @@ public class TestsProcesosBatch {
 		scheduler = new SchedulerProcesos();
 		archivoPrueba.setWritable(true);
 		parser = new ParserArchivoLocales(archivoPrueba.getAbsolutePath());
-		repositorioPOI = new RepositorioInterno();
+		repositorioPOI = RepositorioInterno.getInstance();
+		repositorioPOI.resetRepositorio();
 		panaderia = new LocalComercial("panaderia","","",0,new Point(0,0),new Rubro("panaderias",10),Disponibilidad.lunesAViernes(LocalTime.of(10, 0), LocalTime.of(15, 0)));
 		repositorioPOI.agregarPoi(panaderia);
 		actualizarLocales = new ActualizarLocales(repositorioPOI,archivoPrueba.getAbsolutePath());
+		
 	}
 	@Test
 	public void testPanaderiaConComida() throws IOException, FallaProcesoException	{	
@@ -115,13 +117,13 @@ public class TestsProcesosBatch {
 	public void testSeAgreganAcciones(){
 		Terminal terminal = new Terminal(null, null);
 		RepositorioTerminales lista = new RepositorioTerminales(Arrays.asList(terminal));
-		ActualizarAcciones actualizar =new ActualizarAcciones(lista, Arrays.asList(new GuardarBusqueda(new RepositorioBusquedas())), new ArrayList<ObserverBusqueda>());
+		ActualizarAcciones actualizar =new ActualizarAcciones(lista, Arrays.asList(new GuardarBusqueda(RepositorioBusquedas.getInstance())), new ArrayList<ObserverBusqueda>());
 		actualizar.call();
 		Assert.assertEquals(1,terminal.cantObserversBusqueda(),0);
 		}
 	@Test
 	public void testSeEliminanAcciones(){
-		RepositorioBusquedas repositorio  = new RepositorioBusquedas();
+		RepositorioBusquedas repositorio  = RepositorioBusquedas.getInstance();
 		Terminal terminal = new Terminal(null, null);
 		GuardarBusqueda guardar = new GuardarBusqueda(repositorio);
 		terminal.agregarObserverBusqueda(guardar);
@@ -133,15 +135,15 @@ public class TestsProcesosBatch {
 		}
 	@Test 
 	public void testDarDeBajaPOI() throws JsonProcessingException, IOException, FallaProcesoException{
-		RepositorioInterno repoInt = new RepositorioInterno();
-		repoInt.agregarPoi(panaderia);
-		Assert.assertEquals(1,repoInt.getAllPOIS().size(),0);
+		repositorioPOI.resetRepositorio();
+		repositorioPOI.agregarPoi(panaderia);
+		Assert.assertEquals(1,repositorioPOI.getAllPOIS().size(),0);
 		OldPOISRequestService mockRequest = Mockito.mock(OldPOISRequestService.class);
 		Mockito.when(mockRequest.getJsonPOIS()).thenReturn("");
 		JsonFactory mockfactory = Mockito.mock(JsonFactory.class);
 		Mockito.when(mockfactory.obtenerPoisAEliminar("")).thenReturn(Arrays.asList(panaderia.getID()));
-		DarDeBajaPOIS darDeBaja = new DarDeBajaPOIS(repoInt,mockfactory,mockRequest);
+		DarDeBajaPOIS darDeBaja = new DarDeBajaPOIS(repositorioPOI,mockfactory,mockRequest);
 		darDeBaja.call();
-		Assert.assertEquals(0,repoInt.getAllPOIS().size(),0);
+		Assert.assertEquals(0,repositorioPOI.getAllPOIS().size(),0);
 	}
 }

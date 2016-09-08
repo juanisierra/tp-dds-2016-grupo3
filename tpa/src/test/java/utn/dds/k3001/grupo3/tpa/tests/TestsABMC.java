@@ -34,6 +34,7 @@ public class TestsABMC {
 	public void testAgregarLibreriaYenny () {
 		CABA.agregarPoi(libreriaYenny);
 		Assert.assertEquals(1, CABA.buscar("").size(),0);
+		
 	}
 	@Test
 	public void testEliminarLibreriaYenny() {

@@ -8,7 +8,14 @@ import java.util.stream.Collectors;
 
 public class RepositorioBusquedas{
 private List<Busqueda> listaBusquedas;
-public RepositorioBusquedas()
+private static final RepositorioBusquedas INSTANCE = new RepositorioBusquedas();
+public static RepositorioBusquedas getInstance(){
+	return INSTANCE;
+}
+public void resetRepositorio(){
+	listaBusquedas.clear();
+}
+private RepositorioBusquedas()
 {
 	listaBusquedas = new ArrayList<Busqueda>();
 }

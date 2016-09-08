@@ -117,7 +117,7 @@ public class TestsProcesosBatch {
 	public void testSeAgreganAcciones(){
 		Terminal terminal = new Terminal(null, null);
 		RepositorioTerminales lista = new RepositorioTerminales(Arrays.asList(terminal));
-		ActualizarAcciones actualizar =new ActualizarAcciones(lista, Arrays.asList(new GuardarBusqueda(RepositorioBusquedas.getInstance())), new ArrayList<ObserverBusqueda>());
+		ActualizarAcciones actualizar =new ActualizarAcciones(lista, Arrays.asList(AccionesBusqueda.GUARDARBUSQUEDA), new ArrayList<ObserverBusqueda>());
 		actualizar.call();
 		Assert.assertEquals(1,terminal.cantObserversBusqueda(),0);
 		}
@@ -125,11 +125,10 @@ public class TestsProcesosBatch {
 	public void testSeEliminanAcciones(){
 		RepositorioBusquedas repositorio  = RepositorioBusquedas.getInstance();
 		Terminal terminal = new Terminal(null, null);
-		GuardarBusqueda guardar = new GuardarBusqueda(repositorio);
-		terminal.agregarObserverBusqueda(guardar);
+		terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 		Assert.assertEquals(1,terminal.cantObserversBusqueda(),0);
 		RepositorioTerminales lista = new RepositorioTerminales(Arrays.asList(terminal));
-		ActualizarAcciones actualizar =new ActualizarAcciones(lista, new ArrayList<ObserverBusqueda>(),Arrays.asList(guardar));
+		ActualizarAcciones actualizar =new ActualizarAcciones(lista, new ArrayList<ObserverBusqueda>(),Arrays.asList(AccionesBusqueda.GUARDARBUSQUEDA));
 		actualizar.call();
 		Assert.assertEquals(0,terminal.cantObserversBusqueda(),0);
 		}

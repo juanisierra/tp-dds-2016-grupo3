@@ -34,7 +34,6 @@ public class TestReportesBusqueda
 	ParadaColectivo parada114;
 	CGP cgp2;
 	Servicio altaDomicilio;
-	GuardarBusqueda guardarBusqueda;
 	@Before
 	public void init(){	
 		CABA = Mapa.getInstance();
@@ -43,9 +42,8 @@ public class TestReportesBusqueda
 		terminalMedrano = new Terminal("TerminalMedrano", CABA);
 		repositorioBusquedas = RepositorioBusquedas.getInstance();
 		repositorioBusquedas.resetRepositorio();
-		guardarBusqueda = new GuardarBusqueda(repositorioBusquedas);
-		terminalMedrano.agregarObserverBusqueda(guardarBusqueda);
-		terminal1.agregarObserverBusqueda(guardarBusqueda);
+		terminalMedrano.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
+		terminal1.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 		comuna1 = new Comuna("comuna 1",Arrays.asList(new Point(0,0), new Point(0,11), new Point(11,11), new Point (11,0)));
 		disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));
 		parada114 = new ParadaColectivo("parada 114","Chivilcoy","devoto",1000,new Point(10,10),114);
@@ -108,7 +106,7 @@ public class TestReportesBusqueda
 	}
 	@Test
 	public void testSeMandaMailConBusquedaDemorada()
-	{	NotificarBusquedaLarga notificar;
+	{	
 		ServicioMail servicio = Mockito.mock(ServicioMail.class);
 		Mapa mapaMock = Mockito.mock(Mapa.class);
 		Mockito.when(mapaMock.buscar("")).thenAnswer(new Answer<List<POI>>(){
@@ -119,9 +117,8 @@ public class TestReportesBusqueda
 					return new LinkedList<POI>();
 				}
 		});
-		notificar = new NotificarBusquedaLarga(servicio,"admin@sistema.com",1);
 		Terminal terminalConMock = new Terminal("teminal2", mapaMock);
-		terminalConMock.agregarObserverBusqueda(notificar);
+		terminalConMock.agregarObserverBusqueda(AccionesBusqueda.NOTIFICARBUQUEDALARGA);
 		terminalConMock.buscar("");
 		Mockito.verify(servicio).notificarAdministrador("admin@sistema.com","Busqueda Larga","La busqueda llevó demasiado tiempo.");
 	}

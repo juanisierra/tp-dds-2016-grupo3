@@ -1,9 +1,12 @@
 package utn.dds.k3001.grupo3.tpa.busquedas;
 
-public interface ServicioMail {
+public abstract  class ServicioMail {
 
-	public void enviarMail(String mail,String asunto,String mensaje);
+	public abstract void enviarMail(String mail,String asunto,String mensaje);
 
-	public void notificarAdministrador(String mailAdministrador, String asunto, String cuerpo);
+	public static void notificarAdministrador(String mailAdministrador, String asunto, String cuerpo) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

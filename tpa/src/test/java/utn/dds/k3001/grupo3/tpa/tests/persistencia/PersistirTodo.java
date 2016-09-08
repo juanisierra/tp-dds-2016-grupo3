@@ -26,7 +26,7 @@ import utn.dds.k3001.grupo3.tpa.pois.Rubro;
 import utn.dds.k3001.grupo3.tpa.pois.Servicio;
 import utn.dds.k3001.grupo3.tpa.procesosProgramados.ResultadoProceso;
 
-public class PersistenceTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
+public class PersistirTodo extends AbstractPersistenceTest implements WithGlobalEntityManager {
 
 	@Test
 	public void guardarYTraerBusqueda() {
@@ -41,12 +41,8 @@ public class PersistenceTest extends AbstractPersistenceTest implements WithGlob
 		terminal.setComuna(comuna1);
 		Busqueda busqueda = new Busqueda(terminal,2,"a",LocalTime.now(),LocalTime.now(),LocalDate.now());		
 		withTransaction(() -> {
-			
 			entityManager().persist(busqueda);
 			});
-		Assert.assertTrue(entityManager().find(Busqueda.class, 1)==busqueda);
-		Assert.assertTrue(entityManager().find(Busqueda.class, 1).getTerminal()==terminal);
-		Assert.assertTrue(entityManager().find(Busqueda.class, 1).getTerminal().getComuna()==comuna1);
 	}
 	@Test
 	public void guardarYTraerPOI() {
@@ -106,13 +102,6 @@ public class PersistenceTest extends AbstractPersistenceTest implements WithGlob
 			
 			entityManager().persist(cgpDevoto);
 			});
-	}
-	@Test
-	public void contextUpWithTransaction() throws Exception {
-		
-		withTransaction(() -> {
-
-		});
 	}
 
 }

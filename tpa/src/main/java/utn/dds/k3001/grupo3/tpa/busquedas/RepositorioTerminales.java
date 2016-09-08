@@ -5,10 +5,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 
 
-public class RepositorioTerminales implements OrigenDeTerminales{
+public class RepositorioTerminales implements OrigenDeTerminales, WithGlobalEntityManager{
 	List<Terminal> listaTerminales;
 	public RepositorioTerminales ()
 	{
@@ -27,12 +28,10 @@ public class RepositorioTerminales implements OrigenDeTerminales{
 	}
 	@SuppressWarnings("unchecked")
 	public List<Terminal> obtenerTerminalesPersistidas(){
-		EntityManager em = PerThreadEntityManagers.getEntityManager();
-		return (List<Terminal>) em.createQuery("FROM Terminal").getResultList();
+		return (List<Terminal>) entityManager().createQuery("FROM Terminal").getResultList();
 		
 	}
 	public void persistirTerminales(){
-		EntityManager em = PerThreadEntityManagers.getEntityManager();
-		listaTerminales.forEach(terminal -> em.persist(terminal));
+		listaTerminales.forEach(terminal -> entityManager().persist(terminal));
 	}
 }

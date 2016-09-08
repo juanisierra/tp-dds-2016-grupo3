@@ -9,8 +9,9 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
-public class RepositorioBusquedas{
+public class RepositorioBusquedas implements WithGlobalEntityManager{
 private List<Busqueda> listaBusquedas;
 private static final RepositorioBusquedas INSTANCE = new RepositorioBusquedas();
 public static RepositorioBusquedas getInstance(){
@@ -40,12 +41,10 @@ public void buscar(Busqueda busqueda) {
 }
 @SuppressWarnings("unchecked")
 public List<Busqueda> obtenerBusquedasPersistidas(){
-	EntityManager em = PerThreadEntityManagers.getEntityManager();
-	return (List<Busqueda>) em.createQuery("FROM Busqueda").getResultList();
+	return (List<Busqueda>) entityManager().createQuery("FROM Busqueda").getResultList();
 	
 }
 public void persistirBusquedas(){
-	EntityManager em = PerThreadEntityManagers.getEntityManager();
-	listaBusquedas.forEach(busqueda -> em.persist(busqueda));
+	listaBusquedas.forEach(busqueda -> entityManager().persist(busqueda));
 }
 }

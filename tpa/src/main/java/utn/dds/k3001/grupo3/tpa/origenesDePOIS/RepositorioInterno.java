@@ -7,12 +7,13 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
 import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
-public class RepositorioInterno implements OrigenDeDatos {
+public class RepositorioInterno implements OrigenDeDatos,WithGlobalEntityManager {
 	
 	private ArrayList<POI> listaPOIS;
 	private final static RepositorioInterno INSTANCE = new RepositorioInterno();
@@ -52,12 +53,10 @@ public class RepositorioInterno implements OrigenDeDatos {
 	}
 	@SuppressWarnings("unchecked")
 	public List<POI> obtenerPOISPersistidos(){
-		EntityManager em = PerThreadEntityManagers.getEntityManager();
-		return (List<POI>) em.createQuery("FROM POI").getResultList();
+		return (List<POI>) entityManager().createQuery("FROM POI").getResultList();
 		
 	}
 	public void persistirPOIS(){
-		EntityManager em = PerThreadEntityManagers.getEntityManager();
-		listaPOIS.forEach(terminal -> em.persist(terminal));
+		listaPOIS.forEach(terminal -> entityManager().persist(terminal));
 	}
 }

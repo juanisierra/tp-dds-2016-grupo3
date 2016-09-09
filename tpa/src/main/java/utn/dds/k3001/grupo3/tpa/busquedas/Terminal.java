@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,33 +23,37 @@ public class Terminal
 {	@Id @GeneratedValue
 	private int id;
 	private String nombre;
-	@Transient //TODO Agregar mapa
+	@Transient 
 	private Mapa mapa;
-	@Transient //TODO Agregar Observers
-	private List<ObserverBusqueda> observersBusqueda;
+	@ElementCollection
+	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
+	private List<AccionesBusqueda> observersBusqueda;
 	@ManyToOne
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	private Comuna comuna;
 	public Terminal(String nombre, Mapa mapa){
 		this.nombre = nombre;
 		this.mapa = mapa;
-		this.observersBusqueda = new LinkedList<ObserverBusqueda>();
+		this.observersBusqueda = new LinkedList<AccionesBusqueda>();
 	}
-	public Terminal(){}
+	public Terminal(){	//Builder para hibernate
+		this.mapa = Mapa.getInstance();
+		this.observersBusqueda = new LinkedList<AccionesBusqueda>();
+	}
 	public String getNombre() {
 		return nombre;
 	}
 	public Terminal(String nombre, Mapa mapa,Comuna comuna){
 		this.nombre = nombre;
 		this.mapa = mapa;
-		this.observersBusqueda = new LinkedList<ObserverBusqueda>();
+		this.observersBusqueda = new LinkedList<AccionesBusqueda>();
 		this.comuna = comuna;
 	}
-	public void agregarObserverBusqueda(ObserverBusqueda observerBusqueda){
+	public void agregarObserverBusqueda(AccionesBusqueda observerBusqueda){
 		observersBusqueda.add(observerBusqueda);
 	}
 	
-	public void eliminarObserverBusqueda(ObserverBusqueda observerBusqueda){
+	public void eliminarObserverBusqueda(AccionesBusqueda observerBusqueda){
 		observersBusqueda.remove(observerBusqueda);
 	}
 	
@@ -80,10 +85,10 @@ public class Terminal
 	public void setMapa(Mapa mapa) {
 		this.mapa = mapa;
 	}
-	public List<ObserverBusqueda> getObserversBusqueda() {
+	public List<AccionesBusqueda> getObserversBusqueda() {
 		return observersBusqueda;
 	}
-	public void setObserversBusqueda(List<ObserverBusqueda> observersBusqueda) {
+	public void setObserversBusqueda(List<AccionesBusqueda> observersBusqueda) {
 		this.observersBusqueda = observersBusqueda;
 	}
 	public Comuna getComuna() {

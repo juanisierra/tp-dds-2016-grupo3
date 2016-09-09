@@ -11,25 +11,33 @@ import utn.dds.k3001.grupo3.tpa.pois.POI;
 public class Mapa 
 {
 	private List<OrigenDeDatos> origenesDeDatos;
-	private RepositorioInterno repositorioInterno;
+	private final static Mapa INSTANCE = new Mapa();
 	
-	public Mapa(){
+	private Mapa(){
 		this.origenesDeDatos = new LinkedList<OrigenDeDatos>();
-		this.repositorioInterno = new RepositorioInterno();
-		this.origenesDeDatos.add(repositorioInterno);
+		this.origenesDeDatos.add(RepositorioInterno.getInstance());
+	}
+	public  void resetMapa() {
+		this.origenesDeDatos.clear();
+		this.origenesDeDatos.add(RepositorioInterno.getInstance());
+		RepositorioInterno.getInstance().resetRepositorio();
+	}
+	public static Mapa getInstance() {
+		return INSTANCE;
 	}
 	public void agregarOrigenDeDatos(OrigenDeDatos origen){
 		origenesDeDatos.add(origen);
 	}
 	public void agregarPoi(POI poiNvo){
-		repositorioInterno.agregarPoi(poiNvo);
+		RepositorioInterno.getInstance().agregarPoi(poiNvo);
 	}
 	public void eliminarPoi(POI poiAEliminar){
-		repositorioInterno.eliminarPoi(poiAEliminar);
+		RepositorioInterno.getInstance().eliminarPoi(poiAEliminar);
 	}
 	public List<POI> buscar(String criterio){
 		return origenesDeDatos.stream()
 							  .flatMap(origen -> origen.buscar(criterio).stream())
 							  .collect(Collectors.toList());
 	}
+	
 }

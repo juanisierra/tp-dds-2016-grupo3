@@ -22,16 +22,19 @@ public class TestsABMC {
 
 	@Before
 	public void init(){
-		CABA = new Mapa();
-		comuna1 = new Comuna("comuna 1",Arrays.asList(new Point(0,0), new Point(0,0.011), new Point(0.011,0.011), new Point (0.011,0)));
+		CABA = Mapa.getInstance();
+		CABA.resetMapa();
+		comuna1 = new Comuna("comuna 1",Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,0.011), new PersistablePoint(0.011,0.011), new PersistablePoint (0.011,0)));
 		libreria = new Rubro("libreria",50);
 		disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));
-		libreriaYenny = new LocalComercial("libreria yenny","Beiro","devoto",100,new Point(0.01,0.01),libreria,disponibilidadLibrerias);
+		libreriaYenny = new LocalComercial("libreria yenny","Beiro","devoto",100,new PersistablePoint(0.01,0.01),libreria,disponibilidadLibrerias);
+		
 	}
 	@Test
 	public void testAgregarLibreriaYenny () {
 		CABA.agregarPoi(libreriaYenny);
 		Assert.assertEquals(1, CABA.buscar("").size(),0);
+		
 	}
 	@Test
 	public void testEliminarLibreriaYenny() {

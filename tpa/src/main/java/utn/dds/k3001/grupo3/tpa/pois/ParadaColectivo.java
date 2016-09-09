@@ -10,13 +10,13 @@ public class ParadaColectivo extends POI
 {	
 	private Integer linea;
 	
-	public ParadaColectivo(String nombre, String calle, String barrio, int altura, Point posicion, Integer linea){	
+	public ParadaColectivo(String nombre, String calle, String barrio, int altura, PersistablePoint posicion, Integer linea){	
 		super(nombre,calle,barrio,altura,posicion);
 		this.linea = linea;
 	}
 	public ParadaColectivo(){}
 	@Override
-	public boolean estaCerca(Point otraPosicion){
+	public boolean estaCerca(PersistablePoint otraPosicion){
 		return (posicion.distance(otraPosicion) <=0.1);
 	}
 	

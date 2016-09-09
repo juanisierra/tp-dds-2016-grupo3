@@ -4,13 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+
+import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
+import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
-public class RepositorioInterno implements OrigenDeDatos {
+public class RepositorioInterno implements OrigenDeDatos,WithGlobalEntityManager {
 	
 	private ArrayList<POI> listaPOIS;
-	
-	public RepositorioInterno(){
+	private final static RepositorioInterno INSTANCE = new RepositorioInterno();
+	private RepositorioInterno(){
+		listaPOIS = new ArrayList<POI>();
+	}
+	public static RepositorioInterno getInstance() {
+		return INSTANCE;
+	}
+	public void resetRepositorio(){
 		listaPOIS = new ArrayList<POI>();
 	}
 	public void agregarPoi(POI poiNvo){
@@ -37,5 +50,13 @@ public class RepositorioInterno implements OrigenDeDatos {
 	}	
 	public List<POI> getAllPOIS(){
 		return listaPOIS;
+	}
+	@SuppressWarnings("unchecked")
+	public List<POI> obtenerPOISPersistidos(){
+		return (List<POI>) entityManager().createQuery("FROM POI").getResultList();
+		
+	}
+	public void persistirPOIS(){
+		listaPOIS.forEach(terminal -> entityManager().persist(terminal));
 	}
 }

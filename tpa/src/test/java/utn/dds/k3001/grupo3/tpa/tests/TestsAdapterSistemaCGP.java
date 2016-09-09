@@ -28,7 +28,8 @@ public class TestsAdapterSistemaCGP {
 	
 @Before
 public void init() {
-	CABA = new Mapa();
+	CABA = Mapa.getInstance();
+	CABA.resetMapa();
 	sistemaMock = Mockito.mock(SistemaCGP.class);
 	adapter = new AdapterSistemaCGP(sistemaMock);
 	rangoLunes = new RangosServicioDTO(1,8,0,16,0);
@@ -50,7 +51,7 @@ public void testAdaptarServicio() {
 public void testAdaptarCGP() {
 	ArrayList<Servicio> listaServicios = new ArrayList<Servicio>();
 	listaServicios.add(miCambioDeDomicilio);
-	CGP miCGPCaballito = new CGP("CGP 1","Rivadavia 123","Caballito",0,new Point(0,0),new Comuna("1",null),listaServicios);
+	CGP miCGPCaballito = new CGP("CGP 1","Rivadavia 123","Caballito",0,new PersistablePoint(0,0),new Comuna("1",null),listaServicios);
 	Assert.assertThat(miCGPCaballito, new CGPIgualesDatos(adapter.adaptarCGP(cgpCaballito)));
 	Assert.assertThat(miCGPCaballito.getServiciosOfrecidos().get(0), new ServiciosIgualesDisponibilidades(adapter.adaptarCGP(cgpCaballito).getServiciosOfrecidos().get(0)));
 }

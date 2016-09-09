@@ -6,9 +6,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class RepositorioBusquedas{
+import javax.persistence.EntityManager;
+
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+
+public class RepositorioBusquedas implements WithGlobalEntityManager{
 private List<Busqueda> listaBusquedas;
-public RepositorioBusquedas()
+private static final RepositorioBusquedas INSTANCE = new RepositorioBusquedas();
+public static RepositorioBusquedas getInstance(){
+	return INSTANCE;
+}
+public void resetRepositorio(){
+	listaBusquedas.clear();
+}
+private RepositorioBusquedas()
 {
 	listaBusquedas = new ArrayList<Busqueda>();
 }
@@ -26,5 +38,13 @@ public Map<LocalDate,Long> busquedasPorFecha(){
 }
 public void buscar(Busqueda busqueda) {
 	listaBusquedas.add(busqueda);
+}
+@SuppressWarnings("unchecked")
+public List<Busqueda> obtenerBusquedasPersistidas(){
+	return (List<Busqueda>) entityManager().createQuery("FROM Busqueda").getResultList();
+	
+}
+public void persistirBusquedas(){
+	listaBusquedas.forEach(busqueda -> entityManager().persist(busqueda));
 }
 }

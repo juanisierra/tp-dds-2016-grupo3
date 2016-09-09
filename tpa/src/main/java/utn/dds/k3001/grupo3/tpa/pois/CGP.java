@@ -15,16 +15,16 @@ public class CGP extends PrestadorDeServicios
 	private Comuna comunaPropia;
 	public CGP(){}
 	
-	public CGP(String nombre, String calle, String barrio, int altura, Point posicion, Comuna comuna){
+	public CGP(String nombre, String calle, String barrio, int altura, PersistablePoint posicion, Comuna comuna){
 		super(nombre,calle,barrio,altura,posicion);
 		this.comunaPropia =comuna;
 	}
-	public CGP(String nombre, String calle, String barrio, int altura, Point posicion, Comuna comuna,ArrayList<Servicio> servicios){
+	public CGP(String nombre, String calle, String barrio, int altura, PersistablePoint posicion, Comuna comuna,ArrayList<Servicio> servicios){
 		super(nombre,calle,barrio,altura,posicion);
 		this.comunaPropia =comuna;
 		this.serviciosOfrecidos = servicios;
 	}
-	public boolean estaCerca(Point otraPosicion) {
+	public boolean estaCerca(PersistablePoint otraPosicion) {
 		return comunaPropia.estaEnComuna(otraPosicion);
 	}
 

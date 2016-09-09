@@ -19,11 +19,11 @@ public class LocalComercial extends POI
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	private Rubro rubro;
 	@OneToMany
-	@JoinColumn(name = "disponibilidad_id")
+	@JoinColumn(name = "local_id")
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	private List<Disponibilidad> listaDisponibilidad;
 	public LocalComercial(){}
-	public LocalComercial(String nombre, String calle, String barrio, int altura, Point posicion,Rubro rubro, Disponibilidad disponibilidad){	
+	public LocalComercial(String nombre, String calle, String barrio, int altura, PersistablePoint posicion,Rubro rubro, Disponibilidad disponibilidad){	
 		super(nombre,calle,barrio,altura,posicion);
 		this.listaDisponibilidad = new LinkedList<Disponibilidad>();
 		this.rubro = rubro;
@@ -31,7 +31,7 @@ public class LocalComercial extends POI
 	}
 	
 	@Override
-	public boolean estaCerca(Point otraPosicion){
+	public boolean estaCerca(PersistablePoint otraPosicion){
 		return (posicion.distance(otraPosicion)<= rubro.distanciaDeCercania());		
 	}
 	

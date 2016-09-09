@@ -14,13 +14,13 @@ import org.hibernate.annotations.Cascade;
 
 import utn.dds.k3001.grupo3.tpa.geo.*;
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE) //TODO Agregar single-table o ver como
+ //TODO Agregar single-table o ver como
 public abstract class PrestadorDeServicios extends POI 
 {	@ManyToMany //TODO Revisar relacion
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	protected List<Servicio> serviciosOfrecidos;
 	public PrestadorDeServicios(){}
-	public PrestadorDeServicios(String nombre, String calle, String barrio, int altura, Point posicion){
+	public PrestadorDeServicios(String nombre, String calle, String barrio, int altura, PersistablePoint posicion){
 		super(nombre,calle,barrio,altura,posicion);
 		this.serviciosOfrecidos = new LinkedList<Servicio>();
 	}

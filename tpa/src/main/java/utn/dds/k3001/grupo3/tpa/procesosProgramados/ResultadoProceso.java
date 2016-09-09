@@ -8,11 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
-@Entity
+
 public class ResultadoProceso
-{	@Id @GeneratedValue
-	private int id;
-	@Convert(converter = LocalDateTimeConverter.class)
+{	private int id;
 	private LocalDateTime momentoFinalizacion;
 	private int cantidadAfectados;
 	private boolean terminoCorrectamente;

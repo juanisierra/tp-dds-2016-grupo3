@@ -18,20 +18,20 @@ import org.hibernate.annotations.Cascade;
 
 import java.time.*;
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class POI 
 {	@Id @GeneratedValue
 	protected int id;
 	protected String nombre;
 	@OneToOne
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
-	protected Point posicion;
+	protected PersistablePoint posicion;
 	@ElementCollection
 	protected List<String> listaEtiquetas;
 	@Embedded
 	protected Direccion direccion;
 
-	public POI(String nombre, String calle, String barrio, int altura, Point posicion) {
+	public POI(String nombre, String calle, String barrio, int altura, PersistablePoint posicion) {
 		this.direccion = new Direccion(calle,barrio,altura);
 		this.nombre = nombre;
 		this.posicion = posicion;
@@ -47,7 +47,7 @@ public class POI
 		this.listaEtiquetas.add(etiqueta);
 	}
 	
-	public boolean estaCerca(Point otraPosicion){
+	public boolean estaCerca(PersistablePoint otraPosicion){
 		return (posicion.distance(otraPosicion) <=0.5);
 	}
 	
@@ -67,11 +67,11 @@ public class POI
 		this.nombre = nombre;
 	}
 
-	public Point getPosicion() {
+	public PersistablePoint getPosicion() {
 		return posicion;
 	}
 
-	public void setPosicion(Point posicion) {
+	public void setPosicion(PersistablePoint posicion) {
 		this.posicion = posicion;
 	}
 

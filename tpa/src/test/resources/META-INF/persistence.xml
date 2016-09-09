@@ -20,8 +20,8 @@
     	 <class>utn.dds.k3001.grupo3.tpa.pois.Servicio</class>
     	 <class>utn.dds.k3001.grupo3.tpa.pois.PrestadorDeServicios</class>
     	 <class>utn.dds.k3001.grupo3.tpa.pois.CGP</class>
-    	 <class>utn.dds.k3001.grupo3.tpa.geo.Point</class>
-    	 <class>utn.dds.k3001.grupo3.tpa.geo.Polygon</class>
+    	 <class>utn.dds.k3001.grupo3.tpa.geo.PersistablePoint</class>
+    	 <class>utn.dds.k3001.grupo3.tpa.geo.PersistablePolygon</class>
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        
         

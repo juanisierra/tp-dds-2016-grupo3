@@ -53,7 +53,7 @@ public class TestsProcesosBatch {
 		parser = new ParserArchivoLocales(archivoPrueba.getAbsolutePath());
 		repositorioPOI = RepositorioInterno.getInstance();
 		repositorioPOI.resetRepositorio();
-		panaderia = new LocalComercial("panaderia","","",0,new Point(0,0),new Rubro("panaderias",10),Disponibilidad.lunesAViernes(LocalTime.of(10, 0), LocalTime.of(15, 0)));
+		panaderia = new LocalComercial("panaderia","","",0,new PersistablePoint(0,0),new Rubro("panaderias",10),Disponibilidad.lunesAViernes(LocalTime.of(10, 0), LocalTime.of(15, 0)));
 		repositorioPOI.agregarPoi(panaderia);
 		actualizarLocales = new ActualizarLocales(repositorioPOI,archivoPrueba.getAbsolutePath());
 		

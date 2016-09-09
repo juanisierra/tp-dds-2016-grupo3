@@ -19,16 +19,16 @@ public class Comuna
 	private String nombre;
 	@OneToOne
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
-	private Polygon limites;
+	private PersistablePolygon limites;
 	
-	public Comuna(String nombre,List<Point> puntos){
-		this.limites = new Polygon(puntos);
+	public Comuna(String nombre,List<PersistablePoint> puntos){
+		this.limites = new PersistablePolygon(puntos);
 		this.nombre = nombre;
 	}
 	public Comuna(String nombreComuna) {
 		nombre = nombreComuna;
 	}
-	public boolean estaEnComuna(Point punto){
+	public boolean estaEnComuna(PersistablePoint punto){
 		return limites.isInside(punto);
 	}
 	public Comuna(){}
@@ -42,10 +42,10 @@ public class Comuna
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Polygon getLimites() {
+	public PersistablePolygon getLimites() {
 		return limites;
 	}
-	public void setLimites(Polygon limites) {
+	public void setLimites(PersistablePolygon limites) {
 		this.limites = limites;
 	}
 	public void setNombre(String nombre) {

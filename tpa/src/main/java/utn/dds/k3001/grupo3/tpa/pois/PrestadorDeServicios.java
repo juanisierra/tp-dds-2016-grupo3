@@ -20,7 +20,7 @@ public abstract class PrestadorDeServicios extends POI
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	protected List<Servicio> serviciosOfrecidos;
 	public PrestadorDeServicios(){}
-	public PrestadorDeServicios(String nombre, String calle, String barrio, int altura, Point posicion){
+	public PrestadorDeServicios(String nombre, String calle, String barrio, int altura, PersistablePoint posicion){
 		super(nombre,calle,barrio,altura,posicion);
 		this.serviciosOfrecidos = new LinkedList<Servicio>();
 	}

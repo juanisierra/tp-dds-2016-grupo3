@@ -44,10 +44,10 @@ public class TestReportesBusqueda
 		repositorioBusquedas.resetRepositorio();
 		terminalMedrano.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 		terminal1.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
-		comuna1 = new Comuna("comuna 1",Arrays.asList(new Point(0,0), new Point(0,11), new Point(11,11), new Point (11,0)));
+		comuna1 = new Comuna("comuna 1",Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));
 		disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));
-		parada114 = new ParadaColectivo("parada 114","Chivilcoy","devoto",1000,new Point(10,10),114);
-		cgp2 = new CGP("cgp2","beiro","caballito",100,new Point(10.1,10.1),comuna1);
+		parada114 = new ParadaColectivo("parada 114","Chivilcoy","devoto",1000,new PersistablePoint(10,10),114);
+		cgp2 = new CGP("cgp2","beiro","caballito",100,new PersistablePoint(10.1,10.1),comuna1);
 		altaDomicilio = new Servicio("alta domicilio",disponibilidadLibrerias);
 		cgp2.agregarServicio(altaDomicilio);
 		CABA.agregarPoi(parada114);

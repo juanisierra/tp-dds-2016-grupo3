@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import utn.dds.k3001.grupo3.tpa.busquedas.*;
-import utn.dds.k3001.grupo3.tpa.geo.Point;
+import utn.dds.k3001.grupo3.tpa.geo.PersistablePoint;
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.RepositorioInterno;
 import utn.dds.k3001.grupo3.tpa.pois.*;
 
@@ -49,7 +49,7 @@ public class PersistTest extends AbstractPersistenceTest implements WithGlobalEn
 	public void testPersistirPOIS(){
 		Rubro libreria = new Rubro("libreria",50);
 		Disponibilidad disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));
-		LocalComercial libreriaYenny = new LocalComercial("libreria yenny","Beiro","devoto",100,new Point(10,10),libreria,disponibilidadLibrerias);
+		LocalComercial libreriaYenny = new LocalComercial("libreria yenny","Beiro","devoto",100,new PersistablePoint(10,10),libreria,disponibilidadLibrerias);
 		RepositorioInterno.getInstance().resetRepositorio();
 		RepositorioInterno.getInstance().agregarPoi(libreriaYenny);
 		RepositorioInterno.getInstance().persistirPOIS();

@@ -13,8 +13,8 @@ import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import utn.dds.k3001.grupo3.tpa.busquedas.AccionesBusqueda;
 import utn.dds.k3001.grupo3.tpa.busquedas.Busqueda;
 import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
-import utn.dds.k3001.grupo3.tpa.geo.Point;
-import utn.dds.k3001.grupo3.tpa.geo.Polygon;
+import utn.dds.k3001.grupo3.tpa.geo.PersistablePoint;
+import utn.dds.k3001.grupo3.tpa.geo.PersistablePolygon;
 import utn.dds.k3001.grupo3.tpa.pois.Banco;
 import utn.dds.k3001.grupo3.tpa.pois.CGP;
 import utn.dds.k3001.grupo3.tpa.pois.Comuna;
@@ -32,7 +32,7 @@ public class PersistirTodo extends AbstractPersistenceTest implements WithGlobal
 	public void guardarYTraerBusqueda() {
 		Comuna comuna1 = new Comuna();
 		comuna1.setNombre("Centro");
-		Polygon poligono = new Polygon(Arrays.asList(new Point(2,2),new Point(1,1)));
+		PersistablePolygon poligono = new PersistablePolygon(Arrays.asList(new PersistablePoint(2,2),new PersistablePoint(1,1)));
 		comuna1.setLimites(poligono);
 		Terminal terminal = new Terminal();
 		terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
@@ -46,7 +46,7 @@ public class PersistirTodo extends AbstractPersistenceTest implements WithGlobal
 	}
 	@Test
 	public void guardarYTraerPOI() {
-		POI poi1 = new POI("Verduleria","Nazca","Centro",200,new Point(2,2));
+		POI poi1 = new POI("Verduleria","Nazca","Centro",200,new PersistablePoint(2,2));
 		poi1.agregarEtiqueta("A");
 		poi1.agregarEtiqueta("B");
 		withTransaction(() -> {
@@ -66,7 +66,7 @@ public class PersistirTodo extends AbstractPersistenceTest implements WithGlobal
 	public void guardarYTraerLocalComercial() {
 		Disponibilidad disp = Disponibilidad.lunesAViernes(LocalTime.of(2, 0), LocalTime.of(5, 0));
 		Rubro rubro = new Rubro("a",2);
-		LocalComercial local = new LocalComercial("Pepe","calle1","Centro",12,new Point(2,2),rubro,disp);
+		LocalComercial local = new LocalComercial("Pepe","calle1","Centro",12,new PersistablePoint(2,2),rubro,disp);
 		withTransaction(() -> {
 			
 			entityManager().persist(local);
@@ -74,7 +74,7 @@ public class PersistirTodo extends AbstractPersistenceTest implements WithGlobal
 	}
 	@Test
 	public void guardarYTraerParadaColectivo() {
-		ParadaColectivo parada = new ParadaColectivo("Parada1","calle1","Centro",12,new Point(2,2),114);
+		ParadaColectivo parada = new ParadaColectivo("Parada1","calle1","Centro",12,new PersistablePoint(2,2),114);
 		withTransaction(() -> {
 			
 			entityManager().persist(parada);
@@ -84,7 +84,7 @@ public class PersistirTodo extends AbstractPersistenceTest implements WithGlobal
 	public void guardarYTraerBanco() {
 		Disponibilidad disp = Disponibilidad.lunesAViernes(LocalTime.of(2, 0), LocalTime.of(5, 0));
 		Servicio servicio = new Servicio("Cheques",disp);
-		Banco banco = new Banco("Banco1","calle a","Barrio1",123,new Point(2,2));
+		Banco banco = new Banco("Banco1","calle a","Barrio1",123,new PersistablePoint(2,2));
 		banco.agregarServicio(servicio);
 				withTransaction(() -> {
 			
@@ -96,7 +96,7 @@ public class PersistirTodo extends AbstractPersistenceTest implements WithGlobal
 		Comuna comuna1 = new Comuna("a");
 		Disponibilidad disp = Disponibilidad.lunesAViernes(LocalTime.of(2, 0), LocalTime.of(5, 0));
 		Servicio servicio = new Servicio("Cheques",disp);
-		CGP cgpDevoto = new CGP("CGP","calle a","Barrio1",123,new Point(2,2),comuna1);
+		CGP cgpDevoto = new CGP("CGP","calle a","Barrio1",123,new PersistablePoint(2,2),comuna1);
 		cgpDevoto.agregarServicio(servicio);
 				withTransaction(() -> {
 			

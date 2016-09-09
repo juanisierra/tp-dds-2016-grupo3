@@ -51,7 +51,7 @@ public void testAdaptarServicio() {
 public void testAdaptarCGP() {
 	ArrayList<Servicio> listaServicios = new ArrayList<Servicio>();
 	listaServicios.add(miCambioDeDomicilio);
-	CGP miCGPCaballito = new CGP("CGP 1","Rivadavia 123","Caballito",0,new Point(0,0),new Comuna("1",null),listaServicios);
+	CGP miCGPCaballito = new CGP("CGP 1","Rivadavia 123","Caballito",0,new PersistablePoint(0,0),new Comuna("1",null),listaServicios);
 	Assert.assertThat(miCGPCaballito, new CGPIgualesDatos(adapter.adaptarCGP(cgpCaballito)));
 	Assert.assertThat(miCGPCaballito.getServiciosOfrecidos().get(0), new ServiciosIgualesDisponibilidades(adapter.adaptarCGP(cgpCaballito).getServiciosOfrecidos().get(0)));
 }

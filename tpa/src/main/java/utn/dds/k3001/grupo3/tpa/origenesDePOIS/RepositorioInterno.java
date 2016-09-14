@@ -57,6 +57,6 @@ public class RepositorioInterno implements OrigenDeDatos,WithGlobalEntityManager
 		
 	}
 	public void persistirPOIS(){
-		listaPOIS.forEach(terminal -> entityManager().persist(terminal));
+		listaPOIS.forEach(POI -> entityManager().persist(POI));
 	}
 }

@@ -18,14 +18,13 @@ public class PersistTest extends AbstractPersistenceTest implements WithGlobalEn
 	@Before
 	public void before(){
 		Mapa.getInstance().resetMapa();
-		RepositorioBusquedas.getInstance().resetRepositorio();
 	}
 	@Test
 	public void testPersistirTerminales(){
 	Terminal terminal1 = new Terminal("teminal1", Mapa.getInstance());
 	terminal1.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 	Terminal terminal2 = new Terminal("teminal2", Mapa.getInstance());
-	RepositorioTerminales repo = new RepositorioTerminales();
+	RepositorioTerminales repo = RepositorioTerminales.getInstance();
 	repo.agregarTerminal(terminal1);
 	repo.agregarTerminal(terminal2);
 	repo.persistirTerminales();
@@ -40,21 +39,16 @@ public class PersistTest extends AbstractPersistenceTest implements WithGlobalEn
 	Busqueda busqueda2 = new Busqueda();
 	RepositorioBusquedas.getInstance().buscar(busqueda1);
 	RepositorioBusquedas.getInstance().buscar(busqueda2);
-	RepositorioBusquedas.getInstance().persistirBusquedas();
 	entityManager().flush();
-	List<Busqueda> lista = RepositorioBusquedas.getInstance().obtenerBusquedasPersistidas();
-	Assert.assertEquals(busqueda1.getCriterio(),lista.get(0).getCriterio());
+	Assert.assertEquals(busqueda1.getCriterio(),RepositorioBusquedas.getInstance().getBusquedas().get(0).getCriterio());
 	}
 	@Test
 	public void testPersistirPOIS(){
 		Rubro libreria = new Rubro("libreria",50);
 		Disponibilidad disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));
 		LocalComercial libreriaYenny = new LocalComercial("libreria yenny","Beiro","devoto",100,new PersistablePoint(10,10),libreria,disponibilidadLibrerias);
-		RepositorioInterno.getInstance().resetRepositorio();
 		RepositorioInterno.getInstance().agregarPoi(libreriaYenny);
-		RepositorioInterno.getInstance().persistirPOIS();
 		entityManager().flush();
-		List<POI> lista = RepositorioInterno.getInstance().obtenerPOISPersistidos();
-		Assert.assertEquals(libreriaYenny,lista.get(0));
+		Assert.assertEquals(libreriaYenny,RepositorioInterno.getInstance().getAllPOIS().get(0));
 	}
 }

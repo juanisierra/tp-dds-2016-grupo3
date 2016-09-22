@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import org.junit.*;
 import org.mockito.Mockito;
+import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+
 import utn.dds.k3001.grupo3.tpa.geo.*;
 import utn.dds.k3001.grupo3.tpa.DTO.*;
 import utn.dds.k3001.grupo3.tpa.busquedas.*;
@@ -15,7 +19,7 @@ import utn.dds.k3001.grupo3.tpa.pois.Comuna;
 import utn.dds.k3001.grupo3.tpa.pois.Disponibilidad;
 import utn.dds.k3001.grupo3.tpa.pois.Servicio;
 import utn.dds.k3001.grupo3.tpa.tests.matchers.*;
-public class TestsAdapterSistemaCGP {
+public class TestsAdapterSistemaCGP implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps{
 	Mapa CABA;
 	SistemaCGP sistemaMock;
 	AdapterSistemaCGP adapter;
@@ -28,6 +32,7 @@ public class TestsAdapterSistemaCGP {
 	
 @Before
 public void init() {
+	beginTransaction();
 	CABA = Mapa.getInstance();
 	CABA.resetMapa();
 	sistemaMock = Mockito.mock(SistemaCGP.class);
@@ -42,6 +47,10 @@ public void init() {
 	listaServiciosDTO.add(cambioDomicilio);
 	cgpCaballito = new CentroDTO(1,"Caballito","Juan Pablo","Rivadavia 123","4444-4444",listaServiciosDTO);
 	CABA.agregarOrigenDeDatos(adapter);
+}
+@After
+public void end() {
+	rollbackTransaction();
 }
 @Test
 public void testAdaptarServicio() {

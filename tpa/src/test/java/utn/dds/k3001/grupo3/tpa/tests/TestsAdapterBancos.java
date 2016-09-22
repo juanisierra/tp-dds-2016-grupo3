@@ -4,12 +4,16 @@ import utn.dds.k3001.grupo3.tpa.busquedas.*;
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.AdapterSistemaBancos;
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.RequestService;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
-public class TestsAdapterBancos {
+public class TestsAdapterBancos implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps{
 	Mapa CABA;
 	RequestService requestServiceMock;
 	public String listaBancos = "["
@@ -34,12 +38,17 @@ public class TestsAdapterBancos {
 	
 	@Before
 	public void init(){
+		beginTransaction();
 		CABA = Mapa.getInstance();
 		CABA.resetMapa();
 		requestServiceMock = Mockito.mock(RequestService.class);
 		Mockito.when(requestServiceMock.getJsonBancos("","")).thenReturn(listaBancos);
 		adapter = new AdapterSistemaBancos(requestServiceMock);
 		
+	}
+	@After 
+	public void end() {
+		rollbackTransaction();
 	}
 	@Test
 	public void testElMapaEncuentra2Bancos() throws Exception{

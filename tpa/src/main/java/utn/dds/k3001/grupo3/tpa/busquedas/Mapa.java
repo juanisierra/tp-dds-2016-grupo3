@@ -20,7 +20,6 @@ public class Mapa
 	public  void resetMapa() {
 		this.origenesDeDatos.clear();
 		this.origenesDeDatos.add(RepositorioInterno.getInstance());
-		RepositorioInterno.getInstance().resetRepositorio();
 	}
 	public static Mapa getInstance() {
 		return INSTANCE;

@@ -12,32 +12,27 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
 import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
-
+import static java.lang.Math.toIntExact;
 public class RepositorioInterno implements OrigenDeDatos,WithGlobalEntityManager {
 	
-	private ArrayList<POI> listaPOIS;
 	private final static RepositorioInterno INSTANCE = new RepositorioInterno();
-	private RepositorioInterno(){
-		listaPOIS = new ArrayList<POI>();
-	}
+	private RepositorioInterno(){}
 	public static RepositorioInterno getInstance() {
 		return INSTANCE;
 	}
-	public void resetRepositorio(){
-		listaPOIS = new ArrayList<POI>();
-	}
 	public void agregarPoi(POI poiNvo){
-		listaPOIS.add(poiNvo);
+		entityManager().persist(poiNvo);
 	}
 	public void eliminarPoi(POI poiAEliminar){
-		listaPOIS.remove(poiAEliminar);
+		entityManager().remove(poiAEliminar);
 	}
-	@Override
+	@SuppressWarnings("unchecked")
 	public List<POI> buscar(String criterio) {
-		return listaPOIS.stream().filter(POI -> POI.esBuscado(criterio)).collect(Collectors.toList());
+		return ((List<POI>)entityManager().createQuery("FROM POI").getResultList()).stream().filter(POI -> POI.esBuscado(criterio)).collect(Collectors.toList());
 	}
 	public POI buscarPorNombre(String nombre)
-	{	List<POI> lista = listaPOIS.stream().filter(POI -> POI.getNombre().equals(nombre)).collect(Collectors.toList());
+	{	@SuppressWarnings("unchecked")
+	List<POI> lista = ((List<POI>)entityManager().createQuery("FROM POI").getResultList()).stream().filter(POI -> POI.getNombre().contains(nombre)).collect(Collectors.toList());
 		if(lista.isEmpty())
 		{
 			return null;
@@ -46,17 +41,10 @@ public class RepositorioInterno implements OrigenDeDatos,WithGlobalEntityManager
 		}
 	}
 	public void eliminarPoiPorNumero(long id) {
-		listaPOIS.removeIf(POI -> Long.valueOf(POI.getID()).equals(id));
+		entityManager().createQuery("delete POI p where p.id= :id").setParameter("id",toIntExact(id)).executeUpdate();
 	}	
-	public List<POI> getAllPOIS(){
-		return listaPOIS;
-	}
 	@SuppressWarnings("unchecked")
-	public List<POI> obtenerPOISPersistidos(){
-		return (List<POI>) entityManager().createQuery("FROM POI").getResultList();
-		
-	}
-	public void persistirPOIS(){
-		listaPOIS.forEach(POI -> entityManager().persist(POI));
+	public List<POI> getAllPOIS(){
+		return (List<POI>)entityManager().createQuery("FROM POI").getResultList();
 	}
 }

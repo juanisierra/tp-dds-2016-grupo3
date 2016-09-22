@@ -15,15 +15,22 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Map;
+
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+
 import utn.dds.k3001.grupo3.tpa.geo.*;
 
-public class TestReportesBusqueda
+public class TestReportesBusqueda extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps
 {
 	Mapa CABA;
 	Terminal terminal1, terminalMedrano;
@@ -36,12 +43,12 @@ public class TestReportesBusqueda
 	Servicio altaDomicilio;
 	@Before
 	public void init(){	
+		beginTransaction();
 		CABA = Mapa.getInstance();
 		CABA.resetMapa();
 		terminal1 = new Terminal("teminal1", CABA);
 		terminalMedrano = new Terminal("TerminalMedrano", CABA);
 		repositorioBusquedas = RepositorioBusquedas.getInstance();
-		repositorioBusquedas.resetRepositorio();
 		terminalMedrano.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 		terminal1.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 		comuna1 = new Comuna("comuna 1",Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));
@@ -53,7 +60,10 @@ public class TestReportesBusqueda
 		CABA.agregarPoi(parada114);
 		CABA.agregarPoi(cgp2);
 	}
-	
+	@After
+	public void after() {
+		rollbackTransaction();
+	}
 	@Test
 	public void testGuardarBusquedas(){	
 		terminalMedrano.buscar("gcp1");

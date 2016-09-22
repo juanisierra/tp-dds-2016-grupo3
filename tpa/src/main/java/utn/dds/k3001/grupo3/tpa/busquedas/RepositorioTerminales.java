@@ -11,20 +11,22 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 public class RepositorioTerminales implements OrigenDeTerminales, WithGlobalEntityManager{
 	List<Terminal> listaTerminales;
-	public RepositorioTerminales ()
+	public static RepositorioTerminales INSTANCE = new RepositorioTerminales();
+	public static RepositorioTerminales getInstance(){
+		return INSTANCE;
+	}
+	private RepositorioTerminales ()
 	{
 		listaTerminales = new ArrayList<Terminal>();
 	} 
-	public RepositorioTerminales (List<Terminal> listaTerminales)
-	{
-		this.listaTerminales = listaTerminales;
-	} 
 	public void agregarTerminal(Terminal terminal){
-		listaTerminales.add(terminal);
+		//listaTerminales.add(terminal);
+		entityManager().persist(terminal);
 	}
+	@SuppressWarnings("unchecked")
 	public List<Terminal> obtenerTerminales()
-	{
-		return listaTerminales;
+	{	
+		return (List<Terminal>) entityManager().createQuery("FROM Terminal").getResultList();
 	}
 	@SuppressWarnings("unchecked")
 	public List<Terminal> obtenerTerminalesPersistidas(){

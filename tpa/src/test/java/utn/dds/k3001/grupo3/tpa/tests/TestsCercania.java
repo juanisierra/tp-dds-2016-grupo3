@@ -11,11 +11,17 @@ import utn.dds.k3001.grupo3.tpa.pois.Servicio;
 
 import java.time.LocalTime;
 import java.util.Arrays;
+
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+
 import utn.dds.k3001.grupo3.tpa.geo.*;
-public class TestsCercania {
+public class TestsCercania implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps{
 	Mapa CABA;
 	Comuna comuna1;
 	Rubro libreria;
@@ -27,7 +33,7 @@ public class TestsCercania {
 	
 	@Before
 	public void init()
-	{	
+	{	beginTransaction();
 		CABA = Mapa.getInstance();
 		CABA.resetMapa();
 		comuna1 = new Comuna("comuna 1",Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,0.011), new PersistablePoint(0.011,0.011), new PersistablePoint (0.011,0)));
@@ -37,6 +43,10 @@ public class TestsCercania {
 		parada114 = new ParadaColectivo("parada 114","Chivilcoy","devoto",1000,new PersistablePoint(0.01,0.01),114);
 		cgp1 = new CGP("cgp1","beiro","caballito",100,new PersistablePoint(0.0102,0.0101),comuna1);
 
+	}
+	@After
+	public void end(){
+		rollbackTransaction();
 	}
 	@Test
 	public void testEstaCercaParadaDeColectivo() 

@@ -11,12 +11,19 @@ import utn.dds.k3001.grupo3.tpa.pois.Servicio;
 
 import java.time.LocalTime;
 import java.util.Arrays;
+
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+
 import utn.dds.k3001.grupo3.tpa.geo.*;
 
-public class TestsBusquedaPOI 
+public class TestsBusquedaPOI  extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps
 {	
 	Mapa CABA;
 	Comuna comuna1;
@@ -29,6 +36,7 @@ public class TestsBusquedaPOI
 	
 	@Before
 	public void init(){	
+		beginTransaction();
 		CABA = Mapa.getInstance();
 		CABA.resetMapa();
 		comuna1 = new Comuna("comuna 1",Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));
@@ -43,7 +51,10 @@ public class TestsBusquedaPOI
 		CABA.agregarPoi(libreriaYenny);
 		CABA.agregarPoi(cgp1);
 	}
-	
+	@After
+	public void end() {
+		rollbackTransaction();
+	}
 	@Test
 	public void testBuscarAltaDomicilio(){	
 		Assert.assertTrue(CABA.buscar("alta domicilio").contains(cgp1));

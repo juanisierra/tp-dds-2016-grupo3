@@ -16,10 +16,16 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.mockito.Mockito;
+import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+
 import utn.dds.k3001.grupo3.tpa.geo.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import org.junit.After;
 import org.junit.Assert;
 
 import utn.dds.k3001.grupo3.tpa.busquedas.*;
@@ -29,7 +35,7 @@ import utn.dds.k3001.grupo3.tpa.pois.Disponibilidad;
 import utn.dds.k3001.grupo3.tpa.pois.LocalComercial;
 import utn.dds.k3001.grupo3.tpa.pois.Rubro;
 import utn.dds.k3001.grupo3.tpa.procesosProgramados.*;
-public class TestsProcesosBatch {
+public class TestsProcesosBatch implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps{
 	ParserArchivoLocales parser;
 	File archivoPrueba;
 	RepositorioInterno repositorioPOI;
@@ -42,7 +48,7 @@ public class TestsProcesosBatch {
 	
 	@Before
 	public void init() throws FallaProcesoException	{
-
+		beginTransaction();
 		try {
 			archivoPrueba = carpetaTemporal.newFile("prueba1.txt");
 		} catch (IOException e) {
@@ -52,11 +58,14 @@ public class TestsProcesosBatch {
 		archivoPrueba.setWritable(true);
 		parser = new ParserArchivoLocales(archivoPrueba.getAbsolutePath());
 		repositorioPOI = RepositorioInterno.getInstance();
-		repositorioPOI.resetRepositorio();
 		panaderia = new LocalComercial("panaderia","","",0,new PersistablePoint(0,0),new Rubro("panaderias",10),Disponibilidad.lunesAViernes(LocalTime.of(10, 0), LocalTime.of(15, 0)));
 		repositorioPOI.agregarPoi(panaderia);
 		actualizarLocales = new ActualizarLocales(repositorioPOI,archivoPrueba.getAbsolutePath());
 		
+	}
+	@After
+	public void end() {
+		rollbackTransaction();
 	}
 	@Test
 	public void testPanaderiaConComida() throws IOException, FallaProcesoException	{	
@@ -116,7 +125,8 @@ public class TestsProcesosBatch {
 	@Test
 	public void testSeAgreganAcciones(){
 		Terminal terminal = new Terminal(null, null);
-		RepositorioTerminales lista = new RepositorioTerminales(Arrays.asList(terminal));
+		RepositorioTerminales lista = RepositorioTerminales.getInstance();
+		lista.agregarTerminal(terminal);
 		ActualizarAcciones actualizar =new ActualizarAcciones(lista, Arrays.asList(AccionesBusqueda.GUARDARBUSQUEDA), new ArrayList<AccionesBusqueda>());
 		actualizar.call();
 		Assert.assertEquals(1,terminal.cantObserversBusqueda(),0);
@@ -127,14 +137,14 @@ public class TestsProcesosBatch {
 		Terminal terminal = new Terminal(null, null);
 		terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 		Assert.assertEquals(1,terminal.cantObserversBusqueda(),0);
-		RepositorioTerminales lista = new RepositorioTerminales(Arrays.asList(terminal));
+		RepositorioTerminales lista = RepositorioTerminales.getInstance();
+		lista.agregarTerminal(terminal);
 		ActualizarAcciones actualizar =new ActualizarAcciones(lista, new ArrayList<AccionesBusqueda>(),Arrays.asList(AccionesBusqueda.GUARDARBUSQUEDA));
 		actualizar.call();
 		Assert.assertEquals(0,terminal.cantObserversBusqueda(),0);
 		}
 	@Test 
 	public void testDarDeBajaPOI() throws JsonProcessingException, IOException, FallaProcesoException{
-		repositorioPOI.resetRepositorio();
 		repositorioPOI.agregarPoi(panaderia);
 		Assert.assertEquals(1,repositorioPOI.getAllPOIS().size(),0);
 		OldPOISRequestService mockRequest = Mockito.mock(OldPOISRequestService.class);

@@ -12,39 +12,31 @@ import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 public class RepositorioBusquedas implements WithGlobalEntityManager{
-private List<Busqueda> listaBusquedas;
 private static final RepositorioBusquedas INSTANCE = new RepositorioBusquedas();
 public static RepositorioBusquedas getInstance(){
 	return INSTANCE;
 }
-public void resetRepositorio(){
-	listaBusquedas.clear();
-}
-private RepositorioBusquedas()
-{
-	listaBusquedas = new ArrayList<Busqueda>();
-}
+private RepositorioBusquedas(){}
+@SuppressWarnings("unchecked")
 public Map<Terminal,List<Integer>> busquedasParcialesPorTerminal(){	
-	return  listaBusquedas.stream()
+	return  ((List<Busqueda>) entityManager().createQuery("FROM Busqueda").getResultList()).stream()
 			.collect(Collectors.groupingBy(busqueda -> busqueda.getTerminal(),Collectors.mapping(busqueda-> busqueda.getCantidadResultados(), Collectors.toList())));
 }
+@SuppressWarnings("unchecked")
 public Map<Terminal,Integer> cantResultadosTotalesPorTerminal(){
-	return listaBusquedas.stream()
+	return ((List<Busqueda>) entityManager().createQuery("FROM Busqueda").getResultList()).stream()
 			.collect(Collectors.groupingBy(busqueda -> busqueda.getTerminal(),Collectors.summingInt(busqueda-> busqueda.getCantidadResultados())));
 }
+@SuppressWarnings("unchecked")
+public List<Busqueda> getBusquedas() {
+	return ((List<Busqueda>) entityManager().createQuery("FROM Busqueda").getResultList());
+}
+@SuppressWarnings("unchecked")
 public Map<LocalDate,Long> busquedasPorFecha(){
-	return listaBusquedas.stream()
+	return ((List<Busqueda>) entityManager().createQuery("FROM Busqueda").getResultList()).stream()
 			.collect(Collectors.groupingBy(busqueda -> busqueda.getFecha(), Collectors.counting()));
 }
 public void buscar(Busqueda busqueda) {
-	listaBusquedas.add(busqueda);
-}
-@SuppressWarnings("unchecked")
-public List<Busqueda> obtenerBusquedasPersistidas(){
-	return (List<Busqueda>) entityManager().createQuery("FROM Busqueda").getResultList();
-	
-}
-public void persistirBusquedas(){
-	listaBusquedas.forEach(busqueda -> entityManager().persist(busqueda));
+	entityManager().persist(busqueda);
 }
 }

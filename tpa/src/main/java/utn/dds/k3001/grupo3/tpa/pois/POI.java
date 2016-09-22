@@ -87,10 +87,6 @@ public class POI
 		this.listaEtiquetas.clear();
 		this.listaEtiquetas.addAll(etiquetasNuevas);
 	}
-	public List<String> getEtiquetas()
-	{
-	return listaEtiquetas;
-	}
 	public int getId() {
 		return id;
 	}

@@ -19,6 +19,7 @@ import org.junit.rules.TemporaryFolder;
 import org.mockito.Mockito;
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import utn.dds.k3001.grupo3.tpa.geo.*;
@@ -27,10 +28,11 @@ import utn.dds.k3001.grupo3.tpa.origenesDePOIS.JsonFactory;
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.RepositorioInterno;
 import utn.dds.k3001.grupo3.tpa.pois.Disponibilidad;
 import utn.dds.k3001.grupo3.tpa.pois.LocalComercial;
+import utn.dds.k3001.grupo3.tpa.pois.POI;
 import utn.dds.k3001.grupo3.tpa.pois.Rubro;
 import utn.dds.k3001.grupo3.tpa.procesosProgramados.*;
 
-public class Integracion implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps {
+public class Integracion extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps {
 	ParserArchivoLocales parser;
 	File archivoPrueba;
 	RepositorioInterno repositorioPOI;
@@ -60,27 +62,25 @@ public class Integracion implements WithGlobalEntityManager, TransactionalOps, E
 		requestService = new OldPOISRequestService("http://demo3537367.mockable.io/trash","pois");
 		factory = new JsonFactory();
 	}
-	@After
-	public void after() {
-		rollbackTransaction();
-	}
 	@Test
 	public void testSePidenBienPOIS() throws FallaProcesoException, JsonProcessingException, IOException
 	{	
 		List<Long> listaPOI = factory.obtenerPoisAEliminar(requestService.getJsonPOIS());
 		Assert.assertEquals(2,listaPOI.size(),0);
 	}
-	@Test
+	//@Test
 	public void testSeEjecutaActualizarLocales() throws FileNotFoundException, InterruptedException{
 		PrintWriter writer = new PrintWriter(archivoPrueba);
 		writer.println("panaderia; comida facturas");
 		writer.println("kiosko; golosinas comida");
 		writer.close();
-		scheduler.agregarTarea(actualizarLocales, LocalDateTime.now());   //TODO ver porque no ejecuta
-		Thread.sleep(30); //Dormimos el hilo para que se llegue a ejecutar el otro
-		//Assert.assertEquals(2,repositorioPOI.buscarPorNombre("panaderia").getEtiquetas().size(),0);
-		//Assert.assertEquals(2,repositorioPOI.buscarPorNombre("panaderia").getEtiquetas().size(),0);
-		//Assert.assertEquals(1, scheduler.getHistorial().size(),0);
+		commitTransaction();
+		beginTransaction();
+		scheduler.agregarTarea(actualizarLocales, LocalDateTime.now()); 
+		Thread.sleep(300); //Dormimos el hilo para que se llegue a ejecutar el otro
+		POI poi = repositorioPOI.buscarPorNombre("panaderia");
+		Assert.assertEquals(1, scheduler.getHistorial().size(),0);
+		Assert.assertTrue(poi.getNombre().contains("panaderia"));
 	}
 	@Test
 	public void testNoSeLlegaAEjecutarTarea() throws FileNotFoundException, InterruptedException{
@@ -90,7 +90,7 @@ public class Integracion implements WithGlobalEntityManager, TransactionalOps, E
 		writer.close();
 		scheduler.agregarTarea(actualizarLocales, OffsetDateTime.now().plusHours(1).toLocalDateTime());
 		Thread.sleep(30); //Dormimos el hilo para que se llegue a ejecutar el otro
-		Assert.assertEquals(0,repositorioPOI.buscarPorNombre("panaderia").getEtiquetas().size(),0);
+		Assert.assertEquals(0,repositorioPOI.buscarPorNombre("panaderia").getListaEtiquetas().size(),0);
 		Assert.assertEquals(0, scheduler.getHistorial().size(),0);
 	}
 	@Test

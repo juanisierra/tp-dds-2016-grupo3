@@ -8,6 +8,7 @@ import org.junit.*;
 import org.mockito.Mockito;
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import utn.dds.k3001.grupo3.tpa.geo.*;
@@ -19,7 +20,7 @@ import utn.dds.k3001.grupo3.tpa.pois.Comuna;
 import utn.dds.k3001.grupo3.tpa.pois.Disponibilidad;
 import utn.dds.k3001.grupo3.tpa.pois.Servicio;
 import utn.dds.k3001.grupo3.tpa.tests.matchers.*;
-public class TestsAdapterSistemaCGP implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps{
+public class TestsAdapterSistemaCGP extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps{
 	Mapa CABA;
 	SistemaCGP sistemaMock;
 	AdapterSistemaCGP adapter;
@@ -48,10 +49,7 @@ public void init() {
 	cgpCaballito = new CentroDTO(1,"Caballito","Juan Pablo","Rivadavia 123","4444-4444",listaServiciosDTO);
 	CABA.agregarOrigenDeDatos(adapter);
 }
-@After
-public void end() {
-	rollbackTransaction();
-}
+
 @Test
 public void testAdaptarServicio() {
 	Assert.assertThat(miCambioDeDomicilio,new ServiciosIgualesDisponibilidades(adapter.adaptarServicios(listaServiciosDTO).get(0)));

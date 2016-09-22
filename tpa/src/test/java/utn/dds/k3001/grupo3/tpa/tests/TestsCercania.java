@@ -18,10 +18,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import utn.dds.k3001.grupo3.tpa.geo.*;
-public class TestsCercania implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps{
+public class TestsCercania extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps{
 	Mapa CABA;
 	Comuna comuna1;
 	Rubro libreria;
@@ -44,10 +45,7 @@ public class TestsCercania implements WithGlobalEntityManager, TransactionalOps,
 		cgp1 = new CGP("cgp1","beiro","caballito",100,new PersistablePoint(0.0102,0.0101),comuna1);
 
 	}
-	@After
-	public void end(){
-		rollbackTransaction();
-	}
+
 	@Test
 	public void testEstaCercaParadaDeColectivo() 
 	{

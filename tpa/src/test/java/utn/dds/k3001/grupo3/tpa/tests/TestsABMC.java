@@ -18,7 +18,7 @@ import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import utn.dds.k3001.grupo3.tpa.geo.*;
-public class TestsABMC implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps{
+public class TestsABMC extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps{
 	
 	Mapa CABA;
 	Comuna comuna1;
@@ -37,10 +37,6 @@ public class TestsABMC implements WithGlobalEntityManager, TransactionalOps, Ent
 		libreriaYenny = new LocalComercial("libreria yenny","Beiro","devoto",100,new PersistablePoint(0.01,0.01),libreria,disponibilidadLibrerias);
 		
 		
-	}
-	@After
-	public void end() {
-		rollbackTransaction();
 	}
 	@Test
 	public void testAgregarLibreriaYenny () {

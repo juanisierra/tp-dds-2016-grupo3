@@ -11,9 +11,10 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
-public class TestsAdapterBancos implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps{
+public class TestsAdapterBancos extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps{
 	Mapa CABA;
 	RequestService requestServiceMock;
 	public String listaBancos = "["
@@ -45,10 +46,6 @@ public class TestsAdapterBancos implements WithGlobalEntityManager, Transactiona
 		Mockito.when(requestServiceMock.getJsonBancos("","")).thenReturn(listaBancos);
 		adapter = new AdapterSistemaBancos(requestServiceMock);
 		
-	}
-	@After 
-	public void end() {
-		rollbackTransaction();
 	}
 	@Test
 	public void testElMapaEncuentra2Bancos() throws Exception{

@@ -51,10 +51,7 @@ public class TestsBusquedaPOI  extends AbstractPersistenceTest implements WithGl
 		CABA.agregarPoi(libreriaYenny);
 		CABA.agregarPoi(cgp1);
 	}
-	@After
-	public void end() {
-		rollbackTransaction();
-	}
+
 	@Test
 	public void testBuscarAltaDomicilio(){	
 		Assert.assertTrue(CABA.buscar("alta domicilio").contains(cgp1));

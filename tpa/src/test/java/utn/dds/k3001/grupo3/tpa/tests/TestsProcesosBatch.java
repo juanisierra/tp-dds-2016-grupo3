@@ -35,7 +35,7 @@ import utn.dds.k3001.grupo3.tpa.pois.Disponibilidad;
 import utn.dds.k3001.grupo3.tpa.pois.LocalComercial;
 import utn.dds.k3001.grupo3.tpa.pois.Rubro;
 import utn.dds.k3001.grupo3.tpa.procesosProgramados.*;
-public class TestsProcesosBatch implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps{
+public class TestsProcesosBatch extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps{
 	ParserArchivoLocales parser;
 	File archivoPrueba;
 	RepositorioInterno repositorioPOI;
@@ -62,10 +62,6 @@ public class TestsProcesosBatch implements WithGlobalEntityManager, Transactiona
 		repositorioPOI.agregarPoi(panaderia);
 		actualizarLocales = new ActualizarLocales(repositorioPOI,archivoPrueba.getAbsolutePath());
 		
-	}
-	@After
-	public void end() {
-		rollbackTransaction();
 	}
 	@Test
 	public void testPanaderiaConComida() throws IOException, FallaProcesoException	{	
@@ -95,7 +91,7 @@ public class TestsProcesosBatch implements WithGlobalEntityManager, Transactiona
 		writer.println("kiosko; golosinas comida");
 		writer.close();
 		actualizarLocales.call();
-		Assert.assertEquals(2,repositorioPOI.buscarPorNombre("panaderia").getEtiquetas().size(),0);
+		Assert.assertEquals(2,repositorioPOI.buscarPorNombre("panaderia").getListaEtiquetas().size(),0);
 	}
 	@Test
 	public void testSeReintenta3Veces() throws Exception{

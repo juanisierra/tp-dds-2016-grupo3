@@ -9,31 +9,27 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 
 
-public class RepositorioTerminales implements OrigenDeTerminales, WithGlobalEntityManager{
-	List<Terminal> listaTerminales;
+public class RepositorioTerminales implements OrigenDeTerminales{
 	public static RepositorioTerminales INSTANCE = new RepositorioTerminales();
+	public static TerminalOrigin origen = new InMemoryTerminalOrigin();
 	public static RepositorioTerminales getInstance(){
 		return INSTANCE;
 	}
-	private RepositorioTerminales ()
-	{
-		listaTerminales = new ArrayList<Terminal>();
-	} 
+	private RepositorioTerminales (){}
 	public void agregarTerminal(Terminal terminal){
-		//listaTerminales.add(terminal);
-		entityManager().persist(terminal);
+		origen.agregarTerminal(terminal);
 	}
-	@SuppressWarnings("unchecked")
 	public List<Terminal> obtenerTerminales()
 	{	
-		return (List<Terminal>) entityManager().createQuery("FROM Terminal").getResultList();
+		return origen.obtenerTerminales();
 	}
-	@SuppressWarnings("unchecked")
-	public List<Terminal> obtenerTerminalesPersistidas(){
-		return (List<Terminal>) entityManager().createQuery("FROM Terminal").getResultList();
-		
+	public static void persistirEnMemoria(){
+		origen = new InMemoryTerminalOrigin();
 	}
-	public void persistirTerminales(){
-		listaTerminales.forEach(terminal -> entityManager().persist(terminal));
+	public static void persistirEnBD(){
+		origen = new PersistanceTerminalOrigin();
+	}
+	public static void reset() {
+		origen.reset();
 	}
 }

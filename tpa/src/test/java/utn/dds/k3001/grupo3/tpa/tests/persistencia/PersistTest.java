@@ -4,6 +4,8 @@ package utn.dds.k3001.grupo3.tpa.tests.persistencia;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +20,12 @@ public class PersistTest extends AbstractPersistenceTest implements WithGlobalEn
 	@Before
 	public void before(){
 		Mapa.getInstance().resetMapa();
+		RepositorioTerminales.reset();
+		RepositorioTerminales.persistirEnBD();
+	}
+	@After
+	public void after(){
+		RepositorioTerminales.persistirEnMemoria();
 	}
 	@Test
 	public void testPersistirTerminales(){
@@ -27,9 +35,8 @@ public class PersistTest extends AbstractPersistenceTest implements WithGlobalEn
 	RepositorioTerminales repo = RepositorioTerminales.getInstance();
 	repo.agregarTerminal(terminal1);
 	repo.agregarTerminal(terminal2);
-	repo.persistirTerminales();
 	entityManager().flush();
-	List<Terminal> lista = repo.obtenerTerminalesPersistidas();
+	List<Terminal> lista = repo.obtenerTerminales();
 	Assert.assertEquals(terminal1.getNombre(),lista.get(0).getNombre());
 	Assert.assertEquals(terminal1.getObserversBusqueda(),lista.get(0).getObserversBusqueda());
 	}

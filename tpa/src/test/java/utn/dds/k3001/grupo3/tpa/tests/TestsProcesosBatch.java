@@ -58,6 +58,7 @@ public class TestsProcesosBatch extends AbstractPersistenceTest implements WithG
 		archivoPrueba.setWritable(true);
 		parser = new ParserArchivoLocales(archivoPrueba.getAbsolutePath());
 		repositorioPOI = RepositorioInterno.getInstance();
+		RepositorioInterno.reset();
 		panaderia = new LocalComercial("panaderia","","",0,new PersistablePoint(0,0),new Rubro("panaderias",10),Disponibilidad.lunesAViernes(LocalTime.of(10, 0), LocalTime.of(15, 0)));
 		repositorioPOI.agregarPoi(panaderia);
 		actualizarLocales = new ActualizarLocales(repositorioPOI,archivoPrueba.getAbsolutePath());
@@ -141,7 +142,7 @@ public class TestsProcesosBatch extends AbstractPersistenceTest implements WithG
 		}
 	@Test 
 	public void testDarDeBajaPOI() throws JsonProcessingException, IOException, FallaProcesoException{
-		repositorioPOI.agregarPoi(panaderia);
+		
 		Assert.assertEquals(1,repositorioPOI.getAllPOIS().size(),0);
 		OldPOISRequestService mockRequest = Mockito.mock(OldPOISRequestService.class);
 		Mockito.when(mockRequest.getJsonPOIS()).thenReturn("");

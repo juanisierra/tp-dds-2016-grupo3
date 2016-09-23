@@ -11,26 +11,34 @@ import utn.dds.k3001.grupo3.tpa.pois.POI;
 public class Mapa 
 {
 	private List&lt;OrigenDeDatos&gt; origenesDeDatos;
-	private RepositorioInterno repositorioInterno;
+<span class="fc" id="L14">	private final static Mapa INSTANCE = new Mapa();</span>
 	
-<span class="fc" id="L16">	public Mapa(){</span>
+<span class="fc" id="L16">	private Mapa(){</span>
 <span class="fc" id="L17">		this.origenesDeDatos = new LinkedList&lt;OrigenDeDatos&gt;();</span>
-<span class="fc" id="L18">		this.repositorioInterno = new RepositorioInterno();</span>
-<span class="fc" id="L19">		this.origenesDeDatos.add(repositorioInterno);</span>
-<span class="fc" id="L20">	}</span>
-	public void agregarOrigenDeDatos(OrigenDeDatos origen){
-<span class="fc" id="L22">		origenesDeDatos.add(origen);</span>
-<span class="fc" id="L23">	}</span>
-	public void agregarPoi(POI poiNvo){
-<span class="fc" id="L25">		repositorioInterno.agregarPoi(poiNvo);</span>
-<span class="fc" id="L26">	}</span>
-	public void eliminarPoi(POI poiAEliminar){
-<span class="fc" id="L28">		repositorioInterno.eliminarPoi(poiAEliminar);</span>
-<span class="fc" id="L29">	}</span>
-	public List&lt;POI&gt; buscar(String criterio){
-<span class="fc" id="L31">		return origenesDeDatos.stream()</span>
-<span class="fc" id="L32">							  .flatMap(origen -&gt; origen.buscar(criterio).stream())</span>
-<span class="fc" id="L33">							  .collect(Collectors.toList());</span>
+<span class="fc" id="L18">		this.origenesDeDatos.add(RepositorioInterno.getInstance());</span>
+<span class="fc" id="L19">	}</span>
+	public  void resetMapa() {
+<span class="fc" id="L21">		this.origenesDeDatos.clear();</span>
+<span class="fc" id="L22">		this.origenesDeDatos.add(RepositorioInterno.getInstance());</span>
+<span class="fc" id="L23">		RepositorioInterno.reset();</span>
+<span class="fc" id="L24">	}</span>
+	public static Mapa getInstance() {
+<span class="fc" id="L26">		return INSTANCE;</span>
 	}
+	public void agregarOrigenDeDatos(OrigenDeDatos origen){
+<span class="fc" id="L29">		origenesDeDatos.add(origen);</span>
+<span class="fc" id="L30">	}</span>
+	public void agregarPoi(POI poiNvo){
+<span class="fc" id="L32">		RepositorioInterno.getInstance().agregarPoi(poiNvo);</span>
+<span class="fc" id="L33">	}</span>
+	public void eliminarPoi(POI poiAEliminar){
+<span class="fc" id="L35">		RepositorioInterno.getInstance().eliminarPoi(poiAEliminar);</span>
+<span class="fc" id="L36">	}</span>
+	public List&lt;POI&gt; buscar(String criterio){
+<span class="fc" id="L38">		return origenesDeDatos.stream()</span>
+<span class="fc" id="L39">							  .flatMap(origen -&gt; origen.buscar(criterio).stream())</span>
+<span class="fc" id="L40">							  .collect(Collectors.toList());</span>
+	}
+	
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

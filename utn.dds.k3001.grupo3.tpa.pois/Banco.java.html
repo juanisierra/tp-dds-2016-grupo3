@@ -2,24 +2,29 @@
 
 import java.time.LocalTime;
 import java.util.List;
-import org.uqbar.geodds.Point;
+
+import javax.persistence.Entity;
+
+import utn.dds.k3001.grupo3.tpa.geo.*;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+@Entity
 public class Banco extends PrestadorDeServicios 
-{	
-	public Banco(String nombre, String calle,  String barrio, int altura, Point posicion){
-<span class="nc" id="L12">		super(nombre,calle,barrio,altura,posicion);</span>
-<span class="nc" id="L13">	}</span>
+{	public Banco(){
+<span class="fc" id="L14">	super();</span>
+<span class="fc" id="L15">}</span>
+	public Banco(String nombre, String calle,  String barrio, int altura, PersistablePoint posicion){
+<span class="nc" id="L17">		super(nombre,calle,barrio,altura,posicion);</span>
+<span class="nc" id="L18">	}</span>
 	@JsonCreator
 	public Banco(@JsonProperty(&quot;banco&quot;)String nombre, @JsonProperty(&quot;sucursal&quot;) String barrio,  @JsonProperty(&quot;x&quot;)int PosX,  @JsonProperty(&quot;y&quot;)int PosY,@JsonProperty(&quot;servicios&quot;) List&lt;String&gt; nombresServicios){
-<span class="fc" id="L16">		super(nombre,&quot;&quot;,barrio,0,new Point(PosX,PosY));</span>
-<span class="fc" id="L17">		nombresServicios.forEach(servicio -&gt; serviciosOfrecidos.add(new Servicio(servicio,Disponibilidad.lunesAViernes(LocalTime.of(10,0),LocalTime.of(15,0)))));</span>
-<span class="fc" id="L18">	}</span>
+<span class="fc" id="L21">		super(nombre,&quot;&quot;,barrio,0,new PersistablePoint(PosX,PosY));</span>
+<span class="fc" id="L22">		nombresServicios.forEach(servicio -&gt; serviciosOfrecidos.add(new Servicio(servicio,Disponibilidad.lunesAViernes(LocalTime.of(10,0),LocalTime.of(15,0)))));</span>
+<span class="fc" id="L23">	}</span>
 	public void agregarServicio(Servicio servicio){	
-<span class="nc" id="L20">		servicio.limpiarDisponibilidad();</span>
-<span class="nc" id="L21">		servicio.agregarDisponibilidad(Disponibilidad.lunesAViernes(LocalTime.of(10,0),LocalTime.of(15,0)));</span>
-<span class="nc" id="L22">		serviciosOfrecidos.add(servicio);</span>
-<span class="nc" id="L23">	}</span>
+<span class="nc" id="L25">		servicio.limpiarDisponibilidad();</span>
+<span class="nc" id="L26">		servicio.agregarDisponibilidad(Disponibilidad.lunesAViernes(LocalTime.of(10,0),LocalTime.of(15,0)));</span>
+<span class="nc" id="L27">		serviciosOfrecidos.add(servicio);</span>
+<span class="nc" id="L28">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

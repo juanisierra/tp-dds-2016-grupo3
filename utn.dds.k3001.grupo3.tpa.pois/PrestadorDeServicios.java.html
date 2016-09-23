@@ -3,30 +3,44 @@
 import java.time.*;
 import java.util.LinkedList;
 import java.util.List;
-import org.uqbar.geodds.Point;
 
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Cascade;
+
+import utn.dds.k3001.grupo3.tpa.geo.*;
+@Entity
+ //TODO Agregar single-table o ver como
 public abstract class PrestadorDeServicios extends POI 
-{
+{	@ManyToMany //TODO Revisar relacion
+	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	protected List&lt;Servicio&gt; serviciosOfrecidos;
-	
-	public PrestadorDeServicios(String nombre, String calle, String barrio, int altura, Point posicion){
-<span class="fc" id="L13">		super(nombre,calle,barrio,altura,posicion);</span>
-<span class="fc" id="L14">		this.serviciosOfrecidos = new LinkedList&lt;Servicio&gt;();</span>
-<span class="fc" id="L15">	}</span>
+<span class="fc" id="L22">	public PrestadorDeServicios(){}</span>
+	public PrestadorDeServicios(String nombre, String calle, String barrio, int altura, PersistablePoint posicion){
+<span class="fc" id="L24">		super(nombre,calle,barrio,altura,posicion);</span>
+<span class="fc" id="L25">		this.serviciosOfrecidos = new LinkedList&lt;Servicio&gt;();</span>
+<span class="fc" id="L26">	}</span>
 	public void agregarServicio(Servicio servicio){
-<span class="fc" id="L17">		this.serviciosOfrecidos.add(servicio);</span>
-<span class="fc" id="L18">	}</span>
+<span class="fc" id="L28">		this.serviciosOfrecidos.add(servicio);</span>
+<span class="fc" id="L29">	}</span>
 	public boolean estaDisponible(LocalDateTime fechaBuscada, String servicio) {	
-<span class="fc bfc" id="L20" title="All 4 branches covered.">		return serviciosOfrecidos.stream().anyMatch(servicioBuscado -&gt; (servicioBuscado.nombre().contains(servicio) &amp;&amp; servicioBuscado.estaDisponible(fechaBuscada)));</span>
+<span class="fc bfc" id="L31" title="All 4 branches covered.">		return serviciosOfrecidos.stream().anyMatch(servicioBuscado -&gt; (servicioBuscado.nombre().contains(servicio) &amp;&amp; servicioBuscado.estaDisponible(fechaBuscada)));</span>
 	}
 	public boolean esBuscado(String criterio){
-<span class="fc bfc" id="L23" title="All 4 branches covered.">		return super.esBuscado(criterio) || this.tieneServicio(criterio);</span>
+<span class="fc bfc" id="L34" title="All 4 branches covered.">		return super.esBuscado(criterio) || this.tieneServicio(criterio);</span>
 	}
 	private boolean tieneServicio(String servicio) {
-<span class="fc" id="L26">		return serviciosOfrecidos.stream().anyMatch(unServicio -&gt; unServicio.nombre().contains(servicio));</span>
+<span class="fc" id="L37">		return serviciosOfrecidos.stream().anyMatch(unServicio -&gt; unServicio.nombre().contains(servicio));</span>
 	}
 	public List&lt;Servicio&gt; getServiciosOfrecidos() {
-<span class="fc" id="L29">		return serviciosOfrecidos;</span>
+<span class="fc" id="L40">		return serviciosOfrecidos;</span>
 	}
+	public void setServiciosOfrecidos(List&lt;Servicio&gt; serviciosOfrecidos) {
+<span class="nc" id="L43">		this.serviciosOfrecidos = serviciosOfrecidos;</span>
+<span class="nc" id="L44">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

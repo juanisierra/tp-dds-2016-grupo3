@@ -3,40 +3,94 @@
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Cascade;
+import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
+	@Entity 
 public class Busqueda
-{
+{	@Id @GeneratedValue
+	private int id;
 	private int cantResultados;
 	private String criterio;
 	private double tiempoDemorado;
+	@Convert(converter = LocalDateConverter.class)
 	private LocalDate fecha;
+	@ManyToOne
+	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	private Terminal terminal;
-<span class="fc" id="L13">	public Busqueda(Terminal terminal,int cantResultados, String criterio, LocalTime hInicio, LocalTime hFin, LocalDate fecha){</span>
-<span class="fc" id="L14">		this.terminal = terminal;</span>
-<span class="fc" id="L15">		this.cantResultados = cantResultados;</span>
-<span class="fc" id="L16">		this.criterio = criterio;</span>
-<span class="fc" id="L17">		this.tiempoDemorado = ChronoUnit.SECONDS.between(hInicio, hFin);</span>
-<span class="fc" id="L18">		this.fecha = fecha;</span>
-<span class="fc" id="L19">	}</span>
+	
+	
+<span class="fc" id="L29">	public Busqueda(Terminal terminal,int cantResultados, String criterio, LocalTime hInicio, LocalTime hFin, LocalDate fecha){</span>
+<span class="fc" id="L30">		this.terminal = terminal;</span>
+<span class="fc" id="L31">		this.cantResultados = cantResultados;</span>
+<span class="fc" id="L32">		this.criterio = criterio;</span>
+<span class="fc" id="L33">		this.tiempoDemorado = ChronoUnit.SECONDS.between(hInicio, hFin);</span>
+<span class="fc" id="L34">		this.fecha = fecha;</span>
+<span class="fc" id="L35">	}</span>
+	
+<span class="fc" id="L37">	public Busqueda(){}</span>
 	public Terminal getTerminal(){
-<span class="fc" id="L21">	return terminal;</span>
+<span class="fc" id="L39">	return terminal;</span>
 	}
 	public boolean esEnFecha(LocalDate fecha){
-<span class="nc" id="L24">		return this.fecha.equals(fecha);</span>
+<span class="nc" id="L42">		return this.fecha.equals(fecha);</span>
 	}
 	
 	public int getCantidadResultados(){
-<span class="fc" id="L28">		return this.cantResultados;</span>
+<span class="fc" id="L46">		return this.cantResultados;</span>
 	}
 	
 	public double getTiempo(){
-<span class="fc" id="L32">		return this.tiempoDemorado;</span>
+<span class="fc" id="L50">		return this.tiempoDemorado;</span>
 	}
 	
 	public LocalDate getFecha(){
-<span class="fc" id="L36">		return this.fecha;</span>
+<span class="fc" id="L54">		return this.fecha;</span>
 	}
 	public String getCriterio() {
-<span class="nc" id="L39">		return criterio;</span>
+<span class="fc" id="L57">		return criterio;</span>
 	}
+
+	public int getId() {
+<span class="nc" id="L61">		return id;</span>
+	}
+
+	public void setId(int id) {
+<span class="nc" id="L65">		this.id = id;</span>
+<span class="nc" id="L66">	}</span>
+
+	public int getCantResultados() {
+<span class="nc" id="L69">		return cantResultados;</span>
+	}
+
+	public void setCantResultados(int cantResultados) {
+<span class="nc" id="L73">		this.cantResultados = cantResultados;</span>
+<span class="nc" id="L74">	}</span>
+
+	public double getTiempoDemorado() {
+<span class="nc" id="L77">		return tiempoDemorado;</span>
+	}
+
+	public void setTiempoDemorado(double tiempoDemorado) {
+<span class="nc" id="L81">		this.tiempoDemorado = tiempoDemorado;</span>
+<span class="nc" id="L82">	}</span>
+
+	public void setCriterio(String criterio) {
+<span class="nc" id="L85">		this.criterio = criterio;</span>
+<span class="nc" id="L86">	}</span>
+
+	public void setFecha(LocalDate fecha) {
+<span class="nc" id="L89">		this.fecha = fecha;</span>
+<span class="nc" id="L90">	}</span>
+
+	public void setTerminal(Terminal terminal) {
+<span class="nc" id="L93">		this.terminal = terminal;</span>
+<span class="nc" id="L94">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

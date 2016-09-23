@@ -4,18 +4,18 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import utn.dds.k3001.grupo3.tpa.busquedas.ObserverBusqueda;
+import utn.dds.k3001.grupo3.tpa.busquedas.AccionesBusqueda;
 import utn.dds.k3001.grupo3.tpa.busquedas.OrigenDeTerminales;
 import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 
 public class ActualizarAcciones implements Callable&lt;ResultadoProceso&gt;
 {
-	private List&lt;ObserverBusqueda&gt; accionesAAgregar;
-	private List&lt;ObserverBusqueda&gt; accionesAEliminar;
+	private List&lt;AccionesBusqueda&gt; accionesAAgregar;
+	private List&lt;AccionesBusqueda&gt; accionesAEliminar;
 	private OrigenDeTerminales terminales;
 	private int POISAfectados;
 	
-<span class="fc" id="L18">	public ActualizarAcciones(OrigenDeTerminales terminales,List&lt;ObserverBusqueda&gt; accionesAAgregar,List&lt;ObserverBusqueda&gt; accionesAEliminar){</span>
+<span class="fc" id="L18">	public ActualizarAcciones(OrigenDeTerminales terminales,List&lt;AccionesBusqueda&gt; accionesAAgregar,List&lt;AccionesBusqueda&gt; accionesAEliminar){</span>
 <span class="fc" id="L19">		this.accionesAAgregar = accionesAAgregar;</span>
 <span class="fc" id="L20">		this.accionesAEliminar = accionesAEliminar;</span>
 <span class="fc" id="L21">		this.terminales = terminales;</span>

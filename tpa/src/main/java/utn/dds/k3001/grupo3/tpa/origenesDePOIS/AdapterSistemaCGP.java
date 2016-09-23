@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.uqbar.geodds.Point;
 
+import utn.dds.k3001.grupo3.tpa.geo.*;
 import utn.dds.k3001.grupo3.tpa.DTO.*;
 import utn.dds.k3001.grupo3.tpa.pois.CGP;
 import utn.dds.k3001.grupo3.tpa.pois.Comuna;
@@ -30,7 +30,7 @@ public class AdapterSistemaCGP implements OrigenDeDatos{
 		LocalTime.of(rango.getHorarioHasta(),rango.getMinutosHasta()),Arrays.asList(DayOfWeek.of(rango.getNumeroDia())))).collect(Collectors.toList());
 	}
 	public CGP adaptarCGP(CentroDTO cgpDTO){//TODO Adaptar demas datos, chequear comunas
-		return new CGP(String.join(" ","CGP",Integer.valueOf(cgpDTO.getNumComuna()).toString()),cgpDTO.getDomicilio(),cgpDTO.getZonas(),0,new Point(0,0),new Comuna(new Integer(cgpDTO.getNumComuna()).toString()),(ArrayList<Servicio>) this.adaptarServicios(cgpDTO.getListaServicios()));
+		return new CGP(String.join(" ","CGP",Integer.valueOf(cgpDTO.getNumComuna()).toString()),cgpDTO.getDomicilio(),cgpDTO.getZonas(),0,new PersistablePoint(0,0),new Comuna(new Integer(cgpDTO.getNumComuna()).toString()),(ArrayList<Servicio>) this.adaptarServicios(cgpDTO.getListaServicios()));
 	}
 	public List<POI> buscar(String criterio){
 		return 	sistema.buscarPOIS("").stream().map(cgpDTO -> adaptarCGP(cgpDTO)).filter(CGP -> CGP.esBuscado(criterio)).collect(Collectors.toList());

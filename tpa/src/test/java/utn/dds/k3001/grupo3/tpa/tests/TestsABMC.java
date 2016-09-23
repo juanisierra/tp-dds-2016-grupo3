@@ -8,12 +8,17 @@ import utn.dds.k3001.grupo3.tpa.pois.Rubro;
 import java.time.LocalTime;
 import java.util.Arrays;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.uqbar.geodds.Point;
+import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
-public class TestsABMC {
+import utn.dds.k3001.grupo3.tpa.geo.*;
+public class TestsABMC extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps{
 	
 	Mapa CABA;
 	Comuna comuna1;
@@ -23,16 +28,21 @@ public class TestsABMC {
 
 	@Before
 	public void init(){
-		CABA = new Mapa();
-		comuna1 = new Comuna("comuna 1",Arrays.asList(new Point(0,0), new Point(0,0.011), new Point(0.011,0.011), new Point (0.011,0)));
+		beginTransaction();
+		CABA = Mapa.getInstance();
+		CABA.resetMapa();
+		comuna1 = new Comuna("comuna 1",Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,0.011), new PersistablePoint(0.011,0.011), new PersistablePoint (0.011,0)));
 		libreria = new Rubro("libreria",50);
 		disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));
-		libreriaYenny = new LocalComercial("libreria yenny","Beiro","devoto",100,new Point(0.01,0.01),libreria,disponibilidadLibrerias);
+		libreriaYenny = new LocalComercial("libreria yenny","Beiro","devoto",100,new PersistablePoint(0.01,0.01),libreria,disponibilidadLibrerias);
+		
+		
 	}
 	@Test
 	public void testAgregarLibreriaYenny () {
 		CABA.agregarPoi(libreriaYenny);
 		Assert.assertEquals(1, CABA.buscar("").size(),0);
+		
 	}
 	@Test
 	public void testEliminarLibreriaYenny() {

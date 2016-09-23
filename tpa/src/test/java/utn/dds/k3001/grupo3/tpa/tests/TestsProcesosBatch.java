@@ -16,10 +16,16 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.mockito.Mockito;
-import org.uqbar.geodds.Point;
+import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+
+import utn.dds.k3001.grupo3.tpa.geo.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import org.junit.After;
 import org.junit.Assert;
 
 import utn.dds.k3001.grupo3.tpa.busquedas.*;
@@ -29,7 +35,7 @@ import utn.dds.k3001.grupo3.tpa.pois.Disponibilidad;
 import utn.dds.k3001.grupo3.tpa.pois.LocalComercial;
 import utn.dds.k3001.grupo3.tpa.pois.Rubro;
 import utn.dds.k3001.grupo3.tpa.procesosProgramados.*;
-public class TestsProcesosBatch {
+public class TestsProcesosBatch extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps{
 	ParserArchivoLocales parser;
 	File archivoPrueba;
 	RepositorioInterno repositorioPOI;
@@ -42,7 +48,7 @@ public class TestsProcesosBatch {
 	
 	@Before
 	public void init() throws FallaProcesoException	{
-
+		beginTransaction();
 		try {
 			archivoPrueba = carpetaTemporal.newFile("prueba1.txt");
 		} catch (IOException e) {
@@ -51,10 +57,12 @@ public class TestsProcesosBatch {
 		scheduler = new SchedulerProcesos();
 		archivoPrueba.setWritable(true);
 		parser = new ParserArchivoLocales(archivoPrueba.getAbsolutePath());
-		repositorioPOI = new RepositorioInterno();
-		panaderia = new LocalComercial("panaderia","","",0,new Point(0,0),new Rubro("panaderias",10),Disponibilidad.lunesAViernes(LocalTime.of(10, 0), LocalTime.of(15, 0)));
+		repositorioPOI = RepositorioInterno.getInstance();
+		RepositorioInterno.reset();
+		panaderia = new LocalComercial("panaderia","","",0,new PersistablePoint(0,0),new Rubro("panaderias",10),Disponibilidad.lunesAViernes(LocalTime.of(10, 0), LocalTime.of(15, 0)));
 		repositorioPOI.agregarPoi(panaderia);
 		actualizarLocales = new ActualizarLocales(repositorioPOI,archivoPrueba.getAbsolutePath());
+		
 	}
 	@Test
 	public void testPanaderiaConComida() throws IOException, FallaProcesoException	{	
@@ -84,7 +92,7 @@ public class TestsProcesosBatch {
 		writer.println("kiosko; golosinas comida");
 		writer.close();
 		actualizarLocales.call();
-		Assert.assertEquals(2,repositorioPOI.buscarPorNombre("panaderia").getEtiquetas().size(),0);
+		Assert.assertEquals(2,repositorioPOI.buscarPorNombre("panaderia").getListaEtiquetas().size(),0);
 	}
 	@Test
 	public void testSeReintenta3Veces() throws Exception{
@@ -114,34 +122,34 @@ public class TestsProcesosBatch {
 	@Test
 	public void testSeAgreganAcciones(){
 		Terminal terminal = new Terminal(null, null);
-		RepositorioTerminales lista = new RepositorioTerminales(Arrays.asList(terminal));
-		ActualizarAcciones actualizar =new ActualizarAcciones(lista, Arrays.asList(new GuardarBusqueda(new RepositorioBusquedas())), new ArrayList<ObserverBusqueda>());
+		RepositorioTerminales lista = RepositorioTerminales.getInstance();
+		lista.agregarTerminal(terminal);
+		ActualizarAcciones actualizar =new ActualizarAcciones(lista, Arrays.asList(AccionesBusqueda.GUARDARBUSQUEDA), new ArrayList<AccionesBusqueda>());
 		actualizar.call();
 		Assert.assertEquals(1,terminal.cantObserversBusqueda(),0);
 		}
 	@Test
 	public void testSeEliminanAcciones(){
-		RepositorioBusquedas repositorio  = new RepositorioBusquedas();
+		RepositorioBusquedas repositorio  = RepositorioBusquedas.getInstance();
 		Terminal terminal = new Terminal(null, null);
-		GuardarBusqueda guardar = new GuardarBusqueda(repositorio);
-		terminal.agregarObserverBusqueda(guardar);
+		terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 		Assert.assertEquals(1,terminal.cantObserversBusqueda(),0);
-		RepositorioTerminales lista = new RepositorioTerminales(Arrays.asList(terminal));
-		ActualizarAcciones actualizar =new ActualizarAcciones(lista, new ArrayList<ObserverBusqueda>(),Arrays.asList(guardar));
+		RepositorioTerminales lista = RepositorioTerminales.getInstance();
+		lista.agregarTerminal(terminal);
+		ActualizarAcciones actualizar =new ActualizarAcciones(lista, new ArrayList<AccionesBusqueda>(),Arrays.asList(AccionesBusqueda.GUARDARBUSQUEDA));
 		actualizar.call();
 		Assert.assertEquals(0,terminal.cantObserversBusqueda(),0);
 		}
 	@Test 
 	public void testDarDeBajaPOI() throws JsonProcessingException, IOException, FallaProcesoException{
-		RepositorioInterno repoInt = new RepositorioInterno();
-		repoInt.agregarPoi(panaderia);
-		Assert.assertEquals(1,repoInt.getAllPOIS().size(),0);
+		
+		Assert.assertEquals(1,repositorioPOI.getAllPOIS().size(),0);
 		OldPOISRequestService mockRequest = Mockito.mock(OldPOISRequestService.class);
 		Mockito.when(mockRequest.getJsonPOIS()).thenReturn("");
 		JsonFactory mockfactory = Mockito.mock(JsonFactory.class);
 		Mockito.when(mockfactory.obtenerPoisAEliminar("")).thenReturn(Arrays.asList(panaderia.getID()));
-		DarDeBajaPOIS darDeBaja = new DarDeBajaPOIS(repoInt,mockfactory,mockRequest);
+		DarDeBajaPOIS darDeBaja = new DarDeBajaPOIS(repositorioPOI,mockfactory,mockRequest);
 		darDeBaja.call();
-		Assert.assertEquals(0,repoInt.getAllPOIS().size(),0);
+		Assert.assertEquals(0,repositorioPOI.getAllPOIS().size(),0);
 	}
 }

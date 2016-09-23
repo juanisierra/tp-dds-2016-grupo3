@@ -1,24 +1,44 @@
 package utn.dds.k3001.grupo3.tpa.pois;
 
-import org.uqbar.geodds.*;
+
+import utn.dds.k3001.grupo3.tpa.geo.*;
 import java.util.LinkedList;
 import java.util.List;
-import java.time.*;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Cascade;
+
+import java.time.*;
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class POI 
-{
+{	@Id @GeneratedValue
+	protected int id;
 	protected String nombre;
-	protected Point posicion;
+	@OneToOne
+	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
+	protected PersistablePoint posicion;
+	@ElementCollection
 	protected List<String> listaEtiquetas;
+	@Embedded
 	protected Direccion direccion;
-	protected long id;
-	public static long maxID = 0;
-	public POI(String nombre, String calle, String barrio, int altura, Point posicion) {
+
+	public POI(String nombre, String calle, String barrio, int altura, PersistablePoint posicion) {
 		this.direccion = new Direccion(calle,barrio,altura);
 		this.nombre = nombre;
 		this.posicion = posicion;
 		this.listaEtiquetas = new LinkedList<String>();
-		this.id = ++maxID;
+
+	}
+	public POI(){
 	}
 	public long getID(){
 	return id;
@@ -27,7 +47,7 @@ public class POI
 		this.listaEtiquetas.add(etiqueta);
 	}
 	
-	public boolean estaCerca(Point otraPosicion){
+	public boolean estaCerca(PersistablePoint otraPosicion){
 		return (posicion.distance(otraPosicion) <=0.5);
 	}
 	
@@ -47,11 +67,11 @@ public class POI
 		this.nombre = nombre;
 	}
 
-	public Point getPosicion() {
+	public PersistablePoint getPosicion() {
 		return posicion;
 	}
 
-	public void setPosicion(Point posicion) {
+	public void setPosicion(PersistablePoint posicion) {
 		this.posicion = posicion;
 	}
 
@@ -67,8 +87,16 @@ public class POI
 		this.listaEtiquetas.clear();
 		this.listaEtiquetas.addAll(etiquetasNuevas);
 	}
-	public List<String> getEtiquetas()
-	{
-	return listaEtiquetas;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public List<String> getListaEtiquetas() {
+		return listaEtiquetas;
+	}
+	public void setListaEtiquetas(List<String> listaEtiquetas) {
+		this.listaEtiquetas = listaEtiquetas;
 	}
 }

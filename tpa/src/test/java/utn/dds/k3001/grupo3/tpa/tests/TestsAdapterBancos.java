@@ -4,12 +4,17 @@ import utn.dds.k3001.grupo3.tpa.busquedas.*;
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.AdapterSistemaBancos;
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.RequestService;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
-public class TestsAdapterBancos {
+public class TestsAdapterBancos extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps{
 	Mapa CABA;
 	RequestService requestServiceMock;
 	public String listaBancos = "["
@@ -34,20 +39,24 @@ public class TestsAdapterBancos {
 	
 	@Before
 	public void init(){
-		CABA = new Mapa();
+		beginTransaction();
+		CABA = Mapa.getInstance();
+		CABA.resetMapa();
 		requestServiceMock = Mockito.mock(RequestService.class);
 		Mockito.when(requestServiceMock.getJsonBancos("","")).thenReturn(listaBancos);
 		adapter = new AdapterSistemaBancos(requestServiceMock);
+		
+	}
+	@Test
+	public void testElMapaEncuentra2Bancos() throws Exception{
 		CABA.agregarOrigenDeDatos(adapter);
+		Assert.assertEquals(2, CABA.buscar("la Plaza").size());
+		Mockito.verify(requestServiceMock).getJsonBancos("","");
 	}
 	@Test
 	public void testElAdapterLlamaAlServicio() throws Exception{
 		adapter.buscar("la Plaza");
 		Mockito.verify(requestServiceMock).getJsonBancos("","");
 		}
-	@Test
-	public void testElMapaEncuentra2Bancos() throws Exception{
-		Assert.assertEquals(2, CABA.buscar("la Plaza").size());
-		Mockito.verify(requestServiceMock).getJsonBancos("","");
-	}
+	
 }

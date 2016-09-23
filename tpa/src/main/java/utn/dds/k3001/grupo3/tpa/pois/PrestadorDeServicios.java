@@ -3,13 +3,24 @@ package utn.dds.k3001.grupo3.tpa.pois;
 import java.time.*;
 import java.util.LinkedList;
 import java.util.List;
-import org.uqbar.geodds.Point;
 
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Cascade;
+
+import utn.dds.k3001.grupo3.tpa.geo.*;
+@Entity
+ //TODO Agregar single-table o ver como
 public abstract class PrestadorDeServicios extends POI 
-{
+{	@ManyToMany //TODO Revisar relacion
+	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	protected List<Servicio> serviciosOfrecidos;
-	
-	public PrestadorDeServicios(String nombre, String calle, String barrio, int altura, Point posicion){
+	public PrestadorDeServicios(){}
+	public PrestadorDeServicios(String nombre, String calle, String barrio, int altura, PersistablePoint posicion){
 		super(nombre,calle,barrio,altura,posicion);
 		this.serviciosOfrecidos = new LinkedList<Servicio>();
 	}
@@ -27,5 +38,8 @@ public abstract class PrestadorDeServicios extends POI
 	}
 	public List<Servicio> getServiciosOfrecidos() {
 		return serviciosOfrecidos;
+	}
+	public void setServiciosOfrecidos(List<Servicio> serviciosOfrecidos) {
+		this.serviciosOfrecidos = serviciosOfrecidos;
 	}
 }

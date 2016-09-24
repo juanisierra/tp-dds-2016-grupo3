@@ -46,6 +46,7 @@ public class TestReportesBusqueda extends AbstractPersistenceTest implements Wit
 		beginTransaction();
 		CABA = Mapa.getInstance();
 		CABA.resetMapa();
+		RepositorioBusquedas.getInstance().reset();
 		terminal1 = new Terminal("teminal1", CABA);
 		terminalMedrano = new Terminal("TerminalMedrano", CABA);
 		repositorioBusquedas = RepositorioBusquedas.getInstance();

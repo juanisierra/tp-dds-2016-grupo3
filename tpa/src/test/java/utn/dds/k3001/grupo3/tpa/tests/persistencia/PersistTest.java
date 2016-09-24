@@ -41,15 +41,6 @@ public class PersistTest extends AbstractPersistenceTest implements WithGlobalEn
 	Assert.assertEquals(terminal1.getObserversBusqueda(),lista.get(0).getObserversBusqueda());
 	}
 	@Test
-	public void testPersistirBusquedas(){
-	Busqueda busqueda1 = new Busqueda(null,2,"a",LocalTime.now(),LocalTime.now(),LocalDate.now());
-	Busqueda busqueda2 = new Busqueda();
-	RepositorioBusquedas.getInstance().buscar(busqueda1);
-	RepositorioBusquedas.getInstance().buscar(busqueda2);
-	entityManager().flush();
-	Assert.assertEquals(busqueda1.getCriterio(),RepositorioBusquedas.getInstance().getBusquedas().get(0).getCriterio());
-	}
-	@Test
 	public void testPersistirPOIS(){
 		Rubro libreria = new Rubro("libreria",50);
 		Disponibilidad disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));

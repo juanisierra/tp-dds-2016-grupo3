@@ -28,23 +28,6 @@ import utn.dds.k3001.grupo3.tpa.pois.Servicio;
 import utn.dds.k3001.grupo3.tpa.procesosProgramados.ResultadoProceso;
 
 public class PersistirTodo extends AbstractPersistenceTest implements WithGlobalEntityManager {
-
-	//@Test
-	public void guardarYTraerBusqueda() {
-		Comuna comuna1 = new Comuna();
-		comuna1.setNombre("Centro");
-		PersistablePolygon poligono = new PersistablePolygon(Arrays.asList(new PersistablePoint(2,2),new PersistablePoint(1,1)));
-		comuna1.setLimites(poligono);
-		Terminal terminal = new Terminal();
-		terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
-		terminal.agregarObserverBusqueda(AccionesBusqueda.NOTIFICARBUSQUEDALARGA);
-		terminal.setNombre("Terminal Centro");
-		terminal.setComuna(comuna1);
-		Busqueda busqueda = new Busqueda(terminal,2,"a",LocalTime.now(),LocalTime.now(),LocalDate.now());		
-		withTransaction(() -> {
-			entityManager().persist(busqueda);
-			});
-	}
 	@SuppressWarnings("unchecked")
 	//@Test
 	public void guardarYTraerPOI() {

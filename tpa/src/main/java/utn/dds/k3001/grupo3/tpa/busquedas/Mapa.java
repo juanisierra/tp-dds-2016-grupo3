@@ -1,5 +1,6 @@
 package utn.dds.k3001.grupo3.tpa.busquedas;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,7 +37,15 @@ public class Mapa
 	}
 	public List<POI> buscar(String criterio){
 		return origenesDeDatos.stream()
-							  .flatMap(origen -> origen.buscar(criterio).stream())
+							  .flatMap(origen -> {
+								try {
+									return origen.buscar(criterio).stream();
+								} catch (ClassNotFoundException | IOException e) {
+									
+									e.printStackTrace();
+								}
+								return new LinkedList<POI>().stream();
+							})
 							  .collect(Collectors.toList());
 	}
 	

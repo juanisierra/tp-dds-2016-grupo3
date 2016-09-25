@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import redis.clients.jedis.Jedis;
 import utn.dds.k3001.grupo3.tpa.geo.PersistablePoint;
+import utn.dds.k3001.grupo3.tpa.origenesDePOIS.OrigenSistemaExternoConCache;
 import utn.dds.k3001.grupo3.tpa.pois.Banco;
 import utn.dds.k3001.grupo3.tpa.pois.CGP;
 import utn.dds.k3001.grupo3.tpa.pois.Comuna;

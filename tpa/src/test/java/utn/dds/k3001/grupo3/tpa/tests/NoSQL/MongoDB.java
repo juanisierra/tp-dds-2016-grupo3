@@ -33,7 +33,7 @@ import utn.dds.k3001.grupo3.tpa.pois.Rubro;
 import utn.dds.k3001.grupo3.tpa.pois.Servicio;
 
 public class MongoDB {
-	//@Test
+	//@Test //Solo corre con mongo
 public void testMorphia() {
 		Mapa CABA = Mapa.getInstance();
 		CABA.resetMapa();

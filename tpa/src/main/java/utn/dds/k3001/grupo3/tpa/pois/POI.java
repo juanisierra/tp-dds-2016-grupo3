@@ -19,7 +19,7 @@ import org.hibernate.annotations.Cascade;
 import java.time.*;
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-public class POI 
+public class POI implements java.io.Serializable
 {	@Id @GeneratedValue
 	protected int id;
 	protected String nombre;

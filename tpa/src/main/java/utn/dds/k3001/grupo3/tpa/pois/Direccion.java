@@ -3,7 +3,7 @@ package utn.dds.k3001.grupo3.tpa.pois;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Direccion {
+public class Direccion implements java.io.Serializable{
 	
 	private String calle;
 	private String barrio;

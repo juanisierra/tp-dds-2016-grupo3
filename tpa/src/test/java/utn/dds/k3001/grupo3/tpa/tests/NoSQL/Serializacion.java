@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import org.junit.Test;
+
+import redis.clients.jedis.Jedis;
 import utn.dds.k3001.grupo3.tpa.geo.PersistablePoint;
 import utn.dds.k3001.grupo3.tpa.pois.Banco;
 import utn.dds.k3001.grupo3.tpa.pois.CGP;
@@ -78,6 +80,31 @@ public void testSerializarBancos() throws IOException, ClassNotFoundException{
         out.close();
         String serializado = byteArray.toString("ISO-8859-1");
         ByteArrayInputStream entrada = new ByteArrayInputStream(serializado.getBytes("ISO-8859-1"));
+        ObjectInputStream in = new ObjectInputStream(entrada);
+        List<Banco> bancostraidos = (List<Banco>) in.readObject();
+        in.close();
+	}
+	//@Test Solo funciona con redis levantado
+public void testSerializarBancosConRedis() throws IOException, ClassNotFoundException{
+		ArrayList<Servicio> listaServicios = new ArrayList<Servicio>();
+		
+		Servicio miCambioDeDomicilio = new Servicio("Cambio Domicilio",new Disponibilidad(LocalTime.of(8,0),LocalTime.of(16,0),Arrays.asList(DayOfWeek.of(1))));
+		listaServicios.add(miCambioDeDomicilio);
+		Banco banco1 = new Banco("asdasd","Rivadavia 123","Caballito",0,null);
+		banco1.agregarServicio(miCambioDeDomicilio);
+		banco1.agregarEtiqueta("asdasd");
+		List<Banco> bancos = new LinkedList<Banco>();
+		bancos.add(banco1);
+	ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+
+		ObjectOutputStream out = new ObjectOutputStream(byteArray);
+        out.writeObject(bancos);
+        out.close();
+        String serializado = byteArray.toString("ISO-8859-1");
+        Jedis jedis = new Jedis("localhost");
+        jedis.set("bancos", serializado);
+        String value = jedis.get("bancos");
+        ByteArrayInputStream entrada = new ByteArrayInputStream(value.getBytes("ISO-8859-1"));
         ObjectInputStream in = new ObjectInputStream(entrada);
         List<Banco> bancostraidos = (List<Banco>) in.readObject();
         in.close();

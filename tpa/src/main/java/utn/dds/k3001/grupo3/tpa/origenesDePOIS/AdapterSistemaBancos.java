@@ -24,12 +24,4 @@ public class AdapterSistemaBancos implements OrigenDeDatos{
     			.filter(Banco -> Banco.esBuscado(criterio))
     			.collect(Collectors.toList());
     }
-    public List<Banco> buscarBancos(String criterio){
-    	String json = requestService.getJsonBancos("","");           
-    	return factory
-    			.JsonAObjeto(json, new TypeReference<List<Banco>>(){})
-    			.stream()
-    			.filter(Banco -> Banco.esBuscado(criterio))
-    			.collect(Collectors.toList());
-    }
 }

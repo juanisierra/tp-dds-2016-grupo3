@@ -27,7 +27,7 @@ public class TestCache {
 
 	AdapterSistemaBancos adapter;
 	
-	@Before  //Solo con redis abierto
+	//@Before  //Solo con redis abierto
 	public void init(){
 		adapter =Mockito.mock(AdapterSistemaBancos.class);
 		ArrayList<Servicio> listaServicios = new ArrayList<Servicio>();
@@ -41,7 +41,7 @@ public class TestCache {
 		
 		Mockito.when(adapter.buscar("")).thenReturn(ListaBancosObjeto);
 	}
-	@Test
+	//@Test
 	public void testSeBusca2VecesYUnaVienedeCache() throws Exception{
 		
 		

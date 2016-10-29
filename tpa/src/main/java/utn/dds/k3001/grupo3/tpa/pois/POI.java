@@ -1,10 +1,8 @@
 package utn.dds.k3001.grupo3.tpa.pois;
 
-
 import utn.dds.k3001.grupo3.tpa.geo.*;
 import java.util.LinkedList;
 import java.util.List;
-
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -13,10 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
-
 import org.hibernate.annotations.Cascade;
-
 import java.time.*;
+
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class POI implements java.io.Serializable
@@ -27,7 +24,7 @@ public class POI implements java.io.Serializable
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	protected PersistablePoint posicion;
 	@ElementCollection
-	protected List<String> listaEtiquetas;
+	protected List<String> etiquetas;
 	@Embedded
 	protected Direccion direccion;
 
@@ -35,7 +32,7 @@ public class POI implements java.io.Serializable
 		this.direccion = new Direccion(calle,barrio,altura);
 		this.nombre = nombre;
 		this.posicion = posicion;
-		this.listaEtiquetas = new LinkedList<String>();
+		this.etiquetas = new LinkedList<String>();
 
 	}
 	public POI(){
@@ -44,7 +41,7 @@ public class POI implements java.io.Serializable
 	return id;
 	}
 	public void agregarEtiqueta(String etiqueta){
-		this.listaEtiquetas.add(etiqueta);
+		this.etiquetas.add(etiqueta);
 	}
 	
 	public boolean estaCerca(PersistablePoint otraPosicion){
@@ -52,7 +49,7 @@ public class POI implements java.io.Serializable
 	}
 	
 	public boolean esBuscado(String criterio){
-		return (nombre.contains(criterio) || listaEtiquetas.contains(criterio));
+		return (nombre.contains(criterio) || etiquetas.contains(criterio));
 	}
 	
 	public boolean estaDisponible(LocalDateTime fechaBuscada,String servicio){
@@ -84,8 +81,8 @@ public class POI implements java.io.Serializable
 	}
 	public void cambiarEtiquetas(List<String> etiquetasNuevas)
 	{
-		this.listaEtiquetas.clear();
-		this.listaEtiquetas.addAll(etiquetasNuevas);
+		this.etiquetas.clear();
+		this.etiquetas.addAll(etiquetasNuevas);
 	}
 	public int getId() {
 		return id;
@@ -94,9 +91,9 @@ public class POI implements java.io.Serializable
 		this.id = id;
 	}
 	public List<String> getListaEtiquetas() {
-		return listaEtiquetas;
+		return etiquetas;
 	}
 	public void setListaEtiquetas(List<String> listaEtiquetas) {
-		this.listaEtiquetas = listaEtiquetas;
+		this.etiquetas = listaEtiquetas;
 	}
 }

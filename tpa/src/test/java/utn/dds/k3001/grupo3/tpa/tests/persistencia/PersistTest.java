@@ -1,10 +1,7 @@
 package utn.dds.k3001.grupo3.tpa.tests.persistencia;
 
-
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

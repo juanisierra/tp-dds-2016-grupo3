@@ -32,6 +32,7 @@ public class PersistTest extends AbstractPersistenceTest implements WithGlobalEn
 	Terminal terminal1 = new Terminal("teminal1", Mapa.getInstance());
 	terminal1.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 	Terminal terminal2 = new Terminal("teminal2", Mapa.getInstance());
+	RepositorioTerminales.persistirEnBD();
 	RepositorioTerminales repo = RepositorioTerminales.getInstance();
 	repo.agregarTerminal(terminal1);
 	repo.agregarTerminal(terminal2);

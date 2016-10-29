@@ -27,7 +27,7 @@ public class POI
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	protected PersistablePoint posicion;
 	@ElementCollection
-	protected List<String> listaEtiquetas;
+	protected List<String> etiquetas;
 	@Embedded
 	protected Direccion direccion;
 
@@ -35,7 +35,7 @@ public class POI
 		this.direccion = new Direccion(calle,barrio,altura);
 		this.nombre = nombre;
 		this.posicion = posicion;
-		this.listaEtiquetas = new LinkedList<String>();
+		this.etiquetas = new LinkedList<String>();
 
 	}
 	public POI(){
@@ -44,7 +44,7 @@ public class POI
 	return id;
 	}
 	public void agregarEtiqueta(String etiqueta){
-		this.listaEtiquetas.add(etiqueta);
+		this.etiquetas.add(etiqueta);
 	}
 	
 	public boolean estaCerca(PersistablePoint otraPosicion){
@@ -52,7 +52,7 @@ public class POI
 	}
 	
 	public boolean esBuscado(String criterio){
-		return (nombre.contains(criterio) || listaEtiquetas.contains(criterio));
+		return (nombre.contains(criterio) || etiquetas.contains(criterio));
 	}
 	
 	public boolean estaDisponible(LocalDateTime fechaBuscada,String servicio){
@@ -84,8 +84,8 @@ public class POI
 	}
 	public void cambiarEtiquetas(List<String> etiquetasNuevas)
 	{
-		this.listaEtiquetas.clear();
-		this.listaEtiquetas.addAll(etiquetasNuevas);
+		this.etiquetas.clear();
+		this.etiquetas.addAll(etiquetasNuevas);
 	}
 	public int getId() {
 		return id;
@@ -94,9 +94,9 @@ public class POI
 		this.id = id;
 	}
 	public List<String> getListaEtiquetas() {
-		return listaEtiquetas;
+		return etiquetas;
 	}
 	public void setListaEtiquetas(List<String> listaEtiquetas) {
-		this.listaEtiquetas = listaEtiquetas;
+		this.etiquetas = listaEtiquetas;
 	}
 }

@@ -1,13 +1,11 @@
 package utn.dds.k3001.grupo3.tpa.tests.persistencia;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
@@ -25,7 +23,7 @@ import utn.dds.k3001.grupo3.tpa.pois.POI;
 import utn.dds.k3001.grupo3.tpa.pois.ParadaColectivo;
 import utn.dds.k3001.grupo3.tpa.pois.Rubro;
 import utn.dds.k3001.grupo3.tpa.pois.Servicio;
-import utn.dds.k3001.grupo3.tpa.procesosProgramados.ResultadoProceso;
+
 
 public class PersistirTodo extends AbstractPersistenceTest implements WithGlobalEntityManager {
 

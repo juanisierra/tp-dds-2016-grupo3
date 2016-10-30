@@ -15,6 +15,7 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Optional;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -46,6 +47,7 @@ public class TestReportesBusqueda extends AbstractPersistenceTest implements Wit
 		beginTransaction();
 		CABA = Mapa.getInstance();
 		CABA.resetMapa();
+		RepositorioBusquedas.getInstance().reset();
 		terminal1 = new Terminal("teminal1", CABA);
 		terminalMedrano = new Terminal("TerminalMedrano", CABA);
 		repositorioBusquedas = RepositorioBusquedas.getInstance();
@@ -76,14 +78,14 @@ public class TestReportesBusqueda extends AbstractPersistenceTest implements Wit
 	public void testCantidadResultadosParcialesDeBusqueda1EnTerminal1Son2(){
 		terminalMedrano.buscar("a");
 		terminalMedrano.buscar("cgp1");
-		Assert.assertEquals(repositorioBusquedas.cantResultadosTotalesPorTerminal().get(terminalMedrano).intValue(), 2);
+		Assert.assertEquals(repositorioBusquedas.cantResultadosTotalesPorTerminal().get("TerminalMedrano").intValue(), 2);
 	}
 	
 	@Test
 	public void testCantidadResultadosTotalesDeTerminalSon3(){
 		terminal1.buscar("a");//dos resultadods
 		terminal1.buscar("cgp");//un resultado
-		Assert.assertEquals(repositorioBusquedas.cantResultadosTotalesPorTerminal().get(terminal1).intValue(),3);
+		Assert.assertEquals(repositorioBusquedas.cantResultadosTotalesPorTerminal().get("teminal1").intValue(),3);
 	}
 	
 	@Test
@@ -106,13 +108,13 @@ public class TestReportesBusqueda extends AbstractPersistenceTest implements Wit
 	
 	@Test
 	public void testCantidadResultadosTotalesPorTerminal(){
-		Map<Terminal,Integer> reporte;
+		Map<String,Integer> reporte;
 		terminal1.buscar("alta domicilio");
 		terminal1.buscar("114");
 		terminalMedrano.buscar("cgp");
 		reporte = repositorioBusquedas.cantResultadosTotalesPorTerminal();
-		Assert.assertEquals(2,reporte.get(terminal1),0);
-		Assert.assertEquals(1,reporte.get(terminalMedrano),0);
+		Assert.assertEquals(2,reporte.get("teminal1"),0);
+		Assert.assertEquals(1,reporte.get("TerminalMedrano"),0);
 	}
 	@Test
 	public void testSeMandaMailConBusquedaDemorada()

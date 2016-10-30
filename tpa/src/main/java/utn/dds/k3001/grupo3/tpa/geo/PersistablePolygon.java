@@ -1,5 +1,6 @@
 package utn.dds.k3001.grupo3.tpa.geo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +20,7 @@ import org.uqbar.geodds.Polygon;
 @SuppressWarnings("all")
 @Entity
 
-public class PersistablePolygon extends Polygon{
+public class PersistablePolygon extends Polygon implements Serializable{
 	@Id @GeneratedValue
 	private int id;
 	@OneToMany

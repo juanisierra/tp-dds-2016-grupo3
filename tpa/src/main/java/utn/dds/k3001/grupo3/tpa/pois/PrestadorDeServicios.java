@@ -15,7 +15,7 @@ import org.hibernate.annotations.Cascade;
 import utn.dds.k3001.grupo3.tpa.geo.*;
 @Entity
  //TODO Agregar single-table o ver como
-public abstract class PrestadorDeServicios extends POI 
+public abstract class PrestadorDeServicios extends POI implements java.io.Serializable
 {	@ManyToMany //TODO Revisar relacion
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	protected List<Servicio> serviciosOfrecidos;

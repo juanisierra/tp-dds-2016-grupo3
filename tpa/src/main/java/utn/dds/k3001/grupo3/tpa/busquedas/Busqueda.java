@@ -2,6 +2,7 @@ package utn.dds.k3001.grupo3.tpa.busquedas;
 
 import java.time.*;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -12,6 +13,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
+
+import utn.dds.k3001.grupo3.tpa.pois.POI;
 	@Entity 
 public class Busqueda
 {	@Id @GeneratedValue
@@ -24,14 +27,15 @@ public class Busqueda
 	@ManyToOne
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	private Terminal terminal;
+	private List<POI> resultados;
 	
-	
-	public Busqueda(Terminal terminal,int cantResultados, String criterio, LocalTime hInicio, LocalTime hFin, LocalDate fecha){
+	public Busqueda(Terminal terminal,int cantResultados, String criterio, LocalTime hInicio, LocalTime hFin, LocalDate fecha,List<POI> resultados){
 		this.terminal = terminal;
 		this.cantResultados = cantResultados;
 		this.criterio = criterio;
 		this.tiempoDemorado = ChronoUnit.SECONDS.between(hInicio, hFin);
 		this.fecha = fecha;
+		this.resultados=resultados;
 	}
 	
 	public Busqueda(){}

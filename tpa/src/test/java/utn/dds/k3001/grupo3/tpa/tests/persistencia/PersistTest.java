@@ -1,10 +1,7 @@
 package utn.dds.k3001.grupo3.tpa.tests.persistencia;
 
-
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -40,15 +37,6 @@ public class PersistTest extends AbstractPersistenceTest implements WithGlobalEn
 	List<Terminal> lista = repo.obtenerTerminales();
 	Assert.assertEquals(terminal1.getNombre(),lista.get(0).getNombre());
 	Assert.assertEquals(terminal1.getObserversBusqueda(),lista.get(0).getObserversBusqueda());
-	}
-	@Test
-	public void testPersistirBusquedas(){
-	Busqueda busqueda1 = new Busqueda(null,2,"a",LocalTime.now(),LocalTime.now(),LocalDate.now());
-	Busqueda busqueda2 = new Busqueda();
-	RepositorioBusquedas.getInstance().buscar(busqueda1);
-	RepositorioBusquedas.getInstance().buscar(busqueda2);
-	entityManager().flush();
-	Assert.assertEquals(busqueda1.getCriterio(),RepositorioBusquedas.getInstance().getBusquedas().get(0).getCriterio());
 	}
 	@Test
 	public void testPersistirPOIS(){

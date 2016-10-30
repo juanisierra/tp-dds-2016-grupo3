@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Rubro 
+public class Rubro implements java.io.Serializable
 {	@Id @GeneratedValue
 	private int id;
 	private String nombre;

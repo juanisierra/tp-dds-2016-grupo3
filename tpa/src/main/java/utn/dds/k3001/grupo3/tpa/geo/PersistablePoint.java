@@ -1,5 +1,6 @@
 package utn.dds.k3001.grupo3.tpa.geo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import org.uqbar.geodds.Point;
 
 @SuppressWarnings("all")
 @Entity
-public class PersistablePoint extends Point{
+public class PersistablePoint extends Point implements Serializable{
 	@Id @GeneratedValue
 	private int id;
   private BigDecimal x;
@@ -27,7 +28,11 @@ public class PersistablePoint extends Point{
   public PersistablePoint(){
 	  super(0,0);
   }
-
+  public PersistablePoint(BigDecimal x,BigDecimal y) {
+	  super(x.doubleValue(),y.doubleValue());
+	  this.x=x;
+	  this.y=y;
+  }
   public PersistablePoint(final double aX, final double aY) {
 	  super(aX,aY);
     BigDecimal _bigDecimal = new BigDecimal(aX);

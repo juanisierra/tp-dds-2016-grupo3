@@ -15,7 +15,7 @@ import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 
 import utn.dds.k3001.grupo3.tpa.converters.LocalTimeConverter;
 @Entity
-public class Disponibilidad 
+public class Disponibilidad implements java.io.Serializable
 {	@Id @GeneratedValue
 	private int id;
 	@ElementCollection

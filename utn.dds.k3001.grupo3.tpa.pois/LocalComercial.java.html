@@ -14,7 +14,7 @@ import org.hibernate.annotations.Cascade;
 
 import utn.dds.k3001.grupo3.tpa.geo.*;
 @Entity
-public class LocalComercial extends POI 
+public class LocalComercial extends POI implements java.io.Serializable
 {	@ManyToOne
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	private Rubro rubro;

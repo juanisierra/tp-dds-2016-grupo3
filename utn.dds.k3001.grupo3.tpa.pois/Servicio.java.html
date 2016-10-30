@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Cascade;
 @Entity
-public class Servicio 
+public class Servicio implements java.io.Serializable
 {	@Id @GeneratedValue
 	private int id;
 	private String nombre;

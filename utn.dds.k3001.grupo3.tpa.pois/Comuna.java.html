@@ -7,13 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 
 import utn.dds.k3001.grupo3.tpa.geo.*;
 
 	@Entity
-public class Comuna
+public class Comuna implements java.io.Serializable
 {	@Id @GeneratedValue
 	private int id;
 	private String nombre;
@@ -21,35 +22,35 @@ public class Comuna
 	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	private PersistablePolygon limites;
 	
-<span class="fc" id="L24">	public Comuna(String nombre,List&lt;PersistablePoint&gt; puntos){</span>
-<span class="fc" id="L25">		this.limites = new PersistablePolygon(puntos);</span>
-<span class="fc" id="L26">		this.nombre = nombre;</span>
-<span class="fc" id="L27">	}</span>
-<span class="fc" id="L28">	public Comuna(String nombreComuna) {</span>
-<span class="fc" id="L29">		nombre = nombreComuna;</span>
-<span class="fc" id="L30">	}</span>
+<span class="fc" id="L25">	public Comuna(String nombre,List&lt;PersistablePoint&gt; puntos){</span>
+<span class="fc" id="L26">		this.limites = new PersistablePolygon(puntos);</span>
+<span class="fc" id="L27">		this.nombre = nombre;</span>
+<span class="fc" id="L28">	}</span>
+<span class="fc" id="L29">	public Comuna(String nombreComuna) {</span>
+<span class="fc" id="L30">		nombre = nombreComuna;</span>
+<span class="fc" id="L31">	}</span>
 	public boolean estaEnComuna(PersistablePoint punto){
-<span class="fc" id="L32">		return limites.isInside(punto);</span>
+<span class="fc" id="L33">		return limites.isInside(punto);</span>
 	}
-<span class="fc" id="L34">	public Comuna(){}</span>
+<span class="fc" id="L35">	public Comuna(){}</span>
 	public String getNombre() {
 		
-<span class="nc" id="L37">		return nombre;</span>
+<span class="nc" id="L38">		return nombre;</span>
 	}
 	public int getId() {
-<span class="nc" id="L40">		return id;</span>
+<span class="nc" id="L41">		return id;</span>
 	}
 	public void setId(int id) {
-<span class="nc" id="L43">		this.id = id;</span>
-<span class="nc" id="L44">	}</span>
+<span class="nc" id="L44">		this.id = id;</span>
+<span class="nc" id="L45">	}</span>
 	public PersistablePolygon getLimites() {
-<span class="nc" id="L46">		return limites;</span>
+<span class="nc" id="L47">		return limites;</span>
 	}
 	public void setLimites(PersistablePolygon limites) {
-<span class="nc" id="L49">		this.limites = limites;</span>
-<span class="nc" id="L50">	}</span>
+<span class="nc" id="L50">		this.limites = limites;</span>
+<span class="nc" id="L51">	}</span>
 	public void setNombre(String nombre) {
-<span class="nc" id="L52">		this.nombre = nombre;</span>
-<span class="nc" id="L53">	}</span>
+<span class="nc" id="L53">		this.nombre = nombre;</span>
+<span class="nc" id="L54">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

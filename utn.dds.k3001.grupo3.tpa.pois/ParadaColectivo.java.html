@@ -6,7 +6,7 @@ import java.time.*;
 
 import javax.persistence.Entity;
 @Entity
-public class ParadaColectivo extends POI 
+public class ParadaColectivo extends POI implements java.io.Serializable 
 {	
 	private Integer linea;
 	

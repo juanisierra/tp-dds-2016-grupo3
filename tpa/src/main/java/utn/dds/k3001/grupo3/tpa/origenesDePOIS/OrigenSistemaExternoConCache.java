@@ -14,11 +14,13 @@ import utn.dds.k3001.grupo3.tpa.pois.Banco;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
 public class OrigenSistemaExternoConCache<T> implements OrigenDeDatos {
+	
 	private OrigenDeDatos origen;
 	private LocalDateTime ultimaActualizacion = LocalDateTime.of(1,1,1,0,0,0);
 	private int horasRefresh;
 	private Jedis jedis;
 	private String nombreClase;
+	
 	public OrigenSistemaExternoConCache(OrigenDeDatos origen,String nombreClase,int horasActualizacion) {
 		this.origen = origen;
 		this.jedis = new Jedis("localhost");
@@ -48,7 +50,4 @@ public class OrigenSistemaExternoConCache<T> implements OrigenDeDatos {
 	        return elementosTraidos;
 		}
 		}
-		
 	}
-
-

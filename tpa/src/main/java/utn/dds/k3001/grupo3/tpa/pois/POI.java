@@ -3,6 +3,8 @@ package utn.dds.k3001.grupo3.tpa.pois;
 import utn.dds.k3001.grupo3.tpa.geo.*;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -17,14 +19,17 @@ import java.time.*;
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class POI implements java.io.Serializable
-{	@Id @GeneratedValue
+{	
+	@Id @GeneratedValue
 	protected int id;
 	protected String nombre;
-	@OneToOne
-	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
+	
+	@OneToOne(cascade=CascadeType.PERSIST)
 	protected PersistablePoint posicion;
+	
 	@ElementCollection
 	protected List<String> etiquetas;
+	
 	@Embedded
 	protected Direccion direccion;
 
@@ -35,11 +40,14 @@ public class POI implements java.io.Serializable
 		this.etiquetas = new LinkedList<String>();
 
 	}
+	
 	public POI(){
 	}
+	
 	public long getID(){
-	return id;
+		return id;
 	}
+	
 	public void agregarEtiqueta(String etiqueta){
 		this.etiquetas.add(etiqueta);
 	}
@@ -79,20 +87,25 @@ public class POI implements java.io.Serializable
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
 	}
+	
 	public void cambiarEtiquetas(List<String> etiquetasNuevas)
 	{
 		this.etiquetas.clear();
 		this.etiquetas.addAll(etiquetasNuevas);
 	}
+	
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public List<String> getListaEtiquetas() {
 		return etiquetas;
 	}
+	
 	public void setListaEtiquetas(List<String> listaEtiquetas) {
 		this.etiquetas = listaEtiquetas;
 	}

@@ -17,21 +17,27 @@ public class CentroDTO {
 		this.telefono = telefono;
 		this.listaServicios = listaServicios;
 	}
+	
 	public int getNumComuna() {
 		return numComuna;
 	}
+	
 	public String getZonas() {
 		return zonas;
 	}
+	
 	public String getNombreDirector() {
 		return nombreDirector;
 	}
+	
 	public String getDomicilio() {
 		return domicilio;
 	}
+	
 	public String getTelefono() {
 		return telefono;
 	}
+	
 	public ArrayList<ServiciosDTO> getListaServicios() {
 		return listaServicios;
 	}

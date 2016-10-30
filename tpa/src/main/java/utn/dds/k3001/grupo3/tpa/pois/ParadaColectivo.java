@@ -14,7 +14,9 @@ public class ParadaColectivo extends POI implements java.io.Serializable
 		super(nombre,calle,barrio,altura,posicion);
 		this.linea = linea;
 	}
+	
 	public ParadaColectivo(){}
+	
 	@Override
 	public boolean estaCerca(PersistablePoint otraPosicion){
 		return (posicion.distance(otraPosicion) <=0.1);
@@ -27,9 +29,11 @@ public class ParadaColectivo extends POI implements java.io.Serializable
 	public boolean esBuscado(String criterio) {
 		return super.esBuscado(criterio) || linea.toString().contains(criterio);
 	}
+	
 	public Integer getLinea() {
 		return linea;
 	}
+	
 	public void setLinea(Integer linea) {
 		this.linea = linea;
 	}

@@ -16,6 +16,7 @@ public class PersistenceBusquedasOrigin implements BusquedasOrigin {
 	final Morphia morphia;
 	Datastore datastore;
 	final MongoClient mongoClient;
+
 	public PersistenceBusquedasOrigin() {
 		mongoClient =  new MongoClient();
 		morphia = new Morphia();
@@ -35,7 +36,6 @@ public class PersistenceBusquedasOrigin implements BusquedasOrigin {
 	@Override
 	public void addBusqueda(Busqueda busqueda) {
 		datastore.save(busqueda);
-
 	}
 
 	@Override

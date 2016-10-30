@@ -16,6 +16,7 @@ public class EnviarMailFallo implements Callable<ResultadoProceso>
 		this.servicio = servicio;
 		this.mailAdministrador = mail;
 	}
+	
 	@Override
 	public ResultadoProceso call() throws Exception{
 		ResultadoProceso resultado = proceso.call();

@@ -11,9 +11,11 @@ public class ServiciosDTO {
 			this.nombre = nombre;
 			this.horarios = horarios;
 	}
+	
 	public String getNombre() {
 		return nombre;
 	}
+	
 	public ArrayList<RangosServicioDTO> getHorarios() {
 		return horarios;
 	}

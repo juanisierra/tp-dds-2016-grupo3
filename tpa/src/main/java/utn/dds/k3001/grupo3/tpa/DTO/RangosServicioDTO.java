@@ -11,18 +11,23 @@ public class RangosServicioDTO {
 			this.minutosHasta = minutosHasta;
 			this.horarioHasta = horarioHasta;
 	}
+	
 	public int getNumeroDia() {
 		return numeroDia;
 	}
+	
 	public int getMinutosDesde() {
 		return minutosDesde;
 	}
+	
 	public int getHorarioDesde() {
 		return horarioDesde;
 	}
+	
 	public int getMinutosHasta() {
 		return minutosHasta;
 	}
+	
 	public int getHorarioHasta() {
 		return horarioHasta;
 	}

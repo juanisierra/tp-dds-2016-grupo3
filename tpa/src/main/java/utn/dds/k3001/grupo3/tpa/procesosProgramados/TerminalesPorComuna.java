@@ -15,6 +15,7 @@ public class TerminalesPorComuna implements OrigenDeTerminales
 		this.origen = origen;
 		this.comunaBuscada = comunaBuscada;
 	}
+	
 	@Override
 	public List<Terminal> obtenerTerminales() {
 		return origen.obtenerTerminales().stream().filter(Terminal -> Terminal.estaEnComuna(comunaBuscada)).collect(Collectors.toList());

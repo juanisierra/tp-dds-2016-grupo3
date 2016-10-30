@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -15,14 +16,16 @@ import org.hibernate.annotations.Cascade;
 import utn.dds.k3001.grupo3.tpa.geo.*;
 @Entity
 public class LocalComercial extends POI implements java.io.Serializable
-{	@ManyToOne
-	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
+{	
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Rubro rubro;
-	@OneToMany
+	
+	@OneToMany(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "local_id")
-	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
 	private List<Disponibilidad> listaDisponibilidad;
+	
 	public LocalComercial(){}
+	
 	public LocalComercial(String nombre, String calle, String barrio, int altura, PersistablePoint posicion,Rubro rubro, Disponibilidad disponibilidad){	
 		super(nombre,calle,barrio,altura,posicion);
 		this.listaDisponibilidad = new LinkedList<Disponibilidad>();

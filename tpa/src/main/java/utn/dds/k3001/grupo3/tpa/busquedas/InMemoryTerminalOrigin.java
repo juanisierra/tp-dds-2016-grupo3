@@ -5,6 +5,7 @@ import java.util.List;
 
 public class InMemoryTerminalOrigin implements TerminalOrigin{
 	private List<Terminal> listaTerminales;
+	
 	public InMemoryTerminalOrigin() {
 		listaTerminales = new LinkedList<Terminal>();
 	}

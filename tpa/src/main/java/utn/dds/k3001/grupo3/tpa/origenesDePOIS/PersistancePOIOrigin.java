@@ -17,24 +17,19 @@ public class PersistancePOIOrigin implements POIOrigin,WithGlobalEntityManager {
 	@Override
 	public void eliminarPOI(POI poi) {
 		entityManager().remove(poi);
-
 	}
 
 	@Override
 	public void vaciar() {
-		
-
 	}
 
 	@Override
 	public void agregarPOI(POI poi) {
 		entityManager().persist(poi);
-
 	}
 
 	@Override
 	public void eliminarPorNumero(Long id) {
 		entityManager().createQuery("delete POI p where p.id= :id").setParameter("id",toIntExact(id)).executeUpdate();
 	}
-
 }

@@ -4,6 +4,7 @@ import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,8 +25,7 @@ public class Busqueda
 	private double tiempoDemorado;
 	@Convert(converter = LocalDateConverter.class)
 	private LocalDate fecha;
-	@ManyToOne
-	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Terminal terminal;
 	private List<POI> resultados;
 	

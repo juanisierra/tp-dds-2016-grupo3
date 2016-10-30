@@ -20,6 +20,7 @@ public class DarDeBajaPOIS implements Callable<ResultadoProceso>
 		this.servicio = servicio;
 		this.repositorio = repositorio;
 	}
+	
 	public ResultadoProceso call(){
 		try{
 		this.poisAfectados = 0;
@@ -32,6 +33,6 @@ public class DarDeBajaPOIS implements Callable<ResultadoProceso>
 		} catch(FallaProcesoException | IOException e) {
 			return new ResultadoProceso(LocalDateTime.now(),poisAfectados,false,e.getMessage());
 		}
-	return new ResultadoProceso(LocalDateTime.now(),poisAfectados,true,"POIS dados de baja correctamente.");
+		return new ResultadoProceso(LocalDateTime.now(),poisAfectados,true,"POIS dados de baja correctamente.");
 	}
 }

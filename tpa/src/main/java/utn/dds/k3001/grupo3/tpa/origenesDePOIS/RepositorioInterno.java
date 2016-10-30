@@ -12,41 +12,48 @@ public class RepositorioInterno implements OrigenDeDatos,WithGlobalEntityManager
 	private final static RepositorioInterno INSTANCE = new RepositorioInterno();
 	private static POIOrigin origen = new InMemoryPOIOrigin(); //ELEGIMOS SI PERSISTE EN MEMORIA O EN BASE DE DATOS
 	private RepositorioInterno(){}
+	
 	public static RepositorioInterno getInstance() {
 		return INSTANCE;
 	}
+	
 	public void agregarPoi(POI poiNvo){
 		origen.agregarPOI(poiNvo);;
 	}
+	
 	public void eliminarPoi(POI poiAEliminar){
 		origen.eliminarPOI(poiAEliminar);
 	}
+	
 	public List<POI> buscar(String criterio) {
 		return origen.getPOIS().stream().filter(POI -> POI.esBuscado(criterio)).collect(Collectors.toList());
 	}
-	public POI buscarPorNombre(String nombre)
-	{	
-	List<POI> lista = origen.getPOIS().stream().filter(POI -> POI.getNombre().contains(nombre)).collect(Collectors.toList());
-		if(lista.isEmpty())
-		{
+	
+	public POI buscarPorNombre(String nombre){	
+		List<POI> lista = origen.getPOIS().stream().filter(POI -> POI.getNombre().contains(nombre)).collect(Collectors.toList());
+		if(lista.isEmpty()){
 			return null;
 		} else {
 		return lista.get(0);
 		}
-		
 	}
+	
 	public void eliminarPoiPorNumero(long id) {
 		origen.eliminarPorNumero(id);
 	}
+	
 	public List<POI> getAllPOIS(){
 		return origen.getPOIS();
 	}
+	
 	public static void reset() {
 		origen.vaciar();
 	}
+	
 	public static void origenMemoria() {
 		origen = new InMemoryPOIOrigin();
 	}
+	
 	public static void origenPersistencia() {
 		origen = new PersistancePOIOrigin();
 	}

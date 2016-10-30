@@ -11,6 +11,7 @@ public class Reintentar implements Callable<ResultadoProceso>
 		this.numRepeticiones = numeroDeVeces;
 		this.proceso = proceso;
 	}
+	
 	@Override
 	public ResultadoProceso call() throws Exception {
 		ResultadoProceso resultado;
@@ -18,6 +19,6 @@ public class Reintentar implements Callable<ResultadoProceso>
 			numRepeticiones--;
 			resultado = proceso.call();	
 		} while (numRepeticiones>=0 && !resultado.terminoCorrectamente());
-	return resultado;
+		return resultado;
 	}
 }

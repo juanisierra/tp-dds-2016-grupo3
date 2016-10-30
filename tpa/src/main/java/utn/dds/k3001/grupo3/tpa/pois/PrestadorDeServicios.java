@@ -4,6 +4,7 @@ import java.time.*;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -16,29 +17,37 @@ import utn.dds.k3001.grupo3.tpa.geo.*;
 @Entity
  //TODO Agregar single-table o ver como
 public abstract class PrestadorDeServicios extends POI implements java.io.Serializable
-{	@ManyToMany //TODO Revisar relacion
-	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
+{	
+	@ManyToMany(cascade=CascadeType.PERSIST) //TODO Revisar relacion
 	protected List<Servicio> serviciosOfrecidos;
+	
 	public PrestadorDeServicios(){}
+	
 	public PrestadorDeServicios(String nombre, String calle, String barrio, int altura, PersistablePoint posicion){
 		super(nombre,calle,barrio,altura,posicion);
 		this.serviciosOfrecidos = new LinkedList<Servicio>();
 	}
+	
 	public void agregarServicio(Servicio servicio){
 		this.serviciosOfrecidos.add(servicio);
 	}
+	
 	public boolean estaDisponible(LocalDateTime fechaBuscada, String servicio) {	
 		return serviciosOfrecidos.stream().anyMatch(servicioBuscado -> (servicioBuscado.nombre().contains(servicio) && servicioBuscado.estaDisponible(fechaBuscada)));
 	}
+	
 	public boolean esBuscado(String criterio){
 		return super.esBuscado(criterio) || this.tieneServicio(criterio);
 	}
+	
 	private boolean tieneServicio(String servicio) {
 		return serviciosOfrecidos.stream().anyMatch(unServicio -> unServicio.nombre().contains(servicio));
 	}
+	
 	public List<Servicio> getServiciosOfrecidos() {
 		return serviciosOfrecidos;
 	}
+	
 	public void setServiciosOfrecidos(List<Servicio> serviciosOfrecidos) {
 		this.serviciosOfrecidos = serviciosOfrecidos;
 	}

@@ -22,16 +22,20 @@ public class AdapterSistemaCGP implements OrigenDeDatos{
 	public AdapterSistemaCGP(SistemaCGP sistema){
 		this.sistema = sistema;
 	}
+	
 	public List<Servicio> adaptarServicios(List<ServiciosDTO> servicios){
 		return servicios.stream().map(servicio -> new Servicio(servicio.getNombre(),adaptarDisponibilidades(servicio.getHorarios()))).collect(Collectors.toList());
 	}
+	
 	public List<Disponibilidad> adaptarDisponibilidades(List<RangosServicioDTO> rangoDTO) {
 		return rangoDTO.stream().map(rango -> new Disponibilidad(LocalTime.of(rango.getHorarioDesde(),rango.getMinutosDesde()),
 		LocalTime.of(rango.getHorarioHasta(),rango.getMinutosHasta()),Arrays.asList(DayOfWeek.of(rango.getNumeroDia())))).collect(Collectors.toList());
 	}
+	
 	public CGP adaptarCGP(CentroDTO cgpDTO){//TODO Adaptar demas datos, chequear comunas
 		return new CGP(String.join(" ","CGP",Integer.valueOf(cgpDTO.getNumComuna()).toString()),cgpDTO.getDomicilio(),cgpDTO.getZonas(),0,new PersistablePoint(0,0),new Comuna(new Integer(cgpDTO.getNumComuna()).toString()),(ArrayList<Servicio>) this.adaptarServicios(cgpDTO.getListaServicios()));
 	}
+	
 	public List<POI> buscar(String criterio){
 		return 	sistema.buscarPOIS("").stream().map(cgpDTO -> adaptarCGP(cgpDTO)).filter(CGP -> CGP.esBuscado(criterio)).collect(Collectors.toList());
 	}

@@ -20,6 +20,7 @@ public class ActualizarLocales implements Callable<ResultadoProceso>, WithGlobal
 		this.parser = new ParserArchivoLocales(filePath);
 		this.repositorio = repositorio;
 	}
+	
 	public ResultadoProceso call(){	
 		this.POISAfectados = 0;
 		try {

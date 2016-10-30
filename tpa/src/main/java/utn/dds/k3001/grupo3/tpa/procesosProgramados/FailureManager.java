@@ -6,19 +6,20 @@ import java.util.concurrent.Callable;
 public class FailureManager implements Runnable {
 	Callable<ResultadoProceso> proceso;
 	SchedulerProcesos scheduler;
-	public FailureManager(Callable<ResultadoProceso> proceso,SchedulerProcesos scheduler)
-	{
+	
+	public FailureManager(Callable<ResultadoProceso> proceso,SchedulerProcesos scheduler){
 		this.proceso = proceso;
 		this.scheduler = scheduler;
 	}
+	
 	@Override
 	public void run() {
-	try {
-		ResultadoProceso resultado = proceso.call();
-		scheduler.registrarResultado(resultado);
-	} catch (Exception e) {
-		scheduler.registrarResultado(new ResultadoProceso(LocalDateTime.now(),0, false, e.getMessage()));
-	}
+		try {
+			ResultadoProceso resultado = proceso.call();
+			scheduler.registrarResultado(resultado);
+		} catch (Exception e) {
+			scheduler.registrarResultado(new ResultadoProceso(LocalDateTime.now(),0, false, e.getMessage()));
+		}
 	}
 
 }

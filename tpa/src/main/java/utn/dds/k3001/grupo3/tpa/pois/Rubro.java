@@ -6,11 +6,14 @@ import javax.persistence.Id;
 
 @Entity
 public class Rubro implements java.io.Serializable
-{	@Id @GeneratedValue
+{	
+	@Id @GeneratedValue
 	private int id;
 	private String nombre;
 	private double distanciaDeCercania;
+	
 	public Rubro(){}
+	
 	public Rubro(String nombre, double distanciaDeCercania){
 		this.nombre = nombre;
 		this.distanciaDeCercania = distanciaDeCercania;

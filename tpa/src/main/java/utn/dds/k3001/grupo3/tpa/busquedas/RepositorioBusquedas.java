@@ -15,6 +15,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 public class RepositorioBusquedas implements WithGlobalEntityManager{
 private static final RepositorioBusquedas INSTANCE = new RepositorioBusquedas();
 private BusquedasOrigin origen = new InMemoryBusquedasOrigin();
+
 public static RepositorioBusquedas getInstance(){
 	return INSTANCE;
 }

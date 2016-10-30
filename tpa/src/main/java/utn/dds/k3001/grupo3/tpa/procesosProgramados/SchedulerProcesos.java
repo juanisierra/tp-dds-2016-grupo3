@@ -18,13 +18,16 @@ public class SchedulerProcesos
 		executor = Executors.newSingleThreadScheduledExecutor();
 		historialProcesos = new ArrayList<ResultadoProceso>();
 	}
+	
 	public List<ResultadoProceso> getHistorial() {
-	return historialProcesos;
+		return historialProcesos;
 	}
+	
 	public void agregarTarea(Callable<ResultadoProceso> tarea,LocalDateTime horaEjecucion){
-	executor.schedule(new FailureManager(tarea,this), ChronoUnit.SECONDS.between(LocalDateTime.now(), horaEjecucion), TimeUnit.SECONDS);
+		executor.schedule(new FailureManager(tarea,this), ChronoUnit.SECONDS.between(LocalDateTime.now(), horaEjecucion), TimeUnit.SECONDS);
 	}
+	
 	public void registrarResultado(ResultadoProceso resultado) {
-	historialProcesos.add(resultado);
+		historialProcesos.add(resultado);
 	}
 }

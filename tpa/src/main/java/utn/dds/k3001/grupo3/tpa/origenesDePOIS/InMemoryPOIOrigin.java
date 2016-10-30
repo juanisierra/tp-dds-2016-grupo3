@@ -7,9 +7,11 @@ import utn.dds.k3001.grupo3.tpa.pois.POI;
 
 public class InMemoryPOIOrigin implements POIOrigin {
 	LinkedList<POI> listaPOIS;
+	
 	public InMemoryPOIOrigin() {
 		listaPOIS= new LinkedList<POI>();
 	}
+	
 	@Override
 	public List<POI> getPOIS() {
 		return listaPOIS;
@@ -29,10 +31,10 @@ public class InMemoryPOIOrigin implements POIOrigin {
 	public void agregarPOI(POI poi) {
 		listaPOIS.add(poi);
 	}
+	
 	@Override
 	public void eliminarPorNumero(Long id) {
 		listaPOIS.removeIf(POI -> Long.valueOf(POI.getID()).equals(id));
 		
 	}
-
 }

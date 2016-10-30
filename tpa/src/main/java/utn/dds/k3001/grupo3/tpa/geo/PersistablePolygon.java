@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,22 +24,21 @@ import org.uqbar.geodds.Polygon;
 public class PersistablePolygon extends Polygon implements Serializable{
 	@Id @GeneratedValue
 	private int id;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "poligono_id")
-	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
-  private List<PersistablePoint> puntos;
+	private List<PersistablePoint> puntos;
 
   public PersistablePolygon() {
 	super();
     ArrayList<PersistablePoint> _arrayList = new ArrayList<PersistablePoint>();
     this.puntos = _arrayList;
-    
   }
   
   public boolean add(final PersistablePoint point) {
 	super.add(point);
     return this.puntos.add(point);
   }
+  
   public PersistablePolygon( List<PersistablePoint> points) {
 	super();
     this.puntos = points;

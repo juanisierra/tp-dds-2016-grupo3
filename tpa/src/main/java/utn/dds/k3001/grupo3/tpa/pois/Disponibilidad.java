@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 
 import utn.dds.k3001.grupo3.tpa.converters.LocalTimeConverter;
+
 @Entity
 public class Disponibilidad implements java.io.Serializable
 {	@Id @GeneratedValue
@@ -24,7 +25,9 @@ public class Disponibilidad implements java.io.Serializable
 	private LocalTime horaApertura;
 	@Convert(converter = LocalTimeConverter.class)
 	private LocalTime horaCierre;
+	
 	public Disponibilidad(){}
+	
 	public Disponibilidad(LocalTime horaApertura, LocalTime horaCierre,List<DayOfWeek> diasDisponible){
 		this.horaApertura = horaApertura;
 		this.horaCierre  = horaCierre;

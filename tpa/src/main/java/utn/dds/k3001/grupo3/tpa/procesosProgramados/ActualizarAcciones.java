@@ -20,6 +20,7 @@ public class ActualizarAcciones implements Callable<ResultadoProceso>
 		this.accionesAEliminar = accionesAEliminar;
 		this.terminales = terminales;
 	}
+	
 	public ResultadoProceso call() {
 		this.POISAfectados = 0;
 		List<Terminal> listaTerminalesAModificar = terminales.obtenerTerminales();

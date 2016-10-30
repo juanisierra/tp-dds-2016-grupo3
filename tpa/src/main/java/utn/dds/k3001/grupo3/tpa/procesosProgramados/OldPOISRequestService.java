@@ -15,11 +15,13 @@ public class OldPOISRequestService
 		this.sistemaExterno = sistemaExterno;
 		this.recurso = recurso;
 	}
+	
 	public ClientResponse getPOIS(){ 
         return this.cliente.resource(sistemaExterno).path(recurso)
                 .accept(MediaType.APPLICATION_JSON)
                 .get(ClientResponse.class);
 	}
+	
 	public String getJsonPOIS () throws FallaProcesoException {
 		ClientResponse respuesta = this.getPOIS();
 		if(respuesta.getClientResponseStatus()==ClientResponse.Status.OK){

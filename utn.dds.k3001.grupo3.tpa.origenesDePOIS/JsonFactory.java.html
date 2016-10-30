@@ -17,18 +17,20 @@ public class JsonFactory {
 <span class="fc" id="L17">		this.objectMapper = new ObjectMapper();</span>
 <span class="fc" id="L18">		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);</span>
 <span class="fc" id="L19">	}</span>
+	
 	public &lt;T&gt; T JsonAObjeto(String json, TypeReference&lt;T&gt; typeReference) {
 		try {
-<span class="fc" id="L22">			return this.objectMapper.readValue(json, typeReference);</span>
-<span class="nc" id="L23">		} catch (IOException exception) {</span>
-<span class="nc" id="L24">			throw new RuntimeException(&quot;Error al leer el JSON&quot;, exception);</span>
+<span class="fc" id="L23">			return this.objectMapper.readValue(json, typeReference);</span>
+<span class="nc" id="L24">		} catch (IOException exception) {</span>
+<span class="nc" id="L25">			throw new RuntimeException(&quot;Error al leer el JSON&quot;, exception);</span>
 		}
 	}
+	
 	public List&lt;Long&gt; obtenerPoisAEliminar(String json) throws JsonProcessingException, IOException
-<span class="fc" id="L28">	{	List&lt;Long&gt; lista = new ArrayList&lt;Long&gt;();</span>
-<span class="fc" id="L29">		JsonNode nodo = objectMapper.readTree(json);</span>
-<span class="fc" id="L30">		nodo.forEach(elemento -&gt; lista.add(elemento.get(&quot;id&quot;).asLong()));</span>
-<span class="fc" id="L31">		return lista;</span>
+<span class="fc" id="L30">	{	List&lt;Long&gt; lista = new ArrayList&lt;Long&gt;();</span>
+<span class="fc" id="L31">		JsonNode nodo = objectMapper.readTree(json);</span>
+<span class="fc" id="L32">		nodo.forEach(elemento -&gt; lista.add(elemento.get(&quot;id&quot;).asLong()));</span>
+<span class="fc" id="L33">		return lista;</span>
 	}
 		
 }

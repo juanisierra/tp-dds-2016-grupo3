@@ -15,9 +15,10 @@ public class TerminalesPorComuna implements OrigenDeTerminales
 <span class="nc" id="L15">		this.origen = origen;</span>
 <span class="nc" id="L16">		this.comunaBuscada = comunaBuscada;</span>
 <span class="nc" id="L17">	}</span>
+	
 	@Override
 	public List&lt;Terminal&gt; obtenerTerminales() {
-<span class="nc" id="L20">		return origen.obtenerTerminales().stream().filter(Terminal -&gt; Terminal.estaEnComuna(comunaBuscada)).collect(Collectors.toList());</span>
+<span class="nc" id="L21">		return origen.obtenerTerminales().stream().filter(Terminal -&gt; Terminal.estaEnComuna(comunaBuscada)).collect(Collectors.toList());</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

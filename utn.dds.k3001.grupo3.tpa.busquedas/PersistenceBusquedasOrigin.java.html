@@ -16,26 +16,26 @@ public class PersistenceBusquedasOrigin implements BusquedasOrigin {
 	final Morphia morphia;
 	Datastore datastore;
 	final MongoClient mongoClient;
-<span class="nc" id="L19">	public PersistenceBusquedasOrigin() {</span>
-<span class="nc" id="L20">		mongoClient =  new MongoClient();</span>
-<span class="nc" id="L21">		morphia = new Morphia();</span>
-<span class="nc" id="L22">		morphia.getMapper().getConverters().addConverter(LocalDateConverter.class);</span>
-<span class="nc" id="L23">		morphia.getMapper().getConverters().addConverter(LocalTimeConverter.class);</span>
-<span class="nc" id="L24">		morphia.getMapper().getConverters().addConverter(LocalDateTimeConverter.class);</span>
-<span class="nc" id="L25">		morphia.getMapper().getConverters().addConverter(BigDecimalConverter.class);</span>
-<span class="nc" id="L26">		morphia.mapPackage(&quot;utn.dds.k3001.grupo3.tpa.busquedas&quot;);</span>
-<span class="nc" id="L27">		datastore = morphia.createDatastore(mongoClient, &quot;dds&quot;);</span>
-<span class="nc" id="L28">		datastore.ensureIndexes();</span>
-<span class="nc" id="L29">	}</span>
+
+<span class="nc" id="L20">	public PersistenceBusquedasOrigin() {</span>
+<span class="nc" id="L21">		mongoClient =  new MongoClient();</span>
+<span class="nc" id="L22">		morphia = new Morphia();</span>
+<span class="nc" id="L23">		morphia.getMapper().getConverters().addConverter(LocalDateConverter.class);</span>
+<span class="nc" id="L24">		morphia.getMapper().getConverters().addConverter(LocalTimeConverter.class);</span>
+<span class="nc" id="L25">		morphia.getMapper().getConverters().addConverter(LocalDateTimeConverter.class);</span>
+<span class="nc" id="L26">		morphia.getMapper().getConverters().addConverter(BigDecimalConverter.class);</span>
+<span class="nc" id="L27">		morphia.mapPackage(&quot;utn.dds.k3001.grupo3.tpa.busquedas&quot;);</span>
+<span class="nc" id="L28">		datastore = morphia.createDatastore(mongoClient, &quot;dds&quot;);</span>
+<span class="nc" id="L29">		datastore.ensureIndexes();</span>
+<span class="nc" id="L30">	}</span>
 	@Override
 	public List&lt;Busqueda&gt; getBusquedas() {
-<span class="nc" id="L32">		return datastore.createQuery(Busqueda.class).asList();</span>
+<span class="nc" id="L33">		return datastore.createQuery(Busqueda.class).asList();</span>
 	}
 
 	@Override
 	public void addBusqueda(Busqueda busqueda) {
-<span class="nc" id="L37">		datastore.save(busqueda);</span>
-
+<span class="nc" id="L38">		datastore.save(busqueda);</span>
 <span class="nc" id="L39">	}</span>
 
 	@Override

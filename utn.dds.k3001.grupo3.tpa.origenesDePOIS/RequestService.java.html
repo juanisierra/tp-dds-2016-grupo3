@@ -13,14 +13,16 @@ public class RequestService {
 <span class="nc" id="L13">	public RequestService(){</span>
 <span class="nc" id="L14">		this.cliente = Client.create();</span>
 <span class="nc" id="L15">	}</span>
+	
 	public ClientResponse getBancos(String banco, String servicio){ //TODO modificar para el servidor real
-<span class="nc" id="L17">        return this.cliente.resource(SISTEMAEXTERNO).path(RECURSO)</span>
-<span class="nc" id="L18">                .queryParam(&quot;banco&quot;,banco).queryParam(&quot;servicio&quot;,servicio)</span>
-<span class="nc" id="L19">                .accept(MediaType.APPLICATION_JSON)</span>
-<span class="nc" id="L20">                .get(ClientResponse.class);</span>
+<span class="nc" id="L18">        return this.cliente.resource(SISTEMAEXTERNO).path(RECURSO)</span>
+<span class="nc" id="L19">                .queryParam(&quot;banco&quot;,banco).queryParam(&quot;servicio&quot;,servicio)</span>
+<span class="nc" id="L20">                .accept(MediaType.APPLICATION_JSON)</span>
+<span class="nc" id="L21">                .get(ClientResponse.class);</span>
 	}
+	
 	public String getJsonBancos (String banco, String servicio) {
-<span class="nc" id="L23">		return this.getBancos(banco, servicio).getEntity(String.class);</span>
+<span class="nc" id="L25">		return this.getBancos(banco, servicio).getEntity(String.class);</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -16,13 +16,14 @@ public class EnviarMailFallo implements Callable&lt;ResultadoProceso&gt;
 <span class="fc" id="L16">		this.servicio = servicio;</span>
 <span class="fc" id="L17">		this.mailAdministrador = mail;</span>
 <span class="fc" id="L18">	}</span>
+	
 	@Override
 	public ResultadoProceso call() throws Exception{
-<span class="fc" id="L21">		ResultadoProceso resultado = proceso.call();</span>
-<span class="pc bpc" id="L22" title="1 of 2 branches missed.">		if(!resultado.terminoCorrectamente()){</span>
-<span class="fc" id="L23">		servicio.enviarMail(mailAdministrador, &quot;Fallo un proceso&quot;, resultado.getDescripcion());</span>
+<span class="fc" id="L22">		ResultadoProceso resultado = proceso.call();</span>
+<span class="pc bpc" id="L23" title="1 of 2 branches missed.">		if(!resultado.terminoCorrectamente()){</span>
+<span class="fc" id="L24">		servicio.enviarMail(mailAdministrador, &quot;Fallo un proceso&quot;, resultado.getDescripcion());</span>
 	}
-<span class="fc" id="L25">		return resultado;</span>
+<span class="fc" id="L26">		return resultado;</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -7,33 +7,35 @@ import utn.dds.k3001.grupo3.tpa.pois.POI;
 
 public class InMemoryPOIOrigin implements POIOrigin {
 	LinkedList&lt;POI&gt; listaPOIS;
-<span class="fc" id="L10">	public InMemoryPOIOrigin() {</span>
-<span class="fc" id="L11">		listaPOIS= new LinkedList&lt;POI&gt;();</span>
-<span class="fc" id="L12">	}</span>
+	
+<span class="fc" id="L11">	public InMemoryPOIOrigin() {</span>
+<span class="fc" id="L12">		listaPOIS= new LinkedList&lt;POI&gt;();</span>
+<span class="fc" id="L13">	}</span>
+	
 	@Override
 	public List&lt;POI&gt; getPOIS() {
-<span class="fc" id="L15">		return listaPOIS;</span>
+<span class="fc" id="L17">		return listaPOIS;</span>
 	}
 
 	@Override
 	public void eliminarPOI(POI poi) {
-<span class="fc" id="L20">		listaPOIS.remove(poi);</span>
-<span class="fc" id="L21">	}</span>
+<span class="fc" id="L22">		listaPOIS.remove(poi);</span>
+<span class="fc" id="L23">	}</span>
 
 	@Override
 	public void vaciar() {
-<span class="fc" id="L25">		listaPOIS= new LinkedList&lt;POI&gt;();</span>
-<span class="fc" id="L26">	}</span>
+<span class="fc" id="L27">		listaPOIS= new LinkedList&lt;POI&gt;();</span>
+<span class="fc" id="L28">	}</span>
 
 	@Override
 	public void agregarPOI(POI poi) {
-<span class="fc" id="L30">		listaPOIS.add(poi);</span>
-<span class="fc" id="L31">	}</span>
+<span class="fc" id="L32">		listaPOIS.add(poi);</span>
+<span class="fc" id="L33">	}</span>
+	
 	@Override
 	public void eliminarPorNumero(Long id) {
-<span class="fc" id="L34">		listaPOIS.removeIf(POI -&gt; Long.valueOf(POI.getID()).equals(id));</span>
+<span class="fc" id="L37">		listaPOIS.removeIf(POI -&gt; Long.valueOf(POI.getID()).equals(id));</span>
 		
-<span class="fc" id="L36">	}</span>
-
+<span class="fc" id="L39">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

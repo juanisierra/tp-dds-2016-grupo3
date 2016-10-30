@@ -5,23 +5,24 @@ import java.util.List;
 
 public class InMemoryTerminalOrigin implements TerminalOrigin{
 	private List&lt;Terminal&gt; listaTerminales;
-<span class="fc" id="L8">	public InMemoryTerminalOrigin() {</span>
-<span class="fc" id="L9">		listaTerminales = new LinkedList&lt;Terminal&gt;();</span>
-<span class="fc" id="L10">	}</span>
+	
+<span class="fc" id="L9">	public InMemoryTerminalOrigin() {</span>
+<span class="fc" id="L10">		listaTerminales = new LinkedList&lt;Terminal&gt;();</span>
+<span class="fc" id="L11">	}</span>
 	@Override
 	public void agregarTerminal(Terminal terminal) {
-<span class="fc" id="L13">		listaTerminales.add(terminal);</span>
-<span class="fc" id="L14">	}</span>
+<span class="fc" id="L14">		listaTerminales.add(terminal);</span>
+<span class="fc" id="L15">	}</span>
 
 	@Override
 	public List&lt;Terminal&gt; obtenerTerminales() {
-<span class="fc" id="L18">		return listaTerminales;</span>
+<span class="fc" id="L19">		return listaTerminales;</span>
 	}
 	@Override
 	public void reset() {
-<span class="fc" id="L22">		listaTerminales = new LinkedList&lt;Terminal&gt;();</span>
+<span class="fc" id="L23">		listaTerminales = new LinkedList&lt;Terminal&gt;();</span>
 		
-<span class="fc" id="L24">	}</span>
+<span class="fc" id="L25">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

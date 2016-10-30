@@ -2,6 +2,7 @@
 
 import java.util.ArrayList;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -10,8 +11,7 @@ import org.hibernate.annotations.Cascade;
 import utn.dds.k3001.grupo3.tpa.geo.*;
 @Entity
 public class CGP extends PrestadorDeServicios implements java.io.Serializable
-{	@ManyToOne
-	@Cascade(value={org.hibernate.annotations.CascadeType.PERSIST})
+{	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Comuna comunaPropia;
 <span class="fc" id="L16">	public CGP(){}</span>
 	
@@ -19,21 +19,23 @@ public class CGP extends PrestadorDeServicios implements java.io.Serializable
 <span class="fc" id="L19">		super(nombre,calle,barrio,altura,posicion);</span>
 <span class="fc" id="L20">		this.comunaPropia =comuna;</span>
 <span class="fc" id="L21">	}</span>
+	
 	public CGP(String nombre, String calle, String barrio, int altura, PersistablePoint posicion, Comuna comuna,ArrayList&lt;Servicio&gt; servicios){
-<span class="fc" id="L23">		super(nombre,calle,barrio,altura,posicion);</span>
-<span class="fc" id="L24">		this.comunaPropia =comuna;</span>
-<span class="fc" id="L25">		this.serviciosOfrecidos = servicios;</span>
-<span class="fc" id="L26">	}</span>
+<span class="fc" id="L24">		super(nombre,calle,barrio,altura,posicion);</span>
+<span class="fc" id="L25">		this.comunaPropia =comuna;</span>
+<span class="fc" id="L26">		this.serviciosOfrecidos = servicios;</span>
+<span class="fc" id="L27">	}</span>
+	
 	public boolean estaCerca(PersistablePoint otraPosicion) {
-<span class="fc" id="L28">		return comunaPropia.estaEnComuna(otraPosicion);</span>
+<span class="fc" id="L30">		return comunaPropia.estaEnComuna(otraPosicion);</span>
 	}
 
 	public Comuna getComunaPropia() {
-<span class="nc" id="L32">		return comunaPropia;</span>
+<span class="nc" id="L34">		return comunaPropia;</span>
 	}
 
 	public void setComunaPropia(Comuna comunaPropia) {
-<span class="nc" id="L36">		this.comunaPropia = comunaPropia;</span>
-<span class="nc" id="L37">	}</span>
+<span class="nc" id="L38">		this.comunaPropia = comunaPropia;</span>
+<span class="nc" id="L39">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

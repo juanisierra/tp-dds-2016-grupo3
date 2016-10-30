@@ -15,17 +15,19 @@ public class OldPOISRequestService
 <span class="nc" id="L15">		this.sistemaExterno = sistemaExterno;</span>
 <span class="nc" id="L16">		this.recurso = recurso;</span>
 <span class="nc" id="L17">	}</span>
+	
 	public ClientResponse getPOIS(){ 
-<span class="nc" id="L19">        return this.cliente.resource(sistemaExterno).path(recurso)</span>
-<span class="nc" id="L20">                .accept(MediaType.APPLICATION_JSON)</span>
-<span class="nc" id="L21">                .get(ClientResponse.class);</span>
+<span class="nc" id="L20">        return this.cliente.resource(sistemaExterno).path(recurso)</span>
+<span class="nc" id="L21">                .accept(MediaType.APPLICATION_JSON)</span>
+<span class="nc" id="L22">                .get(ClientResponse.class);</span>
 	}
+	
 	public String getJsonPOIS () throws FallaProcesoException {
-<span class="nc" id="L24">		ClientResponse respuesta = this.getPOIS();</span>
-<span class="nc bnc" id="L25" title="All 2 branches missed.">		if(respuesta.getClientResponseStatus()==ClientResponse.Status.OK){</span>
-<span class="nc" id="L26">			return respuesta.getEntity(String.class);</span>
+<span class="nc" id="L26">		ClientResponse respuesta = this.getPOIS();</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">		if(respuesta.getClientResponseStatus()==ClientResponse.Status.OK){</span>
+<span class="nc" id="L28">			return respuesta.getEntity(String.class);</span>
 		} else {
-<span class="nc" id="L28">			throw new FallaProcesoException(&quot;No se pudieron obtener los POIS a dar de baja&quot;);</span>
+<span class="nc" id="L30">			throw new FallaProcesoException(&quot;No se pudieron obtener los POIS a dar de baja&quot;);</span>
 		}
 	}
 }

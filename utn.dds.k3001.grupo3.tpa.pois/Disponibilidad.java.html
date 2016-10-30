@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 
 import utn.dds.k3001.grupo3.tpa.converters.LocalTimeConverter;
+
 @Entity
 public class Disponibilidad implements java.io.Serializable
 {	@Id @GeneratedValue
@@ -24,60 +25,62 @@ public class Disponibilidad implements java.io.Serializable
 	private LocalTime horaApertura;
 	@Convert(converter = LocalTimeConverter.class)
 	private LocalTime horaCierre;
-<span class="fc" id="L27">	public Disponibilidad(){}</span>
-<span class="fc" id="L28">	public Disponibilidad(LocalTime horaApertura, LocalTime horaCierre,List&lt;DayOfWeek&gt; diasDisponible){</span>
-<span class="fc" id="L29">		this.horaApertura = horaApertura;</span>
-<span class="fc" id="L30">		this.horaCierre  = horaCierre;</span>
-<span class="fc" id="L31">		this.diasDisponible = diasDisponible;</span>
-<span class="fc" id="L32">	}</span>
+	
+<span class="fc" id="L29">	public Disponibilidad(){}</span>
+	
+<span class="fc" id="L31">	public Disponibilidad(LocalTime horaApertura, LocalTime horaCierre,List&lt;DayOfWeek&gt; diasDisponible){</span>
+<span class="fc" id="L32">		this.horaApertura = horaApertura;</span>
+<span class="fc" id="L33">		this.horaCierre  = horaCierre;</span>
+<span class="fc" id="L34">		this.diasDisponible = diasDisponible;</span>
+<span class="fc" id="L35">	}</span>
 	
 	public static Disponibilidad lunesAViernes(LocalTime horaApertura, LocalTime horaCierre){ //Builder para Lunes a viernes
-<span class="fc" id="L35">		List&lt;DayOfWeek&gt; listaDias = Arrays.asList(DayOfWeek.MONDAY,DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY);</span>
-<span class="fc" id="L36">		return new Disponibilidad(horaApertura, horaCierre,listaDias);</span>
+<span class="fc" id="L38">		List&lt;DayOfWeek&gt; listaDias = Arrays.asList(DayOfWeek.MONDAY,DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY);</span>
+<span class="fc" id="L39">		return new Disponibilidad(horaApertura, horaCierre,listaDias);</span>
 	}
 	
 	public boolean estaDisponible(LocalDateTime fechaBuscada){
-<span class="fc bfc" id="L40" title="All 4 branches covered.">		return this.abreElDia(fechaBuscada.getDayOfWeek()) &amp;&amp; this.abreALaHora(fechaBuscada.toLocalTime());</span>
+<span class="fc bfc" id="L43" title="All 4 branches covered.">		return this.abreElDia(fechaBuscada.getDayOfWeek()) &amp;&amp; this.abreALaHora(fechaBuscada.toLocalTime());</span>
 	}
 	
 	public boolean abreElDia(DayOfWeek dia){
-<span class="fc" id="L44">		return diasDisponible.contains(dia);</span>
+<span class="fc" id="L47">		return diasDisponible.contains(dia);</span>
 	}
 
 	private boolean abreALaHora(LocalTime hora){
-<span class="pc bpc" id="L48" title="1 of 4 branches missed.">		return (hora.compareTo(horaApertura)&gt;=0 &amp;&amp; hora.compareTo(horaCierre)&lt;0);</span>
+<span class="pc bpc" id="L51" title="1 of 4 branches missed.">		return (hora.compareTo(horaApertura)&gt;=0 &amp;&amp; hora.compareTo(horaCierre)&lt;0);</span>
 	}
 	
 	public List&lt;DayOfWeek&gt; getDiasDisponible() {
-<span class="nc" id="L52">		return diasDisponible;</span>
+<span class="nc" id="L55">		return diasDisponible;</span>
 	}
 
 	public LocalTime getHoraApertura() {
-<span class="fc" id="L56">		return horaApertura;</span>
+<span class="fc" id="L59">		return horaApertura;</span>
 	}
 
 	public LocalTime getHoraCierre() {
-<span class="fc" id="L60">		return horaCierre;</span>
+<span class="fc" id="L63">		return horaCierre;</span>
 	}
 
 	public int getId() {
-<span class="nc" id="L64">		return id;</span>
+<span class="nc" id="L67">		return id;</span>
 	}
 
 	public void setId(int id) {
-<span class="nc" id="L68">		this.id = id;</span>
-<span class="nc" id="L69">	}</span>
+<span class="nc" id="L71">		this.id = id;</span>
+<span class="nc" id="L72">	}</span>
 
 	public void setDiasDisponible(List&lt;DayOfWeek&gt; diasDisponible) {
-<span class="nc" id="L72">		this.diasDisponible = diasDisponible;</span>
-<span class="nc" id="L73">	}</span>
+<span class="nc" id="L75">		this.diasDisponible = diasDisponible;</span>
+<span class="nc" id="L76">	}</span>
 
 	public void setHoraApertura(LocalTime horaApertura) {
-<span class="nc" id="L76">		this.horaApertura = horaApertura;</span>
-<span class="nc" id="L77">	}</span>
+<span class="nc" id="L79">		this.horaApertura = horaApertura;</span>
+<span class="nc" id="L80">	}</span>
 
 	public void setHoraCierre(LocalTime horaCierre) {
-<span class="nc" id="L80">		this.horaCierre = horaCierre;</span>
-<span class="nc" id="L81">	}</span>
+<span class="nc" id="L83">		this.horaCierre = horaCierre;</span>
+<span class="nc" id="L84">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

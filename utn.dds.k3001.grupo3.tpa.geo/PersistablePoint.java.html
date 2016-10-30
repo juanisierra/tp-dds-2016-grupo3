@@ -25,65 +25,68 @@ public class PersistablePoint extends Point implements Serializable{
 <span class="fc" id="L25">    BigDecimal _bigDecimal_1 = new BigDecimal(aY);</span>
 <span class="fc" id="L26">    this.y = _bigDecimal_1;</span>
 <span class="fc" id="L27">  }</span>
+ 
   public PersistablePoint(){
-<span class="fc" id="L29">	  super(0,0);</span>
-<span class="fc" id="L30">  }</span>
+<span class="fc" id="L30">	  super(0,0);</span>
+<span class="fc" id="L31">  }</span>
+  
   public PersistablePoint(BigDecimal x,BigDecimal y) {
-<span class="nc" id="L32">	  super(x.doubleValue(),y.doubleValue());</span>
-<span class="nc" id="L33">	  this.x=x;</span>
-<span class="nc" id="L34">	  this.y=y;</span>
-<span class="nc" id="L35">  }</span>
+<span class="nc" id="L34">	  super(x.doubleValue(),y.doubleValue());</span>
+<span class="nc" id="L35">	  this.x=x;</span>
+<span class="nc" id="L36">	  this.y=y;</span>
+<span class="nc" id="L37">  }</span>
+  
   public PersistablePoint(final double aX, final double aY) {
-<span class="fc" id="L37">	  super(aX,aY);</span>
-<span class="fc" id="L38">    BigDecimal _bigDecimal = new BigDecimal(aX);</span>
-<span class="fc" id="L39">    this.x = _bigDecimal;</span>
-<span class="fc" id="L40">    BigDecimal _bigDecimal_1 = new BigDecimal(aY);</span>
-<span class="fc" id="L41">    this.y = _bigDecimal_1;</span>
-<span class="fc" id="L42">  }</span>
+<span class="fc" id="L40">	  super(aX,aY);</span>
+<span class="fc" id="L41">    BigDecimal _bigDecimal = new BigDecimal(aX);</span>
+<span class="fc" id="L42">    this.x = _bigDecimal;</span>
+<span class="fc" id="L43">    BigDecimal _bigDecimal_1 = new BigDecimal(aY);</span>
+<span class="fc" id="L44">    this.y = _bigDecimal_1;</span>
+<span class="fc" id="L45">  }</span>
 
   public static PersistablePoint and(final double aX, final double aY) {
-<span class="nc" id="L45">    return new PersistablePoint(aX, aY);</span>
+<span class="nc" id="L48">    return new PersistablePoint(aX, aY);</span>
   }
 
   public double latitude() {
-<span class="fc" id="L49">    return this.x.doubleValue();</span>
+<span class="fc" id="L52">    return this.x.doubleValue();</span>
   }
 
   public double longitude() {
-<span class="fc" id="L53">    return this.y.doubleValue();</span>
+<span class="fc" id="L56">    return this.y.doubleValue();</span>
   }
 
   public double distance(final PersistablePoint anotherPoint) {
-<span class="fc" id="L57">	 return super.distance(anotherPoint);</span>
+<span class="fc" id="L60">	 return super.distance(anotherPoint);</span>
   }
 
   public double toRadian(final double angle) {
-<span class="fc" id="L61">    return ((Math.PI * angle) / 180.0);</span>
+<span class="fc" id="L64">    return ((Math.PI * angle) / 180.0);</span>
   }
 
   public double toDegree(final double angle) {
-<span class="nc" id="L65">    return (angle * (180.0 / Math.PI));</span>
+<span class="nc" id="L68">    return (angle * (180.0 / Math.PI));</span>
   }
 
   @Override
   public String toString() {
-<span class="nc" id="L70">    return (((&quot;x: &quot; + this.x) + &quot;, y: &quot;) + this.y);</span>
+<span class="nc" id="L73">    return (((&quot;x: &quot; + this.x) + &quot;, y: &quot;) + this.y);</span>
   }
 
 public BigDecimal getX() {
-<span class="nc" id="L74">	return x;</span>
+<span class="nc" id="L77">	return x;</span>
 }
 
 public void setX(BigDecimal x) {
-<span class="nc" id="L78">	this.x = x;</span>
-<span class="nc" id="L79">}</span>
+<span class="nc" id="L81">	this.x = x;</span>
+<span class="nc" id="L82">}</span>
 
 public BigDecimal getY() {
-<span class="nc" id="L82">	return y;</span>
+<span class="nc" id="L85">	return y;</span>
 }
 
 public void setY(BigDecimal y) {
-<span class="nc" id="L86">	this.y = y;</span>
-<span class="nc" id="L87">}</span>
+<span class="nc" id="L89">	this.y = y;</span>
+<span class="nc" id="L90">}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

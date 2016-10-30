@@ -22,18 +22,22 @@ public class AdapterSistemaCGP implements OrigenDeDatos{
 <span class="fc" id="L22">	public AdapterSistemaCGP(SistemaCGP sistema){</span>
 <span class="fc" id="L23">		this.sistema = sistema;</span>
 <span class="fc" id="L24">	}</span>
+	
 	public List&lt;Servicio&gt; adaptarServicios(List&lt;ServiciosDTO&gt; servicios){
-<span class="fc" id="L26">		return servicios.stream().map(servicio -&gt; new Servicio(servicio.getNombre(),adaptarDisponibilidades(servicio.getHorarios()))).collect(Collectors.toList());</span>
+<span class="fc" id="L27">		return servicios.stream().map(servicio -&gt; new Servicio(servicio.getNombre(),adaptarDisponibilidades(servicio.getHorarios()))).collect(Collectors.toList());</span>
 	}
+	
 	public List&lt;Disponibilidad&gt; adaptarDisponibilidades(List&lt;RangosServicioDTO&gt; rangoDTO) {
-<span class="fc" id="L29">		return rangoDTO.stream().map(rango -&gt; new Disponibilidad(LocalTime.of(rango.getHorarioDesde(),rango.getMinutosDesde()),</span>
-<span class="fc" id="L30">		LocalTime.of(rango.getHorarioHasta(),rango.getMinutosHasta()),Arrays.asList(DayOfWeek.of(rango.getNumeroDia())))).collect(Collectors.toList());</span>
+<span class="fc" id="L31">		return rangoDTO.stream().map(rango -&gt; new Disponibilidad(LocalTime.of(rango.getHorarioDesde(),rango.getMinutosDesde()),</span>
+<span class="fc" id="L32">		LocalTime.of(rango.getHorarioHasta(),rango.getMinutosHasta()),Arrays.asList(DayOfWeek.of(rango.getNumeroDia())))).collect(Collectors.toList());</span>
 	}
+	
 	public CGP adaptarCGP(CentroDTO cgpDTO){//TODO Adaptar demas datos, chequear comunas
-<span class="fc" id="L33">		return new CGP(String.join(&quot; &quot;,&quot;CGP&quot;,Integer.valueOf(cgpDTO.getNumComuna()).toString()),cgpDTO.getDomicilio(),cgpDTO.getZonas(),0,new PersistablePoint(0,0),new Comuna(new Integer(cgpDTO.getNumComuna()).toString()),(ArrayList&lt;Servicio&gt;) this.adaptarServicios(cgpDTO.getListaServicios()));</span>
+<span class="fc" id="L36">		return new CGP(String.join(&quot; &quot;,&quot;CGP&quot;,Integer.valueOf(cgpDTO.getNumComuna()).toString()),cgpDTO.getDomicilio(),cgpDTO.getZonas(),0,new PersistablePoint(0,0),new Comuna(new Integer(cgpDTO.getNumComuna()).toString()),(ArrayList&lt;Servicio&gt;) this.adaptarServicios(cgpDTO.getListaServicios()));</span>
 	}
+	
 	public List&lt;POI&gt; buscar(String criterio){
-<span class="pc" id="L36">		return 	sistema.buscarPOIS(&quot;&quot;).stream().map(cgpDTO -&gt; adaptarCGP(cgpDTO)).filter(CGP -&gt; CGP.esBuscado(criterio)).collect(Collectors.toList());</span>
+<span class="pc" id="L40">		return 	sistema.buscarPOIS(&quot;&quot;).stream().map(cgpDTO -&gt; adaptarCGP(cgpDTO)).filter(CGP -&gt; CGP.esBuscado(criterio)).collect(Collectors.toList());</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

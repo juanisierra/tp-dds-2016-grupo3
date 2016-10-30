@@ -17,25 +17,20 @@ import utn.dds.k3001.grupo3.tpa.pois.POI;
 	@Override
 	public void eliminarPOI(POI poi) {
 <span class="nc" id="L19">		entityManager().remove(poi);</span>
-
-<span class="nc" id="L21">	}</span>
+<span class="nc" id="L20">	}</span>
 
 	@Override
 	public void vaciar() {
-		
-
-<span class="nc" id="L27">	}</span>
+<span class="nc" id="L24">	}</span>
 
 	@Override
 	public void agregarPOI(POI poi) {
-<span class="nc" id="L31">		entityManager().persist(poi);</span>
-
-<span class="nc" id="L33">	}</span>
+<span class="nc" id="L28">		entityManager().persist(poi);</span>
+<span class="nc" id="L29">	}</span>
 
 	@Override
 	public void eliminarPorNumero(Long id) {
-<span class="nc" id="L37">		entityManager().createQuery(&quot;delete POI p where p.id= :id&quot;).setParameter(&quot;id&quot;,toIntExact(id)).executeUpdate();</span>
-<span class="nc" id="L38">	}</span>
-
+<span class="nc" id="L33">		entityManager().createQuery(&quot;delete POI p where p.id= :id&quot;).setParameter(&quot;id&quot;,toIntExact(id)).executeUpdate();</span>
+<span class="nc" id="L34">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

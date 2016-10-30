@@ -12,10 +12,10 @@ public class ParserArchivoLocales
 {
 	private String filepath;
 	
+<span class="fc" id="L15">	public ParserArchivoLocales(String filepath) throws FallaProcesoException{</span>
+<span class="fc" id="L16">		this.filepath = filepath;</span>
+<span class="fc" id="L17">	}</span>
 	
-<span class="fc" id="L16">	public ParserArchivoLocales(String filepath) throws FallaProcesoException{</span>
-<span class="fc" id="L17">		this.filepath = filepath;</span>
-<span class="fc" id="L18">	}</span>
 	public Map&lt;String,List&lt;String&gt;&gt; obtenerLocalYPalabrasClaves() throws FallaProcesoException{	
 		String[] linea;
 		List&lt;String&gt; palabrasClave;

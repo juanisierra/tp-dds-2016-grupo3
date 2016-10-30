@@ -12,43 +12,50 @@ public class RepositorioInterno implements OrigenDeDatos,WithGlobalEntityManager
 <span class="fc" id="L12">	private final static RepositorioInterno INSTANCE = new RepositorioInterno();</span>
 <span class="fc" id="L13">	private static POIOrigin origen = new InMemoryPOIOrigin(); //ELEGIMOS SI PERSISTE EN MEMORIA O EN BASE DE DATOS</span>
 <span class="fc" id="L14">	private RepositorioInterno(){}</span>
+	
 	public static RepositorioInterno getInstance() {
-<span class="fc" id="L16">		return INSTANCE;</span>
+<span class="fc" id="L17">		return INSTANCE;</span>
 	}
+	
 	public void agregarPoi(POI poiNvo){
-<span class="fc" id="L19">		origen.agregarPOI(poiNvo);;</span>
-<span class="fc" id="L20">	}</span>
+<span class="fc" id="L21">		origen.agregarPOI(poiNvo);;</span>
+<span class="fc" id="L22">	}</span>
+	
 	public void eliminarPoi(POI poiAEliminar){
-<span class="fc" id="L22">		origen.eliminarPOI(poiAEliminar);</span>
-<span class="fc" id="L23">	}</span>
+<span class="fc" id="L25">		origen.eliminarPOI(poiAEliminar);</span>
+<span class="fc" id="L26">	}</span>
+	
 	public List&lt;POI&gt; buscar(String criterio) {
-<span class="fc" id="L25">		return origen.getPOIS().stream().filter(POI -&gt; POI.esBuscado(criterio)).collect(Collectors.toList());</span>
+<span class="fc" id="L29">		return origen.getPOIS().stream().filter(POI -&gt; POI.esBuscado(criterio)).collect(Collectors.toList());</span>
 	}
-	public POI buscarPorNombre(String nombre)
-	{	
-<span class="fc" id="L29">	List&lt;POI&gt; lista = origen.getPOIS().stream().filter(POI -&gt; POI.getNombre().contains(nombre)).collect(Collectors.toList());</span>
-<span class="fc bfc" id="L30" title="All 2 branches covered.">		if(lista.isEmpty())</span>
-		{
-<span class="fc" id="L32">			return null;</span>
+	
+	public POI buscarPorNombre(String nombre){	
+<span class="fc" id="L33">		List&lt;POI&gt; lista = origen.getPOIS().stream().filter(POI -&gt; POI.getNombre().contains(nombre)).collect(Collectors.toList());</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">		if(lista.isEmpty()){</span>
+<span class="fc" id="L35">			return null;</span>
 		} else {
-<span class="fc" id="L34">		return lista.get(0);</span>
+<span class="fc" id="L37">		return lista.get(0);</span>
 		}
-		
 	}
+	
 	public void eliminarPoiPorNumero(long id) {
-<span class="fc" id="L39">		origen.eliminarPorNumero(id);</span>
-<span class="fc" id="L40">	}</span>
+<span class="fc" id="L42">		origen.eliminarPorNumero(id);</span>
+<span class="fc" id="L43">	}</span>
+	
 	public List&lt;POI&gt; getAllPOIS(){
-<span class="fc" id="L42">		return origen.getPOIS();</span>
+<span class="fc" id="L46">		return origen.getPOIS();</span>
 	}
+	
 	public static void reset() {
-<span class="fc" id="L45">		origen.vaciar();</span>
-<span class="fc" id="L46">	}</span>
+<span class="fc" id="L50">		origen.vaciar();</span>
+<span class="fc" id="L51">	}</span>
+	
 	public static void origenMemoria() {
-<span class="nc" id="L48">		origen = new InMemoryPOIOrigin();</span>
-<span class="nc" id="L49">	}</span>
+<span class="nc" id="L54">		origen = new InMemoryPOIOrigin();</span>
+<span class="nc" id="L55">	}</span>
+	
 	public static void origenPersistencia() {
-<span class="nc" id="L51">		origen = new PersistancePOIOrigin();</span>
-<span class="nc" id="L52">	}</span>
+<span class="nc" id="L58">		origen = new PersistancePOIOrigin();</span>
+<span class="nc" id="L59">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

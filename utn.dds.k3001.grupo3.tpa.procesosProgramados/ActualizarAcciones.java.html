@@ -20,15 +20,16 @@ public class ActualizarAcciones implements Callable&lt;ResultadoProceso&gt;
 <span class="fc" id="L20">		this.accionesAEliminar = accionesAEliminar;</span>
 <span class="fc" id="L21">		this.terminales = terminales;</span>
 <span class="fc" id="L22">	}</span>
+	
 	public ResultadoProceso call() {
-<span class="fc" id="L24">		this.POISAfectados = 0;</span>
-<span class="fc" id="L25">		List&lt;Terminal&gt; listaTerminalesAModificar = terminales.obtenerTerminales();</span>
-<span class="fc" id="L26">		listaTerminalesAModificar.forEach(terminal -&gt; {</span>
-<span class="fc" id="L27">			POISAfectados++;</span>
-<span class="fc" id="L28">			accionesAAgregar.forEach(accion -&gt; terminal.agregarObserverBusqueda(accion));</span>
-<span class="fc" id="L29">			accionesAEliminar.forEach(accion -&gt; terminal.eliminarObserverBusqueda(accion));</span>
-<span class="fc" id="L30">		});</span>
-<span class="fc" id="L31">		return new ResultadoProceso(LocalDateTime.now(),POISAfectados,true,&quot;Acciones actualizadas correctamente&quot;);</span>
+<span class="fc" id="L25">		this.POISAfectados = 0;</span>
+<span class="fc" id="L26">		List&lt;Terminal&gt; listaTerminalesAModificar = terminales.obtenerTerminales();</span>
+<span class="fc" id="L27">		listaTerminalesAModificar.forEach(terminal -&gt; {</span>
+<span class="fc" id="L28">			POISAfectados++;</span>
+<span class="fc" id="L29">			accionesAAgregar.forEach(accion -&gt; terminal.agregarObserverBusqueda(accion));</span>
+<span class="fc" id="L30">			accionesAEliminar.forEach(accion -&gt; terminal.eliminarObserverBusqueda(accion));</span>
+<span class="fc" id="L31">		});</span>
+<span class="fc" id="L32">		return new ResultadoProceso(LocalDateTime.now(),POISAfectados,true,&quot;Acciones actualizadas correctamente&quot;);</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

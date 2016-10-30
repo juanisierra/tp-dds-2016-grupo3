@@ -14,24 +14,28 @@ public class ParadaColectivo extends POI implements java.io.Serializable
 <span class="fc" id="L14">		super(nombre,calle,barrio,altura,posicion);</span>
 <span class="fc" id="L15">		this.linea = linea;</span>
 <span class="fc" id="L16">	}</span>
-<span class="fc" id="L17">	public ParadaColectivo(){}</span>
+	
+<span class="fc" id="L18">	public ParadaColectivo(){}</span>
+	
 	@Override
 	public boolean estaCerca(PersistablePoint otraPosicion){
-<span class="pc bpc" id="L20" title="1 of 2 branches missed.">		return (posicion.distance(otraPosicion) &lt;=0.1);</span>
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">		return (posicion.distance(otraPosicion) &lt;=0.1);</span>
 	}
 	
 	public boolean estaDisponible(LocalDateTime fechaBuscada,String servicio){
-<span class="nc" id="L24">		return true;</span>
+<span class="nc" id="L26">		return true;</span>
 	}
 	
 	public boolean esBuscado(String criterio) {
-<span class="pc bpc" id="L28" title="1 of 4 branches missed.">		return super.esBuscado(criterio) || linea.toString().contains(criterio);</span>
+<span class="pc bpc" id="L30" title="1 of 4 branches missed.">		return super.esBuscado(criterio) || linea.toString().contains(criterio);</span>
 	}
+	
 	public Integer getLinea() {
-<span class="nc" id="L31">		return linea;</span>
+<span class="nc" id="L34">		return linea;</span>
 	}
+	
 	public void setLinea(Integer linea) {
-<span class="nc" id="L34">		this.linea = linea;</span>
-<span class="nc" id="L35">	}</span>
+<span class="nc" id="L38">		this.linea = linea;</span>
+<span class="nc" id="L39">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

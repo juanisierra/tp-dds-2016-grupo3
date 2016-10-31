@@ -19,23 +19,31 @@ import utn.dds.k3001.grupo3.tpa.usuarios.TipoUsuario;
 	public ModelAndView iniciarSesion(Request req, Response res){
 <span class="nc" id="L20">		String id_usuario = req.queryParams(&quot;usuario&quot;);</span>
 <span class="nc" id="L21">		String contrasenia = req.queryParams(&quot;contrasenia&quot;);</span>
-<span class="nc bnc" id="L22" title="All 2 branches missed.">		if(!RepositorioUsuarios.instance().validarUsuario(id_usuario, contrasenia))</span>
+<span class="nc" id="L22">		res.removeCookie(&quot;user&quot;);</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">		if(!RepositorioUsuarios.instance().validarUsuario(id_usuario, contrasenia))</span>
 		{
-<span class="nc" id="L24">			Map&lt;String,String&gt; model = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L25">			model.put(&quot;error&quot;,&quot;Error: El usuario o la contraseña no son validos&quot;);</span>
-<span class="nc" id="L26">			return new ModelAndView(model, &quot;login/login.hbs&quot;);</span>
+<span class="nc" id="L25">			Map&lt;String,String&gt; model = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L26">			model.put(&quot;error&quot;,&quot;Error: El usuario o la contraseña no son validos&quot;);</span>
+<span class="nc" id="L27">			return new ModelAndView(model, &quot;login/login.hbs&quot;);</span>
 		} else {
-<span class="nc" id="L28">			res.cookie(&quot;user&quot;,id_usuario);</span>
-<span class="nc bnc" id="L29" title="All 2 branches missed.">		if(RepositorioUsuarios.instance().tipoUsuario(id_usuario)==TipoUsuario.ADMINISTRADOR){</span>
-<span class="nc" id="L30">			res.redirect(&quot;/admin&quot;);</span>
+<span class="nc" id="L29">			res.cookie(&quot;user&quot;,id_usuario);</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">		if(RepositorioUsuarios.instance().tipoUsuario(id_usuario)==TipoUsuario.ADMINISTRADOR){</span>
 			
-<span class="nc" id="L32">			return null;</span>
+<span class="nc" id="L32">			res.redirect(&quot;/admin&quot;);</span>
+			
+<span class="nc" id="L34">			return null;</span>
 		}
 		else {
-<span class="nc" id="L35">			res.redirect(&quot;/terminal&quot;);</span>
-<span class="nc" id="L36">			return null;</span>
+<span class="nc" id="L37">			res.redirect(&quot;/terminal&quot;);</span>
+<span class="nc" id="L38">			return null;</span>
 		}
 		} 
 	}
+		public Void logout(Request req, Response res){
+<span class="nc" id="L43">			res.removeCookie(&quot;user&quot;);</span>
+<span class="nc" id="L44">			res.redirect(&quot;/login&quot;);</span>
+<span class="nc" id="L45">			return null;</span>
+		}
+	
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

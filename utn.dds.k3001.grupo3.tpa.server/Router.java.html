@@ -16,13 +16,9 @@ import utn.dds.k3001.grupo3.tpa.controllers.LoginController;
 
 <span class="nc" id="L17">		Spark.staticFiles.location(&quot;/public&quot;);</span>
 <span class="nc" id="L18">		LoginController loginC = new LoginController();</span>
-		//Spark.get(&quot;/login&quot;, loginC::mostrarLogin, engine);
-<span class="nc" id="L20">		Spark.get(&quot;/&quot;, loginC::mostrarLogin,engine);</span>
-<span class="nc" id="L21">		Spark.post(&quot;/login&quot;, loginC::iniciarSesion);</span>
-		/*Spark.get(&quot;/proyectos/new&quot;, proyectosController::nuevo, engine);
-		Spark.get(&quot;/proyectos/:id&quot;, proyectosController::mostrar, engine);
-		Spark.post(&quot;/proyectos&quot;, proyectosController::crear);*/
-<span class="nc" id="L25">	}</span>
+<span class="nc" id="L19">		Spark.get(&quot;/login&quot;, loginC::mostrarLogin,engine);</span>
+<span class="nc" id="L20">		Spark.post(&quot;/login&quot;, loginC::iniciarSesion,engine);</span>
+<span class="nc" id="L21">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

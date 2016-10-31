@@ -7,22 +7,35 @@ import java.util.Map;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import utn.dds.k3001.grupo3.tpa.usuarios.RepositorioUsuarios;
+import utn.dds.k3001.grupo3.tpa.usuarios.TipoUsuario;
 
-<span class="nc" id="L11">public class LoginController {</span>
+<span class="nc" id="L13">public class LoginController {</span>
 	public ModelAndView mostrarLogin(Request req, Response res){
-		//Map&lt;String, List&lt;Proyecto&gt;&gt; model = new HashMap&lt;&gt;();
-		//List&lt;Proyecto&gt; proyectos = RepositorioProyectos.instancia.listar();
+<span class="nc" id="L15">		Map&lt;String,String&gt; model = new HashMap&lt;&gt;();</span>
 		
-		//model.put(&quot;proyectos&quot;, proyectos);
 <span class="nc" id="L17">		return new ModelAndView(null, &quot;login/login.hbs&quot;);</span>
 	}
-	public String iniciarSesion(Request req, Response res){
-		//Map&lt;String, List&lt;Proyecto&gt;&gt; model = new HashMap&lt;&gt;();
-		//List&lt;Proyecto&gt; proyectos = RepositorioProyectos.instancia.listar();
-<span class="nc" id="L22">		String id_usuario = req.queryParams(&quot;usuario&quot;);</span>
-<span class="nc" id="L23">		String contrasenia = req.queryParams(&quot;contrasenia&quot;);</span>
-		//model.put(&quot;proyectos&quot;, proyectos);
-<span class="nc" id="L25">		return id_usuario+contrasenia;</span>
+	public ModelAndView iniciarSesion(Request req, Response res){
+<span class="nc" id="L20">		String id_usuario = req.queryParams(&quot;usuario&quot;);</span>
+<span class="nc" id="L21">		String contrasenia = req.queryParams(&quot;contrasenia&quot;);</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">		if(!RepositorioUsuarios.instance().validarUsuario(id_usuario, contrasenia))</span>
+		{
+<span class="nc" id="L24">			Map&lt;String,String&gt; model = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L25">			model.put(&quot;error&quot;,&quot;Error: El usuario o la contraseña no son validos&quot;);</span>
+<span class="nc" id="L26">			return new ModelAndView(model, &quot;login/login.hbs&quot;);</span>
+		} else {
+<span class="nc" id="L28">			res.cookie(&quot;user&quot;,id_usuario);</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">		if(RepositorioUsuarios.instance().tipoUsuario(id_usuario)==TipoUsuario.ADMINISTRADOR){</span>
+<span class="nc" id="L30">			res.redirect(&quot;/admin&quot;);</span>
+			
+<span class="nc" id="L32">			return null;</span>
+		}
+		else {
+<span class="nc" id="L35">			res.redirect(&quot;/terminal&quot;);</span>
+<span class="nc" id="L36">			return null;</span>
+		}
+		} 
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

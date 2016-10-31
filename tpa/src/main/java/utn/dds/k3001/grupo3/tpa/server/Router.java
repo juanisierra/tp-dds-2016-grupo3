@@ -16,12 +16,8 @@ public class Router {
 
 		Spark.staticFiles.location("/public");
 		LoginController loginC = new LoginController();
-		//Spark.get("/login", loginC::mostrarLogin, engine);
-		Spark.get("/", loginC::mostrarLogin,engine);
-		Spark.post("/login", loginC::iniciarSesion);
-		/*Spark.get("/proyectos/new", proyectosController::nuevo, engine);
-		Spark.get("/proyectos/:id", proyectosController::mostrar, engine);
-		Spark.post("/proyectos", proyectosController::crear);*/
+		Spark.get("/login", loginC::mostrarLogin,engine);
+		Spark.post("/login", loginC::iniciarSesion,engine);
 	}
 
 }

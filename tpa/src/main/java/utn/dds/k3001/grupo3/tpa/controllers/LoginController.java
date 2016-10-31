@@ -19,6 +19,7 @@ public class LoginController {
 	public ModelAndView iniciarSesion(Request req, Response res){
 		String id_usuario = req.queryParams("usuario");
 		String contrasenia = req.queryParams("contrasenia");
+		res.removeCookie("user");
 		if(!RepositorioUsuarios.instance().validarUsuario(id_usuario, contrasenia))
 		{
 			Map<String,String> model = new HashMap<>();
@@ -27,6 +28,7 @@ public class LoginController {
 		} else {
 			res.cookie("user",id_usuario);
 		if(RepositorioUsuarios.instance().tipoUsuario(id_usuario)==TipoUsuario.ADMINISTRADOR){
+			
 			res.redirect("/admin");
 			
 			return null;
@@ -37,4 +39,10 @@ public class LoginController {
 		}
 		} 
 	}
+		public Void logout(Request req, Response res){
+			res.removeCookie("user");
+			res.redirect("/login");
+			return null;
+		}
+	
 }

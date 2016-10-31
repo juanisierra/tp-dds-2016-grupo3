@@ -13,6 +13,11 @@ public class Server {
 		u.setNombre("admin");
 		u.setContrasenia("123");
 		u.setTipo(TipoUsuario.ADMINISTRADOR);
+		Usuario t = new Usuario();
+		t.setNombre("terminal");
+		t.setContrasenia("123");
+		t.setTipo(TipoUsuario.TERMINAL);
+		RepositorioUsuarios.instance().agregarUsuario(t);
 		RepositorioUsuarios.instance().agregarUsuario(u);
 		DebugScreen.enableDebugScreen();
 		Router.configure();

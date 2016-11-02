@@ -19,14 +19,14 @@ public class LoginController {
 	public ModelAndView iniciarSesion(Request req, Response res){
 		String id_usuario = req.queryParams("usuario");
 		String contrasenia = req.queryParams("contrasenia");
-		res.removeCookie("user");
+		req.session().removeAttribute("user");
 		if(!RepositorioUsuarios.instance().validarUsuario(id_usuario, contrasenia))
 		{
 			Map<String,String> model = new HashMap<>();
 			model.put("error","Error: El usuario o la contraseña no son validos");
 			return new ModelAndView(model, "login/login.hbs");
 		} else {
-			res.cookie("user",id_usuario);
+			req.session().attribute("user",id_usuario);
 		if(RepositorioUsuarios.instance().tipoUsuario(id_usuario)==TipoUsuario.ADMINISTRADOR){
 			
 			res.redirect("/admin");
@@ -40,7 +40,7 @@ public class LoginController {
 		} 
 	}
 		public Void logout(Request req, Response res){
-			res.removeCookie("user");
+			req.session().removeAttribute("user");
 			res.redirect("/login");
 			return null;
 		}

@@ -11,7 +11,7 @@ import utn.dds.k3001.grupo3.tpa.usuarios.TipoUsuario;
 
 public class TerminalController {
 	public ModelAndView mostrarIndex(Request req, Response res){
-		if(req.cookie("user")!=null && RepositorioUsuarios.instance().tipoUsuario(req.cookie("user"))==TipoUsuario.TERMINAL)
+		if(req.session().attribute("user")!=null && RepositorioUsuarios.instance().tipoUsuario(req.session().attribute("user"))==TipoUsuario.TERMINAL)
 		{	
 			return new ModelAndView(null, "/terminal/index.hbs");
 		} else {

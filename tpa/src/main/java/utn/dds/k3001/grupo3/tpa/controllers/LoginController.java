@@ -34,7 +34,7 @@ public class LoginController {
 			return null;
 		}
 		else {
-			res.redirect("/terminal");
+			res.redirect("/terminal/buscar");
 			return null;
 		}
 		} 

@@ -14,6 +14,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import org.hibernate.annotations.Cascade;
+
+import java.math.BigDecimal;
 import java.time.*;
 
 @Entity
@@ -86,6 +88,13 @@ public class POI implements java.io.Serializable
 
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
+	}
+	public BigDecimal getX()
+	{
+		return posicion.getX();
+	}
+	public BigDecimal getY() {
+		return posicion.getY();
 	}
 	
 	public void cambiarEtiquetas(List<String> etiquetasNuevas)

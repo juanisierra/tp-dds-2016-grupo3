@@ -14,6 +14,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import org.hibernate.annotations.Cascade;
+
+import java.math.BigDecimal;
 import java.time.*;
 
 @Entity
@@ -33,81 +35,88 @@ public class POI implements java.io.Serializable
 	@Embedded
 	protected Direccion direccion;
 
-<span class="fc" id="L36">	public POI(String nombre, String calle, String barrio, int altura, PersistablePoint posicion) {</span>
-<span class="fc" id="L37">		this.direccion = new Direccion(calle,barrio,altura);</span>
-<span class="fc" id="L38">		this.nombre = nombre;</span>
-<span class="fc" id="L39">		this.posicion = posicion;</span>
-<span class="fc" id="L40">		this.etiquetas = new LinkedList&lt;String&gt;();</span>
+<span class="fc" id="L38">	public POI(String nombre, String calle, String barrio, int altura, PersistablePoint posicion) {</span>
+<span class="fc" id="L39">		this.direccion = new Direccion(calle,barrio,altura);</span>
+<span class="fc" id="L40">		this.nombre = nombre;</span>
+<span class="fc" id="L41">		this.posicion = posicion;</span>
+<span class="fc" id="L42">		this.etiquetas = new LinkedList&lt;String&gt;();</span>
 
-<span class="fc" id="L42">	}</span>
+<span class="fc" id="L44">	}</span>
 	
-<span class="fc" id="L44">	public POI(){</span>
-<span class="fc" id="L45">	}</span>
+<span class="fc" id="L46">	public POI(){</span>
+<span class="fc" id="L47">	}</span>
 	
 	public long getID(){
-<span class="fc" id="L48">		return id;</span>
+<span class="fc" id="L50">		return id;</span>
 	}
 	
 	public void agregarEtiqueta(String etiqueta){
-<span class="nc" id="L52">		this.etiquetas.add(etiqueta);</span>
-<span class="nc" id="L53">	}</span>
+<span class="nc" id="L54">		this.etiquetas.add(etiqueta);</span>
+<span class="nc" id="L55">	}</span>
 	
 	public boolean estaCerca(PersistablePoint otraPosicion){
-<span class="nc bnc" id="L56" title="All 2 branches missed.">		return (posicion.distance(otraPosicion) &lt;=0.5);</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">		return (posicion.distance(otraPosicion) &lt;=0.5);</span>
 	}
 	
 	public boolean esBuscado(String criterio){
-<span class="pc bpc" id="L60" title="1 of 4 branches missed.">		return (nombre.contains(criterio) || etiquetas.contains(criterio));</span>
+<span class="pc bpc" id="L62" title="1 of 4 branches missed.">		return (nombre.contains(criterio) || etiquetas.contains(criterio));</span>
 	}
 	
 	public boolean estaDisponible(LocalDateTime fechaBuscada,String servicio){
-<span class="nc" id="L64">		return false;</span>
+<span class="nc" id="L66">		return false;</span>
 	}
 
 	public String getNombre() {
-<span class="fc" id="L68">		return nombre;</span>
+<span class="fc" id="L70">		return nombre;</span>
 	}
 
 	public void setNombre(String nombre) {
-<span class="nc" id="L72">		this.nombre = nombre;</span>
-<span class="nc" id="L73">	}</span>
+<span class="nc" id="L74">		this.nombre = nombre;</span>
+<span class="nc" id="L75">	}</span>
 
 	public PersistablePoint getPosicion() {
-<span class="nc" id="L76">		return posicion;</span>
+<span class="nc" id="L78">		return posicion;</span>
 	}
 
 	public void setPosicion(PersistablePoint posicion) {
-<span class="nc" id="L80">		this.posicion = posicion;</span>
-<span class="nc" id="L81">	}</span>
+<span class="nc" id="L82">		this.posicion = posicion;</span>
+<span class="nc" id="L83">	}</span>
 
 	public Direccion getDireccion() {
-<span class="fc" id="L84">		return direccion;</span>
+<span class="fc" id="L86">		return direccion;</span>
 	}
 
 	public void setDireccion(Direccion direccion) {
-<span class="nc" id="L88">		this.direccion = direccion;</span>
-<span class="nc" id="L89">	}</span>
+<span class="nc" id="L90">		this.direccion = direccion;</span>
+<span class="nc" id="L91">	}</span>
+	public BigDecimal getX()
+	{
+<span class="nc" id="L94">		return posicion.getX();</span>
+	}
+	public BigDecimal getY() {
+<span class="nc" id="L97">		return posicion.getY();</span>
+	}
 	
 	public void cambiarEtiquetas(List&lt;String&gt; etiquetasNuevas)
 	{
-<span class="fc" id="L93">		this.etiquetas.clear();</span>
-<span class="fc" id="L94">		this.etiquetas.addAll(etiquetasNuevas);</span>
-<span class="fc" id="L95">	}</span>
+<span class="fc" id="L102">		this.etiquetas.clear();</span>
+<span class="fc" id="L103">		this.etiquetas.addAll(etiquetasNuevas);</span>
+<span class="fc" id="L104">	}</span>
 	
 	public int getId() {
-<span class="nc" id="L98">		return id;</span>
+<span class="nc" id="L107">		return id;</span>
 	}
 	
 	public void setId(int id) {
-<span class="nc" id="L102">		this.id = id;</span>
-<span class="nc" id="L103">	}</span>
+<span class="nc" id="L111">		this.id = id;</span>
+<span class="nc" id="L112">	}</span>
 	
 	public List&lt;String&gt; getListaEtiquetas() {
-<span class="fc" id="L106">		return etiquetas;</span>
+<span class="fc" id="L115">		return etiquetas;</span>
 	}
 	
 	public void setListaEtiquetas(List&lt;String&gt; listaEtiquetas) {
-<span class="nc" id="L110">		this.etiquetas = listaEtiquetas;</span>
-<span class="nc" id="L111">	}</span>
+<span class="nc" id="L119">		this.etiquetas = listaEtiquetas;</span>
+<span class="nc" id="L120">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

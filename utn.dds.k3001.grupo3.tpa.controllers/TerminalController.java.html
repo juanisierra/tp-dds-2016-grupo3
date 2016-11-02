@@ -11,7 +11,7 @@ import utn.dds.k3001.grupo3.tpa.usuarios.TipoUsuario;
 
 <span class="nc" id="L12">public class TerminalController {</span>
 	public ModelAndView mostrarIndex(Request req, Response res){
-<span class="nc bnc" id="L14" title="All 4 branches missed.">		if(req.cookie(&quot;user&quot;)!=null &amp;&amp; RepositorioUsuarios.instance().tipoUsuario(req.cookie(&quot;user&quot;))==TipoUsuario.TERMINAL)</span>
+<span class="nc bnc" id="L14" title="All 4 branches missed.">		if(req.session().attribute(&quot;user&quot;)!=null &amp;&amp; RepositorioUsuarios.instance().tipoUsuario(req.session().attribute(&quot;user&quot;))==TipoUsuario.TERMINAL)</span>
 		{	
 <span class="nc" id="L16">			return new ModelAndView(null, &quot;/terminal/index.hbs&quot;);</span>
 		} else {

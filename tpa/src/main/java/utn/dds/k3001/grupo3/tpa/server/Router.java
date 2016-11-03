@@ -19,6 +19,7 @@ public class Router {
 		Spark.staticFiles.location("/public");
 		LoginController loginC = new LoginController();
 		POISController terminalC = new POISController();
+		Spark.get("/", loginC::mostrarLogin,engine);
 		Spark.get("/login", loginC::mostrarLogin,engine);
 		Spark.post("/login", loginC::iniciarSesion,engine);
 		Spark.get("/pois", terminalC::buscar,engine);

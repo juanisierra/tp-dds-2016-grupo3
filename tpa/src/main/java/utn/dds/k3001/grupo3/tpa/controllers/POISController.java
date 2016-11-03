@@ -73,4 +73,41 @@ public class POISController {
 		}
 		return null;
 	}
+	public ModelAndView getModificar(Request req, Response res){
+		if(req.session().attribute("user")!=null)
+		{	if(!((Usuario) req.session().attribute("user")).esAdmin()) {
+			res.redirect("/login", 403);
+			return null;
+		} else {
+			Map<String, POI> model = new HashMap<>();
+			model.put("poi", Mapa.getInstance().getById(req.params("id")));
+			return new ModelAndView(model, "admin/modificarPOI.hbs");
+		}
+		
+		} else {
+			//res.status(403);
+			res.redirect("/login",403);
+		}
+		return null;
+	}
+	public ModelAndView modificar(Request req, Response res){
+		if(req.session().attribute("user")!=null)
+		{	if(!((Usuario) req.session().attribute("user")).esAdmin()) {
+			res.redirect("/login", 403);
+			return null;
+		} else {
+			POI poi = Mapa.getInstance().getById(req.params("id"));
+			poi.setNombre(req.queryParams("nombre"));
+			poi.getDireccion().setCalle(req.queryParams("calle"));
+			poi.getDireccion().setAltura(Integer.parseInt(req.queryParams("numero")));
+			poi.getDireccion().setBarrio((req.queryParams("barrio")));
+			res.redirect("/pois");
+			return null;
+		}
+		
+		} else {
+			res.redirect("/login",403);
+		}
+		return null;
+	}
 }

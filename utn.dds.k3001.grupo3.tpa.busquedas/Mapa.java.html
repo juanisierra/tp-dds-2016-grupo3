@@ -61,5 +61,14 @@ public class Mapa
 <span class="nc" id="L61">							}).filter(elem -&gt; elem.getClass().getName().contains(clase))</span>
 <span class="nc" id="L62">							  .collect(Collectors.toList());</span>
 	}
+	public void eliminarPorId(String id)
+	{
+<span class="nc" id="L66">		RepositorioInterno.getInstance().eliminarPoiPorNumero(Long.parseLong(id));</span>
+<span class="nc" id="L67">	}</span>
+	public POI getById(String id)
+	{
+<span class="nc bnc" id="L70" title="All 2 branches missed.">		return RepositorioInterno.getInstance().getAllPOIS().stream().filter(poi -&gt; poi.getID()==Long.parseLong(id)).findFirst().get();</span>
+	}
+	
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

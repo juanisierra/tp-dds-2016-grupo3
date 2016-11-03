@@ -40,18 +40,21 @@ import utn.dds.k3001.grupo3.tpa.usuarios.UsuarioTerminal;
 <span class="nc" id="L40">		Rubro libreria = new Rubro(&quot;libreria&quot;,50);</span>
 <span class="nc" id="L41">		Disponibilidad disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));</span>
 <span class="nc" id="L42">		LocalComercial libreriaYenny = new LocalComercial(&quot;libreria yenny&quot;,&quot;Beiro&quot;,&quot;devoto&quot;,100,new PersistablePoint(10,10),libreria,disponibilidadLibrerias);</span>
-<span class="nc" id="L43">		ParadaColectivo parada114 = new ParadaColectivo(&quot;parada 114&quot;,&quot;Chivilcoy&quot;,&quot;devoto&quot;,1000,new PersistablePoint(10,10),114);</span>
-<span class="nc" id="L44">		CGP cgp1 = new CGP(&quot;cgp2&quot;,&quot;beiro&quot;,&quot;caballito&quot;,100,new PersistablePoint(10.1,10.1),comuna1);</span>
-<span class="nc" id="L45">		Servicio altaDomicilio = new Servicio(&quot;alta domicilio&quot;,disponibilidadLibrerias);</span>
-<span class="nc" id="L46">		cgp1.agregarServicio(altaDomicilio);</span>
-<span class="nc" id="L47">		Mapa.getInstance().agregarPoi(parada114);</span>
-<span class="nc" id="L48">		Mapa.getInstance().agregarPoi(libreriaYenny);</span>
-<span class="nc" id="L49">		Mapa.getInstance().agregarPoi(cgp1);</span>
+<span class="nc" id="L43">		libreriaYenny.setId(0);</span>
+<span class="nc" id="L44">		ParadaColectivo parada114 = new ParadaColectivo(&quot;parada 114&quot;,&quot;Chivilcoy&quot;,&quot;devoto&quot;,1000,new PersistablePoint(10,10),114);</span>
+<span class="nc" id="L45">		parada114.setId(2);</span>
+<span class="nc" id="L46">		CGP cgp1 = new CGP(&quot;cgp2&quot;,&quot;beiro&quot;,&quot;caballito&quot;,100,new PersistablePoint(10.1,10.1),comuna1);</span>
+<span class="nc" id="L47">		cgp1.setId(1);</span>
+<span class="nc" id="L48">		Servicio altaDomicilio = new Servicio(&quot;alta domicilio&quot;,disponibilidadLibrerias);</span>
+<span class="nc" id="L49">		cgp1.agregarServicio(altaDomicilio);</span>
+<span class="nc" id="L50">		Mapa.getInstance().agregarPoi(parada114);</span>
+<span class="nc" id="L51">		Mapa.getInstance().agregarPoi(libreriaYenny);</span>
+<span class="nc" id="L52">		Mapa.getInstance().agregarPoi(cgp1);</span>
 		
-<span class="nc" id="L51">		RepositorioUsuarios.instance().agregarUsuario(t);</span>
-<span class="nc" id="L52">		RepositorioUsuarios.instance().agregarUsuario(u);</span>
-<span class="nc" id="L53">		DebugScreen.enableDebugScreen();</span>
-<span class="nc" id="L54">		Router.configure();</span>
-<span class="nc" id="L55">	}</span>
+<span class="nc" id="L54">		RepositorioUsuarios.instance().agregarUsuario(t);</span>
+<span class="nc" id="L55">		RepositorioUsuarios.instance().agregarUsuario(u);</span>
+<span class="nc" id="L56">		DebugScreen.enableDebugScreen();</span>
+<span class="nc" id="L57">		Router.configure();</span>
+<span class="nc" id="L58">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

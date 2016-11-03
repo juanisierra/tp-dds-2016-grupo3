@@ -23,7 +23,10 @@ import utn.dds.k3001.grupo3.tpa.controllers.POISController;
 <span class="nc" id="L23">		Spark.post(&quot;/login&quot;, loginC::iniciarSesion,engine);</span>
 <span class="nc" id="L24">		Spark.get(&quot;/pois&quot;, terminalC::buscar,engine);</span>
 <span class="nc" id="L25">		Spark.post(&quot;/logout&quot;,loginC::logout);</span>
-<span class="nc" id="L26">	}</span>
+<span class="nc" id="L26">		Spark.get(&quot;/pois/eliminar/a/:id&quot;, terminalC::eliminar);</span>
+<span class="nc" id="L27">		Spark.get(&quot;/pois/eliminar/:id&quot;,terminalC::getEliminar,engine);</span>
+		
+<span class="nc" id="L29">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

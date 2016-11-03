@@ -40,4 +40,37 @@ public class POISController {
 		}
 		return null;
 	}
+	public ModelAndView eliminar(Request req, Response res){
+		if(req.session().attribute("user")!=null)
+		{	if(!((Usuario) req.session().attribute("user")).esAdmin()) {
+			res.redirect("/login", 403);
+			return null;
+		} else {
+			Mapa.getInstance().eliminarPorId(req.params("id"));
+			res.redirect("/pois");
+			return null;
+		}
+		
+		} else {
+			res.redirect("/login",403);
+		}
+		return null;
+	}
+	public ModelAndView getEliminar(Request req, Response res){
+		if(req.session().attribute("user")!=null)
+		{	if(!((Usuario) req.session().attribute("user")).esAdmin()) {
+			res.redirect("/login", 403);
+			return null;
+		} else {
+			Map<String, POI> model = new HashMap<>();
+			model.put("poi", Mapa.getInstance().getById(req.params("id")));
+			return new ModelAndView(model, "admin/EliminarPOI.hbs");
+		}
+		
+		} else {
+			//res.status(403);
+			res.redirect("/login",403);
+		}
+		return null;
+	}
 }

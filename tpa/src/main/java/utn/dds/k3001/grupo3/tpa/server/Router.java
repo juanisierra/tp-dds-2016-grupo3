@@ -24,6 +24,9 @@ public class Router {
 		Spark.post("/login", loginC::iniciarSesion,engine);
 		Spark.get("/pois", terminalC::buscar,engine);
 		Spark.post("/logout",loginC::logout);
+		Spark.get("/pois/eliminar/a/:id", terminalC::eliminar);
+		Spark.get("/pois/eliminar/:id",terminalC::getEliminar,engine);
+		
 	}
 
 }

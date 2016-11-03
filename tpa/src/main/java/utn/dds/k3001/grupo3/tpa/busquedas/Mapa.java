@@ -61,4 +61,13 @@ public class Mapa
 							}).filter(elem -> elem.getClass().getName().contains(clase))
 							  .collect(Collectors.toList());
 	}
+	public void eliminarPorId(String id)
+	{
+		RepositorioInterno.getInstance().eliminarPoiPorNumero(Long.parseLong(id));
+	}
+	public POI getById(String id)
+	{
+		return RepositorioInterno.getInstance().getAllPOIS().stream().filter(poi -> poi.getID()==Long.parseLong(id)).findFirst().get();
+	}
+	
 }

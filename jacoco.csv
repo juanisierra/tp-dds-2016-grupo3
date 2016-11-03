@@ -57,7 +57,7 @@ tpa,utn.dds.k3001.grupo3.tpa.geo,PersistablePoint,52,65,0,0,13,18,8,7,8,7
 tpa,utn.dds.k3001.grupo3.tpa.busquedas,RepositorioTerminales,0,34,0,0,0,13,0,8,0,8
 tpa,utn.dds.k3001.grupo3.tpa.busquedas,AccionesBusqueda,9,29,0,0,0,3,2,2,2,2
 tpa,utn.dds.k3001.grupo3.tpa.busquedas,ServicioMail,3,1,0,0,1,1,1,1,1,1
-tpa,utn.dds.k3001.grupo3.tpa.busquedas,RepositorioBusquedas,36,55,0,0,7,12,6,10,6,10
+tpa,utn.dds.k3001.grupo3.tpa.busquedas,RepositorioBusquedas,125,55,8,0,12,12,19,10,15,10
 tpa,utn.dds.k3001.grupo3.tpa.busquedas,InMemoryBusquedasOrigin,0,23,0,0,0,7,0,4,0,4
 tpa,utn.dds.k3001.grupo3.tpa.busquedas,AccionesBusqueda.new AccionesBusqueda() {...},0,10,0,0,0,3,0,2,0,2
 tpa,utn.dds.k3001.grupo3.tpa.busquedas,InMemoryTerminalOrigin,0,23,0,0,0,8,0,4,0,4

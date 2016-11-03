@@ -4,10 +4,7 @@ import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 
 public class Usuario {
 	private String nombre;
-	private String contrasenia;
-	private TipoUsuario tipo;
-	private Terminal terminal;
-	
+	private String contrasenia;	
 	public String getNombre() {
 		return nombre;
 	}
@@ -20,17 +17,8 @@ public class Usuario {
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
 	}
-	public TipoUsuario getTipo() {
-		return tipo;
+	public Boolean esAdmin()
+	{
+		return true;
 	}
-	public void setTipo(TipoUsuario tipo) {
-		this.tipo = tipo;
-	}
-	public Terminal getTerminal() {
-		return terminal;
-	}
-	public void setTerminal(Terminal terminal) {
-		this.terminal = terminal;
-	}
-	
 }

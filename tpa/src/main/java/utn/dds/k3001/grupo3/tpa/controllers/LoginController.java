@@ -8,7 +8,6 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import utn.dds.k3001.grupo3.tpa.usuarios.RepositorioUsuarios;
-import utn.dds.k3001.grupo3.tpa.usuarios.TipoUsuario;
 
 public class LoginController {
 	public ModelAndView mostrarLogin(Request req, Response res){
@@ -26,15 +25,15 @@ public class LoginController {
 			model.put("error","Error: El usuario o la contraseña no son validos");
 			return new ModelAndView(model, "login/login.hbs");
 		} else {
-			req.session().attribute("user",id_usuario);
-		if(RepositorioUsuarios.instance().tipoUsuario(id_usuario)==TipoUsuario.ADMINISTRADOR){
+			req.session().attribute("user",RepositorioUsuarios.instance().getUsuario(id_usuario));
+		if(RepositorioUsuarios.instance().getUsuario(id_usuario).esAdmin()){
 			
-			res.redirect("/admin");
+			res.redirect("/pois");
 			
 			return null;
 		}
 		else {
-			res.redirect("/terminal/buscar");
+			res.redirect("/pois");
 			return null;
 		}
 		} 

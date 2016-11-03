@@ -22,8 +22,8 @@ public class RepositorioUsuarios {
 	{
 		return usuarios.stream().anyMatch(u -> u.getNombre().equals(nombre) && u.getContrasenia().equals(contra));
 	}
-	public TipoUsuario tipoUsuario(String id)
+	public Usuario getUsuario(String id)
 	{
-	return usuarios.stream().filter(usuario -> usuario.getNombre().equals(id)).findFirst().get().getTipo();
+	return usuarios.stream().filter(usuario -> usuario.getNombre().equals(id)).findFirst().get();
 	}
 }

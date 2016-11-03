@@ -1,6 +1,6 @@
 {{#partial "contenido"}}
 <h1>POIS</h1>
-<form action="/terminal/buscar" method="GET">
+<form action="/pois" method="GET">
 
 		<div class="form-group">
 			<label for="criterio">Nombre</label>
@@ -15,8 +15,10 @@
 		<th>Nombre</th>
 		<th>Direccion</th>
 		<th>Posicion X</th>
-    <th>Posicion Y</th>
-		<th></th>
+    	<th>Posicion Y</th>
+		<th>   </th>
+		<th>   </th>
+		<th>   </th>
 	</tr>
 
 	{{#each pois}}
@@ -26,9 +28,11 @@
 			<td>{{x}}</td>
       <td>{{y}}</td>
 			<td><a href="{{url}}">Ver</a><td>
+			<td><a href="{{url}}">Editar</a><td>
+			<td><a href="{{url}}">Eliminar</a><td>
 		</tr>
 	{{/each}}
 </table>
 {{/partial}}
 
-{{>layoutTerminal.hbs}}
+{{>layoutAdmin.hbs}}

@@ -5,7 +5,7 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 import spark.utils.DireccionHelper;
 import spark.utils.HandlebarsTemplateEngineBuilder;
 import utn.dds.k3001.grupo3.tpa.controllers.LoginController;
-import utn.dds.k3001.grupo3.tpa.controllers.TerminalController;
+import utn.dds.k3001.grupo3.tpa.controllers.POISController;
 
 public class Router {
 
@@ -18,10 +18,10 @@ public class Router {
 
 		Spark.staticFiles.location("/public");
 		LoginController loginC = new LoginController();
-		TerminalController terminalC = new TerminalController();
+		POISController terminalC = new POISController();
 		Spark.get("/login", loginC::mostrarLogin,engine);
 		Spark.post("/login", loginC::iniciarSesion,engine);
-		Spark.get("/terminal/buscar", terminalC::buscar,engine);
+		Spark.get("/pois", terminalC::buscar,engine);
 		Spark.post("/logout",loginC::logout);
 	}
 

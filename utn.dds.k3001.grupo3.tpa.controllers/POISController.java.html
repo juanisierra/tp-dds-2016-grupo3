@@ -73,5 +73,42 @@ import utn.dds.k3001.grupo3.tpa.usuarios.UsuarioTerminal;
 		}
 <span class="nc" id="L74">		return null;</span>
 	}
+	public ModelAndView getModificar(Request req, Response res){
+<span class="nc bnc" id="L77" title="All 2 branches missed.">		if(req.session().attribute(&quot;user&quot;)!=null)</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">		{	if(!((Usuario) req.session().attribute(&quot;user&quot;)).esAdmin()) {</span>
+<span class="nc" id="L79">			res.redirect(&quot;/login&quot;, 403);</span>
+<span class="nc" id="L80">			return null;</span>
+		} else {
+<span class="nc" id="L82">			Map&lt;String, POI&gt; model = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L83">			model.put(&quot;poi&quot;, Mapa.getInstance().getById(req.params(&quot;id&quot;)));</span>
+<span class="nc" id="L84">			return new ModelAndView(model, &quot;admin/modificarPOI.hbs&quot;);</span>
+		}
+		
+		} else {
+			//res.status(403);
+<span class="nc" id="L89">			res.redirect(&quot;/login&quot;,403);</span>
+		}
+<span class="nc" id="L91">		return null;</span>
+	}
+	public ModelAndView modificar(Request req, Response res){
+<span class="nc bnc" id="L94" title="All 2 branches missed.">		if(req.session().attribute(&quot;user&quot;)!=null)</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">		{	if(!((Usuario) req.session().attribute(&quot;user&quot;)).esAdmin()) {</span>
+<span class="nc" id="L96">			res.redirect(&quot;/login&quot;, 403);</span>
+<span class="nc" id="L97">			return null;</span>
+		} else {
+<span class="nc" id="L99">			POI poi = Mapa.getInstance().getById(req.params(&quot;id&quot;));</span>
+<span class="nc" id="L100">			poi.setNombre(req.queryParams(&quot;nombre&quot;));</span>
+<span class="nc" id="L101">			poi.getDireccion().setCalle(req.queryParams(&quot;calle&quot;));</span>
+<span class="nc" id="L102">			poi.getDireccion().setAltura(Integer.parseInt(req.queryParams(&quot;numero&quot;)));</span>
+<span class="nc" id="L103">			poi.getDireccion().setBarrio((req.queryParams(&quot;barrio&quot;)));</span>
+<span class="nc" id="L104">			res.redirect(&quot;/pois&quot;);</span>
+<span class="nc" id="L105">			return null;</span>
+		}
+		
+		} else {
+<span class="nc" id="L109">			res.redirect(&quot;/login&quot;,403);</span>
+		}
+<span class="nc" id="L111">		return null;</span>
+	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

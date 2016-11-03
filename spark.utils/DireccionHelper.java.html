@@ -14,7 +14,24 @@ import utn.dds.k3001.grupo3.tpa.pois.Direccion;
 		public CharSequence apply(Direccion arg0, Options arg1) throws IOException {
 <span class="nc" id="L15">		return arg0.getCalle()+&quot; &quot;+arg0.getAltura()+&quot; , &quot;+arg0.getBarrio();</span>
 		}
+	},
+<span class="nc" id="L18">	getCalle{</span>
+		@Override
+		public CharSequence apply(Direccion arg0, Options arg1) throws IOException {
+<span class="nc" id="L21">		return arg0.getCalle();</span>
+		}
+	},
+<span class="nc" id="L24">	getNumero{</span>
+		@Override
+		public CharSequence apply(Direccion arg0, Options arg1) throws IOException {
+<span class="nc" id="L27">		return String.valueOf(arg0.getAltura());</span>
+		}
+	},
+<span class="nc" id="L30">	getBarrio{</span>
+		@Override
+		public CharSequence apply(Direccion arg0, Options arg1) throws IOException {
+<span class="nc" id="L33">		return arg0.getBarrio();</span>
+		}
 	}
-	
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

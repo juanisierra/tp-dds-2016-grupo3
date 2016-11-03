@@ -22,9 +22,9 @@ public class RepositorioUsuarios {
 	{
 <span class="nc bnc" id="L23" title="All 4 branches missed.">		return usuarios.stream().anyMatch(u -&gt; u.getNombre().equals(nombre) &amp;&amp; u.getContrasenia().equals(contra));</span>
 	}
-	public TipoUsuario tipoUsuario(String id)
+	public Usuario getUsuario(String id)
 	{
-<span class="nc" id="L27">	return usuarios.stream().filter(usuario -&gt; usuario.getNombre().equals(id)).findFirst().get().getTipo();</span>
+<span class="nc" id="L27">	return usuarios.stream().filter(usuario -&gt; usuario.getNombre().equals(id)).findFirst().get();</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

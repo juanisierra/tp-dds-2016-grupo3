@@ -8,41 +8,40 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import utn.dds.k3001.grupo3.tpa.usuarios.RepositorioUsuarios;
-import utn.dds.k3001.grupo3.tpa.usuarios.TipoUsuario;
 
-<span class="nc" id="L13">public class LoginController {</span>
+<span class="nc" id="L12">public class LoginController {</span>
 	public ModelAndView mostrarLogin(Request req, Response res){
-<span class="nc" id="L15">		Map&lt;String,String&gt; model = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L14">		Map&lt;String,String&gt; model = new HashMap&lt;&gt;();</span>
 		
-<span class="nc" id="L17">		return new ModelAndView(null, &quot;login/login.hbs&quot;);</span>
+<span class="nc" id="L16">		return new ModelAndView(null, &quot;login/login.hbs&quot;);</span>
 	}
 	public ModelAndView iniciarSesion(Request req, Response res){
-<span class="nc" id="L20">		String id_usuario = req.queryParams(&quot;usuario&quot;);</span>
-<span class="nc" id="L21">		String contrasenia = req.queryParams(&quot;contrasenia&quot;);</span>
-<span class="nc" id="L22">		req.session().removeAttribute(&quot;user&quot;);</span>
-<span class="nc bnc" id="L23" title="All 2 branches missed.">		if(!RepositorioUsuarios.instance().validarUsuario(id_usuario, contrasenia))</span>
+<span class="nc" id="L19">		String id_usuario = req.queryParams(&quot;usuario&quot;);</span>
+<span class="nc" id="L20">		String contrasenia = req.queryParams(&quot;contrasenia&quot;);</span>
+<span class="nc" id="L21">		req.session().removeAttribute(&quot;user&quot;);</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">		if(!RepositorioUsuarios.instance().validarUsuario(id_usuario, contrasenia))</span>
 		{
-<span class="nc" id="L25">			Map&lt;String,String&gt; model = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L26">			model.put(&quot;error&quot;,&quot;Error: El usuario o la contraseña no son validos&quot;);</span>
-<span class="nc" id="L27">			return new ModelAndView(model, &quot;login/login.hbs&quot;);</span>
+<span class="nc" id="L24">			Map&lt;String,String&gt; model = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L25">			model.put(&quot;error&quot;,&quot;Error: El usuario o la contraseña no son validos&quot;);</span>
+<span class="nc" id="L26">			return new ModelAndView(model, &quot;login/login.hbs&quot;);</span>
 		} else {
-<span class="nc" id="L29">			req.session().attribute(&quot;user&quot;,id_usuario);</span>
-<span class="nc bnc" id="L30" title="All 2 branches missed.">		if(RepositorioUsuarios.instance().tipoUsuario(id_usuario)==TipoUsuario.ADMINISTRADOR){</span>
+<span class="nc" id="L28">			req.session().attribute(&quot;user&quot;,RepositorioUsuarios.instance().getUsuario(id_usuario));</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">		if(RepositorioUsuarios.instance().getUsuario(id_usuario).esAdmin()){</span>
 			
-<span class="nc" id="L32">			res.redirect(&quot;/admin&quot;);</span>
+<span class="nc" id="L31">			res.redirect(&quot;/pois&quot;);</span>
 			
-<span class="nc" id="L34">			return null;</span>
+<span class="nc" id="L33">			return null;</span>
 		}
 		else {
-<span class="nc" id="L37">			res.redirect(&quot;/terminal/buscar&quot;);</span>
-<span class="nc" id="L38">			return null;</span>
+<span class="nc" id="L36">			res.redirect(&quot;/pois&quot;);</span>
+<span class="nc" id="L37">			return null;</span>
 		}
 		} 
 	}
 		public Void logout(Request req, Response res){
-<span class="nc" id="L43">			req.session().removeAttribute(&quot;user&quot;);</span>
-<span class="nc" id="L44">			res.redirect(&quot;/login&quot;);</span>
-<span class="nc" id="L45">			return null;</span>
+<span class="nc" id="L42">			req.session().removeAttribute(&quot;user&quot;);</span>
+<span class="nc" id="L43">			res.redirect(&quot;/login&quot;);</span>
+<span class="nc" id="L44">			return null;</span>
 		}
 	
 }

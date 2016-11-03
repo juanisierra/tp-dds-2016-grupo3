@@ -6,6 +6,8 @@ import java.util.Arrays;
 import spark.Spark;
 import spark.debug.DebugScreen;
 import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
+import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioTerminales;
+import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 import utn.dds.k3001.grupo3.tpa.geo.PersistablePoint;
 import utn.dds.k3001.grupo3.tpa.pois.CGP;
 import utn.dds.k3001.grupo3.tpa.pois.Comuna;
@@ -15,40 +17,41 @@ import utn.dds.k3001.grupo3.tpa.pois.ParadaColectivo;
 import utn.dds.k3001.grupo3.tpa.pois.Rubro;
 import utn.dds.k3001.grupo3.tpa.pois.Servicio;
 import utn.dds.k3001.grupo3.tpa.usuarios.RepositorioUsuarios;
-import utn.dds.k3001.grupo3.tpa.usuarios.TipoUsuario;
 import utn.dds.k3001.grupo3.tpa.usuarios.Usuario;
+import utn.dds.k3001.grupo3.tpa.usuarios.UsuarioTerminal;
 
-<span class="nc" id="L21">public class Server {</span>
+<span class="nc" id="L23">public class Server {</span>
 	public static void main(String[] args) {
-<span class="nc" id="L23">		Spark.port(9000);</span>
-<span class="nc" id="L24">		Usuario u = new Usuario();</span>
-<span class="nc" id="L25">		u.setNombre(&quot;admin&quot;);</span>
-<span class="nc" id="L26">		u.setContrasenia(&quot;123&quot;);</span>
-<span class="nc" id="L27">		u.setTipo(TipoUsuario.ADMINISTRADOR);</span>
-<span class="nc" id="L28">		Usuario t = new Usuario();</span>
-<span class="nc" id="L29">		t.setNombre(&quot;terminal&quot;);</span>
-<span class="nc" id="L30">		t.setContrasenia(&quot;123&quot;);</span>
-<span class="nc" id="L31">		t.setTipo(TipoUsuario.TERMINAL);</span>
+<span class="nc" id="L25">		Spark.port(9000);</span>
+		
+<span class="nc" id="L27">		Comuna comuna1 = new Comuna(&quot;comuna 1&quot;,Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));</span>
+		
+<span class="nc" id="L29">		Terminal terminal1 = new Terminal(&quot;Terminal 1&quot;,Mapa.getInstance(),comuna1);</span>
+<span class="nc" id="L30">		RepositorioTerminales.INSTANCE.agregarTerminal(terminal1);</span>
+<span class="nc" id="L31">		Usuario u = new Usuario();</span>
+<span class="nc" id="L32">		u.setNombre(&quot;admin&quot;);</span>
+<span class="nc" id="L33">		u.setContrasenia(&quot;123&quot;);</span>
+<span class="nc" id="L34">		UsuarioTerminal t = new UsuarioTerminal();</span>
+<span class="nc" id="L35">		t.setNombre(&quot;terminal&quot;);</span>
+<span class="nc" id="L36">		t.setContrasenia(&quot;123&quot;);</span>
+<span class="nc" id="L37">		t.setTerminal(terminal1);</span>
 		//CREAMOS POIS
 		
-<span class="nc" id="L34">		Comuna comuna1 = new Comuna(&quot;comuna 1&quot;,Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));</span>
-<span class="nc" id="L35">		Rubro libreria = new Rubro(&quot;libreria&quot;,50);</span>
-<span class="nc" id="L36">		Disponibilidad disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));</span>
-<span class="nc" id="L37">		LocalComercial libreriaYenny = new LocalComercial(&quot;libreria yenny&quot;,&quot;Beiro&quot;,&quot;devoto&quot;,100,new PersistablePoint(10,10),libreria,disponibilidadLibrerias);</span>
-<span class="nc" id="L38">		ParadaColectivo parada114 = new ParadaColectivo(&quot;parada 114&quot;,&quot;Chivilcoy&quot;,&quot;devoto&quot;,1000,new PersistablePoint(10,10),114);</span>
-<span class="nc" id="L39">		CGP cgp1 = new CGP(&quot;cgp2&quot;,&quot;beiro&quot;,&quot;caballito&quot;,100,new PersistablePoint(10.1,10.1),comuna1);</span>
-<span class="nc" id="L40">		Servicio altaDomicilio = new Servicio(&quot;alta domicilio&quot;,disponibilidadLibrerias);</span>
-<span class="nc" id="L41">		cgp1.agregarServicio(altaDomicilio);</span>
-<span class="nc" id="L42">		Mapa.getInstance().agregarPoi(parada114);</span>
-<span class="nc" id="L43">		Mapa.getInstance().agregarPoi(libreriaYenny);</span>
-<span class="nc" id="L44">		Mapa.getInstance().agregarPoi(cgp1);</span>
+<span class="nc" id="L40">		Rubro libreria = new Rubro(&quot;libreria&quot;,50);</span>
+<span class="nc" id="L41">		Disponibilidad disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));</span>
+<span class="nc" id="L42">		LocalComercial libreriaYenny = new LocalComercial(&quot;libreria yenny&quot;,&quot;Beiro&quot;,&quot;devoto&quot;,100,new PersistablePoint(10,10),libreria,disponibilidadLibrerias);</span>
+<span class="nc" id="L43">		ParadaColectivo parada114 = new ParadaColectivo(&quot;parada 114&quot;,&quot;Chivilcoy&quot;,&quot;devoto&quot;,1000,new PersistablePoint(10,10),114);</span>
+<span class="nc" id="L44">		CGP cgp1 = new CGP(&quot;cgp2&quot;,&quot;beiro&quot;,&quot;caballito&quot;,100,new PersistablePoint(10.1,10.1),comuna1);</span>
+<span class="nc" id="L45">		Servicio altaDomicilio = new Servicio(&quot;alta domicilio&quot;,disponibilidadLibrerias);</span>
+<span class="nc" id="L46">		cgp1.agregarServicio(altaDomicilio);</span>
+<span class="nc" id="L47">		Mapa.getInstance().agregarPoi(parada114);</span>
+<span class="nc" id="L48">		Mapa.getInstance().agregarPoi(libreriaYenny);</span>
+<span class="nc" id="L49">		Mapa.getInstance().agregarPoi(cgp1);</span>
 		
-		
-		
-<span class="nc" id="L48">		RepositorioUsuarios.instance().agregarUsuario(t);</span>
-<span class="nc" id="L49">		RepositorioUsuarios.instance().agregarUsuario(u);</span>
-<span class="nc" id="L50">		DebugScreen.enableDebugScreen();</span>
-<span class="nc" id="L51">		Router.configure();</span>
-<span class="nc" id="L52">	}</span>
+<span class="nc" id="L51">		RepositorioUsuarios.instance().agregarUsuario(t);</span>
+<span class="nc" id="L52">		RepositorioUsuarios.instance().agregarUsuario(u);</span>
+<span class="nc" id="L53">		DebugScreen.enableDebugScreen();</span>
+<span class="nc" id="L54">		Router.configure();</span>
+<span class="nc" id="L55">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

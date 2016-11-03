@@ -1,0 +1,30 @@
+{{#partial "contenido"}}
+	{{#with poi}}
+	<form action="/pois/modificar/{{id}}" method="POST">
+		
+		<div class="form-group">
+			<label for="nombre">Nombre</label>
+			<input type="text" placeholder="{{nombre}}" name="nombre">
+		</div>
+	
+		<div class="form-group">		
+			<label for="calle">Calle</label>
+			<input type="text" placeholder="{{getCalle direccion}}" name="calle">
+		</div>
+		<div class="form-group">		
+			<label for="numero">Altura</label>
+			<input type="number" placeholder="{{getNumero direccion}}" name="numero">
+		</div>
+		<div class="form-group">		
+			<label for="barrio">Barrio</label>
+			<input type="text" placeholder="{{getBarrio direccion}}" name="barrio">
+		</div>
+		<table><tr>
+		<input class="btn btn-primary btn-lg" type="submit" value="Guardar"></tr>
+		<tr><input class="btn btn-primary btn-lg" onClick="parent.location='/pois'" value="Cancelar"></tr>
+		</table>
+	</form>
+	{{/with}}
+{{/partial}}
+
+{{>layoutAdmin.hbs}}

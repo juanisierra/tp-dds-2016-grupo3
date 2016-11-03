@@ -14,19 +14,23 @@ public class Router {
 				.create()
 				.withDefaultHelpers()
 				.withHelper("mostrarDir", DireccionHelper.mostrarDireccion)
+				.withHelper("getCalle", DireccionHelper.getCalle)
+				.withHelper("getBarrio", DireccionHelper.getBarrio)
+				.withHelper("getNumero", DireccionHelper.getNumero)
 				.build();
 
 		Spark.staticFiles.location("/public");
 		LoginController loginC = new LoginController();
 		POISController terminalC = new POISController();
-		Spark.get("/", loginC::mostrarLogin,engine);
+		Spark.get("/",loginC::mostrarLogin,engine);
 		Spark.get("/login", loginC::mostrarLogin,engine);
 		Spark.post("/login", loginC::iniciarSesion,engine);
 		Spark.get("/pois", terminalC::buscar,engine);
 		Spark.post("/logout",loginC::logout);
-		Spark.get("/pois/eliminar/a/:id", terminalC::eliminar);
+		Spark.post("/pois/eliminar/:id", terminalC::eliminar);
 		Spark.get("/pois/eliminar/:id",terminalC::getEliminar,engine);
-		
+		Spark.get("/pois/modificar/:id",terminalC::getModificar,engine);
+		Spark.post("/pois/modificar/:id",terminalC::modificar,engine);
 	}
 
 }

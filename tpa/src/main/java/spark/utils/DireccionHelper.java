@@ -14,6 +14,23 @@ public enum DireccionHelper implements Helper<Direccion>{
 		public CharSequence apply(Direccion arg0, Options arg1) throws IOException {
 		return arg0.getCalle()+" "+arg0.getAltura()+" , "+arg0.getBarrio();
 		}
+	},
+	getCalle{
+		@Override
+		public CharSequence apply(Direccion arg0, Options arg1) throws IOException {
+		return arg0.getCalle();
+		}
+	},
+	getNumero{
+		@Override
+		public CharSequence apply(Direccion arg0, Options arg1) throws IOException {
+		return String.valueOf(arg0.getAltura());
+		}
+	},
+	getBarrio{
+		@Override
+		public CharSequence apply(Direccion arg0, Options arg1) throws IOException {
+		return arg0.getBarrio();
+		}
 	}
-	
 }

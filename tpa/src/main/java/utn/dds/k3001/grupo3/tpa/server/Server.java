@@ -40,8 +40,11 @@ public class Server {
 		Rubro libreria = new Rubro("libreria",50);
 		Disponibilidad disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));
 		LocalComercial libreriaYenny = new LocalComercial("libreria yenny","Beiro","devoto",100,new PersistablePoint(10,10),libreria,disponibilidadLibrerias);
+		libreriaYenny.setId(0);
 		ParadaColectivo parada114 = new ParadaColectivo("parada 114","Chivilcoy","devoto",1000,new PersistablePoint(10,10),114);
+		parada114.setId(2);
 		CGP cgp1 = new CGP("cgp2","beiro","caballito",100,new PersistablePoint(10.1,10.1),comuna1);
+		cgp1.setId(1);
 		Servicio altaDomicilio = new Servicio("alta domicilio",disponibilidadLibrerias);
 		cgp1.agregarServicio(altaDomicilio);
 		Mapa.getInstance().agregarPoi(parada114);

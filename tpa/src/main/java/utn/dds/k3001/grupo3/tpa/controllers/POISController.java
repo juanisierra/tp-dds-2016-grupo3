@@ -1,6 +1,7 @@
 package utn.dds.k3001.grupo3.tpa.controllers;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import spark.ModelAndView;
@@ -22,7 +23,13 @@ public class POISController {
 			return new ModelAndView(model, "terminal/buscarPOI.hbs");
 		} else {
 			Map<String, List<POI>> model = new HashMap<>();
-			List<POI> pois = Mapa.getInstance().buscar(req.queryParams("criterio")!= null? req.queryParams("criterio") : "");
+			List<POI> pois = new LinkedList<POI>();
+			if(req.queryParams("tipos")==null)
+					pois.addAll(Mapa.getInstance().buscar(req.queryParams("criterio")!= null? req.queryParams("criterio") : ""));
+					else {
+						pois.addAll(Mapa.getInstance().buscar(req.queryParams("criterio")!= null? req.queryParams("criterio") : "",req.queryParams("tipos")));
+						
+					}
 			model.put("pois", pois);
 			return new ModelAndView(model, "admin/buscarPOI.hbs");
 		}

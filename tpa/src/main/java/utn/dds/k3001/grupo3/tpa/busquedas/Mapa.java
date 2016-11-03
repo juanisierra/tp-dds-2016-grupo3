@@ -48,5 +48,17 @@ public class Mapa
 							})
 							  .collect(Collectors.toList());
 	}
-	
+	public List<POI> buscar(String criterio,String clase){
+		return origenesDeDatos.stream()
+							  .flatMap(origen -> {
+								try {
+									return origen.buscar(criterio).stream();
+								} catch (ClassNotFoundException | IOException e) {
+									
+									e.printStackTrace();
+								}
+								return new LinkedList<POI>().stream();
+							}).filter(elem -> elem.getClass().getName().contains(clase))
+							  .collect(Collectors.toList());
+	}
 }

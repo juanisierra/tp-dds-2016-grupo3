@@ -6,7 +6,17 @@
 			<label for="criterio">Nombre</label>
 			<input type="text" placeholder="Nombre" name="criterio">
 		</div>
-		<input class="btn btn-primary btn-lg" type="submit" value="Filtrar">
+		<div class="form-group">
+			<label for="tipos">Tipos</label>
+			<select name="tipos">
+			<option value="">Todos</option>
+  			<option value="Banco">Banco</option>
+  			<option value="CGP">CGP</option>
+  				<option value="LocalComercial">Local Comercial</option>
+  				<option value="ParadaColectivo">Parada de Colectivo</option>
+			</select>
+		</div>
+		<input class="btn btn-primary btn-lg" type="submit" value="Buscar">
 	</form>
 </div>
 

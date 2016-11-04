@@ -4,6 +4,8 @@ import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import spark.utils.DireccionHelper;
 import spark.utils.HandlebarsTemplateEngineBuilder;
+import spark.utils.PointHelper;
+import spark.utils.ServiciosHelper;
 import utn.dds.k3001.grupo3.tpa.controllers.LoginController;
 import utn.dds.k3001.grupo3.tpa.controllers.POISController;
 
@@ -17,6 +19,8 @@ public class Router {
 				.withHelper("getCalle", DireccionHelper.getCalle)
 				.withHelper("getBarrio", DireccionHelper.getBarrio)
 				.withHelper("getNumero", DireccionHelper.getNumero)
+				.withHelper("mostrarCoord", PointHelper.mostrarCoord)
+				.withHelper("mostrarServicio", ServiciosHelper.mostrarServicio)
 				.build();
 
 		Spark.staticFiles.location("/public");
@@ -31,6 +35,7 @@ public class Router {
 		Spark.get("/pois/eliminar/:id",terminalC::getEliminar,engine);
 		Spark.get("/pois/modificar/:id",terminalC::getModificar,engine);
 		Spark.post("/pois/modificar/:id",terminalC::modificar,engine);
+		Spark.get("/pois/:id", terminalC::verPOI,engine);
 	}
 
 }

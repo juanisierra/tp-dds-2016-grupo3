@@ -10,6 +10,7 @@ public class RepositorioBusquedas implements WithGlobalEntityManager{
 	
 	private static final RepositorioBusquedas INSTANCE = new RepositorioBusquedas();
 	private BusquedasOrigin origen = new InMemoryBusquedasOrigin();
+	//private BusquedasOrigin origen =  new PersistenceBusquedasOrigin();
 	
 	public static RepositorioBusquedas getInstance(){
 		return INSTANCE;

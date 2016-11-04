@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import spark.Spark;
 import spark.debug.DebugScreen;
+import utn.dds.k3001.grupo3.tpa.busquedas.AccionesBusqueda;
 import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
 import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioTerminales;
 import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
@@ -58,6 +59,11 @@ public class Server {
 		Mapa.getInstance().agregarPoi(parada114);
 		Mapa.getInstance().agregarPoi(libreriaYenny);
 		Mapa.getInstance().agregarPoi(cgp1);
+		
+		Terminal terminal = new Terminal("miTerminal", Mapa.getInstance());   //para que haya datos que mostrar, dsp se borra
+		terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
+		terminal.buscar("parada");
+		terminal.buscar("a");
 		
 		RepositorioUsuarios.instance().agregarUsuario(t);
 		RepositorioUsuarios.instance().agregarUsuario(u);

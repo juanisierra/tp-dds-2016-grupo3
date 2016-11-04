@@ -13,7 +13,6 @@ import utn.dds.k3001.grupo3.tpa.pois.CGP;
 import utn.dds.k3001.grupo3.tpa.pois.LocalComercial;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 import utn.dds.k3001.grupo3.tpa.pois.ParadaColectivo;
-import utn.dds.k3001.grupo3.tpa.usuarios.RepositorioUsuarios;
 import utn.dds.k3001.grupo3.tpa.usuarios.Usuario;
 import utn.dds.k3001.grupo3.tpa.usuarios.UsuarioTerminal;
 

@@ -1,0 +1,13 @@
+{{#partial "contenido"}}
+
+{{#with poi}}
+	<h1>{{nombre}} </h1>
+	<p><strong>Direccion:</strong> {{mostrarDir direccion}}</p>
+	<p><strong>Latitud:</strong> {{mostrarCoord y}}</p>
+	<p><strong>Longitud:</strong> {{mostrarCoord x}}</p>
+	{{#block "contenidoPOI"}}
+	{{/block}}
+{{/with}}
+{{/partial}}
+
+{{>layoutAdmin.hbs}}

@@ -1,0 +1,11 @@
+{{#partial "contenidoPOI"}}
+
+{{#with poi}}
+	<p><strong>Servicios Ofrecidos:</strong> {{mostrarServicio serviciosOfrecidos}}</p>
+	<p><strong>Comuna:</strong> {{comunaPropia.nombre}}</p>
+	<tr><input class="btn btn-primary btn-lg" onClick="parent.location='/pois'" value="Salir"></tr>
+	<div class="container">
+{{/with}}
+{{/partial}}
+
+{{>admin/verPOILayout.hbs}}

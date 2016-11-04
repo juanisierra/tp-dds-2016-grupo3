@@ -41,13 +41,11 @@ public class Terminal
 		this.nombre = nombre;
 		this.mapa = mapa;
 		this.observersBusqueda = new LinkedList<AccionesBusqueda>();
-		this.observersBusqueda.add(AccionesBusqueda.GUARDARBUSQUEDA);
 	}
 	
 	public Terminal(){	//Builder para hibernate
 		this.mapa = Mapa.getInstance();
 		this.observersBusqueda = new LinkedList<AccionesBusqueda>();
-		this.observersBusqueda.add(AccionesBusqueda.GUARDARBUSQUEDA);
 	}
 	
 	public String getNombre() {

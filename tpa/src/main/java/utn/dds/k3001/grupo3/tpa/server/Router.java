@@ -4,6 +4,7 @@ import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import spark.utils.DireccionHelper;
 import spark.utils.HandlebarsTemplateEngineBuilder;
+import utn.dds.k3001.grupo3.tpa.busquedas.AccionesBusqueda;
 import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
 import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 import utn.dds.k3001.grupo3.tpa.controllers.BusquedasController;
@@ -28,6 +29,7 @@ public class Router {
 				.build();
 		
 		Terminal terminal = new Terminal("miTerminal", Mapa.getInstance());   //para que haya datos que mostrar, dsp se borra
+		terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 		terminal.buscar("parada");
 		terminal.buscar("114");
 		

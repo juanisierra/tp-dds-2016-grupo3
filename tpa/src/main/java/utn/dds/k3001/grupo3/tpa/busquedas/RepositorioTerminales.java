@@ -2,6 +2,7 @@ package utn.dds.k3001.grupo3.tpa.busquedas;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
@@ -23,9 +24,29 @@ public class RepositorioTerminales implements OrigenDeTerminales{
 		origen.agregarTerminal(terminal);
 	}
 	
+	public void eliminarTerminal(Terminal terminal){
+		origen.obtenerTerminales().remove(terminal);
+	}
+	
+	public void eliminarTerminalPorId(int id){
+		Terminal termABorrar = buscarTerminalPorId(id);
+		if (termABorrar!=null)
+			origen.obtenerTerminales().remove(termABorrar);
+	}
+	
 	public List<Terminal> obtenerTerminales()
 	{	
 		return origen.obtenerTerminales();
+	}
+	
+	public List<Terminal> buscarTerminalesPorComuna(String nombre)
+	{	
+		return origen.obtenerTerminales().stream().filter(terminal -> terminal.getComuna().getNombre().contains(nombre)).collect(Collectors.toList());
+	}
+	
+	public Terminal buscarTerminalPorId(int id)
+	{	
+		return origen.obtenerTerminales().stream().filter(terminal -> terminal.getId()==id).collect(Collectors.toList()).get(0);
 	}
 	
 	public static void persistirEnMemoria(){

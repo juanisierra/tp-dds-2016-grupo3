@@ -6,6 +6,7 @@ import spark.utils.DireccionHelper;
 import spark.utils.HandlebarsTemplateEngineBuilder;
 import utn.dds.k3001.grupo3.tpa.controllers.LoginController;
 import utn.dds.k3001.grupo3.tpa.controllers.POISController;
+import utn.dds.k3001.grupo3.tpa.controllers.TerminalesController;
 
 public class Router {
 
@@ -22,6 +23,7 @@ public class Router {
 		Spark.staticFiles.location("/public");
 		LoginController loginC = new LoginController();
 		POISController terminalC = new POISController();
+		TerminalesController terminales = new TerminalesController();
 		Spark.get("/",loginC::mostrarLogin,engine);
 		Spark.get("/login", loginC::mostrarLogin,engine);
 		Spark.post("/login", loginC::iniciarSesion,engine);
@@ -31,6 +33,9 @@ public class Router {
 		Spark.get("/pois/eliminar/:id",terminalC::getEliminar,engine);
 		Spark.get("/pois/modificar/:id",terminalC::getModificar,engine);
 		Spark.post("/pois/modificar/:id",terminalC::modificar,engine);
+		Spark.get("/terminales", terminales::listar,engine);
+		Spark.get("/terminales/eliminar/:id",terminales::getEliminar,engine);
+		Spark.post("/terminales/eliminar/:id", terminales::eliminar);
 	}
 
 }

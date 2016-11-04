@@ -24,10 +24,10 @@ public class Server {
 	public static void main(String[] args) {
 		Spark.port(9000);
 		
-		Comuna comuna1 = new Comuna("comuna 1",Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));
+		Comuna comuna1 = new Comuna("Montecastro",Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));
 		
 		Terminal terminal1 = new Terminal("Terminal 1",Mapa.getInstance(),comuna1);
-		RepositorioTerminales.INSTANCE.agregarTerminal(terminal1);
+		RepositorioTerminales.getInstance().agregarTerminal(terminal1);
 		Usuario u = new Usuario();
 		u.setNombre("admin");
 		u.setContrasenia("123");

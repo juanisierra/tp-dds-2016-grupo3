@@ -46,6 +46,7 @@ public class Terminal
 	public Terminal(){	//Builder para hibernate
 		this.mapa = Mapa.getInstance();
 		this.observersBusqueda = new LinkedList<AccionesBusqueda>();
+		this.observersBusqueda.add(AccionesBusqueda.GUARDARBUSQUEDA);
 	}
 	
 	public String getNombre() {

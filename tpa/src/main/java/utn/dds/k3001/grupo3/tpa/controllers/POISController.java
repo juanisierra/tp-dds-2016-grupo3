@@ -9,7 +9,6 @@ import spark.Request;
 import spark.Response;
 import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
-import utn.dds.k3001.grupo3.tpa.usuarios.RepositorioUsuarios;
 import utn.dds.k3001.grupo3.tpa.usuarios.Usuario;
 import utn.dds.k3001.grupo3.tpa.usuarios.UsuarioTerminal;
 

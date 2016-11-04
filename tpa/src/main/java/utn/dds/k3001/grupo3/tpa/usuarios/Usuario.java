@@ -21,4 +21,8 @@ public class Usuario {
 	{
 		return true;
 	}
+	public Boolean noEsAdmin()
+	{
+		return false;
+	}
 }

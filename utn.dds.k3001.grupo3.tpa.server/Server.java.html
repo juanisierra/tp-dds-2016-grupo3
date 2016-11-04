@@ -25,10 +25,10 @@ import utn.dds.k3001.grupo3.tpa.usuarios.UsuarioTerminal;
 	public static void main(String[] args) {
 <span class="nc" id="L26">		Spark.port(9000);</span>
 		
-<span class="nc" id="L28">		Comuna comuna1 = new Comuna(&quot;comuna 1&quot;,Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));</span>
+<span class="nc" id="L28">		Comuna comuna1 = new Comuna(&quot;Montecastro&quot;,Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));</span>
 		
 <span class="nc" id="L30">		Terminal terminal1 = new Terminal(&quot;Terminal 1&quot;,Mapa.getInstance(),comuna1);</span>
-<span class="nc" id="L31">		RepositorioTerminales.INSTANCE.agregarTerminal(terminal1);</span>
+<span class="nc" id="L31">		RepositorioTerminales.getInstance().agregarTerminal(terminal1);</span>
 <span class="nc" id="L32">		Usuario u = new Usuario();</span>
 <span class="nc" id="L33">		u.setNombre(&quot;admin&quot;);</span>
 <span class="nc" id="L34">		u.setContrasenia(&quot;123&quot;);</span>

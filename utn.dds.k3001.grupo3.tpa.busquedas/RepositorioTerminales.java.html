@@ -2,6 +2,7 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
@@ -11,33 +12,53 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 public class RepositorioTerminales implements OrigenDeTerminales{
 	
-<span class="fc" id="L14">	public static RepositorioTerminales INSTANCE = new RepositorioTerminales();</span>
-<span class="fc" id="L15">	public static TerminalOrigin origen = new InMemoryTerminalOrigin();</span>
+<span class="fc" id="L15">	public static RepositorioTerminales INSTANCE = new RepositorioTerminales();</span>
+<span class="fc" id="L16">	public static TerminalOrigin origen = new InMemoryTerminalOrigin();</span>
 	
 	public static RepositorioTerminales getInstance(){
-<span class="fc" id="L18">		return INSTANCE;</span>
+<span class="fc" id="L19">		return INSTANCE;</span>
 	}
-<span class="fc" id="L20">	private RepositorioTerminales (){}</span>
+<span class="fc" id="L21">	private RepositorioTerminales (){}</span>
 	
 	public void agregarTerminal(Terminal terminal){
-<span class="fc" id="L23">		origen.agregarTerminal(terminal);</span>
-<span class="fc" id="L24">	}</span>
+<span class="fc" id="L24">		origen.agregarTerminal(terminal);</span>
+<span class="fc" id="L25">	}</span>
+	
+	public void eliminarTerminal(Terminal terminal){
+<span class="nc" id="L28">		origen.obtenerTerminales().remove(terminal);</span>
+<span class="nc" id="L29">	}</span>
+	
+	public void eliminarTerminalPorId(int id){
+<span class="nc" id="L32">		Terminal termABorrar = buscarTerminalPorId(id);</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">		if (termABorrar!=null)</span>
+<span class="nc" id="L34">			origen.obtenerTerminales().remove(termABorrar);</span>
+<span class="nc" id="L35">	}</span>
 	
 	public List&lt;Terminal&gt; obtenerTerminales()
 	{	
-<span class="fc" id="L28">		return origen.obtenerTerminales();</span>
+<span class="fc" id="L39">		return origen.obtenerTerminales();</span>
+	}
+	
+	public List&lt;Terminal&gt; buscarTerminalesPorComuna(String nombre)
+	{	
+<span class="nc" id="L44">		return origen.obtenerTerminales().stream().filter(terminal -&gt; terminal.getComuna().getNombre().contains(nombre)).collect(Collectors.toList());</span>
+	}
+	
+	public Terminal buscarTerminalPorId(int id)
+	{	
+<span class="nc bnc" id="L49" title="All 2 branches missed.">		return origen.obtenerTerminales().stream().filter(terminal -&gt; terminal.getId()==id).collect(Collectors.toList()).get(0);</span>
 	}
 	
 	public static void persistirEnMemoria(){
-<span class="fc" id="L32">		origen = new InMemoryTerminalOrigin();</span>
-<span class="fc" id="L33">	}</span>
+<span class="fc" id="L53">		origen = new InMemoryTerminalOrigin();</span>
+<span class="fc" id="L54">	}</span>
 	
 	public static void persistirEnBD(){
-<span class="fc" id="L36">		origen = new PersistanceTerminalOrigin();</span>
-<span class="fc" id="L37">	}</span>
+<span class="fc" id="L57">		origen = new PersistanceTerminalOrigin();</span>
+<span class="fc" id="L58">	}</span>
 	
 	public static void reset() {
-<span class="fc" id="L40">		origen.reset();</span>
-<span class="fc" id="L41">	}</span>
+<span class="fc" id="L61">		origen.reset();</span>
+<span class="fc" id="L62">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

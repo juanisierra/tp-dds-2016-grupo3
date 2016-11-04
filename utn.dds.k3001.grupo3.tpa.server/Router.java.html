@@ -8,35 +8,40 @@ import spark.utils.PointHelper;
 import spark.utils.ServiciosHelper;
 import utn.dds.k3001.grupo3.tpa.controllers.LoginController;
 import utn.dds.k3001.grupo3.tpa.controllers.POISController;
+import utn.dds.k3001.grupo3.tpa.controllers.TerminalesController;
 
-<span class="nc" id="L12">public class Router {</span>
+<span class="nc" id="L13">public class Router {</span>
 
 	public static void configure() {
 		HandlebarsTemplateEngine engine = HandlebarsTemplateEngineBuilder
-<span class="nc" id="L16">				.create()</span>
-<span class="nc" id="L17">				.withDefaultHelpers()</span>
-<span class="nc" id="L18">				.withHelper(&quot;mostrarDir&quot;, DireccionHelper.mostrarDireccion)</span>
-<span class="nc" id="L19">				.withHelper(&quot;getCalle&quot;, DireccionHelper.getCalle)</span>
-<span class="nc" id="L20">				.withHelper(&quot;getBarrio&quot;, DireccionHelper.getBarrio)</span>
-<span class="nc" id="L21">				.withHelper(&quot;getNumero&quot;, DireccionHelper.getNumero)</span>
-<span class="nc" id="L22">				.withHelper(&quot;mostrarCoord&quot;, PointHelper.mostrarCoord)</span>
-<span class="nc" id="L23">				.withHelper(&quot;mostrarServicio&quot;, ServiciosHelper.mostrarServicio)</span>
-<span class="nc" id="L24">				.build();</span>
+<span class="nc" id="L17">				.create()</span>
+<span class="nc" id="L18">				.withDefaultHelpers()</span>
+<span class="nc" id="L19">				.withHelper(&quot;mostrarDir&quot;, DireccionHelper.mostrarDireccion)</span>
+<span class="nc" id="L20">				.withHelper(&quot;getCalle&quot;, DireccionHelper.getCalle)</span>
+<span class="nc" id="L21">				.withHelper(&quot;getBarrio&quot;, DireccionHelper.getBarrio)</span>
+<span class="nc" id="L22">				.withHelper(&quot;getNumero&quot;, DireccionHelper.getNumero)</span>
+<span class="nc" id="L23">				.withHelper(&quot;mostrarCoord&quot;, PointHelper.mostrarCoord)</span>
+<span class="nc" id="L24">				.withHelper(&quot;mostrarServicio&quot;, ServiciosHelper.mostrarServicio)</span>
+<span class="nc" id="L25">				.build();</span>
 
-<span class="nc" id="L26">		Spark.staticFiles.location(&quot;/public&quot;);</span>
-<span class="nc" id="L27">		LoginController loginC = new LoginController();</span>
-<span class="nc" id="L28">		POISController terminalC = new POISController();</span>
-<span class="nc" id="L29">		Spark.get(&quot;/&quot;,loginC::mostrarLogin,engine);</span>
-<span class="nc" id="L30">		Spark.get(&quot;/login&quot;, loginC::mostrarLogin,engine);</span>
-<span class="nc" id="L31">		Spark.post(&quot;/login&quot;, loginC::iniciarSesion,engine);</span>
-<span class="nc" id="L32">		Spark.get(&quot;/pois&quot;, terminalC::buscar,engine);</span>
-<span class="nc" id="L33">		Spark.post(&quot;/logout&quot;,loginC::logout);</span>
-<span class="nc" id="L34">		Spark.post(&quot;/pois/eliminar/:id&quot;, terminalC::eliminar);</span>
-<span class="nc" id="L35">		Spark.get(&quot;/pois/eliminar/:id&quot;,terminalC::getEliminar,engine);</span>
-<span class="nc" id="L36">		Spark.get(&quot;/pois/modificar/:id&quot;,terminalC::getModificar,engine);</span>
-<span class="nc" id="L37">		Spark.post(&quot;/pois/modificar/:id&quot;,terminalC::modificar,engine);</span>
-<span class="nc" id="L38">		Spark.get(&quot;/pois/:id&quot;, terminalC::verPOI,engine);</span>
-<span class="nc" id="L39">	}</span>
+<span class="nc" id="L27">		Spark.staticFiles.location(&quot;/public&quot;);</span>
+<span class="nc" id="L28">		LoginController loginC = new LoginController();</span>
+<span class="nc" id="L29">		POISController terminalC = new POISController();</span>
+<span class="nc" id="L30">		TerminalesController terminales = new TerminalesController();</span>
+<span class="nc" id="L31">		Spark.get(&quot;/&quot;,loginC::mostrarLogin,engine);</span>
+<span class="nc" id="L32">		Spark.get(&quot;/login&quot;, loginC::mostrarLogin,engine);</span>
+<span class="nc" id="L33">		Spark.post(&quot;/login&quot;, loginC::iniciarSesion,engine);</span>
+<span class="nc" id="L34">		Spark.get(&quot;/pois&quot;, terminalC::buscar,engine);</span>
+<span class="nc" id="L35">		Spark.post(&quot;/logout&quot;,loginC::logout);</span>
+<span class="nc" id="L36">		Spark.post(&quot;/pois/eliminar/:id&quot;, terminalC::eliminar);</span>
+<span class="nc" id="L37">		Spark.get(&quot;/pois/eliminar/:id&quot;,terminalC::getEliminar,engine);</span>
+<span class="nc" id="L38">		Spark.get(&quot;/pois/modificar/:id&quot;,terminalC::getModificar,engine);</span>
+<span class="nc" id="L39">		Spark.post(&quot;/pois/modificar/:id&quot;,terminalC::modificar,engine);</span>
+<span class="nc" id="L40">		Spark.get(&quot;/terminales&quot;, terminales::listar,engine);</span>
+<span class="nc" id="L41">		Spark.get(&quot;/terminales/eliminar/:id&quot;,terminales::getEliminar,engine);</span>
+<span class="nc" id="L42">		Spark.post(&quot;/terminales/eliminar/:id&quot;, terminales::eliminar);</span>
+<span class="nc" id="L43">		Spark.get(&quot;/pois/:id&quot;, terminalC::verPOI,engine);</span>
+<span class="nc" id="L44">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -8,7 +8,12 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
+import utn.dds.k3001.grupo3.tpa.pois.Banco;
+import utn.dds.k3001.grupo3.tpa.pois.CGP;
+import utn.dds.k3001.grupo3.tpa.pois.LocalComercial;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
+import utn.dds.k3001.grupo3.tpa.pois.ParadaColectivo;
+import utn.dds.k3001.grupo3.tpa.usuarios.RepositorioUsuarios;
 import utn.dds.k3001.grupo3.tpa.usuarios.Usuario;
 import utn.dds.k3001.grupo3.tpa.usuarios.UsuarioTerminal;
 
@@ -83,6 +88,22 @@ public class POISController {
 			return new ModelAndView(model, "admin/modificarPOI.hbs");
 		}
 		
+		} else {
+			//res.status(403);
+			res.redirect("/login",403);
+		}
+		return null;
+	}
+	public ModelAndView verPOI(Request req, Response res){
+		if(req.session().attribute("user")!=null)
+		{	Map<String, POI> model = new HashMap<>();
+		POI poi =Mapa.getInstance().getById(req.params("id"));
+			model.put("poi",poi);
+			if(poi.getClass()==Banco.class) return new ModelAndView(model, "admin/verPois/verBanco.hbs");
+			else if (poi.getClass()==CGP.class) return new ModelAndView(model, "admin/verPois/verCGP.hbs");
+			else if (poi.getClass()==LocalComercial.class) return new ModelAndView(model, "admin/verPois/verLocalComercial.hbs");
+			else if (poi.getClass()==ParadaColectivo.class) return new ModelAndView(model, "admin/verPois/verParadaColectivo.hbs");
+			else return new ModelAndView(model, "admin/verPOILayout.hbs");
 		} else {
 			//res.status(403);
 			res.redirect("/login",403);

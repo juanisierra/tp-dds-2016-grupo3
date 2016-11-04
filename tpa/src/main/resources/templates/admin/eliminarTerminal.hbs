@@ -1,0 +1,17 @@
+{{#partial "contenido"}}
+<h1>TERMINALES</h1>
+{{#with terminal}}
+<form action="/terminales/eliminar/{{id}}" method="POST">
+		<div>
+			<label for="mensaje">Esta seguro de que desea eliminar la terminal {{nombre}}?</label>
+		</div>
+		<table> 
+		<tr><input class="btn btn-primary btn-lg" type="submit" value="Aceptar"></tr>
+			<tr><input class="btn btn-primary btn-lg" onClick="parent.location='/terminales'" value="Cancelar"></tr>
+		</table>
+	</form>
+</div>
+{{/with}}
+{{/partial}}
+
+{{>layoutAdmin.hbs}}

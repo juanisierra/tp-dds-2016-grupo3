@@ -49,11 +49,7 @@ public class RepositorioBusquedas implements WithGlobalEntityManager{
 	}
 	
 	public List<Busqueda> busquedasDesdeHasta(LocalDate desde, LocalDate hasta){
-		return origen.getBusquedas().stream().filter(busqueda -> estaEntre(desde, hasta, busqueda.getFecha())).collect(Collectors.toList());
-	}
-	
-	private boolean estaEntre(LocalDate desde, LocalDate hasta, LocalDate fecha){
-		return (fecha.compareTo(desde) >= 0 && fecha.compareTo(hasta) <=0 );
+		return origen.getBusquedas().stream().filter(busqueda -> busqueda.estaEntre(desde, hasta)).collect(Collectors.toList());
 	}
 	
 	public List<Busqueda> busquedasCantResultados(int cantidad){
@@ -66,6 +62,10 @@ public class RepositorioBusquedas implements WithGlobalEntityManager{
 	
 	public List<Busqueda> busquedasTerminal(String nombreTerminal){
 		return origen.getBusquedas().stream().filter(busqueda -> busqueda.getTerminal().getNombre().equals(nombreTerminal)).collect(Collectors.toList());
+	}
+	
+	public Busqueda busquedaConId(int id){
+		return origen.getBusquedas().stream().filter(b -> b.getId() == id).findAny().orElseGet(null);
 	}
 }
 

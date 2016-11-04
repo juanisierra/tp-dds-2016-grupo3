@@ -4,6 +4,7 @@ import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import spark.utils.DireccionHelper;
 import spark.utils.HandlebarsTemplateEngineBuilder;
+import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
 import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 import utn.dds.k3001.grupo3.tpa.controllers.BusquedasController;
 import utn.dds.k3001.grupo3.tpa.controllers.LoginController;
@@ -21,7 +22,7 @@ public class Router {
 				.withHelper("getNumero", DireccionHelper.getNumero)
 				.build();
 		
-		Terminal terminal = new Terminal();
+		Terminal terminal = new Terminal("miTerminal", Mapa.getInstance());   //para que haya datos que mostrar, dsp se borra
 		terminal.buscar("parada");
 		terminal.buscar("114");
 		
@@ -34,6 +35,7 @@ public class Router {
 		Spark.post("/login", loginC::iniciarSesion,engine);
 		Spark.get("/pois", terminalC::buscar,engine);
 		Spark.get("/busquedas", busquedaC::buscar, engine);
+		//Spark.post("/busquedas/verPois", busquedaC::mostrarPois, engine);
 		Spark.post("/logout",loginC::logout);
 		Spark.post("/pois/eliminar/:id", terminalC::eliminar);
 		Spark.get("/pois/eliminar/:id",terminalC::getEliminar,engine);

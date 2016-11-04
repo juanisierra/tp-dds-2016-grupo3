@@ -41,6 +41,7 @@ public class Terminal
 		this.nombre = nombre;
 		this.mapa = mapa;
 		this.observersBusqueda = new LinkedList<AccionesBusqueda>();
+		this.observersBusqueda.add(AccionesBusqueda.GUARDARBUSQUEDA);
 	}
 	
 	public Terminal(){	//Builder para hibernate

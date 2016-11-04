@@ -42,6 +42,10 @@ public class Busqueda
 	public Terminal getTerminal(){
 	return terminal;
 	}
+	public List<POI> getResultados(){
+		return resultados;
+	}
+	
 	public boolean esEnFecha(LocalDate fecha){
 		return this.fecha.equals(fecha);
 	}
@@ -95,5 +99,9 @@ public class Busqueda
 
 	public void setTerminal(Terminal terminal) {
 		this.terminal = terminal;
+	}
+	
+	public boolean estaEntre(LocalDate desde, LocalDate hasta){
+		return (fecha.compareTo(desde) >= 0 && fecha.compareTo(hasta) <=0 );
 	}
 }

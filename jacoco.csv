@@ -25,7 +25,7 @@ tpa,utn.dds.k3001.grupo3.tpa.converters.morphia,BigDecimalConverter,82,0,10,0,20
 tpa,utn.dds.k3001.grupo3.tpa.converters.morphia,LocalDateConverter,54,0,8,0,15,0,7,0,3,0
 tpa,utn.dds.k3001.grupo3.tpa.converters.morphia,LocalDateTimeConverter,50,0,8,0,12,0,7,0,3,0
 tpa,utn.dds.k3001.grupo3.tpa.controllers,LoginController,78,0,4,0,19,0,6,0,4,0
-tpa,utn.dds.k3001.grupo3.tpa.controllers,TerminalesController,145,0,14,0,31,0,11,0,4,0
+tpa,utn.dds.k3001.grupo3.tpa.controllers,TerminalesController,625,0,60,0,128,0,41,0,11,0
 tpa,utn.dds.k3001.grupo3.tpa.controllers,POISController,364,0,38,0,67,0,26,0,7,0
 tpa,utn.dds.k3001.grupo3.tpa.pois,POI,53,61,3,3,18,16,14,9,12,8
 tpa,utn.dds.k3001.grupo3.tpa.pois,ParadaColectivo,10,38,2,4,4,6,5,5,3,4
@@ -52,14 +52,14 @@ tpa,spark.utils,ServiciosHelper,28,0,0,0,2,0,4,0,4,0
 tpa,utn.dds.k3001.grupo3.tpa.usuarios,UsuarioTerminal,13,0,0,0,5,0,4,0,4,0
 tpa,utn.dds.k3001.grupo3.tpa.usuarios,Usuario,20,0,0,0,8,0,6,0,6,0
 tpa,utn.dds.k3001.grupo3.tpa.usuarios,RepositorioUsuarios,59,0,4,0,9,0,10,0,8,0
-tpa,utn.dds.k3001.grupo3.tpa.server,Server,210,0,0,0,37,0,2,0,2,0
-tpa,utn.dds.k3001.grupo3.tpa.server,Router,142,0,0,0,28,0,2,0,2,0
+tpa,utn.dds.k3001.grupo3.tpa.server,Server,260,0,0,0,40,0,2,0,2,0
+tpa,utn.dds.k3001.grupo3.tpa.server,Router,174,0,0,0,32,0,2,0,2,0
 tpa,utn.dds.k3001.grupo3.tpa.DTO,CentroDTO,6,33,0,0,2,12,2,5,2,5
 tpa,utn.dds.k3001.grupo3.tpa.DTO,ServiciosDTO,0,15,0,0,0,6,0,3,0,3
 tpa,utn.dds.k3001.grupo3.tpa.DTO,RangosServicioDTO,0,33,0,0,0,12,0,6,0,6
 tpa,utn.dds.k3001.grupo3.tpa.geo,PersistablePolygon,9,27,0,2,2,8,1,4,1,3
 tpa,utn.dds.k3001.grupo3.tpa.geo,PersistablePoint,52,65,0,0,13,18,8,7,8,7
-tpa,utn.dds.k3001.grupo3.tpa.busquedas,RepositorioTerminales,55,34,4,0,8,13,8,8,6,8
+tpa,utn.dds.k3001.grupo3.tpa.busquedas,RepositorioTerminales,81,34,6,0,13,13,11,8,8,8
 tpa,utn.dds.k3001.grupo3.tpa.busquedas,AccionesBusqueda,9,29,0,0,0,3,2,2,2,2
 tpa,utn.dds.k3001.grupo3.tpa.busquedas,ServicioMail,3,1,0,0,1,1,1,1,1,1
 tpa,utn.dds.k3001.grupo3.tpa.busquedas,RepositorioBusquedas,125,55,8,0,12,12,19,10,15,10

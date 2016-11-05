@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.*;
 
 import spark.ModelAndView;
 import spark.Request;
@@ -11,73 +12,222 @@ import spark.Response;
 import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
 import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioTerminales;
+import utn.dds.k3001.grupo3.tpa.pois.Comuna;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 import utn.dds.k3001.grupo3.tpa.usuarios.Usuario;
 import utn.dds.k3001.grupo3.tpa.usuarios.UsuarioTerminal;
 
-<span class="nc" id="L18">public class TerminalesController {</span>
+//TODO Abstraer recopilación de comunas y ABM de terminales al repositorio, emprolijar
+<span class="nc" id="L21">public class TerminalesController {</span>
 
 	public ModelAndView listar(Request req, Response res){
-<span class="nc bnc" id="L21" title="All 2 branches missed.">		if(req.session().attribute(&quot;user&quot;)!=null)</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">		if(req.session().attribute(&quot;user&quot;)!=null)</span>
 		{	
-<span class="nc bnc" id="L23" title="All 2 branches missed.">			if(!((Usuario) req.session().attribute(&quot;user&quot;)).esAdmin()) {</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">			if(!((Usuario) req.session().attribute(&quot;user&quot;)).esAdmin()) {</span>
 				//res.status(403);
-<span class="nc" id="L25">				res.redirect(&quot;/login&quot;,403);</span>
+<span class="nc" id="L28">				res.redirect(&quot;/login&quot;,403);</span>
 			} 
 			else {
-<span class="nc" id="L28">				Map&lt;String, List&lt;Terminal&gt;&gt; model = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L29">				List&lt;Terminal&gt; terminales = new LinkedList&lt;Terminal&gt;();</span>
-<span class="nc bnc" id="L30" title="All 2 branches missed.">				if (req.queryParams(&quot;comuna&quot;)!=null)</span>
-<span class="nc" id="L31">					terminales.addAll(RepositorioTerminales.getInstance().buscarTerminalesPorComuna(req.queryParams(&quot;comuna&quot;)));</span>
+<span class="nc" id="L31">				Map&lt;String, List&gt; model = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L32">				List&lt;Terminal&gt; terminales = new LinkedList&lt;Terminal&gt;();</span>
+<span class="nc" id="L33">				List&lt;Comuna&gt; comunas = new LinkedList&lt;Comuna&gt;();</span>
+<span class="nc" id="L34">				comunas.add(new Comuna(&quot;Cualquiera&quot;));</span>
+<span class="nc" id="L35">				terminales.addAll(RepositorioTerminales.getInstance().obtenerTerminales());</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">				for (Terminal terminal : terminales){ //Obtener todas las comunas de las terminales</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">					if(!comunas.contains(terminal.getComuna()))</span>
+<span class="nc" id="L38">						comunas.add(terminal.getComuna());</span>
+<span class="nc" id="L39">				}</span>
+<span class="nc" id="L40">				terminales.clear();</span>
+<span class="nc" id="L41">				model.put(&quot;comunas&quot;, comunas);</span>
+				
+<span class="nc bnc" id="L43" title="All 4 branches missed.">				if(req.queryParams(&quot;nombre&quot;)!=null &amp;&amp; !req.queryParams(&quot;nombre&quot;).isEmpty())</span>
+<span class="nc" id="L44">					terminales.addAll(RepositorioTerminales.getInstance().buscarTerminalesPorNombre(req.queryParams(&quot;nombre&quot;)));</span>
 				else
-<span class="nc" id="L33">					terminales.addAll(RepositorioTerminales.getInstance().obtenerTerminales());</span>
-<span class="nc" id="L34">				model.put(&quot;Terminales&quot;, terminales);</span>
-<span class="nc" id="L35">				return new ModelAndView(model, &quot;admin/listarTerminales.hbs&quot;);</span>
+<span class="nc" id="L46">					terminales.addAll(RepositorioTerminales.getInstance().obtenerTerminales());</span>
+				 
+<span class="nc bnc" id="L48" title="All 4 branches missed.">				if (req.queryParams(&quot;comuna&quot;) !=null &amp;&amp; !req.queryParams(&quot;comuna&quot;).equals(&quot;Cualquiera&quot;))</span>
+<span class="nc" id="L49">					terminales = terminales.stream().filter(t -&gt; t.estaEnComuna(req.queryParams(&quot;comuna&quot;))).collect(Collectors.toList());</span>
+
+<span class="nc" id="L51">				model.put(&quot;Terminales&quot;, terminales);</span>
+<span class="nc" id="L52">				return new ModelAndView(model, &quot;admin/listarTerminales.hbs&quot;);</span>
 			}
 		}
 		else {
 			//res.status(403);
-<span class="nc" id="L40">			res.redirect(&quot;/login&quot;,403);</span>
+<span class="nc" id="L57">			res.redirect(&quot;/login&quot;,403);</span>
 		}
-<span class="nc" id="L42">		return null;</span>
+<span class="nc" id="L59">		return null;</span>
 	}
 	
 	public ModelAndView getEliminar(Request req, Response res){
-<span class="nc bnc" id="L46" title="All 2 branches missed.">		if(req.session().attribute(&quot;user&quot;)!=null)</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">		if(req.session().attribute(&quot;user&quot;)!=null)</span>
 		{	
-<span class="nc bnc" id="L48" title="All 2 branches missed.">			if(!((Usuario) req.session().attribute(&quot;user&quot;)).esAdmin()) {</span>
-<span class="nc" id="L49">				res.redirect(&quot;/login&quot;, 403);</span>
-<span class="nc" id="L50">				return null;</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">			if(!((Usuario) req.session().attribute(&quot;user&quot;)).esAdmin()) {</span>
+<span class="nc" id="L66">				res.redirect(&quot;/login&quot;, 403);</span>
+<span class="nc" id="L67">				return null;</span>
 			}
 			else {
-<span class="nc" id="L53">				Map&lt;String, Terminal&gt; model = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L54">				model.put(&quot;terminal&quot;, RepositorioTerminales.getInstance().buscarTerminalPorId(Integer.parseInt(req.params(&quot;id&quot;))));</span>
-<span class="nc" id="L55">				return new ModelAndView(model, &quot;admin/eliminarTerminal.hbs&quot;);</span>
+<span class="nc" id="L70">				Map&lt;String, Terminal&gt; model = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L71">				model.put(&quot;terminal&quot;, RepositorioTerminales.getInstance().buscarTerminalPorId(Integer.parseInt(req.params(&quot;id&quot;))));</span>
+<span class="nc" id="L72">				return new ModelAndView(model, &quot;admin/eliminarTerminal.hbs&quot;);</span>
 			}
 		}
 		else {
 			//res.status(403);
-<span class="nc" id="L60">			res.redirect(&quot;/login&quot;,403);</span>
+<span class="nc" id="L77">			res.redirect(&quot;/login&quot;,403);</span>
 		}
-<span class="nc" id="L62">		return null;</span>
+<span class="nc" id="L79">		return null;</span>
 	}
 	
 	public ModelAndView eliminar(Request req, Response res){
-<span class="nc bnc" id="L66" title="All 2 branches missed.">		if(req.session().attribute(&quot;user&quot;)!=null)</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">		if(req.session().attribute(&quot;user&quot;)!=null)</span>
 		{	
-<span class="nc bnc" id="L68" title="All 2 branches missed.">			if(!((Usuario) req.session().attribute(&quot;user&quot;)).esAdmin()) {</span>
-<span class="nc" id="L69">				res.redirect(&quot;/login&quot;, 403);</span>
-<span class="nc" id="L70">				return null;</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">			if(!((Usuario) req.session().attribute(&quot;user&quot;)).esAdmin()) {</span>
+<span class="nc" id="L86">				res.redirect(&quot;/login&quot;, 403);</span>
+<span class="nc" id="L87">				return null;</span>
 			}
 			else {
-<span class="nc" id="L73">				RepositorioTerminales.getInstance().eliminarTerminalPorId(Integer.parseInt(req.params(&quot;id&quot;)));</span>
-<span class="nc" id="L74">				res.redirect(&quot;/terminales&quot;);</span>
-<span class="nc" id="L75">				return null;</span>
+<span class="nc" id="L90">				RepositorioTerminales.getInstance().eliminarTerminalPorId(Integer.parseInt(req.params(&quot;id&quot;)));</span>
+<span class="nc" id="L91">				res.redirect(&quot;/terminales&quot;);</span>
+<span class="nc" id="L92">				return null;</span>
 			}
 		}
 		else
-<span class="nc" id="L79">			res.redirect(&quot;/login&quot;,403);</span>
-<span class="nc" id="L80">		return null;</span>
+<span class="nc" id="L96">			res.redirect(&quot;/login&quot;,403);</span>
+<span class="nc" id="L97">		return null;</span>
+	}
+	
+	public ModelAndView getModificar(Request req, Response res){
+<span class="nc bnc" id="L101" title="All 2 branches missed.">		if(req.session().attribute(&quot;user&quot;)!=null)</span>
+		{	
+<span class="nc bnc" id="L103" title="All 2 branches missed.">			if(!((Usuario) req.session().attribute(&quot;user&quot;)).esAdmin()) {</span>
+<span class="nc" id="L104">				res.redirect(&quot;/login&quot;, 403);</span>
+<span class="nc" id="L105">				return null;</span>
+			}
+			else {
+<span class="nc" id="L108">				List&lt;Terminal&gt; terminales = new LinkedList&lt;Terminal&gt;();</span>
+<span class="nc" id="L109">				List&lt;Comuna&gt; comunas = new LinkedList&lt;Comuna&gt;();</span>
+<span class="nc" id="L110">				comunas.add(new Comuna(&quot;Cualquiera&quot;));</span>
+<span class="nc" id="L111">				terminales.addAll(RepositorioTerminales.getInstance().obtenerTerminales());</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">				for (Terminal term : terminales){ //Obtener todas las comunas de las terminales</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">					if(!comunas.contains(term.getComuna()))</span>
+<span class="nc" id="L114">						comunas.add(term.getComuna());</span>
+<span class="nc" id="L115">				}</span>
+<span class="nc" id="L116">				terminales.clear();</span>
+<span class="nc" id="L117">				Map&lt;String, Object&gt; model = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L118">				model.put(&quot;comunas&quot;, comunas);</span>
+<span class="nc" id="L119">				model.put(&quot;terminal&quot;, RepositorioTerminales.getInstance().buscarTerminalPorId(Integer.parseInt(req.params(&quot;id&quot;))));</span>
+<span class="nc" id="L120">				return new ModelAndView(model, &quot;admin/modificarTerminal.hbs&quot;);</span>
+			}
+		}
+		else {
+			//res.status(403);
+<span class="nc" id="L125">			res.redirect(&quot;/login&quot;,403);</span>
+		}
+<span class="nc" id="L127">		return null;</span>
+	}
+	
+	public ModelAndView modificar(Request req, Response res){
+<span class="nc bnc" id="L131" title="All 2 branches missed.">		if(req.session().attribute(&quot;user&quot;)!=null)</span>
+		{	
+<span class="nc bnc" id="L133" title="All 2 branches missed.">			if(!((Usuario) req.session().attribute(&quot;user&quot;)).esAdmin()) {</span>
+<span class="nc" id="L134">				res.redirect(&quot;/login&quot;, 403);</span>
+<span class="nc" id="L135">				return null;</span>
+			}
+			else {
+<span class="nc" id="L138">				Terminal terminalAModificar = RepositorioTerminales.getInstance().buscarTerminalPorId(Integer.parseInt(req.params(&quot;id&quot;)));</span>
+<span class="nc" id="L139">				List&lt;Terminal&gt; terminalesEncontradas = RepositorioTerminales.getInstance().buscarTerminalesPorNombre(req.queryParams(&quot;nombre&quot;));</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">				if (!terminalesEncontradas.isEmpty()){</span>
+<span class="nc" id="L141">					res.redirect(&quot;/login&quot;,403);</span>
+<span class="nc" id="L142">					return null;</span>
+				}
+<span class="nc" id="L144">				terminalAModificar.setNombre(req.queryParams(&quot;nombre&quot;));</span>
+				
+<span class="nc" id="L146">				List&lt;Terminal&gt; terminales = new LinkedList&lt;Terminal&gt;();</span>
+<span class="nc" id="L147">				List&lt;Comuna&gt; comunas = new LinkedList&lt;Comuna&gt;();</span>
+<span class="nc" id="L148">				terminales.addAll(RepositorioTerminales.getInstance().obtenerTerminales());</span>
+<span class="nc bnc" id="L149" title="All 2 branches missed.">				for (Terminal term : terminales){ //Obtener todas las comunas de las terminales</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">					if(!comunas.contains(term.getComuna()))</span>
+<span class="nc" id="L151">						comunas.add(term.getComuna());</span>
+<span class="nc" id="L152">				}</span>
+<span class="nc" id="L153">				terminales.clear();</span>
+				
+<span class="nc" id="L155">				Comuna comunaSeleccionada = comunas.stream().filter(com -&gt; com.getNombre().equals(req.queryParams(&quot;comuna&quot;))).collect(Collectors.toList()).get(0);</span>
+<span class="nc" id="L156">				terminalAModificar.setComuna(comunaSeleccionada);</span>
+<span class="nc" id="L157">				res.redirect(&quot;/terminales&quot;);</span>
+<span class="nc" id="L158">				return null;</span>
+			}
+		}
+		else {
+<span class="nc" id="L162">			res.redirect(&quot;/login&quot;,403);</span>
+		}
+<span class="nc" id="L164">		return null;</span>
+	}
+	
+	public ModelAndView getAgregar(Request req, Response res){
+<span class="nc bnc" id="L168" title="All 2 branches missed.">		if(req.session().attribute(&quot;user&quot;)!=null)</span>
+		{	
+<span class="nc bnc" id="L170" title="All 2 branches missed.">			if(!((Usuario) req.session().attribute(&quot;user&quot;)).esAdmin()) {</span>
+<span class="nc" id="L171">				res.redirect(&quot;/login&quot;, 403);</span>
+<span class="nc" id="L172">				return null;</span>
+			}
+			else {
+<span class="nc" id="L175">				List&lt;Terminal&gt; terminales = new LinkedList&lt;Terminal&gt;();</span>
+<span class="nc" id="L176">				List&lt;Comuna&gt; comunas = new LinkedList&lt;Comuna&gt;();</span>
+<span class="nc" id="L177">				comunas.add(new Comuna(&quot;Cualquiera&quot;));</span>
+<span class="nc" id="L178">				terminales.addAll(RepositorioTerminales.getInstance().obtenerTerminales());</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">				for (Terminal term : terminales){ //Obtener todas las comunas de las terminales</span>
+<span class="nc bnc" id="L180" title="All 2 branches missed.">					if(!comunas.contains(term.getComuna()))</span>
+<span class="nc" id="L181">						comunas.add(term.getComuna());</span>
+<span class="nc" id="L182">				}</span>
+<span class="nc" id="L183">				terminales.clear();</span>
+<span class="nc" id="L184">				Map&lt;String, List&lt;Comuna&gt;&gt; model = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L185">				model.put(&quot;comunas&quot;, comunas);</span>
+<span class="nc" id="L186">				return new ModelAndView(model, &quot;admin/agregarTerminal.hbs&quot;);</span>
+			}
+		}
+		else {
+			//res.status(403);
+<span class="nc" id="L191">			res.redirect(&quot;/login&quot;,403);</span>
+		}
+<span class="nc" id="L193">		return null;</span>
+	}
+	
+	public ModelAndView agregar(Request req, Response res){
+<span class="nc bnc" id="L197" title="All 2 branches missed.">		if(req.session().attribute(&quot;user&quot;)!=null)</span>
+		{	
+<span class="nc bnc" id="L199" title="All 2 branches missed.">			if(!((Usuario) req.session().attribute(&quot;user&quot;)).esAdmin()) {</span>
+<span class="nc" id="L200">				res.redirect(&quot;/login&quot;, 403);</span>
+<span class="nc" id="L201">				return null;</span>
+			}
+			else { //Verifico que no haya terminales con igual nombre y lo agrego en memoria
+<span class="nc" id="L204">				List&lt;Terminal&gt; terminalesEncontradas = RepositorioTerminales.getInstance().buscarTerminalesPorNombre(req.params(&quot;nombre&quot;));</span>
+<span class="nc bnc" id="L205" title="All 2 branches missed.">				if (!terminalesEncontradas.isEmpty()){</span>
+<span class="nc" id="L206">					res.redirect(&quot;/login&quot;,403);</span>
+<span class="nc" id="L207">					return null;</span>
+				}
+<span class="nc" id="L209">				Terminal terminal = new Terminal();</span>
+<span class="nc" id="L210">				terminal.setNombre(req.queryParams(&quot;nombre&quot;));</span>
+<span class="nc" id="L211">				List&lt;Terminal&gt; terminales = new LinkedList&lt;Terminal&gt;();</span>
+<span class="nc" id="L212">				List&lt;Comuna&gt; comunas = new LinkedList&lt;Comuna&gt;();</span>
+<span class="nc" id="L213">				terminales.addAll(RepositorioTerminales.getInstance().obtenerTerminales());</span>
+<span class="nc bnc" id="L214" title="All 2 branches missed.">				for (Terminal term : terminales){ //Obtener todas las comunas de las terminales</span>
+<span class="nc bnc" id="L215" title="All 2 branches missed.">					if(!comunas.contains(term.getComuna()))</span>
+<span class="nc" id="L216">						comunas.add(term.getComuna());</span>
+<span class="nc" id="L217">				}</span>
+<span class="nc" id="L218">				terminales.clear();</span>
+<span class="nc" id="L219">				Comuna comunaSeleccionada = comunas.stream().filter(com -&gt; com.getNombre().equals(req.queryParams(&quot;comuna&quot;))).collect(Collectors.toList()).get(0);</span>
+<span class="nc" id="L220">				terminal.setComuna(comunaSeleccionada);</span>
+<span class="nc" id="L221">				RepositorioTerminales.getInstance().agregarTerminal(terminal);</span>
+
+<span class="nc" id="L223">				res.redirect(&quot;/terminales&quot;);</span>
+<span class="nc" id="L224">				return null;</span>
+			}
+		}
+		else {
+<span class="nc" id="L228">			res.redirect(&quot;/login&quot;,403);</span>
+		}
+<span class="nc" id="L230">		return null;</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

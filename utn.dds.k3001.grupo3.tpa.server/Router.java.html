@@ -34,14 +34,18 @@ import utn.dds.k3001.grupo3.tpa.controllers.TerminalesController;
 <span class="nc" id="L34">		Spark.get(&quot;/pois&quot;, terminalC::buscar,engine);</span>
 <span class="nc" id="L35">		Spark.post(&quot;/logout&quot;,loginC::logout);</span>
 <span class="nc" id="L36">		Spark.post(&quot;/pois/eliminar/:id&quot;, terminalC::eliminar);</span>
-<span class="nc" id="L37">		Spark.get(&quot;/pois/eliminar/:id&quot;,terminalC::getEliminar,engine);</span>
-<span class="nc" id="L38">		Spark.get(&quot;/pois/modificar/:id&quot;,terminalC::getModificar,engine);</span>
-<span class="nc" id="L39">		Spark.post(&quot;/pois/modificar/:id&quot;,terminalC::modificar,engine);</span>
-<span class="nc" id="L40">		Spark.get(&quot;/terminales&quot;, terminales::listar,engine);</span>
-<span class="nc" id="L41">		Spark.get(&quot;/terminales/eliminar/:id&quot;,terminales::getEliminar,engine);</span>
-<span class="nc" id="L42">		Spark.post(&quot;/terminales/eliminar/:id&quot;, terminales::eliminar);</span>
-<span class="nc" id="L43">		Spark.get(&quot;/pois/:id&quot;, terminalC::verPOI,engine);</span>
-<span class="nc" id="L44">	}</span>
+<span class="nc" id="L37">		Spark.get(&quot;/pois/:id&quot;, terminalC::verPOI,engine);</span>
+<span class="nc" id="L38">		Spark.get(&quot;/pois/eliminar/:id&quot;,terminalC::getEliminar,engine);</span>
+<span class="nc" id="L39">		Spark.get(&quot;/pois/modificar/:id&quot;,terminalC::getModificar,engine);</span>
+<span class="nc" id="L40">		Spark.post(&quot;/pois/modificar/:id&quot;,terminalC::modificar,engine);</span>
+<span class="nc" id="L41">		Spark.get(&quot;/terminales&quot;, terminales::listar,engine);</span>
+<span class="nc" id="L42">		Spark.get(&quot;/terminales/eliminar/:id&quot;,terminales::getEliminar,engine);</span>
+<span class="nc" id="L43">		Spark.post(&quot;/terminales/eliminar/:id&quot;, terminales::eliminar);</span>
+<span class="nc" id="L44">		Spark.get(&quot;/terminales/modificar/:id&quot;,terminales::getModificar,engine);</span>
+<span class="nc" id="L45">		Spark.post(&quot;/terminales/modificar/:id&quot;,terminales::modificar,engine);		</span>
+<span class="nc" id="L46">		Spark.get(&quot;/terminales/agregar&quot;,terminales::getAgregar,engine);</span>
+<span class="nc" id="L47">		Spark.post(&quot;/terminales/agregar&quot;,terminales::agregar,engine);</span>
+<span class="nc" id="L48">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

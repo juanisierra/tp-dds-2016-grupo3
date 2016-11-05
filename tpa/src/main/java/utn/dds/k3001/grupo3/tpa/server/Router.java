@@ -34,13 +34,17 @@ public class Router {
 		Spark.get("/pois", terminalC::buscar,engine);
 		Spark.post("/logout",loginC::logout);
 		Spark.post("/pois/eliminar/:id", terminalC::eliminar);
+		Spark.get("/pois/:id", terminalC::verPOI,engine);
 		Spark.get("/pois/eliminar/:id",terminalC::getEliminar,engine);
 		Spark.get("/pois/modificar/:id",terminalC::getModificar,engine);
 		Spark.post("/pois/modificar/:id",terminalC::modificar,engine);
 		Spark.get("/terminales", terminales::listar,engine);
 		Spark.get("/terminales/eliminar/:id",terminales::getEliminar,engine);
 		Spark.post("/terminales/eliminar/:id", terminales::eliminar);
-		Spark.get("/pois/:id", terminalC::verPOI,engine);
+		Spark.get("/terminales/modificar/:id",terminales::getModificar,engine);
+		Spark.post("/terminales/modificar/:id",terminales::modificar,engine);		
+		Spark.get("/terminales/agregar",terminales::getAgregar,engine);
+		Spark.post("/terminales/agregar",terminales::agregar,engine);
 	}
 
 }

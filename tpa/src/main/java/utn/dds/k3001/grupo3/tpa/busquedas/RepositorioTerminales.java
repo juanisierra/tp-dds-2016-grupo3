@@ -1,6 +1,7 @@
 package utn.dds.k3001.grupo3.tpa.busquedas;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,14 +40,24 @@ public class RepositorioTerminales implements OrigenDeTerminales{
 		return origen.obtenerTerminales();
 	}
 	
+	public List<Terminal> buscarTerminalesPorNombre(String nombre)
+	{	
+		return origen.obtenerTerminales().stream().filter(terminal -> terminal.getNombre().equals(nombre)).collect(Collectors.toList());
+	}
+	
 	public List<Terminal> buscarTerminalesPorComuna(String nombre)
 	{	
-		return origen.obtenerTerminales().stream().filter(terminal -> terminal.getComuna().getNombre().contains(nombre)).collect(Collectors.toList());
+		return origen.obtenerTerminales().stream().filter(terminal -> terminal.getComuna().getNombre().equals(nombre)).collect(Collectors.toList());
 	}
 	
 	public Terminal buscarTerminalPorId(int id)
 	{	
-		return origen.obtenerTerminales().stream().filter(terminal -> terminal.getId()==id).collect(Collectors.toList()).get(0);
+		List<Terminal> terminalesBuscadas = new LinkedList();
+		terminalesBuscadas = origen.obtenerTerminales().stream().filter(terminal -> terminal.getId()==id).collect(Collectors.toList());
+		if (terminalesBuscadas.isEmpty())
+			return null;
+		else
+			return terminalesBuscadas.get(0);
 	}
 	
 	public static void persistirEnMemoria(){

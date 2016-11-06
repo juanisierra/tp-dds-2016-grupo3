@@ -1,11 +1,11 @@
 {{#partial "contenido"}}
 
-<h1>POIS</h1>
-   <form action="/busquedas/verPois/{{id}}" method="GET"> 
-   
-   </form>
-   </div>
-
+<form action="/busquedas" method="GET">
+		<table> 
+			<tr><input class="btn btn-primary btn-lg" type="submit" value="Volver"></tr>
+		</table>
+</form>
+</div>
 
 <table class="table table-stripped">
 
@@ -29,3 +29,4 @@
 {{/partial}}
 
 {{>layoutAdmin.hbs}}
+

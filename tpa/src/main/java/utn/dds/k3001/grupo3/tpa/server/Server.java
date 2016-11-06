@@ -67,6 +67,7 @@ public class Server {
 		terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 		terminal.buscar("parada");
 		terminal.buscar("a");
+		terminal.buscar("Noencuento Nada");
 		
 		RepositorioUsuarios.instance().agregarUsuario(t);
 		RepositorioUsuarios.instance().agregarUsuario(u);

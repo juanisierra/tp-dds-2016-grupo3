@@ -9,7 +9,6 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import utn.dds.k3001.grupo3.tpa.busquedas.Busqueda;
-import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
 import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioBusquedas;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 import utn.dds.k3001.grupo3.tpa.usuarios.Usuario;
@@ -19,10 +18,10 @@ public class BusquedasController
 	public ModelAndView buscar(Request req, Response res)
 	{
 		
-		if(true ||req.session().attribute("user")!=null )   /* no valido para testear mas facil */
+		if(req.session().attribute("user")!=null )
 		{
 			Map<String, List<Busqueda>> model = new HashMap<>();
-			if(true ||( (Usuario) req.session().attribute("user")).esAdmin() )
+			if(( (Usuario) req.session().attribute("user")).esAdmin() )
 			{
 				List<Busqueda> busquedas = new LinkedList<Busqueda>();
 				String term = req.queryParams("terminal") == null? "" : req.queryParams("terminal");
@@ -62,21 +61,12 @@ public class BusquedasController
 			if(((Usuario) req.session().attribute("user")).esAdmin())
 			{
 				Map<String, List<POI>> model = new HashMap<>();
-				List<POI> pois;
-				Busqueda b = RepositorioBusquedas.getInstance().busquedaConId(Integer.parseInt (req.params("id")));
-				pois = b != null? b.getResultados() : new LinkedList<POI>();
+				List<POI> pois = RepositorioBusquedas.getInstance().buscarPoisPorId(Integer.parseInt (req.params("id")));
 				model.put("pois", pois);
-				return new ModelAndView(model, "admin/ListarPoisBuscados.hbs");
+				return new ModelAndView(model, "admin/listarPoisBuscados.hbs");
 			}	
 		} 
 		res.redirect("/login",403);
 		return null;
 	}
 }
-
-
-
-
-
-
-

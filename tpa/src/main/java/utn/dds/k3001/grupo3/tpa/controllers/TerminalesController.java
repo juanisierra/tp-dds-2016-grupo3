@@ -5,17 +5,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.*;
-
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
 import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioTerminales;
 import utn.dds.k3001.grupo3.tpa.pois.Comuna;
-import utn.dds.k3001.grupo3.tpa.pois.POI;
 import utn.dds.k3001.grupo3.tpa.usuarios.Usuario;
-import utn.dds.k3001.grupo3.tpa.usuarios.UsuarioTerminal;
 
 //TODO Abstraer recopilación de comunas y ABM de terminales al repositorio, emprolijar
 public class TerminalesController {

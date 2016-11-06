@@ -1,10 +1,13 @@
 package utn.dds.k3001.grupo3.tpa.busquedas;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+
+import utn.dds.k3001.grupo3.tpa.pois.POI;
 
 public class RepositorioBusquedas implements WithGlobalEntityManager{
 	
@@ -68,20 +71,12 @@ public class RepositorioBusquedas implements WithGlobalEntityManager{
 		return origen.getBusquedas().stream().filter(busqueda -> busqueda.getTerminal().getNombre().equals(nombreTerminal)).collect(Collectors.toList());
 	}
 	
-	public Busqueda busquedaConId(int id){
-		return origen.getBusquedas().stream().filter(b -> b.getId() == id).findAny().orElseGet(null);
+	public List<POI> buscarPoisPorId(int id){
+		return  origen.getBusquedas()
+									    .stream()
+									    .filter(busqueda -> busqueda.getId() == id)
+									    .findAny()
+									    .map(busqueda  -> busqueda.getResultados())
+									    .orElse(new LinkedList<POI>());
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

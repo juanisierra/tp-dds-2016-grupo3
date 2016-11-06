@@ -1,74 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>RepositorioBusquedas.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tpa</a> &gt; <a href="index.source.html" class="el_package">utn.dds.k3001.grupo3.tpa.busquedas</a> &gt; <span class="el_source">RepositorioBusquedas.java</span></div><h1>RepositorioBusquedas.java</h1><pre class="source lang-java linenums">package utn.dds.k3001.grupo3.tpa.busquedas;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
+import utn.dds.k3001.grupo3.tpa.pois.POI;
+
 public class RepositorioBusquedas implements WithGlobalEntityManager{
 	
-<span class="fc" id="L11">	private static final RepositorioBusquedas INSTANCE = new RepositorioBusquedas();</span>
-<span class="fc" id="L12">	private BusquedasOrigin origen = new InMemoryBusquedasOrigin();</span>
+<span class="fc" id="L14">	private static final RepositorioBusquedas INSTANCE = new RepositorioBusquedas();</span>
+<span class="fc" id="L15">	private BusquedasOrigin origen = new InMemoryBusquedasOrigin();</span>
 	
 	public static RepositorioBusquedas getInstance(){
-<span class="fc" id="L15">		return INSTANCE;</span>
+<span class="fc" id="L18">		return INSTANCE;</span>
 	}
-<span class="fc" id="L17">	private RepositorioBusquedas(){}</span>
+<span class="fc" id="L20">	private RepositorioBusquedas(){}</span>
 	
 	public Map&lt;String,List&lt;Integer&gt;&gt; busquedasParcialesPorTerminal(){	
-<span class="nc" id="L20">		return  origen.getBusquedas().stream()</span>
-<span class="nc" id="L21">				.collect(Collectors.groupingBy(busqueda -&gt; busqueda.getTerminal().getNombre(),Collectors.mapping(busqueda-&gt; busqueda.getCantidadResultados(), Collectors.toList())));</span>
+<span class="nc" id="L23">		return  origen.getBusquedas().stream()</span>
+<span class="nc" id="L24">				.collect(Collectors.groupingBy(busqueda -&gt; busqueda.getTerminal().getNombre(),Collectors.mapping(busqueda-&gt; busqueda.getCantidadResultados(), Collectors.toList())));</span>
 	}
 	
 	public Map&lt;String,Integer&gt; cantResultadosTotalesPorTerminal(){
-<span class="fc" id="L25">		return (origen.getBusquedas().stream()</span>
-<span class="fc" id="L26">				.collect(Collectors.groupingBy(busqueda -&gt; busqueda.getTerminal().getNombre(),Collectors.summingInt(busqueda-&gt; busqueda.getCantidadResultados()))));</span>
+<span class="fc" id="L28">		return (origen.getBusquedas().stream()</span>
+<span class="fc" id="L29">				.collect(Collectors.groupingBy(busqueda -&gt; busqueda.getTerminal().getNombre(),Collectors.summingInt(busqueda-&gt; busqueda.getCantidadResultados()))));</span>
 	}
 	
 	public List&lt;Busqueda&gt; getBusquedas() {
-<span class="nc" id="L30">		return origen.getBusquedas();</span>
+<span class="nc" id="L33">		return origen.getBusquedas();</span>
 	}
 	
 	public Map&lt;LocalDate,Long&gt; busquedasPorFecha(){
-<span class="fc" id="L34">		return  origen.getBusquedas().stream()</span>
-<span class="fc" id="L35">				.collect(Collectors.groupingBy(busqueda -&gt; busqueda.getFecha(), Collectors.counting()));</span>
+<span class="fc" id="L37">		return  origen.getBusquedas().stream()</span>
+<span class="fc" id="L38">				.collect(Collectors.groupingBy(busqueda -&gt; busqueda.getFecha(), Collectors.counting()));</span>
 	}
 	public void buscar(Busqueda busqueda) {
-<span class="fc" id="L38">		origen.addBusqueda(busqueda);</span>
-<span class="fc" id="L39">	}</span>
+<span class="fc" id="L41">		origen.addBusqueda(busqueda);</span>
+<span class="fc" id="L42">	}</span>
+	
 	public  void reset() {
-<span class="fc" id="L41">		origen.reset();</span>
+<span class="fc" id="L45">		origen.reset();</span>
 		
-<span class="fc" id="L43">	}</span>
+<span class="fc" id="L47">	}</span>
 	public void setInMemory() {
-<span class="nc" id="L45">		origen = new InMemoryBusquedasOrigin();</span>
-<span class="nc" id="L46">	}</span>
+<span class="nc" id="L49">		origen = new InMemoryBusquedasOrigin();</span>
+<span class="nc" id="L50">	}</span>
 	public void setPersistence() {
-<span class="nc" id="L48">		origen = new PersistenceBusquedasOrigin();</span>
-<span class="nc" id="L49">	}</span>
+<span class="nc" id="L52">		origen = new PersistenceBusquedasOrigin();</span>
+<span class="nc" id="L53">	}</span>
 	
 	public List&lt;Busqueda&gt; busquedasDesdeHasta(LocalDate desde, LocalDate hasta){
-<span class="nc" id="L52">		return origen.getBusquedas().stream().filter(busqueda -&gt; estaEntre(desde, hasta, busqueda.getFecha())).collect(Collectors.toList());</span>
+<span class="nc" id="L56">		return origen.getBusquedas().stream().filter(busqueda -&gt; busqueda.estaEntre(desde, hasta)).collect(Collectors.toList());</span>
 	}
 	
-	private boolean estaEntre(LocalDate desde, LocalDate hasta, LocalDate fecha){
-<span class="nc bnc" id="L56" title="All 4 branches missed.">		return (fecha.compareTo(desde) &gt;= 0 &amp;&amp; fecha.compareTo(hasta) &lt;=0 );</span>
+	public List&lt;POI&gt; buscarPoisPorId(int id){
+<span class="nc" id="L60">		return  origen.getBusquedas()</span>
+<span class="nc" id="L61">									    .stream()</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">									    .filter(busqueda -&gt; busqueda.getId() == id)</span>
+<span class="nc" id="L63">									    .findAny()</span>
+<span class="nc" id="L64">									    .map(busqueda  -&gt; busqueda.getResultados())</span>
+<span class="nc" id="L65">									    .orElse(new LinkedList&lt;POI&gt;());</span>
 	}
 	
-	public List&lt;Busqueda&gt; busquedasCantResultados(int cantidad){
-<span class="nc bnc" id="L60" title="All 2 branches missed.">		return origen.getBusquedas().stream().filter(busqueda -&gt; busqueda.getCantidadResultados() == cantidad).collect(Collectors.toList());</span>
-	}
-	
-	public List&lt;Busqueda&gt; busquedasTerminal(Terminal terminal){
-<span class="nc bnc" id="L64" title="All 2 branches missed.">		return origen.getBusquedas().stream().filter(busqueda -&gt; busqueda.getTerminal().getId() == terminal.getId()).collect(Collectors.toList());</span>
-	}
-	
-	public List&lt;Busqueda&gt; busquedasTerminal(String nombreTerminal){
-<span class="nc" id="L68">		return origen.getBusquedas().stream().filter(busqueda -&gt; busqueda.getTerminal().getNombre().equals(nombreTerminal)).collect(Collectors.toList());</span>
+	public List&lt;Busqueda&gt; busquedaWeb(String terminal, int cantResultados, LocalDate desde, LocalDate hasta){
+<span class="nc" id="L69">		List&lt;Busqueda&gt; resultado =   this.getBusquedas()</span>
+<span class="nc" id="L70">																					.stream()</span>
+<span class="nc" id="L71">																					.filter(busq -&gt; busq.estaEntre(desde, hasta))</span>
+<span class="nc" id="L72">																					.collect(Collectors.toList());</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">		if( !terminal.equals(&quot;&quot;))</span>
+		{
+<span class="nc" id="L75">			resultado = resultado.stream()</span>
+<span class="nc" id="L76">															.filter(busqueda -&gt; busqueda.getTerminal().getNombre().equals(terminal))</span>
+<span class="nc" id="L77">															.collect(Collectors.toList());</span>
+		}
+<span class="nc bnc" id="L79" title="All 2 branches missed.">		if(cantResultados &gt;= 0 )</span>
+		{
+<span class="nc" id="L81">			resultado = resultado.stream()</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">															.filter(busqueda -&gt; busqueda.getCantidadResultados() == cantResultados)</span>
+<span class="nc" id="L83">															.collect(Collectors.toList());</span>
+		}
+<span class="nc" id="L85">		return resultado;</span>
 	}
 }
-
 
 
 

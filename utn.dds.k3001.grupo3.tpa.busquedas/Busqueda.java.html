@@ -42,59 +42,67 @@ public class Busqueda
 	public Terminal getTerminal(){
 <span class="fc" id="L43">	return terminal;</span>
 	}
+	public List&lt;POI&gt; getResultados(){
+<span class="nc" id="L46">		return resultados;</span>
+	}
+	
 	public boolean esEnFecha(LocalDate fecha){
-<span class="nc" id="L46">		return this.fecha.equals(fecha);</span>
+<span class="nc" id="L50">		return this.fecha.equals(fecha);</span>
 	}
 	
 	public int getCantidadResultados(){
-<span class="fc" id="L50">		return this.cantResultados;</span>
+<span class="fc" id="L54">		return this.cantResultados;</span>
 	}
 	
 	public double getTiempo(){
-<span class="fc" id="L54">		return this.tiempoDemorado;</span>
+<span class="fc" id="L58">		return this.tiempoDemorado;</span>
 	}
 	
 	public LocalDate getFecha(){
-<span class="fc" id="L58">		return this.fecha;</span>
+<span class="fc" id="L62">		return this.fecha;</span>
 	}
 	public String getCriterio() {
-<span class="nc" id="L61">		return criterio;</span>
+<span class="nc" id="L65">		return criterio;</span>
 	}
 
 	public int getId() {
-<span class="nc" id="L65">		return id;</span>
+<span class="nc" id="L69">		return id;</span>
 	}
 
 	public void setId(int id) {
-<span class="nc" id="L69">		this.id = id;</span>
-<span class="nc" id="L70">	}</span>
+<span class="nc" id="L73">		this.id = id;</span>
+<span class="nc" id="L74">	}</span>
 
 	public int getCantResultados() {
-<span class="nc" id="L73">		return cantResultados;</span>
+<span class="nc" id="L77">		return cantResultados;</span>
 	}
 
 	public void setCantResultados(int cantResultados) {
-<span class="nc" id="L77">		this.cantResultados = cantResultados;</span>
-<span class="nc" id="L78">	}</span>
+<span class="nc" id="L81">		this.cantResultados = cantResultados;</span>
+<span class="nc" id="L82">	}</span>
 
 	public double getTiempoDemorado() {
-<span class="nc" id="L81">		return tiempoDemorado;</span>
+<span class="nc" id="L85">		return tiempoDemorado;</span>
 	}
 
 	public void setTiempoDemorado(double tiempoDemorado) {
-<span class="nc" id="L85">		this.tiempoDemorado = tiempoDemorado;</span>
-<span class="nc" id="L86">	}</span>
-
-	public void setCriterio(String criterio) {
-<span class="nc" id="L89">		this.criterio = criterio;</span>
+<span class="nc" id="L89">		this.tiempoDemorado = tiempoDemorado;</span>
 <span class="nc" id="L90">	}</span>
 
-	public void setFecha(LocalDate fecha) {
-<span class="nc" id="L93">		this.fecha = fecha;</span>
+	public void setCriterio(String criterio) {
+<span class="nc" id="L93">		this.criterio = criterio;</span>
 <span class="nc" id="L94">	}</span>
 
-	public void setTerminal(Terminal terminal) {
-<span class="nc" id="L97">		this.terminal = terminal;</span>
+	public void setFecha(LocalDate fecha) {
+<span class="nc" id="L97">		this.fecha = fecha;</span>
 <span class="nc" id="L98">	}</span>
+
+	public void setTerminal(Terminal terminal) {
+<span class="nc" id="L101">		this.terminal = terminal;</span>
+<span class="nc" id="L102">	}</span>
+	
+	public boolean estaEntre(LocalDate desde, LocalDate hasta){
+<span class="nc bnc" id="L105" title="All 4 branches missed.">		return (fecha.compareTo(desde) &gt;= 0 &amp;&amp; fecha.compareTo(hasta) &lt;=0 );</span>
+	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

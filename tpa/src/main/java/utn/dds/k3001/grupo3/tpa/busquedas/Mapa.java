@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.OrigenDeDatos;
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.RepositorioInterno;
+import utn.dds.k3001.grupo3.tpa.pois.Comuna;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
 public class Mapa 
@@ -29,6 +30,7 @@ public class Mapa
 	public void agregarOrigenDeDatos(OrigenDeDatos origen){
 		origenesDeDatos.add(origen);
 	}
+
 	public void agregarPoi(POI poiNvo){
 		RepositorioInterno.getInstance().agregarPoi(poiNvo);
 	}

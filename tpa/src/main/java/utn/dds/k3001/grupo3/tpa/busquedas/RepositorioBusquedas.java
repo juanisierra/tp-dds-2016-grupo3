@@ -9,6 +9,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 public class RepositorioBusquedas implements WithGlobalEntityManager{
 	
 	private static final RepositorioBusquedas INSTANCE = new RepositorioBusquedas();
+	private static int id = 0;
 	private BusquedasOrigin origen = new InMemoryBusquedasOrigin();
 	//private BusquedasOrigin origen =  new PersistenceBusquedasOrigin();
 	
@@ -36,8 +37,10 @@ public class RepositorioBusquedas implements WithGlobalEntityManager{
 				.collect(Collectors.groupingBy(busqueda -> busqueda.getFecha(), Collectors.counting()));
 	}
 	public void buscar(Busqueda busqueda) {
+		busqueda.setId(++id);
 		origen.addBusqueda(busqueda);
 	}
+	
 	public  void reset() {
 		origen.reset();
 		

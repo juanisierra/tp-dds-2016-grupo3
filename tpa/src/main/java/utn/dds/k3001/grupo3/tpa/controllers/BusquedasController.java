@@ -9,6 +9,7 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import utn.dds.k3001.grupo3.tpa.busquedas.Busqueda;
+import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
 import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioBusquedas;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 import utn.dds.k3001.grupo3.tpa.usuarios.Usuario;
@@ -55,21 +56,27 @@ public class BusquedasController
 	}
 	
 	public ModelAndView mostrarPois(Request req, Response res)
-	{
-		Map<String, List<POI>> model = new HashMap<>();
-		List<POI> pois;
-		int id = Integer.parseInt (req.params("id"));
-		Busqueda b = RepositorioBusquedas.getInstance().busquedaConId(id);
-		pois = b != null? b.getResultados() : new LinkedList<POI>();
-		model.put("pois", pois);
-		return new ModelAndView(model, "admin/ListarPoisBuscados.hbs");
+	{		
+		if(req.session().attribute("user")!=null)
+		{	
+			if(((Usuario) req.session().attribute("user")).esAdmin())
+			{
+				Map<String, List<POI>> model = new HashMap<>();
+				List<POI> pois;
+				Busqueda b = RepositorioBusquedas.getInstance().busquedaConId(Integer.parseInt (req.params("id")));
+				pois = b != null? b.getResultados() : new LinkedList<POI>();
+				model.put("pois", pois);
+				return new ModelAndView(model, "admin/ListarPoisBuscados.hbs");
+			}	
+		} 
+		res.redirect("/login",403);
+		return null;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 }
+
+
+
+
+
+
+

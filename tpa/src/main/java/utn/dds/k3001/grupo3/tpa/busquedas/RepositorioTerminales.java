@@ -13,8 +13,8 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 public class RepositorioTerminales implements OrigenDeTerminales{
 	
-	public static RepositorioTerminales INSTANCE = new RepositorioTerminales();
-	public static TerminalOrigin origen = new InMemoryTerminalOrigin();
+	private static RepositorioTerminales INSTANCE = new RepositorioTerminales();
+	private static TerminalOrigin origen = new InMemoryTerminalOrigin();
 	
 	public static RepositorioTerminales getInstance(){
 		return INSTANCE;
@@ -24,7 +24,6 @@ public class RepositorioTerminales implements OrigenDeTerminales{
 	public void agregarTerminal(Terminal terminal){
 		origen.agregarTerminal(terminal);
 	}
-	
 	public void eliminarTerminal(Terminal terminal){
 		origen.obtenerTerminales().remove(terminal);
 	}

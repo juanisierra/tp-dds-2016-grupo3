@@ -15,8 +15,8 @@ import org.uqbar.geodds.Point;
 public class PersistablePoint extends Point implements Serializable{
 	@Id @GeneratedValue
 	private int id;
-  private BigDecimal x;
-  private BigDecimal y;
+	private BigDecimal x;
+	private BigDecimal y;
   
   public PersistablePoint(final int aX, final int aY) {
 	super(aX,aY);
@@ -48,24 +48,8 @@ public class PersistablePoint extends Point implements Serializable{
     return new PersistablePoint(aX, aY);
   }
 
-  public double latitude() {
-    return this.x.doubleValue();
-  }
-
-  public double longitude() {
-    return this.y.doubleValue();
-  }
-
   public double distance(final PersistablePoint anotherPoint) {
 	 return super.distance(anotherPoint);
-  }
-
-  public double toRadian(final double angle) {
-    return ((Math.PI * angle) / 180.0);
-  }
-
-  public double toDegree(final double angle) {
-    return (angle * (180.0 / Math.PI));
   }
 
   @Override

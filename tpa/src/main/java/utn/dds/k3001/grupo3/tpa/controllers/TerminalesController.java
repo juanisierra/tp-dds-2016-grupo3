@@ -10,6 +10,7 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
+import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioComunas;
 import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioTerminales;
 import utn.dds.k3001.grupo3.tpa.pois.Comuna;
@@ -32,12 +33,7 @@ public class TerminalesController {
 				List<Terminal> terminales = new LinkedList<Terminal>();
 				List<Comuna> comunas = new LinkedList<Comuna>();
 				comunas.add(new Comuna("Cualquiera"));
-				terminales.addAll(RepositorioTerminales.getInstance().obtenerTerminales());
-				for (Terminal terminal : terminales){ //Obtener todas las comunas de las terminales
-					if(!comunas.contains(terminal.getComuna()))
-						comunas.add(terminal.getComuna());
-				}
-				terminales.clear();
+				comunas.addAll(RepositorioComunas.getInstance().getComunas());
 				model.put("comunas", comunas);
 				
 				if(req.queryParams("nombre")!=null && !req.queryParams("nombre").isEmpty())
@@ -105,17 +101,8 @@ public class TerminalesController {
 				return null;
 			}
 			else {
-				List<Terminal> terminales = new LinkedList<Terminal>();
-				List<Comuna> comunas = new LinkedList<Comuna>();
-				comunas.add(new Comuna("Cualquiera"));
-				terminales.addAll(RepositorioTerminales.getInstance().obtenerTerminales());
-				for (Terminal term : terminales){ //Obtener todas las comunas de las terminales
-					if(!comunas.contains(term.getComuna()))
-						comunas.add(term.getComuna());
-				}
-				terminales.clear();
 				Map<String, Object> model = new HashMap<>();
-				model.put("comunas", comunas);
+				model.put("comunas", RepositorioComunas.getInstance().getComunas());
 				model.put("terminal", RepositorioTerminales.getInstance().buscarTerminalPorId(Integer.parseInt(req.params("id"))));
 				return new ModelAndView(model, "admin/modificarTerminal.hbs");
 			}
@@ -135,25 +122,21 @@ public class TerminalesController {
 				return null;
 			}
 			else {
+				if (req.params("id") == null || req.queryParams("nombre")==null || req.queryParams("nombre").isEmpty()){
+					res.redirect("/terminales");
+					return null;
+				}
 				Terminal terminalAModificar = RepositorioTerminales.getInstance().buscarTerminalPorId(Integer.parseInt(req.params("id")));
 				List<Terminal> terminalesEncontradas = RepositorioTerminales.getInstance().buscarTerminalesPorNombre(req.queryParams("nombre"));
-				if (!terminalesEncontradas.isEmpty()){
+				if (!terminalesEncontradas.isEmpty() && !terminalesEncontradas.get(0).getNombre().equals(req.queryParams("nombre"))){
 					res.redirect("/login",403);
 					return null;
 				}
-				terminalAModificar.setNombre(req.queryParams("nombre"));
-				
-				List<Terminal> terminales = new LinkedList<Terminal>();
-				List<Comuna> comunas = new LinkedList<Comuna>();
-				terminales.addAll(RepositorioTerminales.getInstance().obtenerTerminales());
-				for (Terminal term : terminales){ //Obtener todas las comunas de las terminales
-					if(!comunas.contains(term.getComuna()))
-						comunas.add(term.getComuna());
+				List<Comuna> comunasEncontradas = RepositorioComunas.getInstance().buscarComunasPorNombre(req.queryParams("comuna"));
+				if (!comunasEncontradas.isEmpty()){
+					terminalAModificar.setNombre(req.queryParams("nombre"));
+					terminalAModificar.setComuna(comunasEncontradas.get(0));
 				}
-				terminales.clear();
-				
-				Comuna comunaSeleccionada = comunas.stream().filter(com -> com.getNombre().equals(req.queryParams("comuna"))).collect(Collectors.toList()).get(0);
-				terminalAModificar.setComuna(comunaSeleccionada);
 				res.redirect("/terminales");
 				return null;
 			}
@@ -172,17 +155,8 @@ public class TerminalesController {
 				return null;
 			}
 			else {
-				List<Terminal> terminales = new LinkedList<Terminal>();
-				List<Comuna> comunas = new LinkedList<Comuna>();
-				comunas.add(new Comuna("Cualquiera"));
-				terminales.addAll(RepositorioTerminales.getInstance().obtenerTerminales());
-				for (Terminal term : terminales){ //Obtener todas las comunas de las terminales
-					if(!comunas.contains(term.getComuna()))
-						comunas.add(term.getComuna());
-				}
-				terminales.clear();
 				Map<String, List<Comuna>> model = new HashMap<>();
-				model.put("comunas", comunas);
+				model.put("comunas", RepositorioComunas.getInstance().getComunas());
 				return new ModelAndView(model, "admin/agregarTerminal.hbs");
 			}
 		}
@@ -200,26 +174,25 @@ public class TerminalesController {
 				res.redirect("/login", 403);
 				return null;
 			}
-			else { //Verifico que no haya terminales con igual nombre y lo agrego en memoria
-				List<Terminal> terminalesEncontradas = RepositorioTerminales.getInstance().buscarTerminalesPorNombre(req.params("nombre"));
-				if (!terminalesEncontradas.isEmpty()){
+			else {
+				if (req.queryParams("nombre")==null || req.queryParams("nombre").isEmpty()){
+					res.redirect("/terminales");
+					return null;
+				}
+				//Verifico que no haya terminales con igual nombre y lo agrego en memoria
+				List<Terminal> terminalesEncontradas = new LinkedList<Terminal>();
+				terminalesEncontradas.addAll(RepositorioTerminales.getInstance().buscarTerminalesPorNombre(req.queryParams("nombre")));
+				if (!(terminalesEncontradas.isEmpty())){
 					res.redirect("/login",403);
 					return null;
 				}
 				Terminal terminal = new Terminal();
 				terminal.setNombre(req.queryParams("nombre"));
-				List<Terminal> terminales = new LinkedList<Terminal>();
-				List<Comuna> comunas = new LinkedList<Comuna>();
-				terminales.addAll(RepositorioTerminales.getInstance().obtenerTerminales());
-				for (Terminal term : terminales){ //Obtener todas las comunas de las terminales
-					if(!comunas.contains(term.getComuna()))
-						comunas.add(term.getComuna());
+				List<Comuna> comunasEncontradas = RepositorioComunas.getInstance().buscarComunasPorNombre(req.queryParams("comuna"));
+				if (!comunasEncontradas.isEmpty()){
+					terminal.setComuna(comunasEncontradas.get(0));
+					RepositorioTerminales.getInstance().agregarTerminal(terminal);
 				}
-				terminales.clear();
-				Comuna comunaSeleccionada = comunas.stream().filter(com -> com.getNombre().equals(req.queryParams("comuna"))).collect(Collectors.toList()).get(0);
-				terminal.setComuna(comunaSeleccionada);
-				RepositorioTerminales.getInstance().agregarTerminal(terminal);
-
 				res.redirect("/terminales");
 				return null;
 			}

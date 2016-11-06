@@ -6,6 +6,7 @@ import java.util.Arrays;
 import spark.Spark;
 import spark.debug.DebugScreen;
 import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
+import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioComunas;
 import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioTerminales;
 import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 import utn.dds.k3001.grupo3.tpa.geo.PersistablePoint;
@@ -27,7 +28,8 @@ public class Server {
 		
 		Comuna comuna1 = new Comuna("Montecastro",Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));
 		Comuna comuna2 = new Comuna("Caballito",Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));
-		
+		RepositorioComunas.getInstance().agregarComuna(comuna1);
+		RepositorioComunas.getInstance().agregarComuna(comuna2);
 		Terminal terminal1 = new Terminal("Terminal 1",Mapa.getInstance(),comuna1);
 		Terminal terminal2 = new Terminal("Terminal 2",Mapa.getInstance(),comuna2);
 		RepositorioTerminales.getInstance().agregarTerminal(terminal1);

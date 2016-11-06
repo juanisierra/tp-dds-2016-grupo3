@@ -9,37 +9,35 @@ import utn.dds.k3001.grupo3.tpa.usuarios.RepositorioUsuarios;
 
 <span class="nc" id="L10">public class LoginController {</span>
 	public ModelAndView mostrarLogin(Request req, Response res){
-<span class="nc" id="L12">		Map&lt;String,String&gt; model = new HashMap&lt;&gt;();</span>
-		
-<span class="nc" id="L14">		return new ModelAndView(null, &quot;login/login.hbs&quot;);</span>
+<span class="nc" id="L12">		return new ModelAndView(null, &quot;login/login.hbs&quot;);</span>
 	}
 	public ModelAndView iniciarSesion(Request req, Response res){
-<span class="nc" id="L17">		String id_usuario = req.queryParams(&quot;usuario&quot;);</span>
-<span class="nc" id="L18">		String contrasenia = req.queryParams(&quot;contrasenia&quot;);</span>
-<span class="nc" id="L19">		req.session().removeAttribute(&quot;user&quot;);</span>
-<span class="nc bnc" id="L20" title="All 2 branches missed.">		if(!RepositorioUsuarios.instance().validarUsuario(id_usuario, contrasenia))</span>
+<span class="nc" id="L15">		String id_usuario = req.queryParams(&quot;usuario&quot;);</span>
+<span class="nc" id="L16">		String contrasenia = req.queryParams(&quot;contrasenia&quot;);</span>
+<span class="nc" id="L17">		req.session().removeAttribute(&quot;user&quot;);</span>
+<span class="nc bnc" id="L18" title="All 2 branches missed.">		if(!RepositorioUsuarios.instance().validarUsuario(id_usuario, contrasenia))</span>
 		{
-<span class="nc" id="L22">			Map&lt;String,String&gt; model = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L23">			model.put(&quot;error&quot;,&quot;Error: El usuario o la contraseña no son validos&quot;);</span>
-<span class="nc" id="L24">			return new ModelAndView(model, &quot;login/login.hbs&quot;);</span>
+<span class="nc" id="L20">			Map&lt;String,String&gt; model = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L21">			model.put(&quot;error&quot;,&quot;Error: El usuario o la contraseña no son validos&quot;);</span>
+<span class="nc" id="L22">			return new ModelAndView(model, &quot;login/login.hbs&quot;);</span>
 		} else {
-<span class="nc" id="L26">			req.session().attribute(&quot;user&quot;,RepositorioUsuarios.instance().getUsuario(id_usuario));</span>
-<span class="nc bnc" id="L27" title="All 2 branches missed.">		if(RepositorioUsuarios.instance().getUsuario(id_usuario).esAdmin()){</span>
+<span class="nc" id="L24">			req.session().attribute(&quot;user&quot;,RepositorioUsuarios.instance().getUsuario(id_usuario));</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">		if(RepositorioUsuarios.instance().getUsuario(id_usuario).esAdmin()){</span>
 			
-<span class="nc" id="L29">			res.redirect(&quot;/pois&quot;);</span>
+<span class="nc" id="L27">			res.redirect(&quot;/pois&quot;);</span>
 			
-<span class="nc" id="L31">			return null;</span>
+<span class="nc" id="L29">			return null;</span>
 		}
 		else {
-<span class="nc" id="L34">			res.redirect(&quot;/pois&quot;);</span>
-<span class="nc" id="L35">			return null;</span>
+<span class="nc" id="L32">			res.redirect(&quot;/pois&quot;);</span>
+<span class="nc" id="L33">			return null;</span>
 		}
 		} 
 	}
 		public Void logout(Request req, Response res){
-<span class="nc" id="L40">			req.session().removeAttribute(&quot;user&quot;);</span>
-<span class="nc" id="L41">			res.redirect(&quot;/login&quot;);</span>
-<span class="nc" id="L42">			return null;</span>
+<span class="nc" id="L38">			req.session().removeAttribute(&quot;user&quot;);</span>
+<span class="nc" id="L39">			res.redirect(&quot;/login&quot;);</span>
+<span class="nc" id="L40">			return null;</span>
 		}
 	
 }

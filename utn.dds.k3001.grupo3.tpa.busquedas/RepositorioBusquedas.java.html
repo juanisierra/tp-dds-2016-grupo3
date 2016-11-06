@@ -43,58 +43,41 @@ public class RepositorioBusquedas implements WithGlobalEntityManager{
 	
 	public  void reset() {
 <span class="fc" id="L45">		origen.reset();</span>
-		
-<span class="fc" id="L47">	}</span>
+<span class="fc" id="L46">	}</span>
 	public void setInMemory() {
-<span class="nc" id="L49">		origen = new InMemoryBusquedasOrigin();</span>
-<span class="nc" id="L50">	}</span>
+<span class="nc" id="L48">		origen = new InMemoryBusquedasOrigin();</span>
+<span class="nc" id="L49">	}</span>
 	public void setPersistence() {
-<span class="nc" id="L52">		origen = new PersistenceBusquedasOrigin();</span>
-<span class="nc" id="L53">	}</span>
-	
-	public List&lt;Busqueda&gt; busquedasDesdeHasta(LocalDate desde, LocalDate hasta){
-<span class="nc" id="L56">		return origen.getBusquedas().stream().filter(busqueda -&gt; busqueda.estaEntre(desde, hasta)).collect(Collectors.toList());</span>
-	}
+<span class="nc" id="L51">		origen = new PersistenceBusquedasOrigin();</span>
+<span class="nc" id="L52">	}</span>
 	
 	public List&lt;POI&gt; buscarPoisPorId(int id){
-<span class="nc" id="L60">		return  origen.getBusquedas()</span>
-<span class="nc" id="L61">									    .stream()</span>
-<span class="nc bnc" id="L62" title="All 2 branches missed.">									    .filter(busqueda -&gt; busqueda.getId() == id)</span>
-<span class="nc" id="L63">									    .findAny()</span>
-<span class="nc" id="L64">									    .map(busqueda  -&gt; busqueda.getResultados())</span>
-<span class="nc" id="L65">									    .orElse(new LinkedList&lt;POI&gt;());</span>
+<span class="nc" id="L55">		return  origen.getBusquedas()</span>
+<span class="nc" id="L56">									    .stream()</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">									    .filter(busqueda -&gt; busqueda.getId() == id)</span>
+<span class="nc" id="L58">									    .findAny()</span>
+<span class="nc" id="L59">									    .map(busqueda  -&gt; busqueda.getResultados())</span>
+<span class="nc" id="L60">									    .orElse(new LinkedList&lt;POI&gt;());</span>
 	}
 	
 	public List&lt;Busqueda&gt; busquedaWeb(String terminal, int cantResultados, LocalDate desde, LocalDate hasta){
-<span class="nc" id="L69">		List&lt;Busqueda&gt; resultado =   this.getBusquedas()</span>
-<span class="nc" id="L70">																					.stream()</span>
-<span class="nc" id="L71">																					.filter(busq -&gt; busq.estaEntre(desde, hasta))</span>
-<span class="nc" id="L72">																					.collect(Collectors.toList());</span>
-<span class="nc bnc" id="L73" title="All 2 branches missed.">		if( !terminal.equals(&quot;&quot;))</span>
+<span class="nc" id="L64">		List&lt;Busqueda&gt; resultado =   this.getBusquedas()</span>
+<span class="nc" id="L65">																					.stream()</span>
+<span class="nc" id="L66">																					.filter(busq -&gt; busq.estaEntre(desde, hasta))</span>
+<span class="nc" id="L67">																					.collect(Collectors.toList());</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">		if( !terminal.equals(&quot;&quot;))</span>
 		{
-<span class="nc" id="L75">			resultado = resultado.stream()</span>
-<span class="nc" id="L76">															.filter(busqueda -&gt; busqueda.getTerminal().getNombre().equals(terminal))</span>
-<span class="nc" id="L77">															.collect(Collectors.toList());</span>
+<span class="nc" id="L70">			resultado = resultado.stream()</span>
+<span class="nc" id="L71">															.filter(busqueda -&gt; busqueda.esDeTerminal(terminal))</span>
+<span class="nc" id="L72">															.collect(Collectors.toList());</span>
 		}
-<span class="nc bnc" id="L79" title="All 2 branches missed.">		if(cantResultados &gt;= 0 )</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">		if(cantResultados &gt;= 0 )</span>
 		{
-<span class="nc" id="L81">			resultado = resultado.stream()</span>
-<span class="nc bnc" id="L82" title="All 2 branches missed.">															.filter(busqueda -&gt; busqueda.getCantidadResultados() == cantResultados)</span>
-<span class="nc" id="L83">															.collect(Collectors.toList());</span>
+<span class="nc" id="L76">			resultado = resultado.stream()</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">															.filter(busqueda -&gt; busqueda.getCantidadResultados() == cantResultados)</span>
+<span class="nc" id="L78">															.collect(Collectors.toList());</span>
 		}
-<span class="nc" id="L85">		return resultado;</span>
+<span class="nc" id="L80">		return resultado;</span>
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

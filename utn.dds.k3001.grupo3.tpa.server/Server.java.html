@@ -65,16 +65,18 @@ import utn.dds.k3001.grupo3.tpa.usuarios.UsuarioTerminal;
 <span class="nc" id="L65">		Mapa.getInstance().agregarPoi(libreriaYenny);</span>
 <span class="nc" id="L66">		Mapa.getInstance().agregarPoi(cgp1);</span>
 		
-<span class="nc" id="L68">		Terminal terminal = new Terminal(&quot;miTerminal&quot;, Mapa.getInstance());   //para que haya datos que mostrar, dsp se borra</span>
+<span class="nc" id="L68">		Terminal terminal = new Terminal(&quot;miTerminal&quot;, Mapa.getInstance());   //para que haya datos que mostrar</span>
 <span class="nc" id="L69">		terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);</span>
-<span class="nc" id="L70">		terminal.buscar(&quot;parada&quot;);</span>
-<span class="nc" id="L71">		terminal.buscar(&quot;a&quot;);</span>
-<span class="nc" id="L72">		terminal.buscar(&quot;Noencuento Nada&quot;);</span>
+<span class="nc" id="L70">		terminal.setComuna(new Comuna(&quot;la plaza de lo pibe&quot;));</span>
+<span class="nc" id="L71">		RepositorioTerminales.getInstance().agregarTerminal(terminal);</span>
+<span class="nc" id="L72">		terminal.buscar(&quot;parada&quot;);</span>
+<span class="nc" id="L73">		terminal.buscar(&quot;a&quot;);</span>
+<span class="nc" id="L74">		terminal.buscar(&quot;Noencuento Nada&quot;);</span>
 		
-<span class="nc" id="L74">		RepositorioUsuarios.instance().agregarUsuario(t);</span>
-<span class="nc" id="L75">		RepositorioUsuarios.instance().agregarUsuario(u);</span>
-<span class="nc" id="L76">		DebugScreen.enableDebugScreen();</span>
-<span class="nc" id="L77">		Router.configure();</span>
-<span class="nc" id="L78">	}</span>
+<span class="nc" id="L76">		RepositorioUsuarios.instance().agregarUsuario(t);</span>
+<span class="nc" id="L77">		RepositorioUsuarios.instance().agregarUsuario(u);</span>
+<span class="nc" id="L78">		DebugScreen.enableDebugScreen();</span>
+<span class="nc" id="L79">		Router.configure();</span>
+<span class="nc" id="L80">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

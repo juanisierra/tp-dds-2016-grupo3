@@ -8,46 +8,44 @@ import java.io.ObjectOutputStream;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
-
 import redis.clients.jedis.Jedis;
-import utn.dds.k3001.grupo3.tpa.pois.Banco;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
 public class OrigenSistemaExternoConCache&lt;T&gt; implements OrigenDeDatos {
 	
 	private OrigenDeDatos origen;
-<span class="nc" id="L19">	private LocalDateTime ultimaActualizacion = LocalDateTime.of(1,1,1,0,0,0);</span>
+<span class="nc" id="L17">	private LocalDateTime ultimaActualizacion = LocalDateTime.of(1,1,1,0,0,0);</span>
 	private int horasRefresh;
 	private Jedis jedis;
 	private String nombreClase;
 	
-<span class="nc" id="L24">	public OrigenSistemaExternoConCache(OrigenDeDatos origen,String nombreClase,int horasActualizacion) {</span>
-<span class="nc" id="L25">		this.origen = origen;</span>
-<span class="nc" id="L26">		this.jedis = new Jedis(&quot;localhost&quot;);</span>
-<span class="nc" id="L27">		this.nombreClase = nombreClase;</span>
-<span class="nc" id="L28">		this.horasRefresh = horasActualizacion;</span>
-<span class="nc" id="L29">	}</span>
+<span class="nc" id="L22">	public OrigenSistemaExternoConCache(OrigenDeDatos origen,String nombreClase,int horasActualizacion) {</span>
+<span class="nc" id="L23">		this.origen = origen;</span>
+<span class="nc" id="L24">		this.jedis = new Jedis(&quot;localhost&quot;);</span>
+<span class="nc" id="L25">		this.nombreClase = nombreClase;</span>
+<span class="nc" id="L26">		this.horasRefresh = horasActualizacion;</span>
+<span class="nc" id="L27">	}</span>
 	@Override
 	public List&lt;POI&gt; buscar(String criterio) throws IOException, ClassNotFoundException {
-<span class="nc bnc" id="L32" title="All 4 branches missed.">		if(ultimaActualizacion.plusHours(horasRefresh).isBefore(LocalDateTime.now()) || ultimaActualizacion.equals(LocalDateTime.of(1,1,1,0,0,0))) {</span>
-<span class="nc" id="L33">			ultimaActualizacion = LocalDateTime.now();</span>
-<span class="nc" id="L34">			ByteArrayOutputStream byteArray = new ByteArrayOutputStream();</span>
-<span class="nc" id="L35">			ObjectOutputStream out = new ObjectOutputStream(byteArray);</span>
-<span class="nc" id="L36">			List&lt;POI&gt; pois = origen.buscar(&quot;&quot;);</span>
-<span class="nc" id="L37">			List&lt;T&gt; listaT= new LinkedList&lt;T&gt;();</span>
-<span class="nc" id="L38">			pois.stream().forEach(t -&gt; listaT.add((T) t) );;</span>
-<span class="nc" id="L39">	        out.writeObject(listaT);</span>
-<span class="nc" id="L40">	        out.close();</span>
-<span class="nc" id="L41">	        String serializado = byteArray.toString(&quot;ISO-8859-1&quot;);</span>
-<span class="nc" id="L42">	        jedis.set(nombreClase, serializado);</span>
-<span class="nc" id="L43">	        return  (List&lt;POI&gt;) listaT;</span>
+<span class="nc bnc" id="L30" title="All 4 branches missed.">		if(ultimaActualizacion.plusHours(horasRefresh).isBefore(LocalDateTime.now()) || ultimaActualizacion.equals(LocalDateTime.of(1,1,1,0,0,0))) {</span>
+<span class="nc" id="L31">			ultimaActualizacion = LocalDateTime.now();</span>
+<span class="nc" id="L32">			ByteArrayOutputStream byteArray = new ByteArrayOutputStream();</span>
+<span class="nc" id="L33">			ObjectOutputStream out = new ObjectOutputStream(byteArray);</span>
+<span class="nc" id="L34">			List&lt;POI&gt; pois = origen.buscar(&quot;&quot;);</span>
+<span class="nc" id="L35">			List&lt;T&gt; listaT= new LinkedList&lt;T&gt;();</span>
+<span class="nc" id="L36">			pois.stream().forEach(t -&gt; listaT.add((T) t) );;</span>
+<span class="nc" id="L37">	        out.writeObject(listaT);</span>
+<span class="nc" id="L38">	        out.close();</span>
+<span class="nc" id="L39">	        String serializado = byteArray.toString(&quot;ISO-8859-1&quot;);</span>
+<span class="nc" id="L40">	        jedis.set(nombreClase, serializado);</span>
+<span class="nc" id="L41">	        return  (List&lt;POI&gt;) listaT;</span>
 		} else {
-<span class="nc" id="L45">	        String value = jedis.get(nombreClase);</span>
-<span class="nc" id="L46">	        ByteArrayInputStream entrada = new ByteArrayInputStream(value.getBytes(&quot;ISO-8859-1&quot;));</span>
-<span class="nc" id="L47">	        ObjectInputStream in = new ObjectInputStream(entrada);</span>
-<span class="nc" id="L48">	        List&lt;POI&gt; elementosTraidos = (List&lt;POI&gt;) in.readObject();</span>
-<span class="nc" id="L49">	        in.close();</span>
-<span class="nc" id="L50">	        return elementosTraidos;</span>
+<span class="nc" id="L43">	        String value = jedis.get(nombreClase);</span>
+<span class="nc" id="L44">	        ByteArrayInputStream entrada = new ByteArrayInputStream(value.getBytes(&quot;ISO-8859-1&quot;));</span>
+<span class="nc" id="L45">	        ObjectInputStream in = new ObjectInputStream(entrada);</span>
+<span class="nc" id="L46">	        List&lt;POI&gt; elementosTraidos = (List&lt;POI&gt;) in.readObject();</span>
+<span class="nc" id="L47">	        in.close();</span>
+<span class="nc" id="L48">	        return elementosTraidos;</span>
 		}
 		}
 	}

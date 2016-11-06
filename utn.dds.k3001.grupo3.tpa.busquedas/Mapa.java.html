@@ -4,72 +4,70 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.OrigenDeDatos;
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.RepositorioInterno;
-import utn.dds.k3001.grupo3.tpa.pois.Comuna;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
 public class Mapa 
 {
 	private List&lt;OrigenDeDatos&gt; origenesDeDatos;
-<span class="fc" id="L16">	private final static Mapa INSTANCE = new Mapa();</span>
+<span class="fc" id="L14">	private final static Mapa INSTANCE = new Mapa();</span>
 	
-<span class="fc" id="L18">	private Mapa(){</span>
-<span class="fc" id="L19">		this.origenesDeDatos = new LinkedList&lt;OrigenDeDatos&gt;();</span>
-<span class="fc" id="L20">		this.origenesDeDatos.add(RepositorioInterno.getInstance());</span>
-<span class="fc" id="L21">	}</span>
+<span class="fc" id="L16">	private Mapa(){</span>
+<span class="fc" id="L17">		this.origenesDeDatos = new LinkedList&lt;OrigenDeDatos&gt;();</span>
+<span class="fc" id="L18">		this.origenesDeDatos.add(RepositorioInterno.getInstance());</span>
+<span class="fc" id="L19">	}</span>
 	public  void resetMapa() {
-<span class="fc" id="L23">		this.origenesDeDatos.clear();</span>
-<span class="fc" id="L24">		this.origenesDeDatos.add(RepositorioInterno.getInstance());</span>
-<span class="fc" id="L25">		RepositorioInterno.reset();</span>
-<span class="fc" id="L26">	}</span>
+<span class="fc" id="L21">		this.origenesDeDatos.clear();</span>
+<span class="fc" id="L22">		this.origenesDeDatos.add(RepositorioInterno.getInstance());</span>
+<span class="fc" id="L23">		RepositorioInterno.reset();</span>
+<span class="fc" id="L24">	}</span>
 	public static Mapa getInstance() {
-<span class="fc" id="L28">		return INSTANCE;</span>
+<span class="fc" id="L26">		return INSTANCE;</span>
 	}
 	public void agregarOrigenDeDatos(OrigenDeDatos origen){
-<span class="fc" id="L31">		origenesDeDatos.add(origen);</span>
-<span class="fc" id="L32">	}</span>
+<span class="fc" id="L29">		origenesDeDatos.add(origen);</span>
+<span class="fc" id="L30">	}</span>
 
 	public void agregarPoi(POI poiNvo){
-<span class="fc" id="L35">		RepositorioInterno.getInstance().agregarPoi(poiNvo);</span>
-<span class="fc" id="L36">	}</span>
+<span class="fc" id="L33">		RepositorioInterno.getInstance().agregarPoi(poiNvo);</span>
+<span class="fc" id="L34">	}</span>
 	public void eliminarPoi(POI poiAEliminar){
-<span class="fc" id="L38">		RepositorioInterno.getInstance().eliminarPoi(poiAEliminar);</span>
-<span class="fc" id="L39">	}</span>
+<span class="fc" id="L36">		RepositorioInterno.getInstance().eliminarPoi(poiAEliminar);</span>
+<span class="fc" id="L37">	}</span>
 	public List&lt;POI&gt; buscar(String criterio){
-<span class="fc" id="L41">		return origenesDeDatos.stream()</span>
-<span class="fc" id="L42">							  .flatMap(origen -&gt; {</span>
+<span class="fc" id="L39">		return origenesDeDatos.stream()</span>
+<span class="fc" id="L40">							  .flatMap(origen -&gt; {</span>
 								try {
-<span class="fc" id="L44">									return origen.buscar(criterio).stream();</span>
-<span class="nc" id="L45">								} catch (ClassNotFoundException | IOException e) {</span>
+<span class="fc" id="L42">									return origen.buscar(criterio).stream();</span>
+<span class="nc" id="L43">								} catch (ClassNotFoundException | IOException e) {</span>
 									
-<span class="nc" id="L47">									e.printStackTrace();</span>
+<span class="nc" id="L45">									e.printStackTrace();</span>
 								}
-<span class="nc" id="L49">								return new LinkedList&lt;POI&gt;().stream();</span>
+<span class="nc" id="L47">								return new LinkedList&lt;POI&gt;().stream();</span>
 							})
-<span class="fc" id="L51">							  .collect(Collectors.toList());</span>
+<span class="fc" id="L49">							  .collect(Collectors.toList());</span>
 	}
 	public List&lt;POI&gt; buscar(String criterio,String clase){
-<span class="nc" id="L54">		return origenesDeDatos.stream()</span>
-<span class="nc" id="L55">							  .flatMap(origen -&gt; {</span>
+<span class="nc" id="L52">		return origenesDeDatos.stream()</span>
+<span class="nc" id="L53">							  .flatMap(origen -&gt; {</span>
 								try {
-<span class="nc" id="L57">									return origen.buscar(criterio).stream();</span>
-<span class="nc" id="L58">								} catch (ClassNotFoundException | IOException e) {</span>
+<span class="nc" id="L55">									return origen.buscar(criterio).stream();</span>
+<span class="nc" id="L56">								} catch (ClassNotFoundException | IOException e) {</span>
 									
-<span class="nc" id="L60">									e.printStackTrace();</span>
+<span class="nc" id="L58">									e.printStackTrace();</span>
 								}
-<span class="nc" id="L62">								return new LinkedList&lt;POI&gt;().stream();</span>
-<span class="nc" id="L63">							}).filter(elem -&gt; elem.getClass().getName().contains(clase))</span>
-<span class="nc" id="L64">							  .collect(Collectors.toList());</span>
+<span class="nc" id="L60">								return new LinkedList&lt;POI&gt;().stream();</span>
+<span class="nc" id="L61">							}).filter(elem -&gt; elem.getClass().getName().contains(clase))</span>
+<span class="nc" id="L62">							  .collect(Collectors.toList());</span>
 	}
 	public void eliminarPorId(String id)
 	{
-<span class="nc" id="L68">		RepositorioInterno.getInstance().eliminarPoiPorNumero(Long.parseLong(id));</span>
-<span class="nc" id="L69">	}</span>
+<span class="nc" id="L66">		RepositorioInterno.getInstance().eliminarPoiPorNumero(Long.parseLong(id));</span>
+<span class="nc" id="L67">	}</span>
 	public POI getById(String id)
 	{
-<span class="nc bnc" id="L72" title="All 2 branches missed.">		return RepositorioInterno.getInstance().getAllPOIS().stream().filter(poi -&gt; poi.getID()==Long.parseLong(id)).findFirst().get();</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">		return RepositorioInterno.getInstance().getAllPOIS().stream().filter(poi -&gt; poi.getID()==Long.parseLong(id)).findFirst().get();</span>
 	}
 	
 }

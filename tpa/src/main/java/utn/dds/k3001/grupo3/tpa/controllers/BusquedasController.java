@@ -1,10 +1,9 @@
 package utn.dds.k3001.grupo3.tpa.controllers;
 
+import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -17,35 +16,17 @@ public class BusquedasController
 {
 	public ModelAndView buscar(Request req, Response res)
 	{
-		
 		if(req.session().attribute("user")!=null )
 		{
-			Map<String, List<Busqueda>> model = new HashMap<>();
 			if(( (Usuario) req.session().attribute("user")).esAdmin() )
 			{
-				List<Busqueda> busquedas = new LinkedList<Busqueda>();
-				String term = req.queryParams("terminal") == null? "" : req.queryParams("terminal");
-				int cantResult = (req.queryParams("cantResultados") == null || req.queryParams("cantResultados").equals(""))? -1 : Integer.parseInt(req.queryParams("cantResultados"));
-				if(term.equals("") && cantResult == -1)
-				{
-					busquedas.addAll(RepositorioBusquedas.getInstance().getBusquedas());
-				}
-				else 	if( !term.equals("") && cantResult == -1)
-				{
-					busquedas.addAll(RepositorioBusquedas.getInstance().busquedasTerminal(req.queryParams("terminal")));
-				}
-				else if( term.equals("") && cantResult!= -1)
-				{
-					busquedas.addAll(RepositorioBusquedas.getInstance().busquedasCantResultados(cantResult));
-				}
-				else if(!term.equals("") && cantResult != -1)
-				{
-					busquedas.addAll(RepositorioBusquedas.getInstance()
-																												 .getBusquedas()
-																												 .stream()
-																												 .filter(b -> b.getCantidadResultados() == cantResult 
-																												                        && b.getTerminal().getNombre() .equals(term)).collect(Collectors.toList()));
-				}
+				String terminal = req.queryParams("terminal") == null? "" : req.queryParams("terminal");
+				int cantResultados = (req.queryParams("cantResultados") == null || req.queryParams("cantResultados").equals(""))? -1 : Integer.parseInt(req.queryParams("cantResultados"));
+				LocalDate desde =( req.queryParams("desde") == null ||  req.queryParams("desde").equals("") ) ? LocalDate.of(2000,1,1) : parsearFecha( req.queryParams("desde"));
+				LocalDate hasta = (req.queryParams("hasta") == null || req.queryParams("hasta").equals("")  ) ? LocalDate.now() : parsearFecha( req.queryParams("hasta"));
+				
+				List<Busqueda> busquedas = RepositorioBusquedas.getInstance().busquedaWeb(terminal, cantResultados, desde, hasta);
+				Map<String, List<Busqueda>> model = new HashMap<>();
 				model.put("busquedas", busquedas);
 				return new ModelAndView(model, "admin/ListarBusquedas.hbs");
 			} 
@@ -68,5 +49,13 @@ public class BusquedasController
 		} 
 		res.redirect("/login",403);
 		return null;
+	}
+	
+	private LocalDate parsearFecha(String fechaString)
+	{
+		int dia =Integer.parseInt (fechaString.substring(0 ,2)) ;
+		int mes =Integer.parseInt (fechaString.substring(3, 5)) ;
+		int anio =Integer.parseInt (fechaString.substring(6,10)) ;
+		return LocalDate.of(anio, mes, dia);
 	}
 }

@@ -12,9 +12,7 @@ import utn.dds.k3001.grupo3.tpa.pois.POI;
 public class RepositorioBusquedas implements WithGlobalEntityManager{
 	
 	private static final RepositorioBusquedas INSTANCE = new RepositorioBusquedas();
-	private static int id = 0;
 	private BusquedasOrigin origen = new InMemoryBusquedasOrigin();
-	//private BusquedasOrigin origen =  new PersistenceBusquedasOrigin();
 	
 	public static RepositorioBusquedas getInstance(){
 		return INSTANCE;
@@ -40,7 +38,6 @@ public class RepositorioBusquedas implements WithGlobalEntityManager{
 				.collect(Collectors.groupingBy(busqueda -> busqueda.getFecha(), Collectors.counting()));
 	}
 	public void buscar(Busqueda busqueda) {
-		busqueda.setId(++id);
 		origen.addBusqueda(busqueda);
 	}
 	
@@ -59,18 +56,6 @@ public class RepositorioBusquedas implements WithGlobalEntityManager{
 		return origen.getBusquedas().stream().filter(busqueda -> busqueda.estaEntre(desde, hasta)).collect(Collectors.toList());
 	}
 	
-	public List<Busqueda> busquedasCantResultados(int cantidad){
-		return origen.getBusquedas().stream().filter(busqueda -> busqueda.getCantidadResultados() == cantidad).collect(Collectors.toList());
-	}
-	
-	public List<Busqueda> busquedasTerminal(Terminal terminal){
-		return origen.getBusquedas().stream().filter(busqueda -> busqueda.getTerminal().getId() == terminal.getId()).collect(Collectors.toList());
-	}
-	
-	public List<Busqueda> busquedasTerminal(String nombreTerminal){
-		return origen.getBusquedas().stream().filter(busqueda -> busqueda.getTerminal().getNombre().equals(nombreTerminal)).collect(Collectors.toList());
-	}
-	
 	public List<POI> buscarPoisPorId(int id){
 		return  origen.getBusquedas()
 									    .stream()
@@ -79,4 +64,36 @@ public class RepositorioBusquedas implements WithGlobalEntityManager{
 									    .map(busqueda  -> busqueda.getResultados())
 									    .orElse(new LinkedList<POI>());
 	}
+	
+	public List<Busqueda> busquedaWeb(String terminal, int cantResultados, LocalDate desde, LocalDate hasta){
+		List<Busqueda> resultado =   this.getBusquedas()
+																					.stream()
+																					.filter(busq -> busq.estaEntre(desde, hasta))
+																					.collect(Collectors.toList());
+		if( !terminal.equals(""))
+		{
+			resultado = resultado.stream()
+															.filter(busqueda -> busqueda.getTerminal().getNombre().equals(terminal))
+															.collect(Collectors.toList());
+		}
+		if(cantResultados >= 0 )
+		{
+			resultado = resultado.stream()
+															.filter(busqueda -> busqueda.getCantidadResultados() == cantResultados)
+															.collect(Collectors.toList());
+		}
+		return resultado;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+

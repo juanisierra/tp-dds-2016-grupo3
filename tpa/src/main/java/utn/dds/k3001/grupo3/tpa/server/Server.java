@@ -27,9 +27,12 @@ public class Server {
 		Spark.port(9000);
 		
 		Comuna comuna1 = new Comuna("Montecastro",Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));
+		Comuna comuna2 = new Comuna("Caballito",Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));
 		
 		Terminal terminal1 = new Terminal("Terminal 1",Mapa.getInstance(),comuna1);
+		Terminal terminal2 = new Terminal("Terminal 2",Mapa.getInstance(),comuna2);
 		RepositorioTerminales.getInstance().agregarTerminal(terminal1);
+		RepositorioTerminales.getInstance().agregarTerminal(terminal2);
 		Usuario u = new Usuario();
 		u.setNombre("admin");
 		u.setContrasenia("123");

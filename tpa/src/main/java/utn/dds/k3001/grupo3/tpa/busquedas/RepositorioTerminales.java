@@ -1,15 +1,7 @@
 package utn.dds.k3001.grupo3.tpa.busquedas;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import javax.persistence.EntityManager;
-import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
-import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-
-
 
 public class RepositorioTerminales implements OrigenDeTerminales{
 	
@@ -51,12 +43,11 @@ public class RepositorioTerminales implements OrigenDeTerminales{
 	
 	public Terminal buscarTerminalPorId(int id)
 	{	
-		List<Terminal> terminalesBuscadas = new LinkedList();
-		terminalesBuscadas = origen.obtenerTerminales().stream().filter(terminal -> terminal.getId()==id).collect(Collectors.toList());
-		if (terminalesBuscadas.isEmpty())
-			return null;
-		else
-			return terminalesBuscadas.get(0);
+		return origen.obtenerTerminales().stream().filter(terminal -> terminal.getId()==id).findAny().orElse(null);
+	}
+	
+	public List<String>  getNombresTerminales(){
+		return origen.obtenerTerminales().stream().map(terminal -> terminal.getNombre()).collect(Collectors.toList());
 	}
 	
 	public static void persistirEnMemoria(){

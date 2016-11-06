@@ -9,8 +9,6 @@ import utn.dds.k3001.grupo3.tpa.usuarios.RepositorioUsuarios;
 
 public class LoginController {
 	public ModelAndView mostrarLogin(Request req, Response res){
-		Map<String,String> model = new HashMap<>();
-		
 		return new ModelAndView(null, "login/login.hbs");
 	}
 	public ModelAndView iniciarSesion(Request req, Response res){

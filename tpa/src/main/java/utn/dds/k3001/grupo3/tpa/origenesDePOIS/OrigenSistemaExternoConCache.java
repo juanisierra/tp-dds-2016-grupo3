@@ -8,9 +8,7 @@ import java.io.ObjectOutputStream;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
-
 import redis.clients.jedis.Jedis;
-import utn.dds.k3001.grupo3.tpa.pois.Banco;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
 public class OrigenSistemaExternoConCache<T> implements OrigenDeDatos {

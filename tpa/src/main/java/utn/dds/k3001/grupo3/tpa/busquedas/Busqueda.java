@@ -3,20 +3,16 @@ package utn.dds.k3001.grupo3.tpa.busquedas;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
-
-import org.hibernate.annotations.Cascade;
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
-
 import utn.dds.k3001.grupo3.tpa.pois.POI;
-	@Entity 
+
+@Entity 
 public class Busqueda
 {	@Id @GeneratedValue
 	private int id;
@@ -103,5 +99,9 @@ public class Busqueda
 	
 	public boolean estaEntre(LocalDate desde, LocalDate hasta){
 		return (fecha.compareTo(desde) >= 0 && fecha.compareTo(hasta) <=0 );
+	}
+	
+	public boolean esDeTerminal(String terminal){
+		return this.terminal.getNombre().equals(terminal);
 	}
 }

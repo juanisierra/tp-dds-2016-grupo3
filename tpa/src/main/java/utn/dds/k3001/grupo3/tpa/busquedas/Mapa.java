@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.OrigenDeDatos;
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.RepositorioInterno;
-import utn.dds.k3001.grupo3.tpa.pois.Comuna;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
 public class Mapa 

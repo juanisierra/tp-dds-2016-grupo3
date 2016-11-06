@@ -45,7 +45,6 @@ public class TerminalesController {
 			}
 		}
 		else {
-			//res.status(403);
 			res.redirect("/login",403);
 		}
 		return null;
@@ -65,7 +64,6 @@ public class TerminalesController {
 			}
 		}
 		else {
-			//res.status(403);
 			res.redirect("/login",403);
 		}
 		return null;
@@ -104,7 +102,6 @@ public class TerminalesController {
 			}
 		}
 		else {
-			//res.status(403);
 			res.redirect("/login",403);
 		}
 		return null;
@@ -157,7 +154,6 @@ public class TerminalesController {
 			}
 		}
 		else {
-			//res.status(403);
 			res.redirect("/login",403);
 		}
 		return null;

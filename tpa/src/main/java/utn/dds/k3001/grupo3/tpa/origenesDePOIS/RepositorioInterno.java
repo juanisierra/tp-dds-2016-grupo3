@@ -6,7 +6,7 @@ import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
-import static java.lang.Math.toIntExact;
+
 public class RepositorioInterno implements OrigenDeDatos,WithGlobalEntityManager,TransactionalOps, EntityManagerOps {
 	
 	private final static RepositorioInterno INSTANCE = new RepositorioInterno();

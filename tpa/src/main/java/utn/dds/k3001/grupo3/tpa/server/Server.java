@@ -65,8 +65,10 @@ public class Server {
 		Mapa.getInstance().agregarPoi(libreriaYenny);
 		Mapa.getInstance().agregarPoi(cgp1);
 		
-		Terminal terminal = new Terminal("miTerminal", Mapa.getInstance());   //para que haya datos que mostrar, dsp se borra
+		Terminal terminal = new Terminal("miTerminal", Mapa.getInstance());   //para que haya datos que mostrar
 		terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
+		terminal.setComuna(new Comuna("la plaza de lo pibe"));
+		RepositorioTerminales.getInstance().agregarTerminal(terminal);
 		terminal.buscar("parada");
 		terminal.buscar("a");
 		terminal.buscar("Noencuento Nada");

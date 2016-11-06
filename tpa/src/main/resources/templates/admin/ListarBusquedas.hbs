@@ -3,8 +3,14 @@
 <form action="/busquedas" method="GET">
 
 		<div class="form-group">
-			<label for="terminal">Terminal</label>
-			<input type="text" placeholder="Nombre" name="terminal">
+			
+				<label for="terminal">Terminal</label>
+				<select placeholder="terminal" name="terminal">
+				{{#each terminales}}
+				<option value={{this}}>{{this}}</option>
+				{{/each}}
+				</select>
+		
 			<label for="cantResultados">Cantidad resultados</label>
 			<input type="text" placeholder="cantidad" name="cantResultados">
 			<label for="desde">Fecha desde</label>

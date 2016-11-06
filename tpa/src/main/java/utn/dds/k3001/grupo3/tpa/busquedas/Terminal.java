@@ -4,21 +4,16 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Transient;
-
-import org.hibernate.annotations.Cascade;
-
 import utn.dds.k3001.grupo3.tpa.pois.Comuna;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
+
 @Entity
 public class Terminal
 {	

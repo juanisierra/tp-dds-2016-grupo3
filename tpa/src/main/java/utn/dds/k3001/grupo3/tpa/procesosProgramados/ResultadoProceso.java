@@ -2,13 +2,6 @@ package utn.dds.k3001.grupo3.tpa.procesosProgramados;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
-
 public class ResultadoProceso
 {	private int id;
 	private LocalDateTime momentoFinalizacion;

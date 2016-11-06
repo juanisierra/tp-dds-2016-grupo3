@@ -43,17 +43,12 @@ public class RepositorioBusquedas implements WithGlobalEntityManager{
 	
 	public  void reset() {
 		origen.reset();
-		
 	}
 	public void setInMemory() {
 		origen = new InMemoryBusquedasOrigin();
 	}
 	public void setPersistence() {
 		origen = new PersistenceBusquedasOrigin();
-	}
-	
-	public List<Busqueda> busquedasDesdeHasta(LocalDate desde, LocalDate hasta){
-		return origen.getBusquedas().stream().filter(busqueda -> busqueda.estaEntre(desde, hasta)).collect(Collectors.toList());
 	}
 	
 	public List<POI> buscarPoisPorId(int id){
@@ -73,7 +68,7 @@ public class RepositorioBusquedas implements WithGlobalEntityManager{
 		if( !terminal.equals(""))
 		{
 			resultado = resultado.stream()
-															.filter(busqueda -> busqueda.getTerminal().getNombre().equals(terminal))
+															.filter(busqueda -> busqueda.esDeTerminal(terminal))
 															.collect(Collectors.toList());
 		}
 		if(cantResultados >= 0 )
@@ -85,15 +80,3 @@ public class RepositorioBusquedas implements WithGlobalEntityManager{
 		return resultado;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-

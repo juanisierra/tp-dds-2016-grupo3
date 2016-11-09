@@ -131,6 +131,7 @@ public class TerminalesController {
 				if (!comunasEncontradas.isEmpty()){
 					terminalAModificar.setNombre(req.queryParams("nombre"));
 					terminalAModificar.setComuna(comunasEncontradas.get(0));
+					RepositorioTerminales.getInstance().agregarTerminal(terminalAModificar);
 				}
 				res.redirect("/terminales");
 				return null;

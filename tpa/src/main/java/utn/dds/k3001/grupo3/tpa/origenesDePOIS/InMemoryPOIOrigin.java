@@ -29,7 +29,7 @@ public class InMemoryPOIOrigin implements POIOrigin {
 
 	@Override
 	public void agregarPOI(POI poi) {
-		listaPOIS.add(poi);
+		if(!listaPOIS.contains(poi)) listaPOIS.add(poi);
 	}
 	
 	@Override

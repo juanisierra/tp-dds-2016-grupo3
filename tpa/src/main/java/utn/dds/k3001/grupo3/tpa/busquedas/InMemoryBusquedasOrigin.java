@@ -13,6 +13,7 @@ public class InMemoryBusquedasOrigin implements BusquedasOrigin{
 	@Override
 	public void addBusqueda(Busqueda busqueda) {
 	lista.add(busqueda);
+	busqueda.setId(String.valueOf(busqueda.hashCode()));
 	}
 
 	@Override

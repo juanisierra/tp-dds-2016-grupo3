@@ -13,11 +13,11 @@ public class RepositorioBusquedas implements WithGlobalEntityManager{
 	
 	private static final RepositorioBusquedas INSTANCE = new RepositorioBusquedas();
 	private BusquedasOrigin origen = new InMemoryBusquedasOrigin();
-	
 	public static RepositorioBusquedas getInstance(){
 		return INSTANCE;
 	}
-	private RepositorioBusquedas(){}
+	private RepositorioBusquedas(){
+	}
 	
 	public Map<String,List<Integer>> busquedasParcialesPorTerminal(){	
 		return  origen.getBusquedas().stream()
@@ -51,13 +51,13 @@ public class RepositorioBusquedas implements WithGlobalEntityManager{
 		origen = new PersistenceBusquedasOrigin();
 	}
 	
-	public List<POI> buscarPoisPorId(int id){
-		return  origen.getBusquedas()
+	public List<POI> buscarPoisPorId(String id){
+		Busqueda b =  origen.getBusquedas()
 									    .stream()
-									    .filter(busqueda -> busqueda.getId() == id)
-									    .findAny()
-									    .map(busqueda  -> busqueda.getResultados())
-									    .orElse(new LinkedList<POI>());
+									    .filter(busqueda -> busqueda.getId().equals(id)).findFirst().get();
+		
+		return b.getResultados();
+									  
 	}
 	
 	public List<Busqueda> busquedaWeb(String terminal, int cantResultados, LocalDate desde, LocalDate hasta){

@@ -6,4 +6,5 @@ public interface TerminalOrigin {
 	public void agregarTerminal(Terminal terminal);
 	public List<Terminal> obtenerTerminales();
 	public void reset();
+	public void remove(Terminal termABorrar);
 }

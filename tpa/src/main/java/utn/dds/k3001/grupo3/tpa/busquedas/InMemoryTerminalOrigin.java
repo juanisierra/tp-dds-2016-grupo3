@@ -11,7 +11,7 @@ public class InMemoryTerminalOrigin implements TerminalOrigin{
 	}
 	@Override
 	public void agregarTerminal(Terminal terminal) {
-		listaTerminales.add(terminal);
+		if(!listaTerminales.contains(terminal)) listaTerminales.add(terminal);
 	}
 
 	@Override
@@ -21,6 +21,11 @@ public class InMemoryTerminalOrigin implements TerminalOrigin{
 	@Override
 	public void reset() {
 		listaTerminales = new LinkedList<Terminal>();
+		
+	}
+	@Override
+	public void remove(Terminal termABorrar) {
+		listaTerminales.remove(termABorrar);
 		
 	}
 

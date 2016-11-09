@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Server.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tpa</a> &gt; <a href="index.source.html" class="el_package">utn.dds.k3001.grupo3.tpa.server</a> &gt; <span class="el_source">Server.java</span></div><h1>Server.java</h1><pre class="source lang-java linenums">package utn.dds.k3001.grupo3.tpa.server;
+
+import java.time.LocalTime;
+import java.util.Arrays;
+
+import spark.Spark;
+import spark.debug.DebugScreen;
+import utn.dds.k3001.grupo3.tpa.busquedas.AccionesBusqueda;
+import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
+import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioBusquedas;
+import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioComunas;
+import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioTerminales;
+import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
+import utn.dds.k3001.grupo3.tpa.geo.PersistablePoint;
+import utn.dds.k3001.grupo3.tpa.origenesDePOIS.RepositorioInterno;
+import utn.dds.k3001.grupo3.tpa.pois.Banco;
+import utn.dds.k3001.grupo3.tpa.pois.CGP;
+import utn.dds.k3001.grupo3.tpa.pois.Comuna;
+import utn.dds.k3001.grupo3.tpa.pois.Disponibilidad;
+import utn.dds.k3001.grupo3.tpa.pois.LocalComercial;
+import utn.dds.k3001.grupo3.tpa.pois.ParadaColectivo;
+import utn.dds.k3001.grupo3.tpa.pois.Rubro;
+import utn.dds.k3001.grupo3.tpa.pois.Servicio;
+import utn.dds.k3001.grupo3.tpa.usuarios.RepositorioUsuarios;
+import utn.dds.k3001.grupo3.tpa.usuarios.Usuario;
+import utn.dds.k3001.grupo3.tpa.usuarios.UsuarioTerminal;
+
+<span class="nc" id="L28">public class Server {</span>
+	public static void main(String[] args) {
+<span class="nc" id="L30">		Spark.port(9000);</span>
+		/*RepositorioInterno.origenPersistencia();
+		RepositorioTerminales.persistirEnBD();
+		RepositorioComunas.persistirEnBD();
+		RepositorioBusquedas.getInstance().setPersistence();*/
+		//cargarDatos()
+<span class="nc" id="L36">		cargarDatosMemoria();</span>
+<span class="nc" id="L37">		Usuario u = new Usuario();</span>
+<span class="nc" id="L38">		u.setNombre(&quot;admin&quot;);</span>
+<span class="nc" id="L39">		u.setContrasenia(&quot;123&quot;);</span>
+<span class="nc" id="L40">		UsuarioTerminal t = new UsuarioTerminal();</span>
+<span class="nc" id="L41">		t.setNombre(&quot;terminal&quot;);</span>
+<span class="nc" id="L42">		t.setContrasenia(&quot;123&quot;);</span>
+<span class="nc" id="L43">		t.setTerminal(RepositorioTerminales.getInstance().obtenerTerminales().get(0));</span>
+<span class="nc" id="L44">		RepositorioUsuarios.instance().agregarUsuario(t);</span>
+<span class="nc" id="L45">		RepositorioUsuarios.instance().agregarUsuario(u);		</span>
+<span class="nc" id="L46">		DebugScreen.enableDebugScreen();</span>
+<span class="nc" id="L47">		Router.configure();</span>
+<span class="nc" id="L48">	}</span>
+	public static void cargarDatos()
+	{
+<span class="nc" id="L51">		Comuna comuna1 = new Comuna(&quot;Montecastro&quot;,Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));</span>
+<span class="nc" id="L52">		Comuna comuna2 = new Comuna(&quot;Caballito&quot;,Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));</span>
+<span class="nc" id="L53">		RepositorioComunas.getInstance().agregarComuna(comuna1);</span>
+<span class="nc" id="L54">		RepositorioComunas.getInstance().agregarComuna(comuna2);</span>
+<span class="nc" id="L55">		Terminal terminal1 = new Terminal(&quot;Terminal 1&quot;,Mapa.getInstance(),comuna1);</span>
+<span class="nc" id="L56">		Terminal terminal2 = new Terminal(&quot;Terminal 2&quot;,Mapa.getInstance(),comuna2);</span>
+<span class="nc" id="L57">		terminal1.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);</span>
+<span class="nc" id="L58">		terminal1.agregarObserverBusqueda(AccionesBusqueda.NOTIFICARBUSQUEDALARGA);</span>
+<span class="nc" id="L59">		RepositorioTerminales.getInstance().agregarTerminal(terminal1);</span>
+<span class="nc" id="L60">		RepositorioTerminales.getInstance().agregarTerminal(terminal2);</span>
+		
+<span class="nc" id="L62">		Rubro libreria = new Rubro(&quot;libreria&quot;,50);</span>
+<span class="nc" id="L63">		Disponibilidad disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));</span>
+<span class="nc" id="L64">		LocalComercial libreriaYenny = new LocalComercial(&quot;libreria yenny&quot;,&quot;Beiro&quot;,&quot;devoto&quot;,100,new PersistablePoint(10,10),libreria,disponibilidadLibrerias);</span>
+		//libreriaYenny.setId(0);
+<span class="nc" id="L66">		libreriaYenny.setRubro(new Rubro(&quot;asd&quot;, 2));</span>
+<span class="nc" id="L67">		ParadaColectivo parada114 = new ParadaColectivo(&quot;parada 114&quot;,&quot;Chivilcoy&quot;,&quot;devoto&quot;,1000,new PersistablePoint(10,10),114);</span>
+		//parada114.setId(2);
+<span class="nc" id="L69">		CGP cgp1 = new CGP(&quot;cgp2&quot;,&quot;beiro&quot;,&quot;caballito&quot;,100,new PersistablePoint(10.1,10.1),comuna1);</span>
+		//cgp1.setId(1);
+<span class="nc" id="L71">		Servicio altaDomicilio = new Servicio(&quot;alta domicilio&quot;,disponibilidadLibrerias);</span>
+<span class="nc" id="L72">		Servicio servicio2 = new Servicio(&quot;otroServicio&quot;,disponibilidadLibrerias);</span>
+<span class="nc" id="L73">		cgp1.agregarServicio(altaDomicilio);</span>
+<span class="nc" id="L74">		Banco banco1 = new Banco(&quot;banco&quot;,&quot;call1&quot;,&quot;devoto&quot;,23,new PersistablePoint(20,20));</span>
+<span class="nc" id="L75">		banco1.agregarServicio(altaDomicilio);</span>
+<span class="nc" id="L76">		banco1.agregarServicio(servicio2);</span>
+		//banco1.setId(5);
+<span class="nc" id="L78">		Mapa.getInstance().agregarPoi(banco1);</span>
+<span class="nc" id="L79">		Mapa.getInstance().agregarPoi(parada114);</span>
+<span class="nc" id="L80">		Mapa.getInstance().agregarPoi(libreriaYenny);</span>
+<span class="nc" id="L81">		Mapa.getInstance().agregarPoi(cgp1);</span>
+<span class="nc" id="L82">		Terminal terminal = new Terminal(&quot;miTerminal&quot;, Mapa.getInstance());   //para que haya datos que mostrar</span>
+<span class="nc" id="L83">		terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);</span>
+<span class="nc" id="L84">		terminal.setComuna(new Comuna(&quot;la plaza de lo pibe&quot;));</span>
+		
+<span class="nc" id="L86">		RepositorioTerminales.getInstance().agregarTerminal(terminal);</span>
+<span class="nc" id="L87">	}</span>
+	public static void cargarDatosMemoria()
+	{
+<span class="nc" id="L90">		Comuna comuna1 = new Comuna(&quot;Montecastro&quot;,Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));</span>
+<span class="nc" id="L91">		Comuna comuna2 = new Comuna(&quot;Caballito&quot;,Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));</span>
+<span class="nc" id="L92">		RepositorioComunas.getInstance().agregarComuna(comuna1);</span>
+<span class="nc" id="L93">		RepositorioComunas.getInstance().agregarComuna(comuna2);</span>
+<span class="nc" id="L94">		Terminal terminal1 = new Terminal(&quot;Terminal 1&quot;,Mapa.getInstance(),comuna1);</span>
+<span class="nc" id="L95">		Terminal terminal2 = new Terminal(&quot;Terminal 2&quot;,Mapa.getInstance(),comuna2);</span>
+<span class="nc" id="L96">		terminal1.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);</span>
+<span class="nc" id="L97">		terminal1.agregarObserverBusqueda(AccionesBusqueda.NOTIFICARBUSQUEDALARGA);</span>
+<span class="nc" id="L98">		RepositorioTerminales.getInstance().agregarTerminal(terminal1);</span>
+<span class="nc" id="L99">		RepositorioTerminales.getInstance().agregarTerminal(terminal2);</span>
+		
+<span class="nc" id="L101">		Rubro libreria = new Rubro(&quot;libreria&quot;,50);</span>
+<span class="nc" id="L102">		Disponibilidad disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));</span>
+<span class="nc" id="L103">		LocalComercial libreriaYenny = new LocalComercial(&quot;libreria yenny&quot;,&quot;Beiro&quot;,&quot;devoto&quot;,100,new PersistablePoint(10,10),libreria,disponibilidadLibrerias);</span>
+<span class="nc" id="L104">		libreriaYenny.setId(0);</span>
+<span class="nc" id="L105">		libreriaYenny.setRubro(new Rubro(&quot;asd&quot;, 2));</span>
+<span class="nc" id="L106">		ParadaColectivo parada114 = new ParadaColectivo(&quot;parada 114&quot;,&quot;Chivilcoy&quot;,&quot;devoto&quot;,1000,new PersistablePoint(10,10),114);</span>
+<span class="nc" id="L107">		parada114.setId(2);</span>
+<span class="nc" id="L108">		CGP cgp1 = new CGP(&quot;cgp2&quot;,&quot;beiro&quot;,&quot;caballito&quot;,100,new PersistablePoint(10.1,10.1),comuna1);</span>
+<span class="nc" id="L109">		cgp1.setId(1);</span>
+<span class="nc" id="L110">		Servicio altaDomicilio = new Servicio(&quot;alta domicilio&quot;,disponibilidadLibrerias);</span>
+<span class="nc" id="L111">		Servicio servicio2 = new Servicio(&quot;otroServicio&quot;,disponibilidadLibrerias);</span>
+<span class="nc" id="L112">		cgp1.agregarServicio(altaDomicilio);</span>
+<span class="nc" id="L113">		Banco banco1 = new Banco(&quot;banco&quot;,&quot;call1&quot;,&quot;devoto&quot;,23,new PersistablePoint(20,20));</span>
+<span class="nc" id="L114">		banco1.agregarServicio(altaDomicilio);</span>
+<span class="nc" id="L115">		banco1.agregarServicio(servicio2);</span>
+<span class="nc" id="L116">		banco1.setId(5);</span>
+<span class="nc" id="L117">		Mapa.getInstance().agregarPoi(banco1);</span>
+<span class="nc" id="L118">		Mapa.getInstance().agregarPoi(parada114);</span>
+<span class="nc" id="L119">		Mapa.getInstance().agregarPoi(libreriaYenny);</span>
+<span class="nc" id="L120">		Mapa.getInstance().agregarPoi(cgp1);</span>
+<span class="nc" id="L121">		Terminal terminal = new Terminal(&quot;miTerminal&quot;, Mapa.getInstance());   //para que haya datos que mostrar</span>
+<span class="nc" id="L122">		terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);</span>
+<span class="nc" id="L123">		terminal.setComuna(new Comuna(&quot;la plaza de lo pibe&quot;));</span>
+		
+<span class="nc" id="L125">		RepositorioTerminales.getInstance().agregarTerminal(terminal);</span>
+<span class="nc" id="L126">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

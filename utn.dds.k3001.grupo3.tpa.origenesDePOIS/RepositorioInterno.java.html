@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>RepositorioInterno.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tpa</a> &gt; <a href="index.source.html" class="el_package">utn.dds.k3001.grupo3.tpa.origenesDePOIS</a> &gt; <span class="el_source">RepositorioInterno.java</span></div><h1>RepositorioInterno.java</h1><pre class="source lang-java linenums">package utn.dds.k3001.grupo3.tpa.origenesDePOIS;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+import utn.dds.k3001.grupo3.tpa.pois.POI;
+
+public class RepositorioInterno implements OrigenDeDatos,WithGlobalEntityManager,TransactionalOps, EntityManagerOps {
+	
+<span class="fc" id="L12">	private final static RepositorioInterno INSTANCE = new RepositorioInterno();</span>
+<span class="fc" id="L13">	private static POIOrigin origen = new InMemoryPOIOrigin(); //ELEGIMOS SI PERSISTE EN MEMORIA O EN BASE DE DATOS</span>
+<span class="fc" id="L14">	private RepositorioInterno(){}</span>
+	
+	public static RepositorioInterno getInstance() {
+<span class="fc" id="L17">		return INSTANCE;</span>
+	}
+	
+	public void agregarPoi(POI poiNvo){
+<span class="fc" id="L21">		origen.agregarPOI(poiNvo);;</span>
+<span class="fc" id="L22">	}</span>
+	
+	public void eliminarPoi(POI poiAEliminar){
+<span class="fc" id="L25">		origen.eliminarPOI(poiAEliminar);</span>
+<span class="fc" id="L26">	}</span>
+	
+	public List&lt;POI&gt; buscar(String criterio) {
+<span class="fc" id="L29">		return origen.getPOIS().stream().filter(POI -&gt; POI.esBuscado(criterio)).collect(Collectors.toList());</span>
+	}
+	
+	public POI buscarPorNombre(String nombre){	
+<span class="fc" id="L33">		List&lt;POI&gt; lista = origen.getPOIS().stream().filter(POI -&gt; POI.getNombre().contains(nombre)).collect(Collectors.toList());</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">		if(lista.isEmpty()){</span>
+<span class="fc" id="L35">			return null;</span>
+		} else {
+<span class="fc" id="L37">		return lista.get(0);</span>
+		}
+	}
+	
+	public void eliminarPoiPorNumero(long id) {
+<span class="fc" id="L42">		origen.eliminarPorNumero(id);</span>
+<span class="fc" id="L43">	}</span>
+	
+	public List&lt;POI&gt; getAllPOIS(){
+<span class="fc" id="L46">		return origen.getPOIS();</span>
+	}
+	
+	public static void reset() {
+<span class="fc" id="L50">		origen.vaciar();</span>
+<span class="fc" id="L51">	}</span>
+	
+	public static void origenMemoria() {
+<span class="nc" id="L54">		origen = new InMemoryPOIOrigin();</span>
+<span class="nc" id="L55">	}</span>
+	
+	public static void origenPersistencia() {
+<span class="nc" id="L58">		origen = new PersistancePOIOrigin();</span>
+<span class="nc" id="L59">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

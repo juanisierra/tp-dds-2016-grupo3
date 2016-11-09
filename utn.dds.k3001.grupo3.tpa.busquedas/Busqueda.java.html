@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Busqueda.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tpa</a> &gt; <a href="index.source.html" class="el_package">utn.dds.k3001.grupo3.tpa.busquedas</a> &gt; <span class="el_source">Busqueda.java</span></div><h1>Busqueda.java</h1><pre class="source lang-java linenums">package utn.dds.k3001.grupo3.tpa.busquedas;
+
+import java.time.*;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
+import utn.dds.k3001.grupo3.tpa.pois.POI;
+
+@Entity 
+public class Busqueda
+{	@Id @GeneratedValue
+	private int id;
+	private int cantResultados;
+	private String criterio;
+	private double tiempoDemorado;
+	@Convert(converter = LocalDateConverter.class)
+	private LocalDate fecha;
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	private Terminal terminal;
+	private List&lt;POI&gt; resultados;
+	
+<span class="fc" id="L28">	public Busqueda(Terminal terminal,int cantResultados, String criterio, LocalTime hInicio, LocalTime hFin, LocalDate fecha,List&lt;POI&gt; resultados){</span>
+<span class="fc" id="L29">		this.terminal = terminal;</span>
+<span class="fc" id="L30">		this.cantResultados = cantResultados;</span>
+<span class="fc" id="L31">		this.criterio = criterio;</span>
+<span class="fc" id="L32">		this.tiempoDemorado = ChronoUnit.SECONDS.between(hInicio, hFin);</span>
+<span class="fc" id="L33">		this.fecha = fecha;</span>
+<span class="fc" id="L34">		this.resultados=resultados;</span>
+<span class="fc" id="L35">	}</span>
+	
+<span class="nc" id="L37">	public Busqueda(){}</span>
+	public Terminal getTerminal(){
+<span class="fc" id="L39">	return terminal;</span>
+	}
+	public List&lt;POI&gt; getResultados(){
+<span class="nc" id="L42">		return resultados;</span>
+	}
+	
+	public boolean esEnFecha(LocalDate fecha){
+<span class="nc" id="L46">		return this.fecha.equals(fecha);</span>
+	}
+	
+	public int getCantidadResultados(){
+<span class="fc" id="L50">		return this.cantResultados;</span>
+	}
+	
+	public double getTiempo(){
+<span class="fc" id="L54">		return this.tiempoDemorado;</span>
+	}
+	
+	public LocalDate getFecha(){
+<span class="fc" id="L58">		return this.fecha;</span>
+	}
+	public String getCriterio() {
+<span class="nc" id="L61">		return criterio;</span>
+	}
+
+	public int getId() {
+<span class="nc" id="L65">		return id;</span>
+	}
+
+	public void setId(int id) {
+<span class="nc" id="L69">		this.id = id;</span>
+<span class="nc" id="L70">	}</span>
+
+	public int getCantResultados() {
+<span class="nc" id="L73">		return cantResultados;</span>
+	}
+
+	public void setCantResultados(int cantResultados) {
+<span class="nc" id="L77">		this.cantResultados = cantResultados;</span>
+<span class="nc" id="L78">	}</span>
+
+	public double getTiempoDemorado() {
+<span class="nc" id="L81">		return tiempoDemorado;</span>
+	}
+
+	public void setTiempoDemorado(double tiempoDemorado) {
+<span class="nc" id="L85">		this.tiempoDemorado = tiempoDemorado;</span>
+<span class="nc" id="L86">	}</span>
+
+	public void setCriterio(String criterio) {
+<span class="nc" id="L89">		this.criterio = criterio;</span>
+<span class="nc" id="L90">	}</span>
+
+	public void setFecha(LocalDate fecha) {
+<span class="nc" id="L93">		this.fecha = fecha;</span>
+<span class="nc" id="L94">	}</span>
+
+	public void setTerminal(Terminal terminal) {
+<span class="nc" id="L97">		this.terminal = terminal;</span>
+<span class="nc" id="L98">	}</span>
+	
+	public boolean estaEntre(LocalDate desde, LocalDate hasta){
+<span class="nc bnc" id="L101" title="All 4 branches missed.">		return (fecha.compareTo(desde) &gt;= 0 &amp;&amp; fecha.compareTo(hasta) &lt;=0 );</span>
+	}
+	
+	public boolean esDeTerminal(String terminal){
+<span class="nc" id="L105">		return this.terminal.getNombre().equals(terminal);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

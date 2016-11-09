@@ -1,0 +1,84 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+tpa,utn.dds.k3001.grupo3.tpa.origenesDePOIS,JsonFactory,7,44,0,0,2,9,0,4,0,4
+tpa,utn.dds.k3001.grupo3.tpa.origenesDePOIS,RepositorioInterno,10,72,0,2,4,18,2,13,2,12
+tpa,utn.dds.k3001.grupo3.tpa.origenesDePOIS,AdapterSistemaCGP,8,114,0,0,0,8,2,7,2,7
+tpa,utn.dds.k3001.grupo3.tpa.origenesDePOIS,RequestService,37,0,0,0,8,0,3,0,3,0
+tpa,utn.dds.k3001.grupo3.tpa.origenesDePOIS,AdapterSistemaBancos.new TypeReference() {...},0,6,0,0,0,1,0,1,0,1
+tpa,utn.dds.k3001.grupo3.tpa.origenesDePOIS,AdapterSistemaBancos,0,38,0,0,0,10,0,3,0,3
+tpa,utn.dds.k3001.grupo3.tpa.origenesDePOIS,PersistancePOIOrigin,33,0,0,0,9,0,6,0,6,0
+tpa,utn.dds.k3001.grupo3.tpa.origenesDePOIS,InMemoryPOIOrigin,0,42,0,0,0,12,0,7,0,7
+tpa,utn.dds.k3001.grupo3.tpa.origenesDePOIS,OrigenSistemaExternoConCache,122,0,4,0,25,0,5,0,3,0
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,ParserArchivoLocales,6,65,0,2,2,14,0,3,0,2
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,EnviarMailFallo,0,30,1,1,0,9,1,2,0,2
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,FailureManager,32,0,0,0,10,0,2,0,2,0
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,TerminalesPorComuna,25,0,0,0,5,0,3,0,3,0
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,ResultadoProceso,38,21,0,0,16,8,11,3,11,3
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,OldPOISRequestService,48,0,2,0,12,0,4,0,3,0
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,Reintentar,0,28,0,4,0,8,0,4,0,2
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,ActualizarAcciones,0,57,0,0,0,13,0,5,0,5
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,SchedulerProcesos,24,11,0,0,5,4,3,1,3,1
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,DarDeBajaPOIS,11,48,0,0,2,13,0,3,0,3
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,ActualizarLocales,11,51,0,2,2,14,0,4,0,3
+tpa,utn.dds.k3001.grupo3.tpa.procesosProgramados,FallaProcesoException,4,0,0,0,2,0,1,0,1,0
+tpa,utn.dds.k3001.grupo3.tpa.converters.morphia,LocalTimeConverter,53,0,8,0,13,0,7,0,3,0
+tpa,utn.dds.k3001.grupo3.tpa.converters.morphia,BigDecimalConverter,82,0,10,0,20,0,8,0,3,0
+tpa,utn.dds.k3001.grupo3.tpa.converters.morphia,LocalDateConverter,54,0,8,0,15,0,7,0,3,0
+tpa,utn.dds.k3001.grupo3.tpa.converters.morphia,LocalDateTimeConverter,50,0,8,0,12,0,7,0,3,0
+tpa,utn.dds.k3001.grupo3.tpa.controllers,LoginController,74,0,4,0,18,0,6,0,4,0
+tpa,utn.dds.k3001.grupo3.tpa.controllers,TerminalesController,604,0,74,0,126,0,48,0,11,0
+tpa,utn.dds.k3001.grupo3.tpa.controllers,BusquedasController,198,0,24,0,28,0,16,0,4,0
+tpa,utn.dds.k3001.grupo3.tpa.controllers,POISController,364,0,38,0,67,0,26,0,7,0
+tpa,utn.dds.k3001.grupo3.tpa.pois,POI,53,61,3,3,18,16,14,9,12,8
+tpa,utn.dds.k3001.grupo3.tpa.pois,ParadaColectivo,10,38,2,4,4,6,5,5,3,4
+tpa,utn.dds.k3001.grupo3.tpa.pois,Banco,25,35,0,0,6,5,2,3,2,3
+tpa,utn.dds.k3001.grupo3.tpa.pois,CGP,7,33,0,0,3,9,2,4,2,4
+tpa,utn.dds.k3001.grupo3.tpa.pois,LocalComercial,28,61,2,4,10,9,8,7,6,6
+tpa,utn.dds.k3001.grupo3.tpa.pois,Rubro,21,18,0,0,9,7,6,4,6,4
+tpa,utn.dds.k3001.grupo3.tpa.pois,Disponibilidad,22,85,1,7,10,13,7,11,6,8
+tpa,utn.dds.k3001.grupo3.tpa.pois,Servicio,22,59,0,0,9,17,5,9,5,9
+tpa,utn.dds.k3001.grupo3.tpa.pois,Direccion,18,18,0,0,8,7,5,3,5,3
+tpa,utn.dds.k3001.grupo3.tpa.pois,Comuna,21,26,0,0,9,9,6,4,6,4
+tpa,utn.dds.k3001.grupo3.tpa.pois,PrestadorDeServicios,4,70,0,8,2,10,1,13,1,9
+tpa,spark.utils,DireccionHelper,58,0,0,0,5,0,4,0,4,0
+tpa,spark.utils,AccionesQueryParamHelper.new AccionesQueryParamHelper() {...},9,0,0,0,2,0,2,0,2,0
+tpa,spark.utils,PointHelper,28,0,0,0,2,0,4,0,4,0
+tpa,spark.utils,DireccionHelper.new DireccionHelper() {...},24,0,0,0,2,0,2,0,2,0
+tpa,spark.utils,ServiciosHelper.new ServiciosHelper() {...},39,0,2,0,6,0,4,0,3,0
+tpa,spark.utils,AccionesBusquedaHelper,28,0,0,0,3,0,4,0,4,0
+tpa,spark.utils,DireccionHelper.new DireccionHelper() {...},9,0,0,0,2,0,2,0,2,0
+tpa,spark.utils,DireccionHelper.new DireccionHelper() {...},10,0,0,0,2,0,2,0,2,0
+tpa,spark.utils,DireccionHelper.new DireccionHelper() {...},9,0,0,0,2,0,2,0,2,0
+tpa,spark.utils,DarkMagic,20,0,0,0,5,0,2,0,2,0
+tpa,spark.utils,AccionesBusquedaHelper.new Object() {...},19,0,0,0,1,0,1,0,1,0
+tpa,spark.utils,AccionesBusquedaHelper.new AccionesBusquedaHelper() {...},25,0,3,0,9,0,4,0,2,0
+tpa,spark.utils,PointHelper.new PointHelper() {...},12,0,0,0,2,0,2,0,2,0
+tpa,spark.utils,AccionesQueryParamHelper,28,0,0,0,2,0,4,0,4,0
+tpa,spark.utils,HandlebarsTemplateEngineBuilder,46,0,0,0,13,0,6,0,6,0
+tpa,spark.utils,ServiciosHelper,28,0,0,0,2,0,4,0,4,0
+tpa,utn.dds.k3001.grupo3.tpa.usuarios,UsuarioTerminal,13,0,0,0,5,0,4,0,4,0
+tpa,utn.dds.k3001.grupo3.tpa.usuarios,Usuario,23,0,0,0,9,0,7,0,7,0
+tpa,utn.dds.k3001.grupo3.tpa.usuarios,RepositorioUsuarios,59,0,4,0,9,0,10,0,8,0
+tpa,utn.dds.k3001.grupo3.tpa.server,Server,302,0,0,0,51,0,2,0,2,0
+tpa,utn.dds.k3001.grupo3.tpa.server,Router,216,0,0,0,39,0,2,0,2,0
+tpa,utn.dds.k3001.grupo3.tpa.DTO,CentroDTO,6,33,0,0,2,12,2,5,2,5
+tpa,utn.dds.k3001.grupo3.tpa.DTO,ServiciosDTO,0,15,0,0,0,6,0,3,0,3
+tpa,utn.dds.k3001.grupo3.tpa.DTO,RangosServicioDTO,0,33,0,0,0,12,0,6,0,6
+tpa,utn.dds.k3001.grupo3.tpa.geo,PersistablePolygon,9,27,0,2,2,8,1,4,1,3
+tpa,utn.dds.k3001.grupo3.tpa.geo,PersistablePoint,48,51,0,0,12,15,7,4,7,4
+tpa,utn.dds.k3001.grupo3.tpa.busquedas,RepositorioTerminales,80,34,4,0,10,13,12,8,10,8
+tpa,utn.dds.k3001.grupo3.tpa.busquedas,AccionesBusqueda,9,29,0,0,0,3,2,2,2,2
+tpa,utn.dds.k3001.grupo3.tpa.busquedas,ServicioMail,3,1,0,0,1,1,1,1,1,1
+tpa,utn.dds.k3001.grupo3.tpa.busquedas,RepositorioBusquedas,117,55,8,0,26,12,17,10,13,10
+tpa,utn.dds.k3001.grupo3.tpa.busquedas,InMemoryBusquedasOrigin,0,23,0,0,0,7,0,4,0,4
+tpa,utn.dds.k3001.grupo3.tpa.busquedas,AccionesBusqueda.new AccionesBusqueda() {...},0,10,0,0,0,3,0,2,0,2
+tpa,utn.dds.k3001.grupo3.tpa.busquedas,InMemoryTerminalOrigin,0,23,0,0,0,8,0,4,0,4
+tpa,utn.dds.k3001.grupo3.tpa.busquedas,PersistenceComunasOrigin,15,0,0,0,5,0,4,0,4,0
+tpa,utn.dds.k3001.grupo3.tpa.busquedas,AccionesBusqueda.new AccionesBusqueda() {...},0,16,1,1,0,4,1,2,0,2
+tpa,utn.dds.k3001.grupo3.tpa.busquedas,InMemoryComunasOrigin,23,0,0,0,8,0,4,0,4,0
+tpa,utn.dds.k3001.grupo3.tpa.busquedas,Busqueda,67,37,4,0,21,12,17,5,15,5
+tpa,utn.dds.k3001.grupo3.tpa.busquedas,Terminal,57,90,2,2,21,24,13,9,11,9
+tpa,utn.dds.k3001.grupo3.tpa.busquedas,PersistanceTerminalOrigin,1,14,0,0,1,4,1,3,1,3
+tpa,utn.dds.k3001.grupo3.tpa.busquedas,PersistenceBusquedasOrigin,82,0,0,0,17,0,4,0,4,0
+tpa,utn.dds.k3001.grupo3.tpa.busquedas,RepositorioComunas,83,0,4,0,20,0,15,0,13,0
+tpa,utn.dds.k3001.grupo3.tpa.busquedas,Mapa,65,59,2,0,14,20,7,9,6,9
+tpa,utn.dds.k3001.grupo3.tpa.converters,LocalTimeConverter,16,3,4,0,4,1,4,1,2,1

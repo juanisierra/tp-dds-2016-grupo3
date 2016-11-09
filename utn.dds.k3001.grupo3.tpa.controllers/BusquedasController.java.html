@@ -24,46 +24,47 @@ import utn.dds.k3001.grupo3.tpa.usuarios.Usuario;
 			{
 <span class="nc bnc" id="L25" title="All 4 branches missed.">				String terminal = (req.queryParams(&quot;terminal&quot;) == null || req.queryParams(&quot;terminal&quot;).equals(&quot;Cualquiera&quot;)) ? &quot;&quot; : req.queryParams(&quot;terminal&quot;);</span>
 <span class="nc bnc" id="L26" title="All 4 branches missed.">				int cantResultados = (req.queryParams(&quot;cantResultados&quot;) == null || req.queryParams(&quot;cantResultados&quot;).equals(&quot;&quot;))? -1 : Integer.parseInt(req.queryParams(&quot;cantResultados&quot;));</span>
-<span class="nc bnc" id="L27" title="All 4 branches missed.">				LocalDate desde =( req.queryParams(&quot;desde&quot;) == null ||  req.queryParams(&quot;desde&quot;).equals(&quot;&quot;) ) ? LocalDate.of(2000,1,1) : parsearFecha( req.queryParams(&quot;desde&quot;));</span>
-<span class="nc bnc" id="L28" title="All 4 branches missed.">				LocalDate hasta = (req.queryParams(&quot;hasta&quot;) == null || req.queryParams(&quot;hasta&quot;).equals(&quot;&quot;)  ) ? LocalDate.now() : parsearFecha( req.queryParams(&quot;hasta&quot;));</span>
+<span class="nc" id="L27">				String query = req.queryParams(&quot;desde&quot;);</span>
+<span class="nc bnc" id="L28" title="All 4 branches missed.">				LocalDate desde =( req.queryParams(&quot;desde&quot;) == null ||  req.queryParams(&quot;desde&quot;).equals(&quot;&quot;) ) ? LocalDate.of(2000,1,1) : parsearFecha( req.queryParams(&quot;desde&quot;));</span>
+<span class="nc bnc" id="L29" title="All 4 branches missed.">				LocalDate hasta = (req.queryParams(&quot;hasta&quot;) == null || req.queryParams(&quot;hasta&quot;).equals(&quot;&quot;)  ) ? LocalDate.now() : parsearFecha( req.queryParams(&quot;hasta&quot;));</span>
 				
-<span class="nc" id="L30">				List&lt;Busqueda&gt; busquedas = RepositorioBusquedas.getInstance().busquedaWeb(terminal, cantResultados, desde, hasta);</span>
-<span class="nc" id="L31">				List&lt;String&gt; terminales = new LinkedList&lt;String&gt;();</span>
-<span class="nc" id="L32">				terminales.add(&quot;Cualquiera&quot;);</span>
-<span class="nc" id="L33">				terminales.addAll(RepositorioTerminales.getInstance().getNombresTerminales());</span>
+<span class="nc" id="L31">				List&lt;Busqueda&gt; busquedas = RepositorioBusquedas.getInstance().busquedaWeb(terminal, cantResultados, desde, hasta);</span>
+<span class="nc" id="L32">				List&lt;String&gt; terminales = new LinkedList&lt;String&gt;();</span>
+<span class="nc" id="L33">				terminales.add(&quot;Cualquiera&quot;);</span>
+<span class="nc" id="L34">				terminales.addAll(RepositorioTerminales.getInstance().getNombresTerminales());</span>
 				@SuppressWarnings(&quot;rawtypes&quot;)
-<span class="nc" id="L35">				Map&lt;String, List&gt; model = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L36">				model.put(&quot;busquedas&quot;, busquedas);</span>
-<span class="nc" id="L37">				model.put(&quot;terminales&quot;, terminales);</span>
-<span class="nc" id="L38">				return new ModelAndView(model, &quot;admin/ListarBusquedas.hbs&quot;);</span>
+<span class="nc" id="L36">				Map&lt;String, List&gt; model = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L37">				model.put(&quot;busquedas&quot;, busquedas);</span>
+<span class="nc" id="L38">				model.put(&quot;terminales&quot;, terminales);</span>
+<span class="nc" id="L39">				return new ModelAndView(model, &quot;admin/ListarBusquedas.hbs&quot;);</span>
 			} 
 		} 
-<span class="nc" id="L41">		res.redirect(&quot;/login&quot;,403);</span>
-<span class="nc" id="L42">		return null;</span>
+<span class="nc" id="L42">		res.redirect(&quot;/login&quot;,403);</span>
+<span class="nc" id="L43">		return null;</span>
 	}
 	
 	public ModelAndView mostrarPois(Request req, Response res)
 	{		
-<span class="nc bnc" id="L47" title="All 2 branches missed.">		if(req.session().attribute(&quot;user&quot;)!=null)</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">		if(req.session().attribute(&quot;user&quot;)!=null)</span>
 		{	
-<span class="nc bnc" id="L49" title="All 2 branches missed.">			if(((Usuario) req.session().attribute(&quot;user&quot;)).esAdmin())</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">			if(((Usuario) req.session().attribute(&quot;user&quot;)).esAdmin())</span>
 			{
-<span class="nc" id="L51">				Map&lt;String, List&lt;POI&gt;&gt; model = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L52">				List&lt;POI&gt; pois = RepositorioBusquedas.getInstance().buscarPoisPorId(Integer.parseInt (req.params(&quot;id&quot;)));</span>
-<span class="nc" id="L53">				model.put(&quot;pois&quot;, pois);</span>
-<span class="nc" id="L54">				return new ModelAndView(model, &quot;admin/listarPoisBuscados.hbs&quot;);</span>
+<span class="nc" id="L52">				Map&lt;String, List&lt;POI&gt;&gt; model = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L53">				List&lt;POI&gt; pois = RepositorioBusquedas.getInstance().buscarPoisPorId(Integer.parseInt (req.params(&quot;id&quot;)));</span>
+<span class="nc" id="L54">				model.put(&quot;pois&quot;, pois);</span>
+<span class="nc" id="L55">				return new ModelAndView(model, &quot;admin/listarPoisBuscados.hbs&quot;);</span>
 			}	
 		} 
-<span class="nc" id="L57">		res.redirect(&quot;/login&quot;,403);</span>
-<span class="nc" id="L58">		return null;</span>
+<span class="nc" id="L58">		res.redirect(&quot;/login&quot;,403);</span>
+<span class="nc" id="L59">		return null;</span>
 	}
 	
 	private LocalDate parsearFecha(String fechaString)
 	{
-<span class="nc" id="L63">		int dia =Integer.parseInt (fechaString.substring(0 ,2)) ;</span>
-<span class="nc" id="L64">		int mes =Integer.parseInt (fechaString.substring(3, 5)) ;</span>
-<span class="nc" id="L65">		int anio =Integer.parseInt (fechaString.substring(6,10)) ;</span>
-<span class="nc" id="L66">		return LocalDate.of(anio, mes, dia);</span>
+<span class="nc" id="L64">		int dia =Integer.parseInt (fechaString.substring(8 ,10)) ;</span>
+<span class="nc" id="L65">		int mes =Integer.parseInt (fechaString.substring(5, 7)) ;</span>
+<span class="nc" id="L66">		int anio =Integer.parseInt (fechaString.substring(0,4)) ;</span>
+<span class="nc" id="L67">		return LocalDate.of(anio, mes, dia);</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -26,7 +26,7 @@ tpa,utn.dds.k3001.grupo3.tpa.converters.morphia,LocalDateConverter,54,0,8,0,15,0
 tpa,utn.dds.k3001.grupo3.tpa.converters.morphia,LocalDateTimeConverter,50,0,8,0,12,0,7,0,3,0
 tpa,utn.dds.k3001.grupo3.tpa.controllers,LoginController,74,0,4,0,18,0,6,0,4,0
 tpa,utn.dds.k3001.grupo3.tpa.controllers,TerminalesController,570,0,68,0,118,0,45,0,11,0
-tpa,utn.dds.k3001.grupo3.tpa.controllers,BusquedasController,198,0,24,0,29,0,16,0,4,0
+tpa,utn.dds.k3001.grupo3.tpa.controllers,BusquedasController,202,0,24,0,30,0,16,0,4,0
 tpa,utn.dds.k3001.grupo3.tpa.controllers,POISController,364,0,38,0,67,0,26,0,7,0
 tpa,utn.dds.k3001.grupo3.tpa.pois,POI,53,61,3,3,18,16,14,9,12,8
 tpa,utn.dds.k3001.grupo3.tpa.pois,ParadaColectivo,10,38,2,4,4,6,5,5,3,4

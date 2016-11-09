@@ -55,11 +55,19 @@ public class Terminal
 	}
 	
 	public void agregarObserverBusqueda(AccionesBusqueda observerBusqueda){
-		observersBusqueda.add(observerBusqueda);
+		if(!observersBusqueda.contains(observerBusqueda)){
+			observersBusqueda.add(observerBusqueda);
+		}
+	}
+	
+	public boolean tengoObserver(AccionesBusqueda observerBusqueda){
+		return observersBusqueda.contains(observerBusqueda);
 	}
 	
 	public void eliminarObserverBusqueda(AccionesBusqueda observerBusqueda){
-		observersBusqueda.remove(observerBusqueda);
+		if(observersBusqueda.contains(observerBusqueda)){
+			observersBusqueda.remove(observerBusqueda);
+		}
 	}
 	
 	public List<POI> buscar(String criterio){

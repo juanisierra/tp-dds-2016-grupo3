@@ -18,27 +18,23 @@ public class BusquedasController
 {
 	public ModelAndView buscar(Request req, Response res)
 	{
-		if(req.session().attribute("user")!=null )
+		if(req.session().attribute("user")!=null  && ((Usuario) req.session().attribute("user")).esAdmin() )
 		{
-			if(( (Usuario) req.session().attribute("user")).esAdmin() )
-			{
-				String terminal = (req.queryParams("terminal") == null || req.queryParams("terminal").equals("Cualquiera")) ? "" : req.queryParams("terminal");
-				int cantResultados = (req.queryParams("cantResultados") == null || req.queryParams("cantResultados").equals(""))? -1 : Integer.parseInt(req.queryParams("cantResultados"));
-				String query = req.queryParams("desde");
-				LocalDate desde =( req.queryParams("desde") == null ||  req.queryParams("desde").equals("") ) ? LocalDate.of(2000,1,1) : parsearFecha( req.queryParams("desde"));
-				LocalDate hasta = (req.queryParams("hasta") == null || req.queryParams("hasta").equals("")  ) ? LocalDate.now() : parsearFecha( req.queryParams("hasta"));
-				
-				List<Busqueda> busquedas = RepositorioBusquedas.getInstance().busquedaWeb(terminal, cantResultados, desde, hasta);
-				List<String> terminales = new LinkedList<String>();
-				terminales.add("Cualquiera");
-				terminales.addAll(RepositorioTerminales.getInstance().getNombresTerminales());
-				@SuppressWarnings("rawtypes")
-				Map<String, List> model = new HashMap<>();
-				model.put("busquedas", busquedas);
-				model.put("terminales", terminales);
-				return new ModelAndView(model, "admin/ListarBusquedas.hbs");
-			} 
-		} 
+			String terminal = (req.queryParams("terminal") == null || req.queryParams("terminal").equals("Cualquiera")) ? "" : req.queryParams("terminal");
+			int cantResultados = (req.queryParams("cantResultados") == null || req.queryParams("cantResultados").equals(""))? -1 : Integer.parseInt(req.queryParams("cantResultados"));
+			LocalDate desde =( req.queryParams("desde") == null ||  req.queryParams("desde").equals("") ) ? LocalDate.of(2000,1,1) : parsearFecha( req.queryParams("desde"));
+			LocalDate hasta = (req.queryParams("hasta") == null || req.queryParams("hasta").equals("")  ) ? LocalDate.now() : parsearFecha( req.queryParams("hasta"));
+			
+			List<Busqueda> busquedas = RepositorioBusquedas.getInstance().busquedaWeb(terminal, cantResultados, desde, hasta);
+			List<String> terminales = new LinkedList<String>();
+			terminales.add("Cualquiera");
+			terminales.addAll(RepositorioTerminales.getInstance().getNombresTerminales());
+			@SuppressWarnings("rawtypes")
+			Map<String, List> model = new HashMap<>();
+			model.put("busquedas", busquedas);
+			model.put("terminales", terminales);
+			return new ModelAndView(model, "admin/ListarBusquedas.hbs");
+		}
 		res.redirect("/login",403);
 		return null;
 	}

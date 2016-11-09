@@ -227,10 +227,25 @@ public class TerminalesController {
 			else {
 				Terminal terminal = RepositorioTerminales.getInstance().buscarTerminalPorId(Integer.parseInt(req.params("id")));
 				if (terminal!=null){
-					if (!req.queryParams(String.valueOf(AccionesBusqueda.GUARDARBUSQUEDA)).isEmpty()){
-						System.out.println("Guardar busqueda OK");
+					
+					if (req.queryParams(String.valueOf(AccionesBusqueda.GUARDARBUSQUEDA))!=null ){
+						if (req.queryParams(String.valueOf(AccionesBusqueda.GUARDARBUSQUEDA)).equals("on")){
+							terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
+						}
+						else{
+							terminal.eliminarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
+						}
 					}
-
+					if (req.queryParams(String.valueOf(AccionesBusqueda.NOTIFICARBUSQUEDALARGA))!=null){
+						if (req.queryParams(String.valueOf(AccionesBusqueda.NOTIFICARBUSQUEDALARGA)).equals("on")){
+							terminal.agregarObserverBusqueda(AccionesBusqueda.NOTIFICARBUSQUEDALARGA);
+						}
+						else{
+							terminal.eliminarObserverBusqueda(AccionesBusqueda.NOTIFICARBUSQUEDALARGA);
+						}
+					}
+					res.redirect("/terminales");
+					return null;
 				}
 				//res.redirect("/terminales");
 				return null;

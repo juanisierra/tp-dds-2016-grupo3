@@ -8,6 +8,8 @@ import java.util.stream.*;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import spark.utils.AccionesBusquedaHelper;
+import utn.dds.k3001.grupo3.tpa.busquedas.AccionesBusqueda;
 import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioComunas;
 import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioTerminales;
@@ -192,6 +194,49 @@ public class TerminalesController {
 		else {
 			res.redirect("/login",403);
 		}
+		return null;
+	}
+	
+	public ModelAndView getAcciones(Request req, Response res){
+		if(req.session().attribute("user")!=null)
+		{	
+			if(!((Usuario) req.session().attribute("user")).esAdmin()) {
+				res.redirect("/login", 403);
+				return null;
+			}
+			else {
+				Map<String, Terminal> model = new HashMap<>();
+				model.put("terminal", RepositorioTerminales.getInstance().buscarTerminalPorId(Integer.parseInt(req.params("id"))));
+				return new ModelAndView(model, "admin/accionesTerminal.hbs");
+			}
+		}
+		else {
+			res.redirect("/login",403);
+		}
+		return null;
+	}
+	
+	public ModelAndView actualizarAcciones(Request req, Response res){
+		if(req.session().attribute("user")!=null)
+		{	
+			if(!((Usuario) req.session().attribute("user")).esAdmin()) {
+				res.redirect("/login", 403);
+				return null;
+			}
+			else {
+				Terminal terminal = RepositorioTerminales.getInstance().buscarTerminalPorId(Integer.parseInt(req.params("id")));
+				if (terminal!=null){
+					if (!req.queryParams(String.valueOf(AccionesBusqueda.GUARDARBUSQUEDA)).isEmpty()){
+						System.out.println("Guardar busqueda OK");
+					}
+
+				}
+				//res.redirect("/terminales");
+				return null;
+			}
+		}
+		else
+			res.redirect("/login",403);
 		return null;
 	}
 }

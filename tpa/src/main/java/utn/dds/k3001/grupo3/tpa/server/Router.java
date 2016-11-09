@@ -2,6 +2,8 @@ package utn.dds.k3001.grupo3.tpa.server;
 
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
+import spark.utils.AccionesBusquedaHelper;
+import spark.utils.AccionesQueryParamHelper;
 import spark.utils.DireccionHelper;
 import spark.utils.HandlebarsTemplateEngineBuilder;
 import utn.dds.k3001.grupo3.tpa.controllers.BusquedasController;
@@ -23,6 +25,8 @@ public class Router {
 				.withHelper("getNumero", DireccionHelper.getNumero)
 				.withHelper("mostrarCoord", PointHelper.mostrarCoord)
 				.withHelper("mostrarServicio", ServiciosHelper.mostrarServicio)
+				.withHelper("mostrarAccion", AccionesBusquedaHelper.mostrarAccion)
+				.withHelper("parametrizarAccion", AccionesQueryParamHelper.parametrizarAccion)
 				.build();
 		
 		Spark.staticFiles.location("/public");
@@ -50,6 +54,8 @@ public class Router {
 		Spark.post("/terminales/modificar/:id",terminales::modificar,engine);		
 		Spark.get("/terminales/agregar",terminales::getAgregar,engine);
 		Spark.post("/terminales/agregar",terminales::agregar,engine);
+		Spark.get("/terminales/acciones/:id",terminales::getAcciones,engine);
+		Spark.post("/terminales/acciones/:id",terminales::actualizarAcciones,engine);
 	}
 
 }

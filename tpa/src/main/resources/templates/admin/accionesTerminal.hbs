@@ -1,0 +1,30 @@
+{{#partial "contenido"}}
+	{{#with terminal}}
+	<form action="/terminales/acciones/{{id}}" method="POST">
+		
+		<div class="form-group">
+			<label for="nombre">Terminal:  </label>
+			<label for="nomTerminal">{{nombre}}</label>
+		</div>
+
+		<div class="form-group">
+			<label for="comuna">Comuna:  </label>
+			<label for="comTerminal">{{comuna.nombre}}</label>
+		</div>
+
+		
+		{{#each observersBusqueda}}
+			<div class="form-group">
+				<input type="checkbox" name="acciones" value="{{parametrizarAccion this}}" checked>{{mostrarAccion this}}
+			</div>
+		{{/each}}
+				
+		<table><tr>
+		<input class="btn btn-primary btn-lg" type="submit" value="Guardar"></tr>
+		<tr><input class="btn btn-primary btn-lg" onClick="parent.location='/terminales'" value="Cancelar"></tr>
+		</table>
+	</form>
+	{{/with}}
+{{/partial}}
+
+{{>layoutAdmin.hbs}}

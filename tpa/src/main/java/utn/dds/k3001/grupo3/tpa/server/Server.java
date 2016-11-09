@@ -33,6 +33,8 @@ public class Server {
 		RepositorioComunas.getInstance().agregarComuna(comuna2);
 		Terminal terminal1 = new Terminal("Terminal 1",Mapa.getInstance(),comuna1);
 		Terminal terminal2 = new Terminal("Terminal 2",Mapa.getInstance(),comuna2);
+		terminal1.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
+		terminal1.agregarObserverBusqueda(AccionesBusqueda.NOTIFICARBUSQUEDALARGA);
 		RepositorioTerminales.getInstance().agregarTerminal(terminal1);
 		RepositorioTerminales.getInstance().agregarTerminal(terminal2);
 		Usuario u = new Usuario();

@@ -29,7 +29,7 @@ public class Terminal
 	
 	private List<AccionesBusqueda> observersBusqueda;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Comuna comuna;
 	
 	public Terminal(String nombre, Mapa mapa){

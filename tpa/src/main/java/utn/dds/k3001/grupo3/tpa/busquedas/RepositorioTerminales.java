@@ -25,7 +25,7 @@ public class RepositorioTerminales implements OrigenDeTerminales{
 	public void eliminarTerminalPorId(int id){
 		Terminal termABorrar = buscarTerminalPorId(id);
 		if (termABorrar!=null)
-			origen.obtenerTerminales().remove(termABorrar);
+			origen.remove(termABorrar);
 	}
 	
 	public List<Terminal> obtenerTerminales()

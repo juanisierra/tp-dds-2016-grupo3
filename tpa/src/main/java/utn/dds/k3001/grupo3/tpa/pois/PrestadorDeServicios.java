@@ -3,7 +3,7 @@ package utn.dds.k3001.grupo3.tpa.pois;
 import java.time.*;
 import java.util.LinkedList;
 import java.util.List;
-
+import org.hibernate.annotations.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -11,14 +11,17 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.Cascade;
-
 import utn.dds.k3001.grupo3.tpa.geo.*;
 @Entity
  //TODO Agregar single-table o ver como
 public abstract class PrestadorDeServicios extends POI implements java.io.Serializable
 {	
-	@ManyToMany(cascade=CascadeType.PERSIST) //TODO Revisar relacion
+	@ManyToMany(cascade= {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST
+    }) //TODO Revisar relacion
 	protected List<Servicio> serviciosOfrecidos;
 	
 	public PrestadorDeServicios(){}

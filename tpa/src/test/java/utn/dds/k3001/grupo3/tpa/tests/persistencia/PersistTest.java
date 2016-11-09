@@ -33,7 +33,6 @@ public class PersistTest extends AbstractPersistenceTest implements WithGlobalEn
 	RepositorioTerminales repo = RepositorioTerminales.getInstance();
 	repo.agregarTerminal(terminal1);
 	repo.agregarTerminal(terminal2);
-	entityManager().flush();
 	List<Terminal> lista = repo.obtenerTerminales();
 	Assert.assertEquals(terminal1.getNombre(),lista.get(0).getNombre());
 	Assert.assertEquals(terminal1.getObserversBusqueda(),lista.get(0).getObserversBusqueda());

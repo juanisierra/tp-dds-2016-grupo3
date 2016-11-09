@@ -5,17 +5,19 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Convert;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import org.mongodb.morphia.annotations.Id;
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
-@Entity 
+//@Entity 
 public class Busqueda
-{	@Id @GeneratedValue
-	private int id;
+{	@Id 
+	private String id;
 	private int cantResultados;
 	private String criterio;
 	private double tiempoDemorado;
@@ -23,6 +25,7 @@ public class Busqueda
 	private LocalDate fecha;
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Terminal terminal;
+	@ElementCollection
 	private List<POI> resultados;
 	
 	public Busqueda(Terminal terminal,int cantResultados, String criterio, LocalTime hInicio, LocalTime hFin, LocalDate fecha,List<POI> resultados){
@@ -61,11 +64,11 @@ public class Busqueda
 		return criterio;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

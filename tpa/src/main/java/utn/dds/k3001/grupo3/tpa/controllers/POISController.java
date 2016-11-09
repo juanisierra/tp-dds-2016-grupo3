@@ -8,6 +8,7 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
+import utn.dds.k3001.grupo3.tpa.origenesDePOIS.RepositorioInterno;
 import utn.dds.k3001.grupo3.tpa.pois.Banco;
 import utn.dds.k3001.grupo3.tpa.pois.CGP;
 import utn.dds.k3001.grupo3.tpa.pois.LocalComercial;
@@ -120,6 +121,7 @@ public class POISController {
 			poi.getDireccion().setCalle(req.queryParams("calle"));
 			poi.getDireccion().setAltura(Integer.parseInt(req.queryParams("numero")));
 			poi.getDireccion().setBarrio((req.queryParams("barrio")));
+			RepositorioInterno.getInstance().agregarPoi(poi);
 			res.redirect("/pois");
 			return null;
 		}

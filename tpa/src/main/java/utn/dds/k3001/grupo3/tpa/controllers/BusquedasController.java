@@ -46,7 +46,8 @@ public class BusquedasController
 			if(((Usuario) req.session().attribute("user")).esAdmin())
 			{
 				Map<String, List<POI>> model = new HashMap<>();
-				List<POI> pois = RepositorioBusquedas.getInstance().buscarPoisPorId(Integer.parseInt (req.params("id")));
+				List<POI> pois = RepositorioBusquedas.getInstance().buscarPoisPorId((req.params("id")));
+				
 				model.put("pois", pois);
 				return new ModelAndView(model, "admin/listarPoisBuscados.hbs");
 			}	

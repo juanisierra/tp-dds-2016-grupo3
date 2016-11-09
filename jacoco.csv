@@ -25,7 +25,7 @@ tpa,utn.dds.k3001.grupo3.tpa.converters.morphia,BigDecimalConverter,82,0,10,0,20
 tpa,utn.dds.k3001.grupo3.tpa.converters.morphia,LocalDateConverter,54,0,8,0,15,0,7,0,3,0
 tpa,utn.dds.k3001.grupo3.tpa.converters.morphia,LocalDateTimeConverter,50,0,8,0,12,0,7,0,3,0
 tpa,utn.dds.k3001.grupo3.tpa.controllers,LoginController,74,0,4,0,18,0,6,0,4,0
-tpa,utn.dds.k3001.grupo3.tpa.controllers,TerminalesController,480,0,56,0,98,0,37,0,9,0
+tpa,utn.dds.k3001.grupo3.tpa.controllers,TerminalesController,570,0,68,0,118,0,45,0,11,0
 tpa,utn.dds.k3001.grupo3.tpa.controllers,BusquedasController,198,0,24,0,29,0,16,0,4,0
 tpa,utn.dds.k3001.grupo3.tpa.controllers,POISController,364,0,38,0,67,0,26,0,7,0
 tpa,utn.dds.k3001.grupo3.tpa.pois,POI,53,61,3,3,18,16,14,9,12,8
@@ -40,21 +40,26 @@ tpa,utn.dds.k3001.grupo3.tpa.pois,Direccion,18,18,0,0,8,7,5,3,5,3
 tpa,utn.dds.k3001.grupo3.tpa.pois,Comuna,21,26,0,0,9,9,6,4,6,4
 tpa,utn.dds.k3001.grupo3.tpa.pois,PrestadorDeServicios,4,70,0,8,2,10,1,13,1,9
 tpa,spark.utils,DireccionHelper,58,0,0,0,5,0,4,0,4,0
+tpa,spark.utils,AccionesQueryParamHelper.new AccionesQueryParamHelper() {...},9,0,0,0,2,0,2,0,2,0
 tpa,spark.utils,PointHelper,28,0,0,0,2,0,4,0,4,0
 tpa,spark.utils,DireccionHelper.new DireccionHelper() {...},24,0,0,0,2,0,2,0,2,0
 tpa,spark.utils,ServiciosHelper.new ServiciosHelper() {...},39,0,2,0,6,0,4,0,3,0
+tpa,spark.utils,AccionesBusquedaHelper,28,0,0,0,3,0,4,0,4,0
 tpa,spark.utils,DireccionHelper.new DireccionHelper() {...},9,0,0,0,2,0,2,0,2,0
 tpa,spark.utils,DireccionHelper.new DireccionHelper() {...},10,0,0,0,2,0,2,0,2,0
 tpa,spark.utils,DireccionHelper.new DireccionHelper() {...},9,0,0,0,2,0,2,0,2,0
 tpa,spark.utils,DarkMagic,20,0,0,0,5,0,2,0,2,0
+tpa,spark.utils,AccionesBusquedaHelper.new Object() {...},19,0,0,0,1,0,1,0,1,0
+tpa,spark.utils,AccionesBusquedaHelper.new AccionesBusquedaHelper() {...},25,0,3,0,9,0,4,0,2,0
 tpa,spark.utils,PointHelper.new PointHelper() {...},12,0,0,0,2,0,2,0,2,0
+tpa,spark.utils,AccionesQueryParamHelper,28,0,0,0,2,0,4,0,4,0
 tpa,spark.utils,HandlebarsTemplateEngineBuilder,46,0,0,0,13,0,6,0,6,0
 tpa,spark.utils,ServiciosHelper,28,0,0,0,2,0,4,0,4,0
 tpa,utn.dds.k3001.grupo3.tpa.usuarios,UsuarioTerminal,13,0,0,0,5,0,4,0,4,0
 tpa,utn.dds.k3001.grupo3.tpa.usuarios,Usuario,23,0,0,0,9,0,7,0,7,0
 tpa,utn.dds.k3001.grupo3.tpa.usuarios,RepositorioUsuarios,59,0,4,0,9,0,10,0,8,0
-tpa,utn.dds.k3001.grupo3.tpa.server,Server,296,0,0,0,49,0,2,0,2,0
-tpa,utn.dds.k3001.grupo3.tpa.server,Router,194,0,0,0,35,0,2,0,2,0
+tpa,utn.dds.k3001.grupo3.tpa.server,Server,302,0,0,0,51,0,2,0,2,0
+tpa,utn.dds.k3001.grupo3.tpa.server,Router,216,0,0,0,39,0,2,0,2,0
 tpa,utn.dds.k3001.grupo3.tpa.DTO,CentroDTO,6,33,0,0,2,12,2,5,2,5
 tpa,utn.dds.k3001.grupo3.tpa.DTO,ServiciosDTO,0,15,0,0,0,6,0,3,0,3
 tpa,utn.dds.k3001.grupo3.tpa.DTO,RangosServicioDTO,0,33,0,0,0,12,0,6,0,6

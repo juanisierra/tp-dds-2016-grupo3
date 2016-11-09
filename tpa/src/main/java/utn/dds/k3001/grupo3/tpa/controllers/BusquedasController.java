@@ -24,7 +24,6 @@ public class BusquedasController
 			{
 				String terminal = (req.queryParams("terminal") == null || req.queryParams("terminal").equals("Cualquiera")) ? "" : req.queryParams("terminal");
 				int cantResultados = (req.queryParams("cantResultados") == null || req.queryParams("cantResultados").equals(""))? -1 : Integer.parseInt(req.queryParams("cantResultados"));
-				String query = req.queryParams("desde");
 				LocalDate desde =( req.queryParams("desde") == null ||  req.queryParams("desde").equals("") ) ? LocalDate.of(2000,1,1) : parsearFecha( req.queryParams("desde"));
 				LocalDate hasta = (req.queryParams("hasta") == null || req.queryParams("hasta").equals("")  ) ? LocalDate.now() : parsearFecha( req.queryParams("hasta"));
 				

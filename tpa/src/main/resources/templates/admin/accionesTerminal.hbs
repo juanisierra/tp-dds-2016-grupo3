@@ -15,7 +15,7 @@
 		
 		{{#each observersBusqueda}}
 			<div class="form-group">
-				<input type="checkbox" name="acciones" value="{{parametrizarAccion this}}" checked>{{mostrarAccion this}}
+				<input type="checkbox" name={{parametrizarAccion this}} checked>{{mostrarAccion this}}
 			</div>
 		{{/each}}
 				

@@ -226,8 +226,8 @@ public class TerminalesController {
 			else {
 				Terminal terminal = RepositorioTerminales.getInstance().buscarTerminalPorId(Integer.parseInt(req.params("id")));
 				if (terminal!=null){
-					if (!req.queryParams(String.valueOf(AccionesBusqueda.GUARDARBUSQUEDA)).isEmpty()){
-						System.out.println("Guardar busqueda OK");
+					if (req.queryParams(String.valueOf(AccionesBusqueda.GUARDARBUSQUEDA))!=null && req.queryParams(String.valueOf(AccionesBusqueda.GUARDARBUSQUEDA)).equals("on")){
+						//System.out.println("Guardar busqueda OK");
 					}
 
 				}

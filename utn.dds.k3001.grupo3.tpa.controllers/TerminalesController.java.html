@@ -226,8 +226,8 @@ import utn.dds.k3001.grupo3.tpa.usuarios.Usuario;
 			else {
 <span class="nc" id="L227">				Terminal terminal = RepositorioTerminales.getInstance().buscarTerminalPorId(Integer.parseInt(req.params(&quot;id&quot;)));</span>
 <span class="nc bnc" id="L228" title="All 2 branches missed.">				if (terminal!=null){</span>
-<span class="nc bnc" id="L229" title="All 2 branches missed.">					if (!req.queryParams(String.valueOf(AccionesBusqueda.GUARDARBUSQUEDA)).isEmpty()){</span>
-<span class="nc" id="L230">						System.out.println(&quot;Guardar busqueda OK&quot;);</span>
+<span class="nc bnc" id="L229" title="All 4 branches missed.">					if (req.queryParams(String.valueOf(AccionesBusqueda.GUARDARBUSQUEDA))!=null &amp;&amp; req.queryParams(String.valueOf(AccionesBusqueda.GUARDARBUSQUEDA)).equals(&quot;on&quot;)){</span>
+						//System.out.println(&quot;Guardar busqueda OK&quot;);
 					}
 
 				}

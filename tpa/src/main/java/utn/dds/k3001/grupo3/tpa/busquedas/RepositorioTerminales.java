@@ -7,7 +7,6 @@ public class RepositorioTerminales implements OrigenDeTerminales{
 	
 	private static RepositorioTerminales INSTANCE = new RepositorioTerminales();
 	private static TerminalOrigin origen = new InMemoryTerminalOrigin();
-	private int num = 0;
 	
 	public static RepositorioTerminales getInstance(){
 		return INSTANCE;
@@ -15,7 +14,6 @@ public class RepositorioTerminales implements OrigenDeTerminales{
 	private RepositorioTerminales (){}
 	
 	public void agregarTerminal(Terminal terminal){
-		terminal.setId(++num);
 		origen.agregarTerminal(terminal);
 	}
 	public void eliminarTerminal(Terminal terminal){

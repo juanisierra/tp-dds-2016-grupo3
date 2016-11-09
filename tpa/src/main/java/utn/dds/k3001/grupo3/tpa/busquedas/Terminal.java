@@ -60,6 +60,10 @@ public class Terminal
 		}
 	}
 	
+	public boolean tengoObserver(AccionesBusqueda observerBusqueda){
+		return observersBusqueda.contains(observerBusqueda);
+	}
+	
 	public void eliminarObserverBusqueda(AccionesBusqueda observerBusqueda){
 		if(observersBusqueda.contains(observerBusqueda)){
 			observersBusqueda.remove(observerBusqueda);

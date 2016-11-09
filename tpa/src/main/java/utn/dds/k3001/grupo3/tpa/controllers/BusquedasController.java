@@ -24,6 +24,7 @@ public class BusquedasController
 			{
 				String terminal = (req.queryParams("terminal") == null || req.queryParams("terminal").equals("Cualquiera")) ? "" : req.queryParams("terminal");
 				int cantResultados = (req.queryParams("cantResultados") == null || req.queryParams("cantResultados").equals(""))? -1 : Integer.parseInt(req.queryParams("cantResultados"));
+				String query = req.queryParams("desde");
 				LocalDate desde =( req.queryParams("desde") == null ||  req.queryParams("desde").equals("") ) ? LocalDate.of(2000,1,1) : parsearFecha( req.queryParams("desde"));
 				LocalDate hasta = (req.queryParams("hasta") == null || req.queryParams("hasta").equals("")  ) ? LocalDate.now() : parsearFecha( req.queryParams("hasta"));
 				
@@ -60,9 +61,9 @@ public class BusquedasController
 	
 	private LocalDate parsearFecha(String fechaString)
 	{
-		int dia =Integer.parseInt (fechaString.substring(0 ,2)) ;
-		int mes =Integer.parseInt (fechaString.substring(3, 5)) ;
-		int anio =Integer.parseInt (fechaString.substring(6,10)) ;
+		int dia =Integer.parseInt (fechaString.substring(8 ,10)) ;
+		int mes =Integer.parseInt (fechaString.substring(5, 7)) ;
+		int anio =Integer.parseInt (fechaString.substring(0,4)) ;
 		return LocalDate.of(anio, mes, dia);
 	}
 }

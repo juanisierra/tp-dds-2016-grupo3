@@ -205,7 +205,13 @@ public class TerminalesController {
 				return null;
 			}
 			else {
-				Map<String, Terminal> model = new HashMap<>();
+				Map<String, Object> model = new HashMap<>();
+				List<AccionesBusqueda> observers = new LinkedList<AccionesBusqueda>();
+				Terminal terminal = RepositorioTerminales.getInstance().buscarTerminalPorId(Integer.parseInt(req.params("id")));
+				observers.add(AccionesBusqueda.GUARDARBUSQUEDA);
+				observers.add(AccionesBusqueda.NOTIFICARBUSQUEDALARGA);
+				observers.removeIf(p -> terminal.tengoObserver(p));
+				model.put("observersFaltantes", observers);
 				model.put("terminal", RepositorioTerminales.getInstance().buscarTerminalPorId(Integer.parseInt(req.params("id"))));
 				return new ModelAndView(model, "admin/accionesTerminal.hbs");
 			}
@@ -235,6 +241,9 @@ public class TerminalesController {
 							terminal.eliminarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 						}
 					}
+					else{
+						terminal.eliminarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
+					}
 					if (req.queryParams(String.valueOf(AccionesBusqueda.NOTIFICARBUSQUEDALARGA))!=null){
 						if (req.queryParams(String.valueOf(AccionesBusqueda.NOTIFICARBUSQUEDALARGA)).equals("on")){
 							terminal.agregarObserverBusqueda(AccionesBusqueda.NOTIFICARBUSQUEDALARGA);
@@ -242,6 +251,9 @@ public class TerminalesController {
 						else{
 							terminal.eliminarObserverBusqueda(AccionesBusqueda.NOTIFICARBUSQUEDALARGA);
 						}
+					}
+					else{
+						terminal.eliminarObserverBusqueda(AccionesBusqueda.NOTIFICARBUSQUEDALARGA);
 					}
 					res.redirect("/terminales");
 					return null;

@@ -1,5 +1,6 @@
 {{#partial "contenido"}}
 	{{#with terminal}}
+	
 	<form action="/terminales/acciones/{{id}}" method="POST">
 		
 		<div class="form-group">
@@ -12,12 +13,21 @@
 			<label for="comTerminal">{{comuna.nombre}}</label>
 		</div>
 
-		
+
 		{{#each observersBusqueda}}
 			<div class="form-group">
 				<input type="checkbox" name={{parametrizarAccion this}} checked>{{mostrarAccion this}}
 			</div>
 		{{/each}}
+
+		{{#with observersFaltantes}}
+		{{#each observersFaltantes}}
+			<div class="form-group">
+				<input type="checkbox" name={{parametrizarAccion this}} unchecked>{{mostrarAccion this}}
+			</div>
+		{{/each}}
+		{{/with}}
+
 				
 		<table><tr>
 		<input class="btn btn-primary btn-lg" type="submit" value="Guardar"></tr>

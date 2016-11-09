@@ -13,11 +13,11 @@ public class RepositorioBusquedas implements WithGlobalEntityManager{
 	
 <span class="fc" id="L14">	private static final RepositorioBusquedas INSTANCE = new RepositorioBusquedas();</span>
 <span class="fc" id="L15">	private BusquedasOrigin origen = new InMemoryBusquedasOrigin();</span>
-	
 	public static RepositorioBusquedas getInstance(){
-<span class="fc" id="L18">		return INSTANCE;</span>
+<span class="fc" id="L17">		return INSTANCE;</span>
 	}
-<span class="fc" id="L20">	private RepositorioBusquedas(){}</span>
+<span class="fc" id="L19">	private RepositorioBusquedas(){</span>
+<span class="fc" id="L20">	}</span>
 	
 	public Map&lt;String,List&lt;Integer&gt;&gt; busquedasParcialesPorTerminal(){	
 <span class="nc" id="L23">		return  origen.getBusquedas().stream()</span>
@@ -51,13 +51,13 @@ public class RepositorioBusquedas implements WithGlobalEntityManager{
 <span class="nc" id="L51">		origen = new PersistenceBusquedasOrigin();</span>
 <span class="nc" id="L52">	}</span>
 	
-	public List&lt;POI&gt; buscarPoisPorId(int id){
-<span class="nc" id="L55">		return  origen.getBusquedas()</span>
+	public List&lt;POI&gt; buscarPoisPorId(String id){
+<span class="nc" id="L55">		Busqueda b =  origen.getBusquedas()</span>
 <span class="nc" id="L56">									    .stream()</span>
-<span class="nc bnc" id="L57" title="All 2 branches missed.">									    .filter(busqueda -&gt; busqueda.getId() == id)</span>
-<span class="nc" id="L58">									    .findAny()</span>
-<span class="nc" id="L59">									    .map(busqueda  -&gt; busqueda.getResultados())</span>
-<span class="nc" id="L60">									    .orElse(new LinkedList&lt;POI&gt;());</span>
+<span class="nc" id="L57">									    .filter(busqueda -&gt; busqueda.getId().equals(id)).findFirst().get();</span>
+		
+<span class="nc" id="L59">		return b.getResultados();</span>
+									  
 	}
 	
 	public List&lt;Busqueda&gt; busquedaWeb(String terminal, int cantResultados, LocalDate desde, LocalDate hasta){

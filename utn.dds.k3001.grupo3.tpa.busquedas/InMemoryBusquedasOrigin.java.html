@@ -13,13 +13,14 @@ import java.util.List;
 	@Override
 	public void addBusqueda(Busqueda busqueda) {
 <span class="fc" id="L15">	lista.add(busqueda);</span>
-<span class="fc" id="L16">	}</span>
+<span class="fc" id="L16">	busqueda.setId(String.valueOf(busqueda.hashCode()));</span>
+<span class="fc" id="L17">	}</span>
 
 	@Override
 	public void reset() {
-<span class="fc" id="L20">		lista = new LinkedList&lt;Busqueda&gt;();</span>
+<span class="fc" id="L21">		lista = new LinkedList&lt;Busqueda&gt;();</span>
 		
-<span class="fc" id="L22">	}</span>
+<span class="fc" id="L23">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

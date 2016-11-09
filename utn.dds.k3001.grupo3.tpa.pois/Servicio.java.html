@@ -18,7 +18,7 @@ public class Servicio implements java.io.Serializable
 {	@Id @GeneratedValue
 	private int id;
 	private String nombre;
-	@OneToMany(cascade=CascadeType.PERSIST)
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name =&quot;servicio_id&quot;)
 	private List&lt;Disponibilidad&gt; listaDisponibilidad;
 	

@@ -5,17 +5,19 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Convert;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import org.mongodb.morphia.annotations.Id;
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
-@Entity 
+//@Entity 
 public class Busqueda
-{	@Id @GeneratedValue
-	private int id;
+{	@Id 
+	private String id;
 	private int cantResultados;
 	private String criterio;
 	private double tiempoDemorado;
@@ -23,86 +25,87 @@ public class Busqueda
 	private LocalDate fecha;
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Terminal terminal;
+	@ElementCollection
 	private List&lt;POI&gt; resultados;
 	
-<span class="fc" id="L28">	public Busqueda(Terminal terminal,int cantResultados, String criterio, LocalTime hInicio, LocalTime hFin, LocalDate fecha,List&lt;POI&gt; resultados){</span>
-<span class="fc" id="L29">		this.terminal = terminal;</span>
-<span class="fc" id="L30">		this.cantResultados = cantResultados;</span>
-<span class="fc" id="L31">		this.criterio = criterio;</span>
-<span class="fc" id="L32">		this.tiempoDemorado = ChronoUnit.SECONDS.between(hInicio, hFin);</span>
-<span class="fc" id="L33">		this.fecha = fecha;</span>
-<span class="fc" id="L34">		this.resultados=resultados;</span>
-<span class="fc" id="L35">	}</span>
+<span class="fc" id="L31">	public Busqueda(Terminal terminal,int cantResultados, String criterio, LocalTime hInicio, LocalTime hFin, LocalDate fecha,List&lt;POI&gt; resultados){</span>
+<span class="fc" id="L32">		this.terminal = terminal;</span>
+<span class="fc" id="L33">		this.cantResultados = cantResultados;</span>
+<span class="fc" id="L34">		this.criterio = criterio;</span>
+<span class="fc" id="L35">		this.tiempoDemorado = ChronoUnit.SECONDS.between(hInicio, hFin);</span>
+<span class="fc" id="L36">		this.fecha = fecha;</span>
+<span class="fc" id="L37">		this.resultados=resultados;</span>
+<span class="fc" id="L38">	}</span>
 	
-<span class="nc" id="L37">	public Busqueda(){}</span>
+<span class="nc" id="L40">	public Busqueda(){}</span>
 	public Terminal getTerminal(){
-<span class="fc" id="L39">	return terminal;</span>
+<span class="fc" id="L42">	return terminal;</span>
 	}
 	public List&lt;POI&gt; getResultados(){
-<span class="nc" id="L42">		return resultados;</span>
+<span class="nc" id="L45">		return resultados;</span>
 	}
 	
 	public boolean esEnFecha(LocalDate fecha){
-<span class="nc" id="L46">		return this.fecha.equals(fecha);</span>
+<span class="nc" id="L49">		return this.fecha.equals(fecha);</span>
 	}
 	
 	public int getCantidadResultados(){
-<span class="fc" id="L50">		return this.cantResultados;</span>
+<span class="fc" id="L53">		return this.cantResultados;</span>
 	}
 	
 	public double getTiempo(){
-<span class="fc" id="L54">		return this.tiempoDemorado;</span>
+<span class="fc" id="L57">		return this.tiempoDemorado;</span>
 	}
 	
 	public LocalDate getFecha(){
-<span class="fc" id="L58">		return this.fecha;</span>
+<span class="fc" id="L61">		return this.fecha;</span>
 	}
 	public String getCriterio() {
-<span class="nc" id="L61">		return criterio;</span>
+<span class="nc" id="L64">		return criterio;</span>
 	}
 
-	public int getId() {
-<span class="nc" id="L65">		return id;</span>
+	public String getId() {
+<span class="nc" id="L68">		return id;</span>
 	}
 
-	public void setId(int id) {
-<span class="nc" id="L69">		this.id = id;</span>
-<span class="nc" id="L70">	}</span>
+	public void setId(String id) {
+<span class="fc" id="L72">		this.id = id;</span>
+<span class="fc" id="L73">	}</span>
 
 	public int getCantResultados() {
-<span class="nc" id="L73">		return cantResultados;</span>
+<span class="nc" id="L76">		return cantResultados;</span>
 	}
 
 	public void setCantResultados(int cantResultados) {
-<span class="nc" id="L77">		this.cantResultados = cantResultados;</span>
-<span class="nc" id="L78">	}</span>
+<span class="nc" id="L80">		this.cantResultados = cantResultados;</span>
+<span class="nc" id="L81">	}</span>
 
 	public double getTiempoDemorado() {
-<span class="nc" id="L81">		return tiempoDemorado;</span>
+<span class="nc" id="L84">		return tiempoDemorado;</span>
 	}
 
 	public void setTiempoDemorado(double tiempoDemorado) {
-<span class="nc" id="L85">		this.tiempoDemorado = tiempoDemorado;</span>
-<span class="nc" id="L86">	}</span>
+<span class="nc" id="L88">		this.tiempoDemorado = tiempoDemorado;</span>
+<span class="nc" id="L89">	}</span>
 
 	public void setCriterio(String criterio) {
-<span class="nc" id="L89">		this.criterio = criterio;</span>
-<span class="nc" id="L90">	}</span>
+<span class="nc" id="L92">		this.criterio = criterio;</span>
+<span class="nc" id="L93">	}</span>
 
 	public void setFecha(LocalDate fecha) {
-<span class="nc" id="L93">		this.fecha = fecha;</span>
-<span class="nc" id="L94">	}</span>
+<span class="nc" id="L96">		this.fecha = fecha;</span>
+<span class="nc" id="L97">	}</span>
 
 	public void setTerminal(Terminal terminal) {
-<span class="nc" id="L97">		this.terminal = terminal;</span>
-<span class="nc" id="L98">	}</span>
+<span class="nc" id="L100">		this.terminal = terminal;</span>
+<span class="nc" id="L101">	}</span>
 	
 	public boolean estaEntre(LocalDate desde, LocalDate hasta){
-<span class="nc bnc" id="L101" title="All 4 branches missed.">		return (fecha.compareTo(desde) &gt;= 0 &amp;&amp; fecha.compareTo(hasta) &lt;=0 );</span>
+<span class="nc bnc" id="L104" title="All 4 branches missed.">		return (fecha.compareTo(desde) &gt;= 0 &amp;&amp; fecha.compareTo(hasta) &lt;=0 );</span>
 	}
 	
 	public boolean esDeTerminal(String terminal){
-<span class="nc" id="L105">		return this.terminal.getNombre().equals(terminal);</span>
+<span class="nc" id="L108">		return this.terminal.getNombre().equals(terminal);</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -23,7 +23,7 @@ public class RepositorioTerminales implements OrigenDeTerminales{
 	public void eliminarTerminalPorId(int id){
 <span class="nc" id="L24">		Terminal termABorrar = buscarTerminalPorId(id);</span>
 <span class="nc bnc" id="L25" title="All 2 branches missed.">		if (termABorrar!=null)</span>
-<span class="nc" id="L26">			origen.obtenerTerminales().remove(termABorrar);</span>
+<span class="nc" id="L26">			origen.remove(termABorrar);</span>
 <span class="nc" id="L27">	}</span>
 	
 	public List&lt;Terminal&gt; obtenerTerminales()

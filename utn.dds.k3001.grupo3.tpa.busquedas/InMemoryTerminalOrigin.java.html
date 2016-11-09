@@ -11,7 +11,7 @@ public class InMemoryTerminalOrigin implements TerminalOrigin{
 <span class="fc" id="L11">	}</span>
 	@Override
 	public void agregarTerminal(Terminal terminal) {
-<span class="fc" id="L14">		listaTerminales.add(terminal);</span>
+<span class="pc bpc" id="L14" title="1 of 2 branches missed.">		if(!listaTerminales.contains(terminal)) listaTerminales.add(terminal);</span>
 <span class="fc" id="L15">	}</span>
 
 	@Override
@@ -23,6 +23,11 @@ public class InMemoryTerminalOrigin implements TerminalOrigin{
 <span class="fc" id="L23">		listaTerminales = new LinkedList&lt;Terminal&gt;();</span>
 		
 <span class="fc" id="L25">	}</span>
+	@Override
+	public void remove(Terminal termABorrar) {
+<span class="nc" id="L28">		listaTerminales.remove(termABorrar);</span>
+		
+<span class="nc" id="L30">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

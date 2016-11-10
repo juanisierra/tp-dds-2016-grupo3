@@ -1,5 +1,6 @@
 package utn.dds.k3001.grupo3.tpa.controllers;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -209,11 +210,10 @@ public class TerminalesController {
 				Map<String, Object> model = new HashMap<>();
 				List<AccionesBusqueda> observers = new LinkedList<AccionesBusqueda>();
 				Terminal terminal = RepositorioTerminales.getInstance().buscarTerminalPorId(Integer.parseInt(req.params("id")));
-				observers.add(AccionesBusqueda.GUARDARBUSQUEDA);
-				observers.add(AccionesBusqueda.NOTIFICARBUSQUEDALARGA);
+				observers.addAll(Arrays.asList(AccionesBusqueda.class.getEnumConstants()));
 				observers.removeIf(p -> terminal.tengoObserver(p));
 				model.put("observersFaltantes", observers);
-				model.put("terminal", RepositorioTerminales.getInstance().buscarTerminalPorId(Integer.parseInt(req.params("id"))));
+				model.put("terminal", terminal);
 				return new ModelAndView(model, "admin/accionesTerminal.hbs");
 			}
 		}
@@ -233,33 +233,20 @@ public class TerminalesController {
 			else {
 				Terminal terminal = RepositorioTerminales.getInstance().buscarTerminalPorId(Integer.parseInt(req.params("id")));
 				if (terminal!=null){
-					
-					if (req.queryParams(String.valueOf(AccionesBusqueda.GUARDARBUSQUEDA))!=null ){
-						if (req.queryParams(String.valueOf(AccionesBusqueda.GUARDARBUSQUEDA)).equals("on")){
-							terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
-						}
-						else{
-							terminal.eliminarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
-						}
-					}
-					else{
-						terminal.eliminarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
-					}
-					if (req.queryParams(String.valueOf(AccionesBusqueda.NOTIFICARBUSQUEDALARGA))!=null){
-						if (req.queryParams(String.valueOf(AccionesBusqueda.NOTIFICARBUSQUEDALARGA)).equals("on")){
-							terminal.agregarObserverBusqueda(AccionesBusqueda.NOTIFICARBUSQUEDALARGA);
-						}
-						else{
-							terminal.eliminarObserverBusqueda(AccionesBusqueda.NOTIFICARBUSQUEDALARGA);
-						}
-					}
-					else{
-						terminal.eliminarObserverBusqueda(AccionesBusqueda.NOTIFICARBUSQUEDALARGA);
-					}
+					Arrays.asList(AccionesBusqueda.class.getEnumConstants()).stream().forEach(accion -> {
+					if(req.queryParams(String.valueOf(accion))==null || !req.queryParams(String.valueOf(accion)).equals("on")){
+						
+						terminal.eliminarObserverBusqueda(accion);
+					}else {
+						terminal.agregarObserverBusqueda(accion);
+					}		
+					});
+
+					RepositorioTerminales.getInstance().agregarTerminal(terminal);
 					res.redirect("/terminales");
 					return null;
 				}
-				//res.redirect("/terminales");
+				res.redirect("/terminales");
 				return null;
 			}
 		}

@@ -31,8 +31,8 @@ public class Server {
 		/*RepositorioInterno.origenPersistencia();
 		RepositorioTerminales.persistirEnBD();
 		RepositorioComunas.persistirEnBD();
-		RepositorioBusquedas.getInstance().setPersistence();*/
-		//cargarDatos()
+		RepositorioBusquedas.getInstance().setPersistence();
+		cargarDatos()*/
 		cargarDatosMemoria();
 		Usuario u = new Usuario();
 		u.setNombre("admin");

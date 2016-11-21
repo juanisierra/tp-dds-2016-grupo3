@@ -27,7 +27,12 @@ import utn.dds.k3001.grupo3.tpa.usuarios.UsuarioTerminal;
 
 public class Server {
 	public static void main(String[] args) {
-		Spark.port(9000);
+		if(System.getenv("PORT")!=null)
+			{
+			Spark.port(Integer.parseInt(System.getenv("PORT")));
+			} else {
+				Spark.port(9000);
+			}
 		/*RepositorioInterno.origenPersistencia();
 		RepositorioTerminales.persistirEnBD();
 		RepositorioComunas.persistirEnBD();
@@ -43,7 +48,7 @@ public class Server {
 		t.setTerminal(RepositorioTerminales.getInstance().obtenerTerminales().get(0));
 		RepositorioUsuarios.instance().agregarUsuario(t);
 		RepositorioUsuarios.instance().agregarUsuario(u);		
-		DebugScreen.enableDebugScreen();
+		//DebugScreen.enableDebugScreen();
 		Router.configure();
 	}
 	public static void cargarDatos()

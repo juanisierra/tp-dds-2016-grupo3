@@ -22,3 +22,5 @@ generated-sources
 *.svn
 *.classpath
 .classpath
+
+target

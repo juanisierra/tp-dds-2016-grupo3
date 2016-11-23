@@ -19,8 +19,7 @@ import utn.dds.k3001.grupo3.tpa.usuarios.UsuarioTerminal;
 
 public class POISController {
 	public ModelAndView buscar(Request req, Response res){
-		if(req.session().attribute("user")!=null)
-		{	if(!((Usuario) req.session().attribute("user")).esAdmin()) {
+	if(!((Usuario) req.session().attribute("user")).esAdmin()) {
 			Map<String, List<POI>> model = new HashMap<>();
 			List<POI> pois = ((UsuarioTerminal) req.session().attribute("user")).getTerminal().buscar(req.queryParams("criterio")!= null? req.queryParams("criterio") : "");
 			model.put("pois", pois);
@@ -37,16 +36,10 @@ public class POISController {
 			model.put("pois", pois);
 			return new ModelAndView(model, "admin/buscarPOI.hbs");
 		}
-		
-		} else {
-			//res.status(403);
-			res.redirect("/login",403);
-		}
-		return null;
+
 	}
 	public ModelAndView eliminar(Request req, Response res){
-		if(req.session().attribute("user")!=null)
-		{	if(!((Usuario) req.session().attribute("user")).esAdmin()) {
+	if(!((Usuario) req.session().attribute("user")).esAdmin()) {
 			res.redirect("/login", 403);
 			return null;
 		} else {
@@ -54,15 +47,9 @@ public class POISController {
 			res.redirect("/pois");
 			return null;
 		}
-		
-		} else {
-			res.redirect("/login",403);
-		}
-		return null;
 	}
 	public ModelAndView getEliminar(Request req, Response res){
-		if(req.session().attribute("user")!=null)
-		{	if(!((Usuario) req.session().attribute("user")).esAdmin()) {
+			if(!((Usuario) req.session().attribute("user")).esAdmin()) {
 			res.redirect("/login", 403);
 			return null;
 		} else {
@@ -70,16 +57,10 @@ public class POISController {
 			model.put("poi", Mapa.getInstance().getById(req.params("id")));
 			return new ModelAndView(model, "admin/EliminarPOI.hbs");
 		}
-		
-		} else {
-			//res.status(403);
-			res.redirect("/login",403);
-		}
-		return null;
+
 	}
 	public ModelAndView getModificar(Request req, Response res){
-		if(req.session().attribute("user")!=null)
-		{	if(!((Usuario) req.session().attribute("user")).esAdmin()) {
+	if(!((Usuario) req.session().attribute("user")).esAdmin()) {
 			res.redirect("/login", 403);
 			return null;
 		} else {
@@ -88,15 +69,9 @@ public class POISController {
 			return new ModelAndView(model, "admin/modificarPOI.hbs");
 		}
 		
-		} else {
-			//res.status(403);
-			res.redirect("/login",403);
-		}
-		return null;
 	}
 	public ModelAndView verPOI(Request req, Response res){
-		if(req.session().attribute("user")!=null)
-		{	Map<String, POI> model = new HashMap<>();
+	Map<String, POI> model = new HashMap<>();
 		POI poi =Mapa.getInstance().getById(req.params("id"));
 			model.put("poi",poi);
 			if(poi.getClass()==Banco.class) return new ModelAndView(model, "admin/verPois/verBanco.hbs");
@@ -104,15 +79,10 @@ public class POISController {
 			else if (poi.getClass()==LocalComercial.class) return new ModelAndView(model, "admin/verPois/verLocalComercial.hbs");
 			else if (poi.getClass()==ParadaColectivo.class) return new ModelAndView(model, "admin/verPois/verParadaColectivo.hbs");
 			else return new ModelAndView(model, "admin/verPOILayout.hbs");
-		} else {
-			//res.status(403);
-			res.redirect("/login",403);
-		}
-		return null;
+
 	}
 	public ModelAndView modificar(Request req, Response res){
-		if(req.session().attribute("user")!=null)
-		{	if(!((Usuario) req.session().attribute("user")).esAdmin()) {
+	if(!((Usuario) req.session().attribute("user")).esAdmin()) {
 			res.redirect("/login", 403);
 			return null;
 		} else {
@@ -125,10 +95,6 @@ public class POISController {
 			res.redirect("/pois");
 			return null;
 		}
-		
-		} else {
-			res.redirect("/login",403);
-		}
-		return null;
+
 	}
 }

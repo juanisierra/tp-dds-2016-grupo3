@@ -33,10 +33,11 @@ public class Server {
 			} else {
 				Spark.port(9000);
 			}
+	
 		/*RepositorioInterno.origenPersistencia();
 		RepositorioTerminales.persistirEnBD();
 		RepositorioComunas.persistirEnBD();
-		RepositorioBusquedas.getInstance().setPersistence();
+		//RepositorioBusquedas.getInstance().setPersistence();
 		cargarDatos()*/
 		cargarDatosMemoria();
 		Usuario u = new Usuario();

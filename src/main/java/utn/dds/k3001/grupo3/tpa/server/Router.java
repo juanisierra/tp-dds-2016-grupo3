@@ -56,6 +56,17 @@ public class Router {
 		Spark.post("/terminales/agregar",terminales::agregar,engine);
 		Spark.get("/terminales/acciones/:id",terminales::getAcciones,engine);
 		Spark.post("/terminales/acciones/:id",terminales::actualizarAcciones,engine);
+		Spark.after(Filters.BorrarCache);
+		Spark.before(Filters.Login);
+		Spark.before("/busquedas", Filters.Admin);
+		Spark.before("/busquedas/verPois/:id", Filters.Admin);
+		Spark.before("/pois/eliminar/:id", Filters.Admin);
+		Spark.before("/pois/modificar/:id", Filters.Admin);
+		Spark.before("/terminales", Filters.Admin);
+		Spark.before("/terminales/eliminar/:id", Filters.Admin);
+		Spark.before("/terminales/modificar/:id", Filters.Admin);
+		Spark.before("/terminales/agregar", Filters.Admin);
+		Spark.before("/terminales/acciones/:id", Filters.Admin);
 	}
 
 }

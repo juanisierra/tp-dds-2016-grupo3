@@ -49,7 +49,7 @@ public class Server {
 		t.setTerminal(RepositorioTerminales.getInstance().obtenerTerminales().get(0));
 		RepositorioUsuarios.instance().agregarUsuario(t);
 		RepositorioUsuarios.instance().agregarUsuario(u);		
-		//DebugScreen.enableDebugScreen();
+		DebugScreen.enableDebugScreen();
 		Router.configure();
 	}
 	public static void cargarDatos()

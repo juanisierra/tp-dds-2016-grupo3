@@ -6,6 +6,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.*;
+
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -18,7 +22,7 @@ import utn.dds.k3001.grupo3.tpa.pois.Comuna;
 import utn.dds.k3001.grupo3.tpa.usuarios.Usuario;
 
 //TODO Abstraer recopilación de comunas y ABM de terminales al repositorio, emprolijar
-public class TerminalesController {
+public class TerminalesController implements WithGlobalEntityManager,TransactionalOps{
 
 	public ModelAndView listar(Request req, Response res){
 
@@ -52,8 +56,9 @@ public class TerminalesController {
 	}
 	
 	public ModelAndView eliminar(Request req, Response res){
-
+		withTransaction(() -> {
 				RepositorioTerminales.getInstance().eliminarTerminalPorId(Integer.parseInt(req.params("id")));
+		});
 				res.redirect("/terminales");
 				return null;
 	}

@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -17,7 +21,7 @@ import utn.dds.k3001.grupo3.tpa.pois.ParadaColectivo;
 import utn.dds.k3001.grupo3.tpa.usuarios.Usuario;
 import utn.dds.k3001.grupo3.tpa.usuarios.UsuarioTerminal;
 
-public class POISController {
+public class POISController implements WithGlobalEntityManager,TransactionalOps {
 	public ModelAndView buscar(Request req, Response res){
 	if(!((Usuario) req.session().attribute("user")).esAdmin()) {
 			Map<String, List<POI>> model = new HashMap<>();
@@ -39,37 +43,26 @@ public class POISController {
 
 	}
 	public ModelAndView eliminar(Request req, Response res){
-	if(!((Usuario) req.session().attribute("user")).esAdmin()) {
-			res.redirect("/login", 403);
-			return null;
-		} else {
+		withTransaction(() -> {
 			Mapa.getInstance().eliminarPorId(req.params("id"));
+		});
 			res.redirect("/pois");
 			return null;
-		}
+		
 	}
 	public ModelAndView getEliminar(Request req, Response res){
-			if(!((Usuario) req.session().attribute("user")).esAdmin()) {
-			res.redirect("/login", 403);
-			return null;
-		} else {
 			Map<String, POI> model = new HashMap<>();
 			model.put("poi", Mapa.getInstance().getById(req.params("id")));
 			return new ModelAndView(model, "admin/EliminarPOI.hbs");
-		}
 
 	}
 	public ModelAndView getModificar(Request req, Response res){
-	if(!((Usuario) req.session().attribute("user")).esAdmin()) {
-			res.redirect("/login", 403);
-			return null;
-		} else {
 			Map<String, POI> model = new HashMap<>();
 			model.put("poi", Mapa.getInstance().getById(req.params("id")));
 			return new ModelAndView(model, "admin/modificarPOI.hbs");
 		}
 		
-	}
+	
 	public ModelAndView verPOI(Request req, Response res){
 	Map<String, POI> model = new HashMap<>();
 		POI poi =Mapa.getInstance().getById(req.params("id"));
@@ -82,19 +75,17 @@ public class POISController {
 
 	}
 	public ModelAndView modificar(Request req, Response res){
-	if(!((Usuario) req.session().attribute("user")).esAdmin()) {
-			res.redirect("/login", 403);
-			return null;
-		} else {
+		withTransaction(() -> {
 			POI poi = Mapa.getInstance().getById(req.params("id"));
 			poi.setNombre(req.queryParams("nombre"));
 			poi.getDireccion().setCalle(req.queryParams("calle"));
 			poi.getDireccion().setAltura(Integer.parseInt(req.queryParams("numero")));
 			poi.getDireccion().setBarrio((req.queryParams("barrio")));
 			RepositorioInterno.getInstance().agregarPoi(poi);
+		});
 			res.redirect("/pois");
 			return null;
-		}
+		
 
 	}
 }

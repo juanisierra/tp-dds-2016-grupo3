@@ -67,11 +67,8 @@ public class POISController implements WithGlobalEntityManager,TransactionalOps 
 	Map<String, POI> model = new HashMap<>();
 		POI poi =Mapa.getInstance().getById(req.params("id"));
 			model.put("poi",poi);
-			if(poi.getClass()==Banco.class) return new ModelAndView(model, "admin/verPois/verBanco.hbs");
-			else if (poi.getClass()==CGP.class) return new ModelAndView(model, "admin/verPois/verCGP.hbs");
-			else if (poi.getClass()==LocalComercial.class) return new ModelAndView(model, "admin/verPois/verLocalComercial.hbs");
-			else if (poi.getClass()==ParadaColectivo.class) return new ModelAndView(model, "admin/verPois/verParadaColectivo.hbs");
-			else return new ModelAndView(model, "admin/verPOILayout.hbs");
+			return new ModelAndView(model, "admin/verPois/ver"+poi.getClass().getSimpleName()+".hbs");
+			
 
 	}
 	public ModelAndView modificar(Request req, Response res){

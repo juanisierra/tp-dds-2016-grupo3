@@ -29,11 +29,7 @@ public enum Filters implements Filter, WithGlobalEntityManager,TransactionalOps 
 		public void handle(Request request, Response response) throws Exception {
 			if(!request.pathInfo().equals("/") && !request.pathInfo().equals("/login"))
 			{	
-				withTransaction(() -> {
-				entityManager().flush();
 				entityManager().clear();
-				entityManager().getTransaction().commit();
-				});
 			}
 		}
 	}

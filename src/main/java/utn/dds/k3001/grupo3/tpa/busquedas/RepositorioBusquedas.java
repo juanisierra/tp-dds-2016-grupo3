@@ -1,15 +1,13 @@
 package utn.dds.k3001.grupo3.tpa.busquedas;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
-public class RepositorioBusquedas implements WithGlobalEntityManager{
+public class RepositorioBusquedas {
 	
 	private static final RepositorioBusquedas INSTANCE = new RepositorioBusquedas();
 	private BusquedasOrigin origen = new InMemoryBusquedasOrigin();

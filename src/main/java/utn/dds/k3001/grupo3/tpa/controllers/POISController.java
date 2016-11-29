@@ -39,7 +39,7 @@ public class POISController implements WithGlobalEntityManager,TransactionalOps 
 	}
 	public ModelAndView eliminar(Request req, Response res){
 		withTransaction(() -> {
-			Mapa.getInstance().eliminarPorId(Long.parseLong( req.params("id")));
+			RepositorioInterno.getInstance().eliminarPoiPorNumero(Long.parseLong( req.params("id")));
 		});
 			res.redirect("/pois");
 			return null;

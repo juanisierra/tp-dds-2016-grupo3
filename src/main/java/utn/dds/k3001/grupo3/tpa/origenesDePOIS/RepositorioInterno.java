@@ -7,7 +7,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
-public class RepositorioInterno implements OrigenDeDatos,WithGlobalEntityManager,TransactionalOps, EntityManagerOps {
+public class RepositorioInterno implements OrigenDeDatos {
 	
 	private final static RepositorioInterno INSTANCE = new RepositorioInterno();
 	private static POIOrigin origen = new InMemoryPOIOrigin(); //ELEGIMOS SI PERSISTE EN MEMORIA O EN BASE DE DATOS

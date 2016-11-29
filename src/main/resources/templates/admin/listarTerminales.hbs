@@ -1,12 +1,15 @@
 {{#partial "contenido"}}
 <h1>TERMINALES</h1>
+<table>
+	<tr><td>
 <form action="/terminales" method="GET">
 
 		<div class="form-group">
 			<label for="nombre">Nombre</label>
 			<input type="text" placeholder="Nombre" name="nombre">
 		</div>
-		
+		</td></tr>
+		<tr><td>
 		<div class="form-group">
 			<label for="Comuna">Comuna</label>
 			<select placeholder="Comuna" name="comuna">
@@ -15,36 +18,41 @@
 				{{/each}}
 			</select>
 		</div>
-
+		</td></tr>
+		<tr align="center" ><td>
 		<table> 
-		<tr><input class="btn btn-primary btn-lg" type="submit" value="Buscar"></tr>
+		
+		<tr align="center"><input class="btn btn-primary" type="submit" value="Buscar"></tr>
 		</table>
+		</td></tr>
 	</form>
-	
+	<tr align="center"><td>
 <form action="/terminales/agregar" method="GET">
+	
+<input class="btn btn-default" type="submit" value="Nueva terminal">
 
-		<table> 
-		<tr><input class="btn btn-primary btn-lg" type="submit" value="Nueva terminal"></tr>
-		</table>
 	</form>
-</div>
-
+</td></tr>
+</table>
 <table class="table table-stripped">
 	<tr>
 		<th>Nombre</th>
 		<th>Comuna</th>
+		<th> </th>
+		<th> </th>
+		<th> </th>
 	</tr>
-
 	{{#each Terminales}}
 		<tr>
 			<td>{{nombre}}</td>
 			<td>{{comuna.nombre}}</td>
-			<td><a href="/terminales/acciones/{{id}}">Acciones</a><td>
-			<td><a href="/terminales/modificar/{{id}}">Editar</a><td>
-			<td><a href="/terminales/eliminar/{{id}}">Eliminar</a><td>
+			<td><a href="/terminales/acciones/{{id}}">Acciones</a></td>
+			<td><a href="/terminales/modificar/{{id}}">Editar</a></td>
+			<td><a href="/terminales/eliminar/{{id}}">Eliminar</a></td>
 		</tr>
 	{{/each}}
 </table>
+
 {{/partial}}
 
 {{>layoutAdmin.hbs}}

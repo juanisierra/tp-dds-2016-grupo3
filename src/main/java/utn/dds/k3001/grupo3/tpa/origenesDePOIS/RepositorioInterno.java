@@ -28,7 +28,9 @@ public class RepositorioInterno implements OrigenDeDatos,WithGlobalEntityManager
 	public List<POI> buscar(String criterio) {
 		return origen.getPOIS().stream().filter(POI -> POI.esBuscado(criterio)).collect(Collectors.toList());
 	}
-	
+	public List<POI> buscar(String criterio,String clase){
+		return this.buscar(criterio).stream().filter(elem -> elem.getClass().getName().contains(clase)).collect(Collectors.toList());
+	}
 	public POI buscarPorNombre(String nombre){	
 		List<POI> lista = origen.getPOIS().stream().filter(POI -> POI.getNombre().contains(nombre)).collect(Collectors.toList());
 		if(lista.isEmpty()){

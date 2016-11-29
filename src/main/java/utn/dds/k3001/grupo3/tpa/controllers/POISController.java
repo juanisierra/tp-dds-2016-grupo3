@@ -32,9 +32,9 @@ public class POISController implements WithGlobalEntityManager,TransactionalOps 
 			Map<String, List<POI>> model = new HashMap<>();
 			List<POI> pois = new LinkedList<POI>();
 			if(req.queryParams("tipos")==null)
-					pois.addAll(Mapa.getInstance().buscar(req.queryParams("criterio")!= null? req.queryParams("criterio") : ""));
+					pois.addAll(RepositorioInterno.getInstance().buscar(req.queryParams("criterio")!= null? req.queryParams("criterio") : ""));
 					else {
-						pois.addAll(Mapa.getInstance().buscar(req.queryParams("criterio")!= null? req.queryParams("criterio") : "",req.queryParams("tipos")));
+						pois.addAll(RepositorioInterno.getInstance().buscar(req.queryParams("criterio")!= null? req.queryParams("criterio") : "",req.queryParams("tipos")));
 						
 					}
 			model.put("pois", pois);

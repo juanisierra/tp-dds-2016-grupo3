@@ -2,17 +2,14 @@ package utn.dds.k3001.grupo3.tpa.server;
 
 import java.time.LocalTime;
 import java.util.Arrays;
-
 import spark.Spark;
 import spark.debug.DebugScreen;
 import utn.dds.k3001.grupo3.tpa.busquedas.AccionesBusqueda;
 import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
-import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioBusquedas;
 import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioComunas;
 import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioTerminales;
 import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 import utn.dds.k3001.grupo3.tpa.geo.PersistablePoint;
-import utn.dds.k3001.grupo3.tpa.origenesDePOIS.RepositorioInterno;
 import utn.dds.k3001.grupo3.tpa.pois.Banco;
 import utn.dds.k3001.grupo3.tpa.pois.CGP;
 import utn.dds.k3001.grupo3.tpa.pois.Comuna;

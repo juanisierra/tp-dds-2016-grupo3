@@ -124,6 +124,7 @@ public class Server {
 		Terminal terminal = new Terminal("miTerminal", Mapa.getInstance());   //para que haya datos que mostrar
 		terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 		terminal.setComuna(new Comuna("la plaza de lo pibe"));
+		terminal.buscar("");
 		
 		RepositorioTerminales.getInstance().agregarTerminal(terminal);
 	}

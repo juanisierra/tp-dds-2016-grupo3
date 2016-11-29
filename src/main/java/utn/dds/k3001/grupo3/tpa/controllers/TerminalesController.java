@@ -6,14 +6,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.*;
-
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
-
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import spark.utils.AccionesBusquedaHelper;
 import utn.dds.k3001.grupo3.tpa.busquedas.AccionesBusqueda;
 import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioComunas;
 import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
@@ -45,7 +42,6 @@ public class TerminalesController implements WithGlobalEntityManager,Transaction
 				return new ModelAndView(model, "admin/listarTerminales.hbs");
 		}
 
-	
 	
 	public ModelAndView getEliminar(Request req, Response res){
 

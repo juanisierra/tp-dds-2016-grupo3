@@ -12,13 +12,11 @@ import utn.dds.k3001.grupo3.tpa.busquedas.Busqueda;
 import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioBusquedas;
 import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioTerminales;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
-import utn.dds.k3001.grupo3.tpa.usuarios.Usuario;
 
 public class BusquedasController
 {
 	public ModelAndView buscar(Request req, Response res)
 	{
-
 			String terminal = (req.queryParams("terminal") == null || req.queryParams("terminal").equals("Cualquiera")) ? "" : req.queryParams("terminal");
 			int cantResultados = (req.queryParams("cantResultados") == null || req.queryParams("cantResultados").equals(""))? -1 : Integer.parseInt(req.queryParams("cantResultados"));
 			LocalDate desde =( req.queryParams("desde") == null ||  req.queryParams("desde").equals("") ) ? LocalDate.of(2000,1,1) : parsearFecha( req.queryParams("desde"));
@@ -33,17 +31,14 @@ public class BusquedasController
 			model.put("busquedas", busquedas);
 			model.put("terminales", terminales);
 			return new ModelAndView(model, "admin/ListarBusquedas.hbs");
-
 	}
 	
 	public ModelAndView mostrarPois(Request req, Response res)
-	{		
+	{
 				Map<String, List<POI>> model = new HashMap<>();
 				List<POI> pois = RepositorioBusquedas.getInstance().buscarPoisPorId((req.params("id")));
-				
 				model.put("pois", pois);
-				return new ModelAndView(model, "admin/listarPoisBuscados.hbs");
-				
+				return new ModelAndView(model, "admin/listarPoisBuscados.hbs");	
 	}
 	
 	private LocalDate parsearFecha(String fechaString)

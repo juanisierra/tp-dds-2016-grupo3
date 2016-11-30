@@ -6,7 +6,7 @@ public enum AccionesBusqueda implements ObserverBusqueda {
 	GUARDARBUSQUEDA {
 
 		@Override
-		public void agregar(Busqueda busqueda) {
+		public void notificar(Busqueda busqueda) {
 			RepositorioBusquedas.getInstance().buscar(busqueda);
 			
 		}
@@ -14,7 +14,7 @@ public enum AccionesBusqueda implements ObserverBusqueda {
 	NOTIFICARBUSQUEDALARGA {
 		
 			@Override
-			public void agregar(Busqueda busqueda) {
+			public void notificar(Busqueda busqueda) {
 				if(busqueda.getTiempo()>1){
 					ServicioMail.notificarAdministrador("admin@sistema.com","Busqueda Larga","La busqueda llevó demasiado tiempo.");
 				}

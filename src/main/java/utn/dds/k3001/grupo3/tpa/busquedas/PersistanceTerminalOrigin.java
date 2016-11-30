@@ -10,17 +10,15 @@ public class PersistanceTerminalOrigin extends AbstractPersistenceTest implement
 
 	@Override
 	public void agregarTerminal(Terminal terminal) {
-		withTransaction(() -> {
+//		withTransaction(() -> {
 		entityManager().persist(terminal);	
-		});
+//		});
 	}
 
 	@Override
 	public List<Terminal> obtenerTerminales() {
 		List<Terminal> terminales = new LinkedList<Terminal>();
-		withTransaction(() -> {
 		terminales.addAll((List<Terminal>) entityManager().createQuery("FROM Terminal").getResultList());
-		});
 		return terminales;
 	}
 
@@ -31,9 +29,9 @@ public class PersistanceTerminalOrigin extends AbstractPersistenceTest implement
 
 	@Override
 	public void remove(Terminal termABorrar) {
-		withTransaction(() -> {
+//		withTransaction(() -> {
 			entityManager().remove(termABorrar);
-			});
+//			});
 		
 	}
 

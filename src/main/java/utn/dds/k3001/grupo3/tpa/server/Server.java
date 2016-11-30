@@ -10,6 +10,7 @@ import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioComunas;
 import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioTerminales;
 import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 import utn.dds.k3001.grupo3.tpa.geo.PersistablePoint;
+import utn.dds.k3001.grupo3.tpa.origenesDePOIS.RepositorioInterno;
 import utn.dds.k3001.grupo3.tpa.pois.Banco;
 import utn.dds.k3001.grupo3.tpa.pois.CGP;
 import utn.dds.k3001.grupo3.tpa.pois.Comuna;
@@ -35,7 +36,7 @@ public class Server {
 		RepositorioTerminales.persistirEnBD();
 		RepositorioComunas.persistirEnBD();
 		//RepositorioBusquedas.getInstance().setPersistence();
-		cargarDatos()*/
+		cargarDatos();*/
 		cargarDatosMemoria();
 		Usuario u = new Usuario();
 		u.setNombre("admin");
@@ -85,7 +86,6 @@ public class Server {
 		Terminal terminal = new Terminal("miTerminal");   //para que haya datos que mostrar
 		terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 		terminal.setComuna(new Comuna("la plaza de lo pibe"));
-		
 		RepositorioTerminales.getInstance().agregarTerminal(terminal);
 	}
 	public static void cargarDatosMemoria()

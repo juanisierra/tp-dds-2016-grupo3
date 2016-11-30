@@ -53,10 +53,10 @@ public class TerminalesController implements WithGlobalEntityManager,Transaction
 	
 	public ModelAndView eliminar(Request req, Response res){
 		withTransaction(() -> {
-				RepositorioTerminales.getInstance().eliminarTerminalPorId(Integer.parseInt(req.params("id")));
+			RepositorioTerminales.getInstance().eliminarTerminalPorId(Integer.parseInt(req.params("id")));
 		});
-				res.redirect("/terminales");
-				return null;
+		res.redirect("/terminales");
+		return null;
 	}
 	
 	public ModelAndView getModificar(Request req, Response res){
@@ -84,7 +84,9 @@ public class TerminalesController implements WithGlobalEntityManager,Transaction
 				if (!comunasEncontradas.isEmpty()){
 					terminalAModificar.setNombre(req.queryParams("nombre"));
 					terminalAModificar.setComuna(comunasEncontradas.get(0));
-					RepositorioTerminales.getInstance().agregarTerminal(terminalAModificar);
+					withTransaction(() -> {
+						RepositorioTerminales.getInstance().agregarTerminal(terminalAModificar);
+					});
 				}
 				res.redirect("/terminales");
 				return null;
@@ -117,7 +119,9 @@ public class TerminalesController implements WithGlobalEntityManager,Transaction
 				List<Comuna> comunasEncontradas = RepositorioComunas.getInstance().buscarComunasPorNombre(req.queryParams("comuna"));
 				if (!comunasEncontradas.isEmpty()){
 					terminal.setComuna(comunasEncontradas.get(0));
+					withTransaction(() -> {
 					RepositorioTerminales.getInstance().agregarTerminal(terminal);
+					});
 				}
 				res.redirect("/terminales");
 				return null;

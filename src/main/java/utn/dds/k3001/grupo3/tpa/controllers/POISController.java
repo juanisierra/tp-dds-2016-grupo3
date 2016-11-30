@@ -62,7 +62,6 @@ public class POISController implements WithGlobalEntityManager,TransactionalOps 
 			return new ModelAndView(model, "admin/modificarPOI.hbs");
 		}
 		
-	
 	public ModelAndView verPOI(Request req, Response res){
 	Map<String, POI> model = new HashMap<>();
 		POI poi =Mapa.getInstance().getById(Long.parseLong( req.params("id")));

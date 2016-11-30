@@ -39,7 +39,7 @@ public class Router {
 		Spark.post("/login", loginController::iniciarSesion,engine);
 		Spark.get("/pois", poisController::buscar,engine);
 		Spark.get("/busquedas", busquedasController::buscar, engine);
-		Spark.get("/busquedas/verPois/:id", busquedasController::mostrarPois, engine);
+		Spark.get("/busquedas/:id/pois", busquedasController::mostrarPois, engine);
 		Spark.post("/logout",loginController::logout);
 		Spark.post("/pois/eliminar/:id", poisController::eliminar);
 		Spark.get("/pois/:id", poisController::verPOI,engine);

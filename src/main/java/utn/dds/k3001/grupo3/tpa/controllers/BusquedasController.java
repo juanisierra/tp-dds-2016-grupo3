@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -20,10 +22,10 @@ public class BusquedasController
 		List<Busqueda> busquedas = new LinkedList<Busqueda>();
 		if(req.queryParams("terminal") != null)
 		{
-			String terminal = req.queryParams("terminal").equals("Cualquiera") ? "" : req.queryParams("terminal");
-			int cantResultados = req.queryParams("cantResultados").equals("") ? -1 : Integer.parseInt(req.queryParams("cantResultados"));
-			LocalDate desde = req.queryParams("desde").equals("")  ? LocalDate.of(2000,1,1) : parsearFecha( req.queryParams("desde"));
-			LocalDate hasta = req.queryParams("hasta").equals("") ? LocalDate.now() : parsearFecha( req.queryParams("hasta"));
+			Optional<String> terminal = req.queryParams("terminal").equals("Cualquiera") ? Optional.empty() : Optional.of(req.queryParams("terminal"));
+			Optional<Integer> cantResultados = req.queryParams("cantResultados").equals("") ? Optional.empty() :  Optional.of(Integer.parseInt(req.queryParams("cantResultados")));
+			Optional<LocalDate>  desde = req.queryParams("desde").equals("")  ? Optional.empty() : Optional.of(parsearFecha( req.queryParams("desde")));
+			Optional<LocalDate>  hasta = req.queryParams("hasta").equals("")  ? Optional.empty() : Optional.of(parsearFecha( req.queryParams("hasta")));
 			busquedas = RepositorioBusquedas.getInstance().busquedaWeb(terminal, cantResultados, desde, hasta);
 		}
 		List<String> terminales = new LinkedList<String>();

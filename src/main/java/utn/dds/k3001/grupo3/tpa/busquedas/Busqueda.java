@@ -6,15 +6,12 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.ManyToOne;
-
 import org.mongodb.morphia.annotations.Id;
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
-//@Entity 
+
 public class Busqueda
 {	@Id 
 	private String id;
@@ -100,8 +97,12 @@ public class Busqueda
 		this.terminal = terminal;
 	}
 	
-	public boolean estaEntre(LocalDate desde, LocalDate hasta){
-		return (fecha.compareTo(desde) >= 0 && fecha.compareTo(hasta) <=0 );
+	public boolean esAntes(LocalDate date){
+		return fecha.compareTo(date) <=0 ;
+	}
+	
+	public boolean esDespues(LocalDate date){
+		return fecha.compareTo(date) >= 0;
 	}
 	
 	public boolean esDeTerminal(String terminal){

@@ -3,6 +3,7 @@ package utn.dds.k3001.grupo3.tpa.busquedas;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import utn.dds.k3001.grupo3.tpa.pois.POI;
@@ -55,26 +56,15 @@ public class RepositorioBusquedas {
 									    .filter(busqueda -> busqueda.getId().equals(id)).findFirst().get();
 		
 		return b.getResultados();
-									  
 	}
 	
-	public List<Busqueda> busquedaWeb(String terminal, int cantResultados, LocalDate desde, LocalDate hasta){
-		List<Busqueda> resultado =   this.getBusquedas()
-																					.stream()
-																					.filter(busq -> busq.estaEntre(desde, hasta))
-																					.collect(Collectors.toList());
-		if( !terminal.equals(""))
-		{
-			resultado = resultado.stream()
-															.filter(busqueda -> busqueda.esDeTerminal(terminal))
-															.collect(Collectors.toList());
-		}
-		if(cantResultados >= 0 )
-		{
-			resultado = resultado.stream()
-															.filter(busqueda -> busqueda.getCantidadResultados() == cantResultados)
-															.collect(Collectors.toList());
-		}
-		return resultado;
+	public List<Busqueda> busquedaWeb(Optional<String> terminal, Optional<Integer> cantResultados, Optional<LocalDate>  desde, Optional<LocalDate>  hasta){
+		return this.getBusquedas()
+								 .stream()
+								 .filter(busq -> desde.map( dsd -> busq.esDespues(dsd)).orElse(true))
+								 .filter(busq -> hasta.map(ht  -> busq.esAntes(ht)).orElse(true))
+								 .filter(busq -> terminal.map(ter  -> busq.esDeTerminal(ter)).orElse(true))
+								 .filter(busq -> cantResultados.map(cant -> busq.getCantidadResultados() == cant ).orElse(true))
+								 .collect(Collectors.toList());
 	}
 }

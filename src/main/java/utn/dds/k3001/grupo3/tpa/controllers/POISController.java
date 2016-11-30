@@ -18,25 +18,31 @@ import utn.dds.k3001.grupo3.tpa.usuarios.UsuarioTerminal;
 public class POISController implements WithGlobalEntityManager,TransactionalOps {
 	
 	public ModelAndView buscar(Request req, Response res){
-	if(!((Usuario) req.session().attribute("user")).esAdmin()) {
-			Map<String, List<POI>> model = new HashMap<>();
-			List<POI> pois = ((UsuarioTerminal) req.session().attribute("user")).getTerminal().buscar(req.queryParams("criterio")!= null? req.queryParams("criterio") : "");
-			model.put("pois", pois);
-			return new ModelAndView(model, "terminal/buscarPOI.hbs");
-		} else {
+		if(((Usuario) req.session().attribute("user")).esAdmin()) {
 			Map<String, List<POI>> model = new HashMap<>();
 			List<POI> pois = new LinkedList<POI>();
-			if(req.queryParams("tipos")==null)
-					pois.addAll(RepositorioInterno.getInstance().buscar(req.queryParams("criterio")!= null? req.queryParams("criterio") : ""));
-					else {
-						pois.addAll(RepositorioInterno.getInstance().buscar(req.queryParams("criterio")!= null? req.queryParams("criterio") : "",req.queryParams("tipos")));
-						
-					}
+			if(req.queryParams("tipos")!=null || req.queryParams("criterio")!= null){
+				if(req.queryParams("tipos")==null){
+					pois.addAll(RepositorioInterno.getInstance().buscar(req.queryParams("criterio"), ""));
+				}
+				else {
+					pois.addAll(RepositorioInterno.getInstance().buscar( "",req.queryParams("tipos")));
+				}
+			}
 			model.put("pois", pois);
 			return new ModelAndView(model, "admin/buscarPOI.hbs");
 		}
-
+		else {
+			Map<String, List<POI>> model = new HashMap<>();
+			List<POI> pois = new LinkedList<POI>();
+			if(req.queryParams("criterio")!= null){
+				pois = ((UsuarioTerminal) req.session().attribute("user")).getTerminal().buscar(req.queryParams("criterio") );
+			}
+			model.put("pois", pois);
+			return new ModelAndView(model, "terminal/buscarPOI.hbs");
+		}
 	}
+	
 	public ModelAndView eliminar(Request req, Response res){
 		withTransaction(() -> {
 			RepositorioInterno.getInstance().eliminarPoiPorNumero(Long.parseLong( req.params("id")));

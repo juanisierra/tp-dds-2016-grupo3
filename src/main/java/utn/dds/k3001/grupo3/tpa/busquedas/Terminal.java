@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
 import utn.dds.k3001.grupo3.tpa.pois.Comuna;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
@@ -22,24 +21,18 @@ public class Terminal
 	
 	private String nombre;
 	
-	@Transient 
-	private Mapa mapa;
-	
 	@ElementCollection
-	
 	private List<AccionesBusqueda> observersBusqueda;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Comuna comuna;
 	
-	public Terminal(String nombre, Mapa mapa){
+	public Terminal(String nombre){
 		this.nombre = nombre;
-		this.mapa = mapa;
 		this.observersBusqueda = new LinkedList<AccionesBusqueda>();
 	}
 	
 	public Terminal(){	//Builder para hibernate
-		this.mapa = Mapa.getInstance();
 		this.observersBusqueda = new LinkedList<AccionesBusqueda>();
 	}
 	
@@ -47,9 +40,8 @@ public class Terminal
 		return nombre;
 	}
 	
-	public Terminal(String nombre, Mapa mapa,Comuna comuna){
+	public Terminal(String nombre, Comuna comuna){
 		this.nombre = nombre;
-		this.mapa = mapa;
 		this.observersBusqueda = new LinkedList<AccionesBusqueda>();
 		this.comuna = comuna;
 	}
@@ -73,7 +65,7 @@ public class Terminal
 	public List<POI> buscar(String criterio){
 		LocalTime inicio = LocalTime.now();
 		LocalDate fecha = LocalDate.now();
-		List<POI> resultado = mapa.buscar(criterio);
+		List<POI> resultado = Mapa.getInstance().buscar(criterio);
 		Busqueda busqueda = new Busqueda(this,resultado.size(), criterio, inicio, LocalTime.now(), fecha,resultado);
 		observersBusqueda.stream().forEach(observer -> observer.agregar(busqueda));
 		return resultado;
@@ -94,14 +86,6 @@ public class Terminal
 	
 	public void setId(int id) {
 		this.id = id;
-	}
-	
-	public Mapa getMapa() {
-		return mapa;
-	}
-	
-	public void setMapa(Mapa mapa) {
-		this.mapa = mapa;
 	}
 	
 	public List<AccionesBusqueda> getObserversBusqueda() {

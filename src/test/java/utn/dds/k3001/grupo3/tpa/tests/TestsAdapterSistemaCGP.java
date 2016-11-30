@@ -21,7 +21,7 @@ import utn.dds.k3001.grupo3.tpa.pois.Disponibilidad;
 import utn.dds.k3001.grupo3.tpa.pois.Servicio;
 import utn.dds.k3001.grupo3.tpa.tests.matchers.*;
 public class TestsAdapterSistemaCGP extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps{
-	Mapa CABA;
+
 	SistemaCGP sistemaMock;
 	AdapterSistemaCGP adapter;
 	RangosServicioDTO rangoLunes;
@@ -34,8 +34,7 @@ public class TestsAdapterSistemaCGP extends AbstractPersistenceTest implements W
 @Before
 public void init() {
 	beginTransaction();
-	CABA = Mapa.getInstance();
-	CABA.resetMapa();
+	Mapa.getInstance().resetMapa();
 	sistemaMock = Mockito.mock(SistemaCGP.class);
 	adapter = new AdapterSistemaCGP(sistemaMock);
 	rangoLunes = new RangosServicioDTO(1,8,0,16,0);
@@ -47,7 +46,7 @@ public void init() {
 	listaServiciosDTO= new ArrayList<ServiciosDTO>(1);
 	listaServiciosDTO.add(cambioDomicilio);
 	cgpCaballito = new CentroDTO(1,"Caballito","Juan Pablo","Rivadavia 123","4444-4444",listaServiciosDTO);
-	CABA.agregarOrigenDeDatos(adapter);
+	Mapa.getInstance().agregarOrigenDeDatos(adapter);
 }
 
 @Test
@@ -64,7 +63,7 @@ public void testAdaptarCGP() {
 }
 @Test
 public void testBuscarCGP(){
-	CABA.buscar("hola");
+	Mapa.getInstance().buscar("hola");
 	Mockito.verify(sistemaMock).buscarPOIS("");
 }
 }

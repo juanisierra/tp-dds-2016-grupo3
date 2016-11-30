@@ -5,14 +5,9 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.junit.Test;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
-import org.mongodb.morphia.annotations.Converters;
-
 import com.mongodb.MongoClient;
-
 import utn.dds.k3001.grupo3.tpa.busquedas.AccionesBusqueda;
 import utn.dds.k3001.grupo3.tpa.busquedas.Busqueda;
 import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
@@ -35,8 +30,7 @@ import utn.dds.k3001.grupo3.tpa.pois.Servicio;
 public class MongoDB {
 	//@Test //Solo corre con mongo
 public void testMorphia() {
-		Mapa CABA = Mapa.getInstance();
-		CABA.resetMapa();
+		Mapa.getInstance().resetMapa();
 		Comuna comuna1 = new Comuna("comuna 1",Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));
 		Rubro libreria = new Rubro("libreria",50);
 		Disponibilidad disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));
@@ -45,7 +39,6 @@ public void testMorphia() {
 		CGP cgp1 = new CGP("cgp2","beiro","caballito",100,new PersistablePoint(10.1,10.1),comuna1);
 		Servicio altaDomicilio = new Servicio("alta domicilio",disponibilidadLibrerias);
 		cgp1.agregarServicio(altaDomicilio);
-		Comuna comuna2 = new Comuna();
 		comuna1.setNombre("Centro");
 		PersistablePolygon poligono = new PersistablePolygon(Arrays.asList(new PersistablePoint(2,2),new PersistablePoint(1,1)));
 		comuna1.setLimites(poligono);

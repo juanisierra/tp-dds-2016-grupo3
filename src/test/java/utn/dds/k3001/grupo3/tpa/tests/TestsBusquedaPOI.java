@@ -8,11 +8,8 @@ import utn.dds.k3001.grupo3.tpa.pois.LocalComercial;
 import utn.dds.k3001.grupo3.tpa.pois.ParadaColectivo;
 import utn.dds.k3001.grupo3.tpa.pois.Rubro;
 import utn.dds.k3001.grupo3.tpa.pois.Servicio;
-
 import java.time.LocalTime;
 import java.util.Arrays;
-
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +22,6 @@ import utn.dds.k3001.grupo3.tpa.geo.*;
 
 public class TestsBusquedaPOI  extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps
 {	
-	Mapa CABA;
 	Comuna comuna1;
 	Rubro libreria;
 	Disponibilidad disponibilidadLibrerias;
@@ -37,8 +33,7 @@ public class TestsBusquedaPOI  extends AbstractPersistenceTest implements WithGl
 	@Before
 	public void init(){	
 		beginTransaction();
-		CABA = Mapa.getInstance();
-		CABA.resetMapa();
+		Mapa.getInstance().resetMapa();
 		comuna1 = new Comuna("comuna 1",Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));
 		libreria = new Rubro("libreria",50);
 		disponibilidadLibrerias = Disponibilidad.lunesAViernes(LocalTime.of(10,0), LocalTime.of(18,0));
@@ -47,23 +42,23 @@ public class TestsBusquedaPOI  extends AbstractPersistenceTest implements WithGl
 		cgp1 = new CGP("cgp2","beiro","caballito",100,new PersistablePoint(10.1,10.1),comuna1);
 		altaDomicilio = new Servicio("alta domicilio",disponibilidadLibrerias);
 		cgp1.agregarServicio(altaDomicilio);
-		CABA.agregarPoi(parada114);
-		CABA.agregarPoi(libreriaYenny);
-		CABA.agregarPoi(cgp1);
+		Mapa.getInstance().agregarPoi(parada114);
+		Mapa.getInstance().agregarPoi(libreriaYenny);
+		Mapa.getInstance().agregarPoi(cgp1);
 	}
 
 	@Test
 	public void testBuscarAltaDomicilio(){	
-		Assert.assertTrue(CABA.buscar("alta domicilio").contains(cgp1));
+		Assert.assertTrue(Mapa.getInstance().buscar("alta domicilio").contains(cgp1));
 	}
 	
 	@Test
 	public void testBuscarParada114(){
-		Assert.assertTrue(CABA.buscar("114").contains(parada114));
+		Assert.assertTrue(Mapa.getInstance().buscar("114").contains(parada114));
 	}
 	
 	@Test
 	public void testBuscarLibreria(){
-		Assert.assertTrue(CABA.buscar("libreria").contains(libreriaYenny));
+		Assert.assertTrue(Mapa.getInstance().buscar("libreria").contains(libreriaYenny));
 	}
 }

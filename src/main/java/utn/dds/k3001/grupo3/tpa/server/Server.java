@@ -55,8 +55,8 @@ public class Server {
 		Comuna comuna2 = new Comuna("Caballito",Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));
 		RepositorioComunas.getInstance().agregarComuna(comuna1);
 		RepositorioComunas.getInstance().agregarComuna(comuna2);
-		Terminal terminal1 = new Terminal("Terminal 1",Mapa.getInstance(),comuna1);
-		Terminal terminal2 = new Terminal("Terminal 2",Mapa.getInstance(),comuna2);
+		Terminal terminal1 = new Terminal("Terminal 1",comuna1);
+		Terminal terminal2 = new Terminal("Terminal 2",comuna2);
 		terminal1.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 		terminal1.agregarObserverBusqueda(AccionesBusqueda.NOTIFICARBUSQUEDALARGA);
 		RepositorioTerminales.getInstance().agregarTerminal(terminal1);
@@ -82,7 +82,7 @@ public class Server {
 		Mapa.getInstance().agregarPoi(parada114);
 		Mapa.getInstance().agregarPoi(libreriaYenny);
 		Mapa.getInstance().agregarPoi(cgp1);
-		Terminal terminal = new Terminal("miTerminal", Mapa.getInstance());   //para que haya datos que mostrar
+		Terminal terminal = new Terminal("miTerminal");   //para que haya datos que mostrar
 		terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 		terminal.setComuna(new Comuna("la plaza de lo pibe"));
 		
@@ -94,8 +94,8 @@ public class Server {
 		Comuna comuna2 = new Comuna("Caballito",Arrays.asList(new PersistablePoint(0,0), new PersistablePoint(0,11), new PersistablePoint(11,11), new PersistablePoint (11,0)));
 		RepositorioComunas.getInstance().agregarComuna(comuna1);
 		RepositorioComunas.getInstance().agregarComuna(comuna2);
-		Terminal terminal1 = new Terminal("Terminal 1",Mapa.getInstance(),comuna1);
-		Terminal terminal2 = new Terminal("Terminal 2",Mapa.getInstance(),comuna2);
+		Terminal terminal1 = new Terminal("Terminal 1",comuna1);
+		Terminal terminal2 = new Terminal("Terminal 2",comuna2);
 		terminal1.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 		terminal1.agregarObserverBusqueda(AccionesBusqueda.NOTIFICARBUSQUEDALARGA);
 		RepositorioTerminales.getInstance().agregarTerminal(terminal1);
@@ -121,7 +121,7 @@ public class Server {
 		Mapa.getInstance().agregarPoi(parada114);
 		Mapa.getInstance().agregarPoi(libreriaYenny);
 		Mapa.getInstance().agregarPoi(cgp1);
-		Terminal terminal = new Terminal("miTerminal", Mapa.getInstance());   //para que haya datos que mostrar
+		Terminal terminal = new Terminal("miTerminal");   //para que haya datos que mostrar
 		terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 		terminal.setComuna(new Comuna("la plaza de lo pibe"));
 		terminal.buscar("");

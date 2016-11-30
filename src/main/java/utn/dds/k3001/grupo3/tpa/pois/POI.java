@@ -3,7 +3,6 @@ package utn.dds.k3001.grupo3.tpa.pois;
 import utn.dds.k3001.grupo3.tpa.geo.*;
 import java.util.LinkedList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
@@ -13,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
-import org.hibernate.annotations.Cascade;
-
 import java.math.BigDecimal;
 import java.time.*;
 
@@ -43,11 +40,14 @@ public class POI implements java.io.Serializable
 
 	}
 	
-	public POI(){
-	}
+	public POI(){}
 	
 	public long getID(){
 		return id;
+	}
+	
+	public double distanciaA(long x, long y){
+		return posicion.distance(new PersistablePoint(x, y));
 	}
 	
 	public void agregarEtiqueta(String etiqueta){

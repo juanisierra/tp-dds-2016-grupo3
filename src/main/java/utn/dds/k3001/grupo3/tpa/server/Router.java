@@ -52,7 +52,7 @@ public class Router {
 		Spark.get("/terminales/:id/modificar",terminalesController::getModificar,engine);
 		Spark.post("/terminales/:id/modificar",terminalesController::modificar,engine);		
 		Spark.get("/terminales/agregar",terminalesController::getAgregar,engine);
-		Spark.post("/terminales/agregar",terminalesController::agregar,engine);
+		Spark.post("/terminales",terminalesController::agregar,engine);
 		Spark.get("/terminales/:id/acciones",terminalesController::getAcciones,engine);
 		Spark.post("/terminales/:id/acciones",terminalesController::actualizarAcciones,engine);
 		Spark.after(Filters.BorrarCache);

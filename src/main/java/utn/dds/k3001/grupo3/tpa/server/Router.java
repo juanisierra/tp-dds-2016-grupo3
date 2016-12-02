@@ -41,31 +41,31 @@ public class Router {
 		Spark.get("/busquedas", busquedasController::buscar, engine);
 		Spark.get("/busquedas/:id/pois", busquedasController::mostrarPois, engine);
 		Spark.post("/logout",loginController::logout);
-		Spark.post("/pois/eliminar/:id", poisController::eliminar);
+		Spark.post("/pois/:id/eliminar", poisController::eliminar);
 		Spark.get("/pois/:id", poisController::verPOI,engine);
-		Spark.get("/pois/eliminar/:id",poisController::getEliminar,engine);
-		Spark.get("/pois/modificar/:id",poisController::getModificar,engine);
-		Spark.post("/pois/modificar/:id",poisController::modificar,engine);
+		Spark.get("/pois/:id/eliminar",poisController::getEliminar,engine);
+		Spark.get("/pois/:id/modificar",poisController::getModificar,engine);
+		Spark.post("/pois/:id/modificar",poisController::modificar,engine);
 		Spark.get("/terminales", terminalesController::listar,engine);
-		Spark.get("/terminales/eliminar/:id",terminalesController::getEliminar,engine);
-		Spark.post("/terminales/eliminar/:id", terminalesController::eliminar);
-		Spark.get("/terminales/modificar/:id",terminalesController::getModificar,engine);
-		Spark.post("/terminales/modificar/:id",terminalesController::modificar,engine);		
+		Spark.get("/terminales/:id/eliminar",terminalesController::getEliminar,engine);
+		Spark.post("/terminales/:id/eliminar", terminalesController::eliminar);
+		Spark.get("/terminales/:id/modificar",terminalesController::getModificar,engine);
+		Spark.post("/terminales/:id/modificar",terminalesController::modificar,engine);		
 		Spark.get("/terminales/agregar",terminalesController::getAgregar,engine);
 		Spark.post("/terminales/agregar",terminalesController::agregar,engine);
-		Spark.get("/terminales/acciones/:id",terminalesController::getAcciones,engine);
-		Spark.post("/terminales/acciones/:id",terminalesController::actualizarAcciones,engine);
+		Spark.get("/terminales/:id/acciones",terminalesController::getAcciones,engine);
+		Spark.post("/terminales/:id/acciones",terminalesController::actualizarAcciones,engine);
 		Spark.after(Filters.BorrarCache);
 		Spark.before(Filters.Login);
 		Spark.before("/busquedas", Filters.Admin);
-		Spark.before("/busquedas/verPois/:id", Filters.Admin);
-		Spark.before("/pois/eliminar/:id", Filters.Admin);
-		Spark.before("/pois/modificar/:id", Filters.Admin);
+		Spark.before("/busquedas/:id/verPois", Filters.Admin);
+		Spark.before("/pois/:id/eliminar", Filters.Admin);
+		Spark.before("/pois/:id/modificar", Filters.Admin);
 		Spark.before("/terminales", Filters.Admin);
-		Spark.before("/terminales/eliminar/:id", Filters.Admin);
-		Spark.before("/terminales/modificar/:id", Filters.Admin);
+		Spark.before("/terminales/:id/eliminar", Filters.Admin);
+		Spark.before("/terminales/:id/modificar", Filters.Admin);
 		Spark.before("/terminales/agregar", Filters.Admin);
-		Spark.before("/terminales/acciones/:id", Filters.Admin);
+		Spark.before("/terminales/:id/acciones", Filters.Admin);
 	}
 
 }

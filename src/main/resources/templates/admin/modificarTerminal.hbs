@@ -1,6 +1,6 @@
 {{#partial "contenido"}}
 	{{#with terminal}}
-	<form action="/terminales/modificar/{{id}}" method="POST">
+	<form action="/terminales/{{id}}/modificar" method="POST">
 		
 		<div class="form-group">
 			<label for="nombre">Nombre</label>
@@ -17,7 +17,7 @@
 		</div>
 		<table><tr>
 		<input class="btn btn-primary " type="submit" value="Guardar" style="height:40px; width:100px"></tr>
-		<tr><input class="btn btn-default  " onClick="parent.location='/terminales'" value="Cancelar" style="height:40px; width:100px"></tr>
+		<tr><input class="btn btn-default  " onClick="parent.location='/terminales'" value="Cancelar" style="height:40px; width:110px"></tr>
 		</table>
 	</form>
 	{{/with}}

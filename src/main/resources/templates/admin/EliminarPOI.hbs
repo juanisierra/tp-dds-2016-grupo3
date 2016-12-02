@@ -1,7 +1,7 @@
 {{#partial "contenido"}}
 <h1>POIS</h1>
 {{#with poi}}
-<form action="/pois/eliminar/{{id}}" method="POST">
+<form action="/pois/{{id}}/eliminar" method="POST">
 		<div>
 			<label for="mensaje">Esta seguro de que desea eliminar el POI {{nombre}}?</label>
 		</div>

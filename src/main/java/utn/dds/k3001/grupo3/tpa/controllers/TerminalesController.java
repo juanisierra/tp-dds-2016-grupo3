@@ -32,7 +32,7 @@ public class TerminalesController implements WithGlobalEntityManager,Transaction
 				
 				if(req.queryParams("nombre")!=null && !req.queryParams("nombre").isEmpty())
 					terminales.addAll(RepositorioTerminales.getInstance().buscarTerminalesPorNombre(req.queryParams("nombre")));
-				else
+				else if(req.queryParams("nombre")!=null)
 					terminales.addAll(RepositorioTerminales.getInstance().obtenerTerminales());
 				 
 				if (req.queryParams("comuna") !=null && !req.queryParams("comuna").equals("Cualquiera"))

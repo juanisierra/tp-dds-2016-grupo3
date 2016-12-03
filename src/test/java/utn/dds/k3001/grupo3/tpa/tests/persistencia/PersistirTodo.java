@@ -1,20 +1,11 @@
 package utn.dds.k3001.grupo3.tpa.tests.persistencia;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Arrays;
 import java.util.List;
-
 import org.junit.Assert;
-import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
-
-import utn.dds.k3001.grupo3.tpa.busquedas.AccionesBusqueda;
-import utn.dds.k3001.grupo3.tpa.busquedas.Busqueda;
-import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
 import utn.dds.k3001.grupo3.tpa.geo.PersistablePoint;
-import utn.dds.k3001.grupo3.tpa.geo.PersistablePolygon;
 import utn.dds.k3001.grupo3.tpa.pois.Banco;
 import utn.dds.k3001.grupo3.tpa.pois.CGP;
 import utn.dds.k3001.grupo3.tpa.pois.Comuna;
@@ -24,7 +15,6 @@ import utn.dds.k3001.grupo3.tpa.pois.POI;
 import utn.dds.k3001.grupo3.tpa.pois.ParadaColectivo;
 import utn.dds.k3001.grupo3.tpa.pois.Rubro;
 import utn.dds.k3001.grupo3.tpa.pois.Servicio;
-
 
 public class PersistirTodo extends AbstractPersistenceTest implements WithGlobalEntityManager {
 	@SuppressWarnings("unchecked")

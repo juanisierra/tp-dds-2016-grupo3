@@ -17,7 +17,6 @@ import utn.dds.k3001.grupo3.tpa.converters.morphia.LocalDateConverter;
 import utn.dds.k3001.grupo3.tpa.converters.morphia.LocalDateTimeConverter;
 import utn.dds.k3001.grupo3.tpa.converters.morphia.LocalTimeConverter;
 import utn.dds.k3001.grupo3.tpa.geo.PersistablePoint;
-import utn.dds.k3001.grupo3.tpa.geo.PersistablePolygon;
 import utn.dds.k3001.grupo3.tpa.pois.CGP;
 import utn.dds.k3001.grupo3.tpa.pois.Comuna;
 import utn.dds.k3001.grupo3.tpa.pois.Disponibilidad;
@@ -70,6 +69,6 @@ public void testMorphia() {
 	lista.add(parada114);
 	Busqueda busqueda1= new Busqueda(terminal,2,"asdasd",LocalTime.now(),LocalTime.now(),LocalDate.now(),lista);
 	datastore.save(busqueda1);
-	List<Busqueda> busquedaNueva= datastore.createQuery(Busqueda.class).asList();
+	//List<Busqueda> busquedaNueva= datastore.createQuery(Busqueda.class).asList();
 }
 }

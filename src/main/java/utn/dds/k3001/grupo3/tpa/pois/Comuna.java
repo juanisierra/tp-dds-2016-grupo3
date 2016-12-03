@@ -19,7 +19,7 @@ public class Comuna implements java.io.Serializable{
 	@OneToMany(cascade=CascadeType.PERSIST)
 	private List<PersistablePoint> puntos;
 	
-	public Comuna(String nombre,List<PersistablePoint> puntos){
+	public Comuna(String nombre, List<PersistablePoint> puntos){
 		this.puntos = puntos;
 		this.nombre = nombre;
 	}

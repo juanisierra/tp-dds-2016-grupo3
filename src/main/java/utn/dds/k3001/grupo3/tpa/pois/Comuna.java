@@ -1,27 +1,26 @@
 package utn.dds.k3001.grupo3.tpa.pois;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Transient;
-
-import org.hibernate.annotations.Cascade;
-
+import javax.persistence.OneToMany;
+import org.uqbar.geodds.Point;
+import org.uqbar.geodds.Polygon;
 import utn.dds.k3001.grupo3.tpa.geo.*;
 
-	@Entity
-public class Comuna implements java.io.Serializable
-{	@Id @GeneratedValue
+@Entity
+public class Comuna implements java.io.Serializable{
+	@Id @GeneratedValue
 	private int id;
 	private String nombre;
-	@OneToOne(cascade=CascadeType.PERSIST)
-	private PersistablePolygon limites;
+	@OneToMany(cascade=CascadeType.PERSIST)
+	private List<PersistablePoint> puntos;
 	
 	public Comuna(String nombre,List<PersistablePoint> puntos){
-		this.limites = new PersistablePolygon(puntos);
+		this.puntos = puntos;
 		this.nombre = nombre;
 	}
 	
@@ -30,7 +29,12 @@ public class Comuna implements java.io.Serializable
 	}
 	
 	public boolean estaEnComuna(PersistablePoint punto){
-		return limites.isInside(punto);
+		return polygon().isInside(punto);
+	}
+	
+	private Polygon polygon(){
+		List<Point> puntosPoint = puntos.stream().map(p -> p.toPoint()).collect(Collectors.toList());
+		return new Polygon(puntosPoint);
 	}
 	
 	public Comuna(){}
@@ -48,12 +52,8 @@ public class Comuna implements java.io.Serializable
 		this.id = id;
 	}
 	
-	public PersistablePolygon getLimites() {
-		return limites;
-	}
-	
-	public void setLimites(PersistablePolygon limites) {
-		this.limites = limites;
+	public void setLimites( List<PersistablePoint>  limites) {
+		this.puntos = limites;
 	}
 	
 	public void setNombre(String nombre) {

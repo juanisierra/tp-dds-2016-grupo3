@@ -40,8 +40,7 @@ public void testMorphia() {
 		Servicio altaDomicilio = new Servicio("alta domicilio",disponibilidadLibrerias);
 		cgp1.agregarServicio(altaDomicilio);
 		comuna1.setNombre("Centro");
-		PersistablePolygon poligono = new PersistablePolygon(Arrays.asList(new PersistablePoint(2,2),new PersistablePoint(1,1)));
-		comuna1.setLimites(poligono);
+		comuna1.setLimites(Arrays.asList(new PersistablePoint(2,2),new PersistablePoint(1,1)));
 		Terminal terminal = new Terminal();
 		terminal.agregarObserverBusqueda(AccionesBusqueda.GUARDARBUSQUEDA);
 		terminal.agregarObserverBusqueda(AccionesBusqueda.NOTIFICARBUSQUEDALARGA);

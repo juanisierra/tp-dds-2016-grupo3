@@ -25,6 +25,10 @@ public class PersistablePoint extends Point implements Serializable{
     BigDecimal _bigDecimal_1 = new BigDecimal(aY);
     this.y = _bigDecimal_1;
   }
+  
+  public Point toPoint(){
+	  return new Point(x.intValue(), y.intValue());
+  }
  
   public PersistablePoint(){
 	  super(0,0);

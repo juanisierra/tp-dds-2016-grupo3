@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import org.uqbar.geodds.Point;
 import org.uqbar.geodds.Polygon;
 import utn.dds.k3001.grupo3.tpa.geo.*;
 
@@ -16,10 +17,10 @@ public class Comuna implements java.io.Serializable{
 	private int id;
 	private String nombre;
 	@OneToMany(cascade=CascadeType.PERSIST)
-	private List<PersistablePoint> puntos;
+	private List<PersistablePoint> limites;
 	
 	public Comuna(String nombre, List<PersistablePoint> puntos){
-		this.puntos = puntos;
+		this.limites = puntos;
 		this.nombre = nombre;
 	}
 	
@@ -32,7 +33,7 @@ public class Comuna implements java.io.Serializable{
 	}
 	
 	private Polygon polygon(){
-		List<Point> puntosPoint = puntos.stream().map(p -> p.toPoint()).collect(Collectors.toList());
+		List<Point> puntosPoint = limites.stream().map(p -> p.toPoint()).collect(Collectors.toList());
 		return new Polygon(puntosPoint);
 	}
 	
@@ -51,7 +52,11 @@ public class Comuna implements java.io.Serializable{
 	}
 	
 	public void setLimites( List<PersistablePoint>  limites) {
-		this.puntos = limites;
+		this.limites = limites;
+	}
+	
+	public List<PersistablePoint> getLimites(){
+		return limites;
 	}
 	
 	public void setNombre(String nombre) {

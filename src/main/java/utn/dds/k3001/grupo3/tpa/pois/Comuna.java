@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import org.uqbar.geodds.Point;
 import org.uqbar.geodds.Polygon;
 import utn.dds.k3001.grupo3.tpa.geo.*;
 
@@ -29,7 +28,7 @@ public class Comuna implements java.io.Serializable{
 	}
 	
 	public boolean estaEnComuna(PersistablePoint punto){
-		return polygon().isInside(punto);
+		return polygon().isInside(punto.toPoint());
 	}
 	
 	private Polygon polygon(){
@@ -40,7 +39,6 @@ public class Comuna implements java.io.Serializable{
 	public Comuna(){}
 	
 	public String getNombre() {
-		
 		return nombre;
 	}
 	

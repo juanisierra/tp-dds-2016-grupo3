@@ -1,25 +1,28 @@
 {{#partial "contenido"}}
 	{{#with terminal}}
+
+	<div class="col-lg-4">
 	<form action="/terminales/{{id}}/modificar" method="POST">
 		
 		<div class="form-group">
 			<label for="nombre">Nombre</label>
-			<input type="text" value="{{nombre}}" name="nombre">
-			
+			<input class="form-control" type="text" value="{{nombre}}" id="nombre" name="nombre">
 		</div>
+
 		<div class="form-group">
-		<label for="Comuna">Comuna</label>
-		<select placeholder="Comuna" name="comuna">
+			<label for="comuna">Comuna</label>
+			<select class="form-control" placeholder="Comuna" id="comuna" name="comuna">
 			{{#each comunas}}
 			<option value={{nombre}}>{{nombre}}</option>
 			{{/each}}
-		</select>
+			</select>
 		</div>
-		<table><tr>
-		<input class="btn btn-primary " type="submit" value="Guardar" style="height:40px; width:100px"></tr>
-		<tr><input class="btn btn-default  " onClick="parent.location='/terminales'" value="Cancelar" style="height:40px; width:110px"></tr>
-		</table>
-	</form>
+		
+		<button class="btn btn-primary" type="submit">Guardar</button>
+		<a class="btn btn-default" href="/terminales">Cancelar</a>
+	  </form>
+	  </div>
+	
 	{{/with}}
 {{/partial}}
 

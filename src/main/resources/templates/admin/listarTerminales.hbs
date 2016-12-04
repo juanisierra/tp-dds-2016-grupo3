@@ -1,40 +1,32 @@
 {{#partial "contenido"}}
-<h1>TERMINALES</h1>
-<table>
-	<tr><td>
+
+<div class="row">
+<h1>Terminales</h1>
+</div>
+
 <form action="/terminales" method="GET">
 
-		<div class="form-group">
-			<label for="nombre">Nombre</label>
-			<input type="text" placeholder="Nombre" name="nombre">
-		</div>
-		</td></tr>
-		<tr><td>
-		<div class="form-group">
-			<label for="Comuna">Comuna</label>
-			<select placeholder="Comuna" name="comuna">
-				{{#each comunas}}
-				<option value={{nombre}}>{{nombre}}</option>
-				{{/each}}
-			</select>
-		</div>
-		</td></tr>
-		<tr align="center" ><td>
-		<table> 
-		
-		<tr align="center"><input class="btn btn-primary" type="submit" value="Buscar"></tr>
-		</table>
-		</td></tr>
-	</form>
-	<tr align="center"><td>
-<form action="/terminales/agregar" method="GET">
-	
-<input class="btn btn-default" type="submit" value="Nueva terminal">
+  <div class="form-group">
+	<label for="nombre">Nombre</label>
+	<input class="form-control" type="text" placeholder="Ej: 114" id="nombre" name="nombre"/>
+  </div>
 
-	</form>
-</td></tr>
-</table>
+  <div class="form-group">
+  	<label for="comuna">Comuna</label>
+	<select class="form-control" name="comuna" id="comuna">
+		{{#each comunas}}
+		<option value={{nombre}}>{{nombre}}</option>
+		{{/each}}
+	</select>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Buscar</button>
+
+</form>
+
+{{#if Terminales}}
 <table class="table table-stripped">
+	<thead>
 	<tr>
 		<th>Nombre</th>
 		<th>Comuna</th>
@@ -42,6 +34,8 @@
 		<th> </th>
 		<th> </th>
 	</tr>
+	</thead>
+	<tbody>
 	{{#each Terminales}}
 		<tr>
 			<td>{{nombre}}</td>
@@ -50,8 +44,21 @@
 			<td><a href="/terminales/{{id}}/modificar">Editar</a></td>
 			<td><a href="/terminales/{{id}}/eliminar">Eliminar</a></td>
 		</tr>
+	{{else}}
+		<tr>
+		<td colspan="5">
+		</td>
+		</tr>
 	{{/each}}
+	</tbody>
 </table>
+{{else}}
+	<div class="alert alert-info" role="alert">No se encontraron resultados.</div>
+{{/if}}
+
+<form action="/terminales/agregar" method="GET">
+	<input class="btn btn-default" type="submit" value="Nueva terminal">
+</form>
 
 {{/partial}}
 

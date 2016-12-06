@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import com.fasterxml.jackson.core.type.TypeReference;
 
+import utn.dds.k3001.grupo3.tpa.busquedas.filtros.FiltroPOI;
 import utn.dds.k3001.grupo3.tpa.pois.Banco;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
@@ -22,6 +23,14 @@ public class AdapterSistemaBancos implements OrigenDeDatos{
     			.JsonAObjeto(json, new TypeReference<List<Banco>>(){})
     			.stream()
     			.filter(Banco -> Banco.esBuscado(criterio))
+    			.collect(Collectors.toList());
+    }
+    public List<POI> buscar(List<FiltroPOI> filtros){
+    	String json = requestService.getJsonBancos("","");           
+    	return factory
+    			.JsonAObjeto(json, new TypeReference<List<Banco>>(){})
+    			.stream()
+    			.filter(Banco -> filtros.stream().allMatch(f -> f.filtrar(Banco)))
     			.collect(Collectors.toList());
     }
 }

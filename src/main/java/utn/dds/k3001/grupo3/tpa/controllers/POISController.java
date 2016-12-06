@@ -1,5 +1,6 @@
 package utn.dds.k3001.grupo3.tpa.controllers;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,6 +11,9 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
+import utn.dds.k3001.grupo3.tpa.busquedas.filtros.FiltroClase;
+import utn.dds.k3001.grupo3.tpa.busquedas.filtros.FiltroPOI;
+import utn.dds.k3001.grupo3.tpa.busquedas.filtros.FiltroStringCriterio;
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.RepositorioInterno;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 import utn.dds.k3001.grupo3.tpa.usuarios.Usuario;
@@ -18,29 +22,43 @@ import utn.dds.k3001.grupo3.tpa.usuarios.UsuarioTerminal;
 public class POISController implements WithGlobalEntityManager,TransactionalOps {
 	
 	public ModelAndView buscar(Request req, Response res){
-		if(((Usuario) req.session().attribute("user")).esAdmin()) {
-			Map<String, List<POI>> model = new HashMap<>();
-			List<POI> pois = new LinkedList<POI>();
-			if(req.queryParams("tipos")!=null || req.queryParams("criterio")!= null){
-				if(req.queryParams("tipos")==null){
-					pois.addAll(RepositorioInterno.getInstance().buscar(req.queryParams("criterio"), ""));
-				}
-				else {
-					pois.addAll(RepositorioInterno.getInstance().buscar( "",req.queryParams("tipos")));
-				}
-			}
-			model.put("pois", pois);
-			return new ModelAndView(model, "admin/buscarPOI.hbs");
+			if(((Usuario) req.session().attribute("user")).esAdmin()) {
+			return busquedaAdmin(req, res);
 		}
-		else {
-			Map<String, List<POI>> model = new HashMap<>();
-			List<POI> pois = new LinkedList<POI>();
-			if(req.queryParams("criterio")!= null){
-				pois = ((UsuarioTerminal) req.session().attribute("user")).getTerminal().buscar(req.queryParams("criterio") );
+		else return busquedaTerminal(req,res);
+	}
+	
+	private ModelAndView busquedaAdmin(Request req,Response res)
+	{
+		Map<String, List<POI>> model = new HashMap<>();
+		List<POI> pois = new LinkedList<POI>();
+		List<FiltroPOI> filtros = new LinkedList<FiltroPOI>();
+		if(req.queryParams("tipos")!=null || req.queryParams("criterio")!= null){
+			
+			if(req.queryParams("criterio")!=null){
+				filtros.add(new FiltroStringCriterio(req.queryParams("criterio")));
 			}
-			model.put("pois", pois);
-			return new ModelAndView(model, "terminal/buscarPOI.hbs");
+			if(req.queryParams("tipos")!=null) {
+				filtros.add(new FiltroClase(req.queryParams("tipos")));
+			}
+			pois.addAll(RepositorioInterno.getInstance().buscar(filtros));
 		}
+			
+		model.put("pois", pois);
+		return new ModelAndView(model, "admin/buscarPOI.hbs");
+	}
+	
+	private ModelAndView busquedaTerminal(Request req,Response res)
+	{
+		Map<String, List<POI>> model = new HashMap<>();
+		List<POI> pois = new LinkedList<POI>();
+		List<FiltroPOI> filtros = new LinkedList<FiltroPOI>();
+		if(req.queryParams("criterio")!= null){
+	
+			pois.addAll(((UsuarioTerminal) req.session().attribute("user")).getTerminal().buscar(req.queryParams("criterio")));
+		}
+		model.put("pois", pois);
+		return new ModelAndView(model, "terminal/buscarPOI.hbs");
 	}
 	
 	public ModelAndView eliminar(Request req, Response res){

@@ -70,7 +70,6 @@ public class Terminal
 		observersBusqueda.stream().forEach(observer -> observer.notificar(busqueda));
 		return resultado;
 	}
-	
 	public int cantObserversBusqueda(){
 		return observersBusqueda.size();
 	}

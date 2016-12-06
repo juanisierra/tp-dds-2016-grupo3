@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import utn.dds.k3001.grupo3.tpa.geo.*;
 import utn.dds.k3001.grupo3.tpa.DTO.*;
+import utn.dds.k3001.grupo3.tpa.busquedas.filtros.FiltroPOI;
 import utn.dds.k3001.grupo3.tpa.pois.CGP;
 import utn.dds.k3001.grupo3.tpa.pois.Comuna;
 import utn.dds.k3001.grupo3.tpa.pois.Disponibilidad;
@@ -38,5 +39,10 @@ public class AdapterSistemaCGP implements OrigenDeDatos{
 	
 	public List<POI> buscar(String criterio){
 		return 	sistema.buscarPOIS("").stream().map(cgpDTO -> adaptarCGP(cgpDTO)).filter(CGP -> CGP.esBuscado(criterio)).collect(Collectors.toList());
+	}
+	public List<POI> buscar(List<FiltroPOI> filtros) 
+	{
+		return 	sistema.buscarPOIS("").stream().map(cgpDTO -> adaptarCGP(cgpDTO)).filter(CGP -> filtros.stream().allMatch(f -> f.filtrar(CGP))).collect(Collectors.toList());
+		
 	}
 }

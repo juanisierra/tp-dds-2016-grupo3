@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import utn.dds.k3001.grupo3.tpa.busquedas.filtros.FiltroPOI;
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.OrigenDeDatos;
 import utn.dds.k3001.grupo3.tpa.origenesDePOIS.RepositorioInterno;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
@@ -48,18 +50,18 @@ public class Mapa
 							})
 							  .collect(Collectors.toList());
 	}
-	public List<POI> buscar(String criterio,String clase){
+	public List<POI> buscar(List<FiltroPOI> filtros)
+	{
 		return origenesDeDatos.stream()
-							  .flatMap(origen -> {
-								try {
-									return origen.buscar(criterio).stream();
-								} catch (ClassNotFoundException | IOException e) {
-									
-									e.printStackTrace();
-								}
-								return new LinkedList<POI>().stream();
-							}).filter(elem -> elem.getClass().getName().contains(clase))
-							  .collect(Collectors.toList());
+				  .flatMap(origen -> {
+					try {
+						return origen.buscar(filtros).stream();
+					} catch (ClassNotFoundException | IOException e) {
+						
+						e.printStackTrace();
+					}
+					return new LinkedList<POI>().stream();
+				}).collect(Collectors.toList());
 	}
 	public POI getById(long id)
 	{

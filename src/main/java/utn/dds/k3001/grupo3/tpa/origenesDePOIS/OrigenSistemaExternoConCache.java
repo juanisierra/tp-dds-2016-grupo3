@@ -8,7 +8,10 @@ import java.io.ObjectOutputStream;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import redis.clients.jedis.Jedis;
+import utn.dds.k3001.grupo3.tpa.busquedas.filtros.FiltroPOI;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
 public class OrigenSistemaExternoConCache<T> implements OrigenDeDatos {
@@ -48,4 +51,8 @@ public class OrigenSistemaExternoConCache<T> implements OrigenDeDatos {
 	        return elementosTraidos;
 		}
 		}
+	public List<POI> buscar(List<FiltroPOI> filtros) throws ClassNotFoundException, IOException
+	{
+		return this.buscar("").stream().filter(poi -> filtros.stream().allMatch(f -> f.filtrar(poi))).collect(Collectors.toList());
+	}
 	}

@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+
+import utn.dds.k3001.grupo3.tpa.busquedas.filtros.FiltroPOI;
 import utn.dds.k3001.grupo3.tpa.pois.POI;
 
 public class RepositorioInterno implements OrigenDeDatos {
@@ -28,8 +30,9 @@ public class RepositorioInterno implements OrigenDeDatos {
 	public List<POI> buscar(String criterio) {
 		return origen.getPOIS().stream().filter(POI -> POI.esBuscado(criterio)).collect(Collectors.toList());
 	}
-	public List<POI> buscar(String criterio,String clase){
-		return this.buscar(criterio).stream().filter(elem -> elem.getClass().getName().contains(clase)).collect(Collectors.toList());
+	public List<POI> buscar(List<FiltroPOI> filtros)
+	{
+		return origen.getPOIS().stream().filter(elem -> filtros.stream().allMatch(filtro -> filtro.filtrar(elem))).collect(Collectors.toList());
 	}
 	public POI buscarPorNombre(String nombre){	
 		List<POI> lista = origen.getPOIS().stream().filter(POI -> POI.getNombre().contains(nombre)).collect(Collectors.toList());

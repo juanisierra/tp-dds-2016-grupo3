@@ -96,9 +96,9 @@ public class TerminalesController implements WithGlobalEntityManager,Transaction
 	
 	public ModelAndView getAgregar(Request req, Response res){
 
-				Map<String, List<Comuna>> model = new HashMap<>();
+				Map<String,Object> model = new HashMap<>();
 				model.put("comunas", RepositorioComunas.getInstance().getComunas());
-				return new ModelAndView(model, "admin/agregarTerminal.hbs");
+				return new ModelAndView(model, "admin/modificarTerminal.hbs");
 			
 	}
 	

@@ -42,7 +42,7 @@ public class Server {
 		RepositorioInterno.origenPersistencia();
 		RepositorioComunas.persistirEnBD();
 		RepositorioTerminales.persistirEnBD();
-		RepositorioBusquedas.getInstance().setPersistence();
+		//RepositorioBusquedas.getInstance().setPersistence();
 		//cargarDatosMemoria();
 		//cargarDatos();
 		Usuario u = new Usuario();

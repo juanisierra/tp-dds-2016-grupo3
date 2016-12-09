@@ -11,7 +11,6 @@ after_script:
 notifications:
   email:
     recipients:
-    - gastonprietoutn@gmail.com
     - juanignaciosierra96@gmail.com
     - estefi.im@hotmail.com
     - santi_pecin@hotmail.com

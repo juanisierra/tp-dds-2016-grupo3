@@ -12,9 +12,7 @@ notifications:
   email:
     recipients:
     - juanignaciosierra96@gmail.com
-    - estefi.im@hotmail.com
-    - santi_pecin@hotmail.com
-    - matias_rivas@outlook.com
+
 env:
   global:
     secure: fBVTNN1QvpR1HxbzexsKdIO6/UM05pdGk+bMeJ8YnAGC4GUf5Ec/7l3a8C99N6kWjARS3wkJelVxXg4Tp0xpzB9ABgWL/qhRNJWCTs8SbUiRlnjVwm4DQes6FeE5aa3XYP8DsTlRfralpmOzmJt67o0KHEoA/h7EBywccsW18EBaUFxchaqd+KdtPNBXI8SSSgOcFiwowH1bz+gmM00IqzX5Zb6P0Fcccj2mFz9Ts6VbrXovBgWv4g2thaunR4z2/hC/tqzuU6+Ysxsnc1+nQLA/Z2Yi87/+A/zV3NIcEennYIRU6St37WudkoC40bfDU4/z4hZObzo0XYxhven5VULf7ZwwfcbmgR5lR1D1wN3ZHKYwW6HHGv4L5t31zyb1rtelbJeZLAkZJQLSOr5CUGnARmI2rmeniL+pwJE7UFI0tZ4Zjugu+2llUGsPyjKMp8V7O6/unPKQ1v0xqyS9SRl5cJ8g8CFvJjpL/mN5dahxA1XELo3xYMnrOydyTv+M/D7m2TUDluN7GXzrRxz18PmI3Zsf2IWMGfmkFUUVMdtc8fUfubv6ihbe5pQnN97UI0sMHOiQ7Rvyq3NNCvtxzQDnxT1NMlMBFcBgYnJh1XlozzK8+B8efjMwvSprvpuRAzgP32VMYrxA3YL+6KVBORzDbXq1B4Ot9MP2ecWSy3k=

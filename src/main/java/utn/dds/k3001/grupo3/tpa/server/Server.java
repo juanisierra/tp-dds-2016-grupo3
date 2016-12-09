@@ -44,7 +44,7 @@ public class Server {
 		RepositorioTerminales.persistirEnBD();
 		//RepositorioBusquedas.getInstance().setPersistence();
 		//cargarDatosMemoria();
-		cargarDatos();
+		//cargarDatos();
 		Usuario u = new Usuario();
 		u.setNombre("admin");
 		u.setContrasenia("123");

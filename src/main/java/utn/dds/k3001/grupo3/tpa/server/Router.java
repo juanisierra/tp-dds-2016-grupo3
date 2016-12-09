@@ -29,7 +29,7 @@ public class Router {
 				.withHelper("parametrizarAccion", AccionesQueryParamHelper.parametrizarAccion)
 				.build();
 		
-		Spark.staticFiles.location("/public");
+		//Spark.staticFiles.location("/public");
 		LoginController loginController = new LoginController();
 		POISController poisController = new POISController();
 		BusquedasController busquedasController = new BusquedasController();

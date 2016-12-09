@@ -38,10 +38,13 @@ public class Server {
 		RepositorioComunas.persistirEnBD();
 		//RepositorioBusquedas.getInstance().setPersistence();
 		cargarDatos();*/
-		RepositorioBusquedas.getInstance().setPersistence();
+		//RepositorioBusquedas.getInstance().setPersistence();
 		RepositorioInterno.origenPersistencia();
-		cargarDatosMemoria();
-		
+		RepositorioComunas.persistirEnBD();
+		RepositorioTerminales.persistirEnBD();
+		RepositorioBusquedas.getInstance().setPersistence();
+		//cargarDatosMemoria();
+		//cargarDatos();
 		Usuario u = new Usuario();
 		u.setNombre("admin");
 		u.setContrasenia("123");

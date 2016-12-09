@@ -38,7 +38,7 @@ public class Server {
 		RepositorioComunas.persistirEnBD();
 		//RepositorioBusquedas.getInstance().setPersistence();
 		cargarDatos();*/
-		RepositorioBusquedas.getInstance().setPersistence();
+		//RepositorioBusquedas.getInstance().setPersistence();
 		cargarDatosMemoria();
 		
 		Usuario u = new Usuario();

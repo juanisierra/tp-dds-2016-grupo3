@@ -6,6 +6,7 @@ import spark.Spark;
 import spark.debug.DebugScreen;
 import utn.dds.k3001.grupo3.tpa.busquedas.AccionesBusqueda;
 import utn.dds.k3001.grupo3.tpa.busquedas.Mapa;
+import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioBusquedas;
 import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioComunas;
 import utn.dds.k3001.grupo3.tpa.busquedas.RepositorioTerminales;
 import utn.dds.k3001.grupo3.tpa.busquedas.Terminal;
@@ -37,7 +38,9 @@ public class Server {
 		RepositorioComunas.persistirEnBD();
 		//RepositorioBusquedas.getInstance().setPersistence();
 		cargarDatos();*/
+		RepositorioBusquedas.getInstance().setPersistence();
 		cargarDatosMemoria();
+		
 		Usuario u = new Usuario();
 		u.setNombre("admin");
 		u.setContrasenia("123");

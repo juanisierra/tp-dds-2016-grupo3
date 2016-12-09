@@ -6,6 +6,7 @@ import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 
 import utn.dds.k3001.grupo3.tpa.converters.morphia.BigDecimalConverter;
 import utn.dds.k3001.grupo3.tpa.converters.morphia.LocalDateConverter;
@@ -18,14 +19,20 @@ public class PersistenceBusquedasOrigin implements BusquedasOrigin {
 	final MongoClient mongoClient;
 
 	public PersistenceBusquedasOrigin() {
-		mongoClient =  new MongoClient();
+		if(System.getenv("PROD_MONGODB")!=null) {
+		 MongoClientURI uri  = new MongoClientURI(System.getenv("PROD_MONGODB")); 
+	    mongoClient = new MongoClient(uri);
+		} else {
+			mongoClient = new MongoClient();
+		}
 		morphia = new Morphia();
 		morphia.getMapper().getConverters().addConverter(LocalDateConverter.class);
 		morphia.getMapper().getConverters().addConverter(LocalTimeConverter.class);
 		morphia.getMapper().getConverters().addConverter(LocalDateTimeConverter.class);
 		morphia.getMapper().getConverters().addConverter(BigDecimalConverter.class);
 		morphia.mapPackage("utn.dds.k3001.grupo3.tpa.busquedas");
-		datastore = morphia.createDatastore(mongoClient, "dds");
+		datastore = morphia.createDatastore(mongoClient, "ddstpa");
+		
 		datastore.ensureIndexes();
 	}
 	@Override
